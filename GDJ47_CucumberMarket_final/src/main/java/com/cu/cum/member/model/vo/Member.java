@@ -26,6 +26,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Member implements UserDetails{
 	
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@Column(name = "userid")
 	private String userId;
@@ -49,11 +51,6 @@ public class Member implements UserDetails{
 		auth.add(new SimpleGrantedAuthority("ROLE_USER"));
 		return auth;
 	}
-//	@Override
-//	public String getPassword() {
-//		// TODO Auto-generated method stub
-//		return true;
-//	}
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
