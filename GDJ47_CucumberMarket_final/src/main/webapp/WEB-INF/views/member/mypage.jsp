@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-
     <div id="all">
       <div id="content">
         <div class="container">
@@ -31,7 +30,7 @@
                   <a href="${path }/member/mypage.do" class="nav-link active"><i class="fa fa-list"></i>내 정보 보기</a>
                   <a href="${path }/member/wishList.do" class="nav-link"><i class="fa fa-heart"></i>찜 목록</a>
                   <a href="${path }/member/myAccount.do" class="nav-link"><i class="fa fa-user"></i>내 정보 수정</a>
-                  <a href="" class="nav-link"><i class="fa fa-sign-out"></i>로그아웃</a>
+                  <a href="/logout" class="nav-link"><i class="fa fa-sign-out"></i>로그아웃</a>
                   </ul>
                 </div>
               </div>
@@ -94,17 +93,17 @@
                   <br/>
 				  <div>
 				  <h3>이메일</h3>
-				  <input type="text" value="admin" readonly>
+				  <input type="text" value="<c:out value="${loginMember.userId }"/>" readonly>
 				  </div>
 				  <br/>
 				  <div>
 				  <h3>이름</h3>
-				  <input type="text" value="관리자" readonly>
+				  <input type="text" value="<c:out value="${loginMember.name }"/>" readonly>
 				  </div>
 				  <br/>
 				  <div>
 				  <h3>휴대폰번호</h3>
-				  <input type="text" value="01011112222" readonly>
+				  <input type="text" value="<c:out value="${loginMember.phone }"/>" readonly>
 				  </div>
 				  <br/>
 				  <div>
