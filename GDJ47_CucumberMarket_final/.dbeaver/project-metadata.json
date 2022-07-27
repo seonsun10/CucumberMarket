@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"resources":{"Scripts/Script-1.sql":{"sql-editor-data-source-id":"oracle_thin-1823d14d96e-75fd648e8a29bebc","default-datasource":"oracle_thin-1823d14d96e-75fd648e8a29bebc","default-schema":"CUCUMBER"},"Scripts/Script.sql":{"default-schema":"SPRING","sql-editor-data-source-id":"oracle_thin-1823a79eba2-b8aa4bc628ef59a","default-datasource":"oracle_thin-1823a79eba2-b8aa4bc628ef59a"}}}
+=======
+{"resources":{"Scripts/Script-1.sql":{"sql-editor-data-source-id":"oracle_thin-1823d04aa9e-69f9c54a2e5e6fda","default-datasource":"oracle_thin-1823d04aa9e-69f9c54a2e5e6fda","default-schema":"CUCUMBER"},"Scripts/Script.sql":{"default-schema":"SPRING","sql-editor-data-source-id":"oracle_thin-1823a79eba2-b8aa4bc628ef59a","default-datasource":"oracle_thin-1823a79eba2-b8aa4bc628ef59a"}}}
+>>>>>>> branch 'main' of https://github.com/seonsun10/CucumberMarket.git

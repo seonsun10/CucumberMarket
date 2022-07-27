@@ -31,6 +31,7 @@
 				"auth-model": "oracle_native"
 			}
 		},
+<<<<<<< HEAD
 		"oracle_thin-1823d14d96e-75fd648e8a29bebc": {
 			"provider": "oracle",
 			"driver": "oracle_thin",
@@ -43,6 +44,20 @@
 				"database": "XE",
 				"url": "jdbc:oracle:thin:@61.78.121.242:8877:XE",
 				"home": "C:\\app\\tjsdn\\product\\18.0.0\\dbhomeXE",
+=======
+		"oracle_thin-1823d04aa9e-69f9c54a2e5e6fda": {
+			"provider": "oracle",
+			"driver": "oracle_thin",
+			"name": "final server",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"host": "61.78.121.242",
+				"port": "8877",
+				"database": "XE",
+				"url": "jdbc:oracle:thin:@61.78.121.242:8877:XE",
+				"home": "C:\\app\\ljd\\product\\18.0.0\\dbhomeXE",
+>>>>>>> branch 'main' of https://github.com/seonsun10/CucumberMarket.git
 				"type": "dev",
 				"provider-properties": {
 					"show-only-one-schema@": "false",
