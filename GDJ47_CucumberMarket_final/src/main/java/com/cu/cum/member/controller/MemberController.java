@@ -55,6 +55,6 @@ public class MemberController {
 	
 	@RequestMapping("/mypage.do")
 	public String myPage() {
-		return "mypage";
+		return "member/mypage";
 	}
 }
