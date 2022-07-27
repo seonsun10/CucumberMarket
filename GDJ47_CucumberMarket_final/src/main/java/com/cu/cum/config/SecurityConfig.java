@@ -30,12 +30,14 @@ public class SecurityConfig {
 		return http.csrf().disable()
 				.formLogin()
 					 //web.xml에서 설정하는 것들 설정가능
+					.successForwardUrl("/successLogin.do")
 					.and() //http부터 또 설정 가능
 				.authorizeRequests() //인증 권한
 					.antMatchers("/**").hasRole("USER")
 					.and()
 				.logout()
 					.logoutUrl("/logout")
+					.logoutSuccessUrl("/successLogout.do")
 					.and()
 				.authenticationProvider(authenticationProvider())//인증 대상 빈을 받아서 설정
 				.build();

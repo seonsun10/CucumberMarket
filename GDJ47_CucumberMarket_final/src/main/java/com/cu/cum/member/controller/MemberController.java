@@ -1,15 +1,16 @@
 package com.cu.cum.member.controller;
 
 import java.security.Principal;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.cu.cum.member.model.service.MemberService;
 import com.cu.cum.member.model.vo.Member;
@@ -18,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
+@SessionAttributes("loginMember")
 public class MemberController {
 	
 	@Autowired
@@ -54,6 +56,24 @@ public class MemberController {
 //		return "register";
 //	}
 
+	
+	@RequestMapping("/successLogin.do")
+	public String successLogin(Model m) {
+		//인증받은 객체의 정보를 가져올 수 있다.
+		//loadUserByUsername()메소드에서 반환하는 객체를 받을 수 있음.
+		Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		m.addAttribute("loginMember",(Member)o);
+		return "redirect:/";
+	}
+	
+	@RequestMapping("/successLogout.do")
+	public String successLogout(SessionStatus session) {
+		if(!session.isComplete()) {
+			session.setComplete();
+		}
+		return "redirect:/";
+	}
+	
 	
 	@RequestMapping("/member/mypage.do")
 	public String myPage() {

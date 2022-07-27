@@ -49,13 +49,13 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="email">이메일</label>
-                        <input id="email" type="text" class="form-control" style="background-color:lightgray;" readonly value="email@email.com">
+                        <input id="email" type="text" class="form-control" style="background-color:lightgray;" readonly value="<c:out value="${loginMember.userId }"/>">
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="name">이름</label>
-                        <input id="name" type="text" class="form-control">
+                        <input id="name" type="text" class="form-control" value="<c:out value="${loginMember.name }"/>">
                       </div>
                     </div>
                   </div>
@@ -64,7 +64,7 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="company">전화번호</label>
-                        <input id="company" type="text" class="form-control">
+                        <input id="company" type="text" class="form-control" value="<c:out value="${loginMember.phone }"/>">
                       </div>
                     </div>
                     <div class="col-md-6">

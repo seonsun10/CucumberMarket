@@ -93,17 +93,17 @@
                   <br/>
 				  <div>
 				  <h3>이메일</h3>
-				  <input type="text" value="admin" readonly>
+				  <input type="text" value="<c:out value="${loginMember.userId }"/>" readonly>
 				  </div>
 				  <br/>
 				  <div>
 				  <h3>이름</h3>
-				  <input type="text" value="관리자" readonly>
+				  <input type="text" value="<c:out value="${loginMember.name }"/>" readonly>
 				  </div>
 				  <br/>
 				  <div>
 				  <h3>휴대폰번호</h3>
-				  <input type="text" value="01011112222" readonly>
+				  <input type="text" value="<c:out value="${loginMember.phone }"/>" readonly>
 				  </div>
 				  <br/>
 				  <div>
