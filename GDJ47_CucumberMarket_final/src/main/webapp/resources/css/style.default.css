@@ -772,24 +772,24 @@ h1 {
   left: 0;
 }
 
-#content .product .front {
+#content .product  {
   z-index: 2;
   -webkit-transform: rotateY(0deg);
   transform: rotateY(0deg);
 }
 
-#content .product .back {
+#content .product  {
   -webkit-transform: rotateY(-180deg);
   transform: rotateY(-180deg);
 }
 
-#content .product:hover .back {
+#content .product:hover  {
   -webkit-transform: rotateY(0deg);
   transform: rotateY(0deg);
   z-index: 2;
 }
 
-#content .product:hover .front {
+#content .product:hover  {
   -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg);
   z-index: 1;
