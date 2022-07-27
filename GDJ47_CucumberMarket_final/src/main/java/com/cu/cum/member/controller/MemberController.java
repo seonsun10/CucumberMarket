@@ -63,4 +63,9 @@ public class MemberController {
 	public String myAccount() {
 		return "member/myAccount";
 	}
+	
+	@RequestMapping("/member/wishList.do")
+	public String wishList() {
+		return "member/wishList";
+	}
 }

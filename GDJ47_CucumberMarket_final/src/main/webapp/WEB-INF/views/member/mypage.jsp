@@ -27,11 +27,12 @@
                   <h3 class="h4 card-title">메뉴</h3>
                 </div>
                 <div class="card-body">
-                  <ul class="nav nav-pills flex-column"><a href="customer-orders.html" class="nav-link active">
-                  <i class="fa fa-list"></i>내 정보 보기</a><a href="customer-wishlist.html" class="nav-link">
-                  <i class="fa fa-heart"></i>찜 목록</a><a href="customer-account.html" class="nav-link">
-                  <i class="fa fa-user"></i>내 정보 수정</a><a href="index.html" class="nav-link">
-                  <i class="fa fa-sign-out"></i>로그아웃</a></ul>
+                  <ul class="nav nav-pills flex-column">
+                  <a href="${path }/member/mypage.do" class="nav-link active"><i class="fa fa-list"></i>내 정보 보기</a>
+                  <a href="${path }/member/wishList.do" class="nav-link"><i class="fa fa-heart"></i>찜 목록</a>
+                  <a href="${path }/member/myAccount.do" class="nav-link"><i class="fa fa-user"></i>내 정보 수정</a>
+                  <a href="" class="nav-link"><i class="fa fa-sign-out"></i>로그아웃</a>
+                  </ul>
                 </div>
               </div>
               <!-- /.col-lg-3-->
@@ -40,11 +41,9 @@
             <div id="customer-orders" class="col-lg-9">
               <div class="box">
                 <h1>내 정보보기</h1>
-                <p class="lead">소개글</p>
-                <p class="text-muted">여긴 나의 소개글이야</p>
                 <hr>
                 <div class="table-responsive">
-                  <table class="table table-hover">
+                  <!-- <table class="table table-hover">
                     <thead>
                       <tr>
                         <th>Order</th>
@@ -91,34 +90,53 @@
                         <td><a href="customer-order.html" class="btn btn-primary btn-sm">View</a></td>
                       </tr>
                     </tbody>
-                  </table>
-
+                  </table> -->
+                  <br/>
+				  <div>
+				  <h3>이메일</h3>
+				  <input type="text" value="admin" readonly>
+				  </div>
+				  <br/>
+				  <div>
+				  <h3>이름</h3>
+				  <input type="text" value="관리자" readonly>
+				  </div>
+				  <br/>
+				  <div>
+				  <h3>휴대폰번호</h3>
+				  <input type="text" value="01011112222" readonly>
+				  </div>
+				  <br/>
+				  <div>
+				  <h3>소개글</h3>
+				  <input type="text" value="소개글이야~" readonly>
+				  </div>
                 </div>
               </div>
               
               <!-- 여기 이제 분기처리 해야함 등록한 상품이없으면 안보이게 -->
               <div  class="col-lg-9 box " style="max-width:100%;">
-          	  	<div class="row products" style="justify-content:center" >
-		          	  		<div style="width:200px;">
-		          	  			<h1>1</h1>
-		          	  		</div>
-		          	  		<div style="width:200px;">
-		          	  			<h1>2</h1>
-		          	  		</div>
-		          	  		<div style="width:200px;">
-		          	  			<h1>3</h1>
-		          	  		</div>
-		          	  		<div style="width:200px;">
-		          	  			<h1>4</h1>
-		          	  		</div>
-		          	  		<div style="width:200px;">
-		          	  			<h1>5</h1>
-		          	  		</div>
-		          	  		<div style="width:200px;">
-		          	  			<h1>6</h1>
-		          	  		</div>
-          	  	</div>
-          	  </div>
+                  <div class="row products" style="justify-content:center" >
+                           <div style="width:200px;">
+                              <h1>1</h1>
+                           </div>
+                           <div style="width:200px;">
+                              <h1>2</h1>
+                           </div>
+                           <div style="width:200px;">
+                              <h1>3</h1>
+                           </div>
+                           <div style="width:200px;">
+                              <h1>4</h1>
+                           </div>
+                           <div style="width:200px;">
+                              <h1>5</h1>
+                           </div>
+                           <div style="width:200px;">
+                              <h1>6</h1>
+                           </div>
+                  </div>
+               </div>
             </div>
           </div>
         </div>
