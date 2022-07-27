@@ -53,8 +53,14 @@ public class MemberController {
 //	}
 
 	
-	@RequestMapping("/mypage.do")
+	@RequestMapping("/member/mypage.do")
 	public String myPage() {
-		return "mypage";
+		return "member/mypage";
+	}
+	
+	//회원정보수정
+	@RequestMapping("/member/myAccount.do")
+	public String myAccount() {
+		return "member/myAccount";
 	}
 }
