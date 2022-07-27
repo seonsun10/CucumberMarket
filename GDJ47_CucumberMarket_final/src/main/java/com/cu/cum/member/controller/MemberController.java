@@ -52,4 +52,9 @@ public class MemberController {
 //		return "register";
 //	}
 
+	
+	@RequestMapping("/mypage.do")
+	public String myPage() {
+		return "mypage";
+	}
 }
