@@ -1,5 +1,7 @@
 package com.cu.cum.member.model.service;
 
+import java.util.List;
+
 import com.cu.cum.member.model.vo.Member;
 
 public interface MemberService {
@@ -9,5 +11,4 @@ public interface MemberService {
 //	String checkEmail(String email);
 
 	Member join(Member member);
-
 }
