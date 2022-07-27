@@ -29,7 +29,7 @@ public class SecurityConfig {
 	public SecurityFilterChain authenticatePath(HttpSecurity http) throws Exception{
 		return http.csrf().disable()
 				.formLogin()
-					.successForwardUrl("/successlogin") //web.xml에서 설정하는 것들 설정가능
+					 //web.xml에서 설정하는 것들 설정가능
 					.and() //http부터 또 설정 가능
 				.authorizeRequests() //인증 권한
 					.antMatchers("/**").hasRole("USER")
