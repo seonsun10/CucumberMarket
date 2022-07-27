@@ -24,34 +24,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Member implements UserDetails{
-
+	
 	@Id
-	@Column(name="userid")
+	@Column(name = "userid")
 	private String userId;
 	private String password;
-	@Column(name = "username")
-	private String userName;
-	private String gender;
-	private int age;
-	private String email;
+//	private String role;
 	private String phone;
-	private String address;
-	private String hobby;
-//	@Temporal(TemporalType.DATE) //create했을경우
-	@Column( name = "enrolldate")
+//	private String activated;
+//	private double score;
 	private Date enrollDate;
-	
-	
-	
-	
-	
-//	@Id
-//	private String userId;
-////	private enum role;
-//	private String phone;
-////	private String activated;
-////	private double score;
-//	private Date enrollDate;
 //	private String intro;
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

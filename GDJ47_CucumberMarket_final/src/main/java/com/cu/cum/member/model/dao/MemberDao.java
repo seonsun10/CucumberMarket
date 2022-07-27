@@ -4,7 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.cu.cum.member.model.vo.Member;
 
-public interface MemberRepository extends JpaRepository<Member, String>{
+public interface MemberDao extends JpaRepository<Member, String>{
+	
+	Member save(Member m);
 	
 	Member findByUserId(String userId);
 
