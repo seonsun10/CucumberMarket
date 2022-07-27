@@ -1,12 +1,14 @@
 package com.cu.cum.member.controller;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cu.cum.member.model.service.MemberService;
@@ -58,9 +60,11 @@ public class MemberController {
 		return "member/mypage";
 	}
 	
-	//회원정보수정
+	//회원정보수정 페이지로 이동
 	@RequestMapping("/member/myAccount.do")
 	public String myAccount() {
 		return "member/myAccount";
 	}
+	
+	
 }

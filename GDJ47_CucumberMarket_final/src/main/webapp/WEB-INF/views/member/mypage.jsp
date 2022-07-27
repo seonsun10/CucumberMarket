@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-
     <div id="all">
       <div id="content">
         <div class="container">
@@ -27,10 +26,10 @@
                   <h3 class="h4 card-title">메뉴</h3>
                 </div>
                 <div class="card-body">
-                  <ul class="nav nav-pills flex-column"><a href="customer-orders.html" class="nav-link active">
-                  <i class="fa fa-list"></i>내 정보 보기</a><a href="customer-wishlist.html" class="nav-link">
-                  <i class="fa fa-heart"></i>찜 목록</a><a href="customer-account.html" class="nav-link">
-                  <i class="fa fa-user"></i>내 정보 수정</a><a href="index.html" class="nav-link">
+                  <ul class="nav nav-pills flex-column"><a href="${path }/member/mypage.do" class="nav-link active">
+                  <i class="fa fa-list"></i>내 정보 보기</a><a href="#" class="nav-link">
+                  <i class="fa fa-heart"></i>찜 목록</a><a href="${path }/member/myAccount.do" class="nav-link">
+                  <i class="fa fa-user"></i>내 정보 수정</a><a href="/logout" class="nav-link">
                   <i class="fa fa-sign-out"></i>로그아웃</a></ul>
                 </div>
               </div>
