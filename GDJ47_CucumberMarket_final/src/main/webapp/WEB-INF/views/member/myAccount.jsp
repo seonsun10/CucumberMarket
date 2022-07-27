@@ -30,19 +30,11 @@
                 </div>
                 <div class="card-body">
                   <ul class="nav nav-pills flex-column">
-<<<<<<< HEAD
-                  	<a href="${path }/member/mypage.do" class="nav-link"><i class="fa fa-list"></i>내 정보 보기</a>
-                  	<a href="#" class="nav-link"><i class="fa fa-heart"></i>찜 목록</a>
-                  	<a href="${path }/member/myAccount.do" class="nav-link active"><i class="fa fa-user"></i>내 정보 수정</a>
-                  	<a href="/logout" class="nav-link"><i class="fa fa-sign-out"></i>로그아웃</a>
-                  	</ul>
-=======
                      <a href="${path }/member/mypage.do" class="nav-link"><i class="fa fa-list"></i>내 정보 보기</a>
                      <a href="${path }/member/wishList.do" class="nav-link"><i class="fa fa-heart"></i>찜 목록</a>
                      <a href="${path }/member/myAccount.do" class="nav-link active"><i class="fa fa-user"></i>내 정보 수정</a>
-                     <a href="index.html" class="nav-link"><i class="fa fa-sign-out"></i>로그아웃</a>
+                     <a href="/logout" class="nav-link"><i class="fa fa-sign-out"></i>로그아웃</a>
                      </ul>
->>>>>>> branch 'main' of https://github.com/seonsun10/CucumberMarket.git
                 </div>
               </div>
               <!-- /.col-lg-3-->
