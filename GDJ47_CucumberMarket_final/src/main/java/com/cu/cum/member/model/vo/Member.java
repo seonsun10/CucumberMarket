@@ -29,6 +29,7 @@ public class Member implements UserDetails{
 	@Column(name = "userid")
 	private String userId;
 	private String password;
+	private String name;
 //	private String role;
 	private String phone;
 //	private String activated;
