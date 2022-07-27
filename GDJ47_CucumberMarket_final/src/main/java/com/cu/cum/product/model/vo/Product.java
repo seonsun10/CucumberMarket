@@ -35,7 +35,7 @@ public class Product {
 	@GeneratedValue(generator = "seq_prono" , strategy = GenerationType.SEQUENCE)
 	private int proNo;
 	
-	private int categoryId;
+	private String categoryId;
 	
 	private String proName;
 	

@@ -30,6 +30,7 @@
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    
   </head>
   <body>
   <header class="header mb-5">
@@ -243,7 +244,10 @@
               <div id="search-not-mobile" class="navbar-collapse collapse"></div><a data-toggle="collapse" href="#search" class="btn navbar-btn btn-primary d-none d-lg-inline-block"><span class="sr-only">Toggle search</span><i class="fa fa-search"></i></a>
               <div id="basket-overview" class="navbar-collapse collapse d-none d-lg-block"><a href="basket.html" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span>3 items in cart</span></a></div>
               <div><a href="${path }/member/mypage.do">마이페이지</a></div>
-              <div><a href="${path }/product/insertProduct.do">상품등록</a></div>
+              <div>
+              <button class="btn btn-outline-success my-2 my-sm-0"
+				data-toggle="modal" data-target="#loginModal">상품 등록</button>
+			  </div>
             </div>
           </div>
         </div>
@@ -261,3 +265,40 @@
         </div>
       </div>
     </header>
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
+		aria-labelledby="loginModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h2 class="modal-title" id="loginModalLabel">상품 등록</h2>
+						<button type="button" class="close" 
+						data-dismiss="modal" aria-label="close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form action="${path }/">
+					<div class="modal-body">
+						<input type="text" name="proName" class="form-control"
+						placeholder="상품명" required><br>
+						<select class="form-control" aria-label="Default select example">
+						  <option selected>상품태그</option>
+						  <option value="1">의류</option>
+						  <option value="2">핸드폰</option>
+						  <option value="3">컴퓨터/게임용품</option>
+						  <option value="3">자동차/오토바이</option>
+						  <option value="3">가전제품</option>
+						  <option value="3">상품권/티켓/쿠폰</option>
+						  <option value="3">가구/인테리어</option>
+						  <option value="3">스포츠</option>
+						</select><br>
+						<textarea class="form-control" rows="3" placeholder="상품내용"></textarea>											
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-outline-success">로그인</button>
+						<button type="button" class="btn btn-outline-success"
+						data-dismiss="modal">취소</button>
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
