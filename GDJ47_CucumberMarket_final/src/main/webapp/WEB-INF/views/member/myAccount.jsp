@@ -58,10 +58,10 @@
                 </div>
                 <div class="card-body">
                   <ul class="nav nav-pills flex-column">
-                  	<a href="customer-orders.html" class="nav-link active"><i class="fa fa-list"></i> ???</a>
-                  	<a href="customer-wishlist.html" class="nav-link"><i class="fa fa-heart"></i> 찜목록</a>
-                  	<a href="customer-account.html" class="nav-link"><i class="fa fa-user"></i> 회원정보</a>
-                  	<a href="index.html" class="nav-link"><i class="fa fa-sign-out"></i> 로그아웃</a>
+                  	<a href="customer-orders.html" class="nav-link active"><i class="fa fa-list"></i>내 정보 보기</a>
+                  	<a href="customer-wishlist.html" class="nav-link"><i class="fa fa-heart"></i>찜 목록</a>
+                  	<a href="customer-account.html" class="nav-link"><i class="fa fa-user"></i>내 정보 수정</a>
+                  	<a href="index.html" class="nav-link"><i class="fa fa-sign-out"></i>로그아웃</a>
                   	</ul>
                 </div>
               </div>
@@ -102,7 +102,7 @@
                     <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save new password</button>
                   </div>
                 </form>
-                <h3 class="mt-5" style="font-size:30px; font-weight: 700;">회원 정보</h3>
+                <h3 class="mt-5" style="font-size:30px; font-weight: 900;">회원 정보</h3>
                 <form>
                   <div class="row">
                     <div class="col-md-6">

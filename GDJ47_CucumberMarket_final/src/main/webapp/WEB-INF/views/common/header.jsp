@@ -13,18 +13,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
     <!-- Bootstrap CSS-->
-    <link rel="stylesheet" href="resources/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/vendor/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome CSS-->
-    <link rel="stylesheet" href="resources/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/resources/vendor/font-awesome/css/font-awesome.min.css">
     <!-- Google fonts - Roboto -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700">
     <!-- owl carousel-->
-    <link rel="stylesheet" href="resources/vendor/owl.carousel/assets/owl.carousel.css">
-    <link rel="stylesheet" href="resources/vendor/owl.carousel/assets/owl.theme.default.css">
+    <link rel="stylesheet" href="/resources/vendor/owl.carousel/assets/owl.carousel.css">
+    <link rel="stylesheet" href="/resources/vendor/owl.carousel/assets/owl.theme.default.css">
     <!-- theme stylesheet-->
-    <link rel="stylesheet" href="resources/css/style.default.css" id="theme-stylesheet">
+    <link rel="stylesheet" href="/resources/css/style.default.css" id="theme-stylesheet">
     <!-- Custom stylesheet - for your changes-->
-    <link rel="stylesheet" href="resources/css/custom.css">
+    <link rel="stylesheet" href="/resources/css/custom.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="favicon.png">
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
@@ -242,7 +242,7 @@
               <!-- /.nav-collapse-->
               <div id="search-not-mobile" class="navbar-collapse collapse"></div><a data-toggle="collapse" href="#search" class="btn navbar-btn btn-primary d-none d-lg-inline-block"><span class="sr-only">Toggle search</span><i class="fa fa-search"></i></a>
               <div id="basket-overview" class="navbar-collapse collapse d-none d-lg-block"><a href="basket.html" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span>3 items in cart</span></a></div>
-              <div><a href="${path }/member/myAccount.do">마이페이지</a></div>
+              <div><a href="${path }/member/mypage.do">마이페이지</a></div>
             </div>
           </div>
         </div>
