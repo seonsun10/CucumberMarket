@@ -3,10 +3,10 @@ server:
 
 spring:
   datasource:
-    url: jdbc:oracle:thin:@localhost:1521:xe
+    url: jdbc:oracle:thin:@61.78.121.242:1521:xe
     driver-class-name: oracle.jdbc.driver.OracleDriver
-    username: spring
-    password: spring
+    username: cucumber
+    password: cucumber123
     #connection pool설정
     hikari:
       minimum-idle: 10
