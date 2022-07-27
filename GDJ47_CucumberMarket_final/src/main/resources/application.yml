@@ -20,7 +20,7 @@ spring:
     view:
       prefix: /WEB-INF/views/
       suffix: .jsp
-      
+        
 #jpa환경설정하기
   jpa:
     generate-ddl: false
