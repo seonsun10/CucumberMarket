@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -28,6 +29,7 @@ public class Member implements UserDetails{
 	@Id
 	@Column(name = "userid")
 	private String userId;
+	
 	private String password;
 	private String name;
 //	private String role;
@@ -36,6 +38,10 @@ public class Member implements UserDetails{
 //	private double score;
 	private Date enrollDate;
 //	private String intro;
+	
+	
+	@OneToMany(mappedBy="member")
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
@@ -73,7 +79,4 @@ public class Member implements UserDetails{
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
-	
-	
 }

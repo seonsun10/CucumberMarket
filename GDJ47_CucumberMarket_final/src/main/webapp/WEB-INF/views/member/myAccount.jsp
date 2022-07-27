@@ -3,35 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>::오이마켓::오늘도 이용하는 마켓</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="all,follow">
-    <!-- Bootstrap CSS-->
-    <link rel="stylesheet" href="/resources/vendor/bootstrap/css/bootstrap.min.css">
-    <!-- Font Awesome CSS-->
-    <link rel="stylesheet" href="/resources/vendor/font-awesome/css/font-awesome.min.css">
-    <!-- Google fonts - Roboto -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700">
-    <!-- owl carousel-->
-    <link rel="stylesheet" href="/resources/vendor/owl.carousel/assets/owl.carousel.css">
-    <link rel="stylesheet" href="/resources/vendor/owl.carousel/assets/owl.theme.default.css">
-    <!-- theme stylesheet-->
-    <link rel="stylesheet" href="/resources/css/style.default.css" id="theme-stylesheet">
-    <!-- Custom stylesheet - for your changes-->
-    <link rel="stylesheet" href="/resources/css/custom.css">
-    <!-- Favicon-->
-    <link rel="shortcut icon" href="favicon.png">
-    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-  </head>
-  <body>
+<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- navbar-->
     
     <div id="all">
@@ -54,15 +26,15 @@
               -->
               <div class="card sidebar-menu">
                 <div class="card-header">
-                  <h3 class="h4 card-title">Customer section</h3>
+                  <h3 class="h4 card-title">메뉴</h3>
                 </div>
                 <div class="card-body">
                   <ul class="nav nav-pills flex-column">
-                  	<a href="customer-orders.html" class="nav-link active"><i class="fa fa-list"></i>내 정보 보기</a>
-                  	<a href="customer-wishlist.html" class="nav-link"><i class="fa fa-heart"></i>찜 목록</a>
-                  	<a href="customer-account.html" class="nav-link"><i class="fa fa-user"></i>내 정보 수정</a>
-                  	<a href="index.html" class="nav-link"><i class="fa fa-sign-out"></i>로그아웃</a>
-                  	</ul>
+                     <a href="${path }/member/mypage.do" class="nav-link"><i class="fa fa-list"></i>내 정보 보기</a>
+                     <a href="${path }/member/wishList.do" class="nav-link"><i class="fa fa-heart"></i>찜 목록</a>
+                     <a href="${path }/member/myAccount.do" class="nav-link active"><i class="fa fa-user"></i>내 정보 수정</a>
+                     <a href="/logout" class="nav-link"><i class="fa fa-sign-out"></i>로그아웃</a>
+                     </ul>
                 </div>
               </div>
               <!-- /.col-lg-3-->
@@ -70,51 +42,20 @@
             </div>
             <div class="col-lg-9">
               <div class="box">
-                <h1>My account</h1>
-                <p class="lead">Change your personal details or your password here.</p>
-                <p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-                <h3>Change password</h3>
-                <form>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="password_old">Old password</label>
-                        <input id="password_old" type="password" class="form-control">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="password_1">New password</label>
-                        <input id="password_1" type="password" class="form-control">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="password_2">Retype new password</label>
-                        <input id="password_2" type="password" class="form-control">
-                      </div>
-                    </div>
-                  </div>
-                  <!-- /.row-->
-                  <div class="col-md-12 text-center">
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save new password</button>
-                  </div>
-                </form>
-                <h3 class="mt-5" style="font-size:30px; font-weight: 900;">회원 정보</h3>
+              <h1>회원정보</h1>
+                <p class="text-muted">현재 페이지에서 회원님의 정보를 수정할 수 있습니다.</p>
                 <form>
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="email">이메일</label>
-                        <input id="email" type="text" class="form-control">
+                        <input id="email" type="text" class="form-control" style="background-color:lightgray;" readonly value="<c:out value="${loginMember.userId }"/>">
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="name">이름</label>
-                        <input id="name" type="text" class="form-control">
+                        <input id="name" type="text" class="form-control" value="<c:out value="${loginMember.name }"/>">
                       </div>
                     </div>
                   </div>
@@ -122,8 +63,8 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="company">Company</label>
-                        <input id="company" type="text" class="form-control">
+                        <label for="company">전화번호</label>
+                        <input id="company" type="text" class="form-control" value="<c:out value="${loginMember.phone }"/>">
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -174,6 +115,37 @@
                     <div class="col-md-12 text-center">
                       <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> 수정하기</button>
                     </div>
+                  </div>
+                </form>
+                
+                <h3>비밀번호 변경</h3>
+                <form action="${path }/member/pwChange.do" method="post">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="oldPw">현재 비밀번호</label>
+                        <input name="passwordOld" id="oldPw" type="password" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="newPw">새로운 비밀번호</label>
+                        <input name="passwordNew" id="newPw" type="password" class="form-control">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="password_2">비밀번호 확인</label>
+                        <input id="password_2" type="password" class="form-control">
+                        <span id="pwBox"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /.row-->
+                  <div class="col-md-12 text-center">
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>비밀번호 변경</button>
                   </div>
                 </form>
               </div>
@@ -272,12 +244,29 @@
     </div>
     <!-- *** COPYRIGHT END ***-->
     <!-- JavaScript files-->
-    <script src="vendor/jquery/jquery.min.js"></script>
+  <!--   <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
     <script src="vendor/owl.carousel/owl.carousel.min.js"></script>
     <script src="vendor/owl.carousel2.thumbs/owl.carousel2.thumbs.js"></script>
-    <script src="js/front.js"></script>
+    <script src="js/front.js"></script> -->
   </body>
+  <script>
+  	$(()=>{
+  		$("#password_2").keyup(e=>{
+	  		const pw = $("#newPw").val();
+	  		const pw2 = $(e.target).val();
+	  		if(pw2.trim().length>2){
+	  			if(pw === pw2){
+	  				$("#pwBox").text("비밀번호가 일치합니다.").css('color','green');
+	  			}else{
+	  				$("#pwBox").text("비밀번호가 일치하지 않습니다.").css('color','red');
+	  			}
+	  		}else{
+	  			$("#pwBox").text("");
+	  		}
+  		})
+  	});
+  </script>
 </html>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

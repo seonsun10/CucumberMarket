@@ -27,7 +27,6 @@ public class MyProvider implements AuthenticationProvider {
 		Member loginMember = (Member)service.loadUserByUsername(username);
 		if(loginMember == null || !encoder.matches(password, loginMember.getPassword()))
 			throw new BadCredentialsException("인증 실패"); //login창에서 출력
-		
 		return new UsernamePasswordAuthenticationToken(loginMember, 
 				loginMember.getPassword(), loginMember.getAuthorities());
 	}
