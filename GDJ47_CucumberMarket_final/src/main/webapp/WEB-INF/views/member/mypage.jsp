@@ -32,6 +32,8 @@
                   <a href="${path }/member/myAccount.do" class="nav-link"><i class="fa fa-user"></i>내 정보 수정</a>
                   <a href="/logout" class="nav-link"><i class="fa fa-sign-out"></i>로그아웃</a>
                   </ul>
+                  <button class="btn btn-outline-success my-2 my-sm-0"
+				data-toggle="modal" data-target="#loginModal">상품 등록</button>
                 </div>
               </div>
               <!-- /.col-lg-3-->
@@ -156,4 +158,128 @@
       </div>
       <!-- /.container-->
     </div>
+
+    <!-- /#footer-->
+    <!-- *** FOOTER END ***-->
+    
+    
+    <!--
+    *** COPYRIGHT ***
+    _________________________________________________________
+    -->
+   
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
+		aria-labelledby="loginModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h2 class="modal-title" id="loginModalLabel">상품 등록</h2>
+						<button type="button" class="close" 
+						data-dismiss="modal" aria-label="close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form action="${path }/product/insertProduct.do" method="post">
+					<div class="modal-body">
+						<label for="exampleInputFile">상품 이미지 업로드</label><br>
+   						<input type="file" id="exampleInputFile" name="image" class="real-upload" accept="image/*" required multiple>
+   						<div class="upload"></div>
+  						<ul class="image-preview"></ul>
+  						
+						<input type="text" name="proName" class="form-control"
+						placeholder="제목" required><br>
+						<select class="form-control" name="tag" aria-label="Default select example">
+						  <option selected>상품태그</option>
+						  <option value="의류">의류</option>
+						  <option value="핸드폰">핸드폰</option>
+						  <option value="컴퓨터">컴퓨터</option>
+						  <option value="자동차/오토바이">차량용품</option>
+						  <option value="가전제품">가전제품</option>
+						  <option value="상품권">상품권</option>
+						  <option value="가구/인테리어">가구/인테리어</option>
+						  <option value="스포츠">스포츠</option>
+						  <option value="기타">기타</option>
+						</select><br>
+						<input type="text" name="region" class="form-control"
+						placeholder="거래 지역" required><br>
+						<label class="radio-inline">
+						  <input type="radio" name="proStatus" id="inlineRadio1" value="y"> 중고상품
+						</label>
+						<label class="radio-inline">
+						  <input type="radio" name="proStatus" id="inlineRadio2" value="n"> 새상품
+						</label><br>
+						<input type="number" name="price" class="form-control"
+						placeholder="가격" required"><br>
+						<textarea class="form-control" name="proContent" rows="5" placeholder="상품내용"></textarea><br>
+						<!-- <input type="text" name="user" value="admin" class="form-control">		 -->								
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-outline-success">로그인</button>
+						<button type="button" class="btn btn-outline-success"
+						data-dismiss="modal">취소</button>
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+<style>
+  	li {
+      list-style: none;
+    }
+    img {
+      width: 200px;
+      height: 200px;
+    }
+</style>
+<script>
+function getImageFiles(e) {
+    const uploadFiles = [];
+    const files = e.currentTarget.files;
+    const imagePreview = document.querySelector('.image-preview');
+    const docFrag = new DocumentFragment();
+
+    if ([...files].length >= 7) {
+      alert('이미지는 최대 6개 까지 업로드가 가능합니다.');
+      return;
+    }
+
+    // 파일 타입 검사
+    [...files].forEach(file => {
+      if (!file.type.match("image/.*")) {
+        alert('이미지 파일만 업로드가 가능합니다.');
+        return
+      }
+
+      // 파일 갯수 검사
+      if ([...files].length < 3) {
+        uploadFiles.push(file);
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const preview = createElement(e, file);
+          imagePreview.appendChild(preview);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  }
+
+  function createElement(e, file) {
+    const li = document.createElement('li');
+    const img = document.createElement('img');
+    img.setAttribute('src', e.target.result);
+    img.setAttribute('data-file', file.name);
+    li.appendChild(img);
+
+    return li;
+  }
+
+  const realUpload = document.querySelector('.real-upload');
+  const upload = document.querySelector('.upload');
+
+  upload.addEventListener('click', () => realUpload.click());
+
+  realUpload.addEventListener('change', getImageFiles);
+</script>
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
