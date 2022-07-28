@@ -211,6 +211,7 @@
       </div>
       <!-- /.container-->
     </div>
+
     <!-- /#footer-->
     <!-- *** FOOTER END ***-->
     
@@ -333,4 +334,5 @@ function getImageFiles(e) {
 
   realUpload.addEventListener('change', getImageFiles);
 </script>
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
