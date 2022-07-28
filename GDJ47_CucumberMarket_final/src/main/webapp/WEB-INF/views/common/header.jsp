@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+  	<link rel="icon" href="${path }/resources/img/오이.png"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>::오이마켓::오늘도 이용하는 마켓</title>
@@ -25,7 +26,8 @@
     <link rel="stylesheet" href="${path}/resources/css/style.default.css" id="theme-stylesheet">
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="${path}/resources/css/custom.css">
-    <link rel="stylesheet" href="${path}/resources/css/mypage.css">
+    <link rel="stylesheet" href="${path}/resources/css/mypage/mypage.css">
+    
     <!-- Favicon-->
     <link rel="shortcut icon" href="favicon.png">
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>

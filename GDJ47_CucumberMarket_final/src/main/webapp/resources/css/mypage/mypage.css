@@ -23,17 +23,17 @@ div#mp-b>div{
 }
 
 div#havePro{
-	padding-left:30px;
+	padding-left:50px;
 }
 
 div#mp-b{
-	top:50%;
 	width:500px;
 	display:flex;
-	padding-top:40px;
+	padding-top:20px;
+	padding-left:20px;
 }
 
-div>span{
+div>span#count{
 	color:black;
 	font-size:12px;
 }
@@ -69,7 +69,39 @@ div#myList>p{
 
 div#produce{
 	position:absolute;
-	padding-top: 25%;
-	padding-left: 31%;
+	top:320px;
+	left:50%;
+	transform: translate(-25%, -66%);
 	font-size: 13px;
+	background-color:rgb(229,229,229);
+	width:400px;
+	height:180px;
+	border-radius: 20px;
+	opacity: 0.7;
+	padding:15px;
+	word-break:break-all;
+	font-size:15px;
+}
+/*=====================================*/
+/* mypageProduct.jsp 스타일 */
+div#pro-head{
+	display:flex;
+	justify-content: space-between;
+	font-size:17px;
+	padding-bottom:25px;
+	border-bottom:1px solid rgb(229,229,229);
+}
+div#pro-head span{
+	color:orange;
+}
+select#listOption{
+	width:100px;
+	border:1px solid rgb(229,229,229);
+	border-radius: 4px;
+}
+div#pro-body{
+	margin:50px 0px;
+}
+div#pro-body>span{
+	color:gray;
 }

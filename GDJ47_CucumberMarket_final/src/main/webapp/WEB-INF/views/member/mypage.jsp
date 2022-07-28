@@ -49,24 +49,24 @@
 				  	</div>
 				  	<div id="mp-b">
 				  		<div id="havePro">
-				  		<img src="https://cdn-icons.flaticon.com/png/512/4202/premium/4202831.png?token=exp=1658985646~hmac=622aefed546ce5a011e99eed2ee5eeaf"
+				  		<img src="https://cdn-icons-png.flaticon.com/512/4695/4695312.png"
 				  		 width="14px"/>
 				  			방문자수&nbsp;
-				  			<span>0명</span>
+				  			<span id="count">0명</span>
 				  		</div>
 				  		<div id="dibs">
 				  		<img src="https://cdn-icons-png.flaticon.com/512/6696/6696548.png" width="14px"/>
 				  			등록상품&nbsp;
-				  			<span>0개</span>
+				  			<span id="count">0개</span>
 				  		</div>
 				  		<div id="report">
 				  		<img src="https://cdn-icons-png.flaticon.com/512/5132/5132236.png" width="14px"/>
 				  			상품판매&nbsp;
-				  			<span>0개</span>
+				  			<span id="count">0개</span>
 				  		</div>
 				  	</div>
 				  	<div id="produce">
-				  		소개하기
+				  		제 상점은 깨끗한 상점이에요&&;
 				  	</div>
 				  </div>
 				  <div>

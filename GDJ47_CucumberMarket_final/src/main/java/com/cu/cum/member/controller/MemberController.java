@@ -2,6 +2,8 @@ package com.cu.cum.member.controller;
 
 import java.security.Principal;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -146,10 +148,13 @@ public class MemberController {
 	
 	//마이페이지에서 상품 목록 뿌리는 페이지
 	@RequestMapping("/member/mypageProduct.do")
-	public String propage(@RequestParam(defaultValue="1") int cPage, @RequestParam(defaultValue="5") int numPerpage) {
+	public String propage(@RequestParam(defaultValue="1") int cPage,
+							@RequestParam(defaultValue="5") int numPerpage,
+							HttpServletRequest request,
+							Model m) {
 //		List<Product> boards=new Service().selectBoardList(cPage, numPerpage);
-//		int totalBoard=new BoardService().selectBoardCount();
-//		int totalPage=(int)Math.ceil((double)totalBoard/numPerpage);
+//		int totalProduct=productService().selectProductCount();
+//		int totalPage=(int)Math.ceil((double)totalProduct/numPerpage);
 //		
 //		int pageBarSize=5;
 //		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
@@ -182,6 +187,8 @@ public class MemberController {
 //			+"?cPage="+(pageNo)
 //			+"&numPerpage="+numPerpage+">[다음]</a>";
 //		}
+//		m.addAttribute("pageBar",pageBar);
+//		m.addAttribute("product",product);
 		return "member/mypageProduct";
 	}
 	//마이페이지에서 후기 목록 뿌리는 페이지
