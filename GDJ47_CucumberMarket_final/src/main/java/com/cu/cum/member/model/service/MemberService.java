@@ -16,4 +16,7 @@ public interface MemberService {
 	
 	//비밀번호 변경
 	Member updatePassword(Member m);
+	
+	//회원정보 수정
+	Member updateMember(Member m);
 }

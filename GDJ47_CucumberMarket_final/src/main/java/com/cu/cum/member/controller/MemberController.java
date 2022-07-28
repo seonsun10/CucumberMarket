@@ -126,10 +126,14 @@ public class MemberController {
 	public String pwUpdate(@RequestParam String userId,
 							@RequestParam String oldPw,
 							@RequestParam String newPw, Model model) {
+		
 		Member m = service.searchMember(userId);
+		
 		log.debug("{}",m);
 		log.debug("{}",pwEncoder.matches(oldPw, m.getPassword()));
+		
 		model.addAttribute("loc","member/myAccount.do");
+		
 		if(!(pwEncoder.matches(oldPw, m.getPassword()))) {
 			model.addAttribute("msg","현재 비밀번호가 일치하지 않습니다.");
 		}else {
@@ -139,4 +143,66 @@ public class MemberController {
 		}
 		return "common/msg";
 	}
+	
+	//마이페이지에서 상품 목록 뿌리는 페이지
+	@RequestMapping("/member/mypageProduct.do")
+	public String propage(@RequestParam(defaultValue="1") int cPage, @RequestParam(defaultValue="5") int numPerpage) {
+//		List<Product> boards=new Service().selectBoardList(cPage, numPerpage);
+//		int totalBoard=new BoardService().selectBoardCount();
+//		int totalPage=(int)Math.ceil((double)totalBoard/numPerpage);
+//		
+//		int pageBarSize=5;
+//		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
+//		int pageEnd=pageNo+pageBarSize-1;
+//		
+//		String pageBar="";
+//		if(pageNo==1) {
+//			pageBar+="<span>[이전]</span>";
+//		}else {
+//			pageBar+="<a href="+request.getRequestURL()
+//					+"?cPage="+(pageNo-1)
+//					+"&numPerpage="+numPerpage+">[이전]</a>";
+//		}
+//		
+//		while(!(pageNo>pageEnd||pageNo>totalPage)) {
+//			if(cPage==pageNo) {
+//				pageBar+="<span>"+pageNo+"</span>";
+//			}else {
+//				pageBar+="<a href="+request.getRequestURL()
+//				+"?cPage="+(pageNo)
+//				+"&numPerpage="+numPerpage+">"+pageNo+"</a>";
+//			}
+//			pageNo++;
+//		}
+//		
+//		if(pageNo>totalPage) {
+//			pageBar+="<span>[다음]</span>";
+//		}else {
+//			pageBar+="<a href="+request.getRequestURL()
+//			+"?cPage="+(pageNo)
+//			+"&numPerpage="+numPerpage+">[다음]</a>";
+//		}
+		return "member/mypageProduct";
+	}
+	//마이페이지에서 후기 목록 뿌리는 페이지
+	@RequestMapping("/member/mypageReview.do")
+	public String reviewpage() {
+		return "member/mypageReview";
+	}
+	//마이페이지에서 찜 목록 뿌리는 페이지
+	@RequestMapping("/member/mypageDibs.do")
+	public String dibspage() {
+		return "member/mypageDibs";
+	}
+	//마이페이지에서 신고 목록 뿌리는 페이지
+	@RequestMapping("/member/mypageReport.do")
+	public String reportpage() {
+		return "member/mypageReport";
+	}
+	//마이페이지에서 채팅 목록 뿌리는 페이지
+	@RequestMapping("/member/mypageChat.do")
+	public String chatpage() {
+		return "member/mypageChat";
+	}
+	
 }

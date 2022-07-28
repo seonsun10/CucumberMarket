@@ -42,100 +42,47 @@
                 <h1>내 정보보기</h1>
                 <hr>
                 <div class="table-responsive">
-                  <!-- <table class="table table-hover">
-                    <thead>
-                      <tr>
-                        <th>Order</th>
-                        <th>Date</th>
-                        <th>Total</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th># 1735</th>
-                        <td>22/06/2013</td>
-                        <td>$ 150.00</td>
-                        <td><span class="badge badge-info">Being prepared</span></td>
-                        <td><a href="customer-order.html" class="btn btn-primary btn-sm">View</a></td>
-                      </tr>
-                      <tr>
-                        <th># 1735</th>
-                        <td>22/06/2013</td>
-                        <td>$ 150.00</td>
-                        <td><span class="badge badge-info">Being prepared</span></td>
-                        <td><a href="customer-order.html" class="btn btn-primary btn-sm">View</a></td>
-                      </tr>
-                      <tr>
-                        <th># 1735</th>
-                        <td>22/06/2013</td>
-                        <td>$ 150.00</td>
-                        <td><span class="badge badge-success">Received</span></td>
-                        <td><a href="customer-order.html" class="btn btn-primary btn-sm">View</a></td>
-                      </tr>
-                      <tr>
-                        <th># 1735</th>
-                        <td>22/06/2013</td>
-                        <td>$ 150.00</td>
-                        <td><span class="badge badge-danger">Cancelled</span></td>
-                        <td><a href="customer-order.html" class="btn btn-primary btn-sm">View</a></td>
-                      </tr>
-                      <tr>
-                        <th># 1735</th>
-                        <td>22/06/2013</td>
-                        <td>$ 150.00</td>
-                        <td><span class="badge badge-warning">On hold</span></td>
-                        <td><a href="customer-order.html" class="btn btn-primary btn-sm">View</a></td>
-                      </tr>
-                    </tbody>
-                  </table> -->
                   <br/>
-				  <div>
-				  <h3>이메일</h3>
-				  <input type="text" value="<c:out value="${loginMember.userId }"/>" readonly>
+                  <div id="mp-h">
+				  	<div id="imgBox">
+				  		<img src="https://cdn-icons-png.flaticon.com/512/149/149071.png"/>
+				  	</div>
+				  	<div id="mp-b">
+				  		<div id="havePro">
+				  		<img src="https://cdn-icons.flaticon.com/png/512/4202/premium/4202831.png?token=exp=1658985646~hmac=622aefed546ce5a011e99eed2ee5eeaf"
+				  		 width="14px"/>
+				  			방문자수&nbsp;
+				  			<span>0명</span>
+				  		</div>
+				  		<div id="dibs">
+				  		<img src="https://cdn-icons-png.flaticon.com/512/6696/6696548.png" width="14px"/>
+				  			등록상품&nbsp;
+				  			<span>0개</span>
+				  		</div>
+				  		<div id="report">
+				  		<img src="https://cdn-icons-png.flaticon.com/512/5132/5132236.png" width="14px"/>
+				  			상품판매&nbsp;
+				  			<span>0개</span>
+				  		</div>
+				  	</div>
+				  	<div id="produce">
+				  		소개하기
+				  	</div>
 				  </div>
-				  <br/>
 				  <div>
-				  <h3>이름</h3>
-				  <input type="text" value="<c:out value="${loginMember.name }"/>" readonly>
+				  <div id="myList">
+				  	<p id="protag">상품</p>
+				  	<p id="reviewtag">후기</p>
+				  	<p id="dibstag">찜</p>
+				  	<p id="reporttag">신고</p>
+				  	<p id="chattag">채팅</p>
 				  </div>
-				  <br/>
-				  <div>
-				  <h3>휴대폰번호</h3>
-				  <input type="text" value="<c:out value="${loginMember.phone }"/>" readonly>
-				  </div>
-				  <br/>
-				  <div>
-				  <h3>소개글</h3>
-				  <input type="text" value="소개글이야~" readonly>
 				  </div>
                 </div>
               </div>
               
               <!-- 여기 이제 분기처리 해야함 등록한 상품이없으면 안보이게 -->
-              <div  class="col-lg-9 box " style="max-width:100%;">
-                  <div class="row products" style="justify-content:center" >
-                           <div style="width:200px;">
-                              <h1>1</h1>
-                           </div>
-                           <div style="width:200px;">
-                              <h1>2</h1>
-                           </div>
-                           <div style="width:200px;">
-                              <h1>3</h1>
-                           </div>
-                           <div style="width:200px;">
-                              <h1>4</h1>
-                           </div>
-                           <div style="width:200px;">
-                              <h1>5</h1>
-                           </div>
-                           <div style="width:200px;">
-                              <h1>6</h1>
-                           </div>
-                  </div>
-               </div>
+              <div id="databox" class="col-lg-9 box " style="max-width:100%;"></div>
             </div>
           </div>
         </div>

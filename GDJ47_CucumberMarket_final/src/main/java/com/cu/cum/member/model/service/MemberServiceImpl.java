@@ -50,4 +50,11 @@ public class MemberServiceImpl implements MemberService {
 		
 		return dao.save(m);
 	}
+	
+	//회원정보 수정
+	@Override
+	public Member updateMember(Member m) {
+		// TODO Auto-generated method stub
+		return dao.save(m);
+	}
 }
