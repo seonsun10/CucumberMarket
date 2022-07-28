@@ -11,4 +11,9 @@ public interface MemberService {
 //	String checkEmail(String email);
 
 	Member join(Member member);
+	
+	Member searchMember(String userId);
+	
+	//비밀번호 변경
+	Member updatePassword(Member m);
 }

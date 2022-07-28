@@ -1,11 +1,8 @@
 package com.cu.cum.member.model.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import com.cu.cum.member.model.dao.MemberRepository;
 import com.cu.cum.member.model.vo.Member;
@@ -39,5 +36,18 @@ public class MemberServiceImpl implements MemberService {
 		member.setPassword(pwEncoder.encode(member.getPassword()));
 	
 		return dao.save(member);
+	}
+	//회원찾기
+	@Override
+	public Member searchMember(String userId) {
+		
+		return dao.findByUserId(userId);
+	}
+	
+	//비밀번호 변경
+	@Override
+	public Member updatePassword(Member m) {
+		
+		return dao.save(m);
 	}
 }

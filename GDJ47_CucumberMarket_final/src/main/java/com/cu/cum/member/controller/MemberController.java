@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,12 +14,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.cu.cum.member.model.dao.MemberRepository;
 import com.cu.cum.member.model.service.MemberService;
 import com.cu.cum.member.model.vo.Member;
 
@@ -30,6 +31,9 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
 	
 	private Logger logger = LoggerFactory.getLogger(MemberController.class);
+	
+	@Autowired
+	private BCryptPasswordEncoder pwEncoder; 
 	
 	@Autowired
 	private MemberService service;
@@ -111,9 +115,28 @@ public class MemberController {
 	public String myAccount() {
 		return "member/myAccount";
 	}
-
+	//찜목록 이동
 	@RequestMapping("/member/wishList.do")
 	public String wishList() {
 		return "member/wishList";
+	}
+	
+	//비밀번호 변경
+	@RequestMapping("/member/pwUpdate.do")
+	public String pwUpdate(@RequestParam String userId,
+							@RequestParam String oldPw,
+							@RequestParam String newPw, Model model) {
+		Member m = service.searchMember(userId);
+		log.debug("{}",m);
+		log.debug("{}",pwEncoder.matches(oldPw, m.getPassword()));
+		model.addAttribute("loc","member/myAccount.do");
+		if(!(pwEncoder.matches(oldPw, m.getPassword()))) {
+			model.addAttribute("msg","현재 비밀번호가 일치하지 않습니다.");
+		}else {
+			m.setPassword(pwEncoder.encode(newPw));
+			service.updatePassword(m);
+			model.addAttribute("msg","비밀번호를 변경하였습니다.");
+		}
+		return "common/msg";
 	}
 }
