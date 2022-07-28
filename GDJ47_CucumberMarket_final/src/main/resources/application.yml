@@ -28,7 +28,7 @@ spring:
     database: oracle
     database-platform: org.hibernate.dialect.Oracle9iDialect
     hibernate: 
-      ddl-auto: none
+      ddl-auto: update
 
 logging:
   level:

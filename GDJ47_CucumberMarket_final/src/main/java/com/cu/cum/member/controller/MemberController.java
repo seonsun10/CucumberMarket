@@ -2,21 +2,34 @@ package com.cu.cum.member.controller;
 
 import java.security.Principal;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
+import com.cu.cum.member.model.dao.MemberRepository;
 import com.cu.cum.member.model.service.MemberService;
 import com.cu.cum.member.model.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Controller
 @Slf4j
+@Controller
+@SessionAttributes("loginMember")
 public class MemberController {
+	
+	private Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	@Autowired
 	private MemberService service;
@@ -24,8 +37,9 @@ public class MemberController {
 	@GetMapping({"","/"})
 	public String index(Principal p,Model m) {
 		log.debug("{}",p);
-//		m.getAttribute();
-		return "index"; //뷰리졸버 파일 설정 확인 "Path with "WEB-INF" or "META-INF": [WEB-INF/views/index.jsp]" 출력
+		
+//		m.getAttribute(); //무엇을 해야하는 건지 다시 생각해보기
+		return "index";
 	}
 	
 	@RequestMapping("/insertAdmin")
@@ -38,18 +52,68 @@ public class MemberController {
 		
 		return result;
 	}
-//	@RequestMapping("/successlogin")
-//	public String loingInde(Principal p, Model m) {
-//		log.debug("{}",p);
-//		//m.addAttribute("loingId",p.getName());
-//		return "index";
-//	}
+	
+	//회원가입 페이지로
+	@RequestMapping(value = "/joinForm", method =RequestMethod.GET)
+	public String joinForm() {
+		return "/member/joinForm";
+	}
+	
+	//회원가입
+	@PostMapping("/join")
+	public ModelAndView join(@ModelAttribute Member member) {
+		service.join(member);
+		return new ModelAndView("redirect:/"); //회원가입 후, 메인 화면으로 바로 이동
+ 	}
+	
+//	@PostMapping("/join")
+//	public String join(Member member) {
+//		logger.debug("원본 :{}", member.getPassword());
+//		String rawPassword = member.getPassword();
+//		String encPassword = pwEncoder.encode(rawPassword);
+//		//패스워드 암호화
+//		logger.debug("암호화 :{}",pwEncoder.encode(member.getPassword()));
+//		member.setPassword(pwEncoder.encode(member.getPassword()));
+//		member.setPassword(encPassword);
+//		
+//		dao.save(member);
 //	
-//	@GetMapping("/register")
-//	public Member insertMember() {
-//		
-//		
-//		return "register";
+//		return "redirect:/login";
 //	}
+	
 
+	
+	@RequestMapping("/successLogin.do")
+	public String successLogin(Model m) {
+		//인증받은 객체의 정보를 가져올 수 있다.
+		//loadUserByUsername()메소드에서 반환하는 객체를 받을 수 있음.
+		Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		m.addAttribute("loginMember",(Member)o);
+		return "redirect:/";
+	}
+	
+	@RequestMapping("/successLogout.do")
+	public String successLogout(SessionStatus session) {
+		if(!session.isComplete()) {
+			session.setComplete();
+		}
+		return "redirect:/";
+	}
+	
+	
+	@RequestMapping("/member/mypage.do")
+	public String myPage() {
+		return "member/mypage";
+	}
+	
+	//회원정보수정 페이지로 이동
+	@RequestMapping("/member/myAccount.do")
+	public String myAccount() {
+		return "member/myAccount";
+	}
+
+	@RequestMapping("/member/wishList.do")
+	public String wishList() {
+		return "member/wishList";
+	}
 }
