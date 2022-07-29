@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -25,16 +26,23 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Member implements UserDetails{
 	
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@Column(name = "userid")
 	private String userId;
+	
 	private String password;
+	private String name;
 //	private String role;
 	private String phone;
 //	private String activated;
 //	private double score;
 	private Date enrollDate;
 //	private String intro;
+	
+	
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
@@ -42,11 +50,6 @@ public class Member implements UserDetails{
 		auth.add(new SimpleGrantedAuthority("ROLE_USER"));
 		return auth;
 	}
-//	@Override
-//	public String getPassword() {
-//		// TODO Auto-generated method stub
-//		return true;
-//	}
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
@@ -72,7 +75,4 @@ public class Member implements UserDetails{
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
-	
-	
 }

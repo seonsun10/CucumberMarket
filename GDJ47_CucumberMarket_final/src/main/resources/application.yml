@@ -22,14 +22,16 @@ spring:
         
 #jpa환경설정하기
   jpa:
-    generate-ddl: false
+    generate-ddl: true
     show-sql: true
     database: oracle
     database-platform: org.hibernate.dialect.Oracle9iDialect
     hibernate: 
-      ddl-auto: none
+      ddl-auto: update
+      use-new-id-generator-mappings: true
 
 logging:
   level:
     root: info
     com.cu.cum: debug
+    

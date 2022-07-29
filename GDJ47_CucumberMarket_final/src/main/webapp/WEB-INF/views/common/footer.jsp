@@ -16,11 +16,16 @@
     </div>
     <!-- *** COPYRIGHT END ***-->
     <!-- JavaScript files-->
-    <script src="resources/vendor/jquery/jquery.min.js"></script>
-    <script src="resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="resources/vendor/jquery.cookie/jquery.cookie.js"> </script>
-    <script src="resources/vendor/owl.carousel/owl.carousel.min.js"></script>
-    <script src="resources/vendor/owl.carousel2.thumbs/owl.carousel2.thumbs.js"></script>
-    <script src="resources/js/front.js"></script>
+    <script src="${path}/resources/vendor/jquery/jquery.min.js"></script>
+    <script src="${path}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="${path}/resources/vendor/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="${path}/resources/vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script src="${path}/resources/vendor/owl.carousel2.thumbs/owl.carousel2.thumbs.js"></script>
+    <script src="${path}/resources/js/front.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+    <script src="${path}/resources/js/mypage.js"></script>
+
   </body>
 </html>
