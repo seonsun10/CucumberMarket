@@ -100,7 +100,18 @@ $(()=>{
 		});
 	});
 	
+	
 });
+function fn_ajaxPage(pageNo){
+	$.ajax({
+		url:"/member/mypageProduct.do",
+		data:{"cPage":pageNo},
+		dataType:"html",
+		success:data=>{
+			$("#databox").html(data);
+		}
+	});
+};
 
 const pwcheck=()=>{
 	const pw1 = $("#newPw");

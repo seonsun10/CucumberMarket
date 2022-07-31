@@ -84,7 +84,8 @@
               </div>
               
               <!-- 여기 이제 분기처리 해야함 등록한 상품이없으면 안보이게 -->
-              <div id="databox" class="col-lg-9 box " style="max-width:100%;"></div>
+              <div id="databox" class="col-lg-9 box " style="max-width:100%;">
+              </div>
             </div>
           </div>
         </div>
@@ -222,16 +223,6 @@
 				</div>
 			</div>
 		</div>
-
-<style>
-  	li {
-      list-style: none;
-    }
-    img {
-      width: 200px;
-      height: 200px;
-    }
-</style>
 <script>
 function getImageFiles(e) {
     const uploadFiles = [];

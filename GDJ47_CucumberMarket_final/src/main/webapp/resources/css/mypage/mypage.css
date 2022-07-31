@@ -89,7 +89,6 @@ div#pro-head{
 	justify-content: space-between;
 	font-size:17px;
 	padding-bottom:25px;
-	border-bottom:1px solid rgb(229,229,229);
 }
 div#pro-head span{
 	color:orange;
@@ -100,8 +99,39 @@ select#listOption{
 	border-radius: 4px;
 }
 div#pro-body{
-	margin:50px 0px;
+	/* margin:50px 0px; */
 }
 div#pro-body>span{
 	color:gray;
+}
+ul#pro-list{
+	list-style: none;
+	padding:0;
+	justify-content: space-between;
+	display:flex;
+	border-bottom:1px solid rgb(229,229,229);
+	align-items: center;
+	margin-bottom:0;
+}
+tr#tablebody>td{
+	padding: 20px 0px;
+	border-bottom:1px solid rgb(229,229,229);
+	text-align:center;
+}
+tr#tablehead>th{
+	width:150px;
+	height:40px;
+	text-align: center;
+	border-bottom:1px solid rgb(229,229,229);
+}
+#pro-title{
+	width:150px;
+}
+
+#tablebody:hover{
+	background-color:rgd(229,229,229);
+}
+#pageBar{
+	text-align:center;
+	padding:20px 0 0 0;
 }
