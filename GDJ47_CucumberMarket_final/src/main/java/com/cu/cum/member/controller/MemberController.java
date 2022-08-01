@@ -2,10 +2,16 @@ package com.cu.cum.member.controller;
 
 import java.security.Principal;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +19,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -20,7 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cu.cum.member.model.service.MemberService;
 import com.cu.cum.member.model.vo.Member;
-import com.cu.cum.session.ChatSession;
+
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,7 +41,11 @@ public class MemberController {
 	private Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	@Autowired
-	private ChatSession cSession;
+
+	
+	private BCryptPasswordEncoder pwEncoder; 
+	
+
 	@Autowired
 	private MemberService service;
 	
@@ -91,8 +104,8 @@ public class MemberController {
 		//loadUserByUsername()메소드에서 반환하는 객체를 받을 수 있음.
 		Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		m.addAttribute("loginMember",(Member)o);
-		cSession.addLoginUser(((Member)o).getUserId());
-		System.out.println(cSession);
+	
+		
 		return "redirect:/";
 	}
 	
@@ -100,8 +113,7 @@ public class MemberController {
 	public String successLogout(SessionStatus session) {
 		Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String id= ((Member)o).getUserId();
-		cSession.removeLoginUser(id);
-		System.out.println(cSession);
+		
 		if(!session.isComplete()) {
 			
 			
@@ -121,9 +133,99 @@ public class MemberController {
 	public String myAccount() {
 		return "member/myAccount";
 	}
-
+	//찜목록 이동
 	@RequestMapping("/member/wishList.do")
 	public String wishList() {
 		return "member/wishList";
 	}
+	
+	//비밀번호 변경
+	@RequestMapping("/member/pwUpdate.do")
+	public String pwUpdate(@RequestParam String userId,
+							@RequestParam String oldPw,
+							@RequestParam String newPw, Model model) {
+		
+		Member m = service.searchMember(userId);
+		
+		log.debug("{}",m);
+		log.debug("{}",pwEncoder.matches(oldPw, m.getPassword()));
+		
+		model.addAttribute("loc","member/myAccount.do");
+		
+		if(!(pwEncoder.matches(oldPw, m.getPassword()))) {
+			model.addAttribute("msg","현재 비밀번호가 일치하지 않습니다.");
+		}else {
+			m.setPassword(pwEncoder.encode(newPw));
+			service.updatePassword(m);
+			model.addAttribute("msg","비밀번호를 변경하였습니다.");
+		}
+		return "common/msg";
+	}
+	
+	//마이페이지에서 상품 목록 뿌리는 페이지
+	@RequestMapping("/member/mypageProduct.do")
+	public String propage(@RequestParam(defaultValue="1") int cPage,
+							@RequestParam(defaultValue="5") int numPerpage,
+							HttpServletRequest request,
+							Model m) {
+//		List<Product> boards=new Service().selectBoardList(cPage, numPerpage);
+//		int totalProduct=productService().selectProductCount();
+//		int totalPage=(int)Math.ceil((double)totalProduct/numPerpage);
+//		
+//		int pageBarSize=5;
+//		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
+//		int pageEnd=pageNo+pageBarSize-1;
+//		
+//		String pageBar="";
+//		if(pageNo==1) {
+//			pageBar+="<span>[이전]</span>";
+//		}else {
+//			pageBar+="<a href="+request.getRequestURL()
+//					+"?cPage="+(pageNo-1)
+//					+"&numPerpage="+numPerpage+">[이전]</a>";
+//		}
+//		
+//		while(!(pageNo>pageEnd||pageNo>totalPage)) {
+//			if(cPage==pageNo) {
+//				pageBar+="<span>"+pageNo+"</span>";
+//			}else {
+//				pageBar+="<a href="+request.getRequestURL()
+//				+"?cPage="+(pageNo)
+//				+"&numPerpage="+numPerpage+">"+pageNo+"</a>";
+//			}
+//			pageNo++;
+//		}
+//		
+//		if(pageNo>totalPage) {
+//			pageBar+="<span>[다음]</span>";
+//		}else {
+//			pageBar+="<a href="+request.getRequestURL()
+//			+"?cPage="+(pageNo)
+//			+"&numPerpage="+numPerpage+">[다음]</a>";
+//		}
+//		m.addAttribute("pageBar",pageBar);
+//		m.addAttribute("product",product);
+		return "member/mypageProduct";
+	}
+	//마이페이지에서 후기 목록 뿌리는 페이지
+	@RequestMapping("/member/mypageReview.do")
+	public String reviewpage() {
+		return "member/mypageReview";
+	}
+	//마이페이지에서 찜 목록 뿌리는 페이지
+	@RequestMapping("/member/mypageDibs.do")
+	public String dibspage() {
+		return "member/mypageDibs";
+	}
+	//마이페이지에서 신고 목록 뿌리는 페이지
+	@RequestMapping("/member/mypageReport.do")
+	public String reportpage() {
+		return "member/mypageReport";
+	}
+	//마이페이지에서 채팅 목록 뿌리는 페이지
+	@RequestMapping("/member/mypageChat.do")
+	public String chatpage() {
+		return "member/mypageChat";
+	}
+	
 }

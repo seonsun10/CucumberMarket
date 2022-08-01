@@ -42,7 +42,6 @@ public class Member implements UserDetails{
 //	private String intro;
 	
 	
-	@OneToMany(mappedBy="member")
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

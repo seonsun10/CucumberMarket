@@ -145,13 +145,15 @@
                     </div>
                   </div><a href="detail.html" class="invisible"><img src="resources/img/product3.jpg" alt="" class="img-fluid"></a>
                   <div class="text">
-                    <h3><a href="detail.html">Black Blouse Versace</a></h3>
-                    <p class="price"> 
-                      <del></del>$143.00
+                    <h3>
+                    <a href="detail.html">Black Blouse Versace</a></h3>
+                    <p class="price">
+					<del></del>$143.00
                     </p>
                   </div>
                   <!-- /.text-->
                 </div>
+    			
                 <!-- /.product-->
               </div>
               <div class="item">

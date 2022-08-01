@@ -38,8 +38,8 @@
             </div>
             <div id="wishlist" class="col-lg-9">
               <ul class="breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li>Ladies</li>
+                <li><a href="/member/mypage.do">Home</a></li>
+                <li> 찜 목록</li>
               </ul>
               <div class="box">
                 <h1>찜 목록</h1>
@@ -55,7 +55,7 @@
                       </div>
                     </div><a href="detail.html" class="invisible"><img src="img/product1.jpg" alt="" class="img-fluid"></a>
                     <div class="text">
-                      <h3><a href="detail.html">Fur coat with very but very very long name</a></h3>
+                      <h3><a href="detail.html">하하하</a></h3>
                       <p class="price"> 
                         <del></del>$143.00
                       </p>
