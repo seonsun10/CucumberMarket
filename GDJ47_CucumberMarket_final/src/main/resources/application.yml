@@ -34,3 +34,8 @@ logging:
   level:
     root: info
     com.cu.cum: debug
+    
+    
+mybatis:
+  mapper-locations: /mapper/**/*.xml
+  

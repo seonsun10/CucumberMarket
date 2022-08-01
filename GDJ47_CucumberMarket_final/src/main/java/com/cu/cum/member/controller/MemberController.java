@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.cu.cum.member.model.dao.MemberRepository;
 import com.cu.cum.member.model.service.MemberService;
 import com.cu.cum.member.model.vo.Member;
+import com.cu.cum.session.ChatSession;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,6 +31,8 @@ public class MemberController {
 	
 	private Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
+	@Autowired
+	private ChatSession cSession;
 	@Autowired
 	private MemberService service;
 	
@@ -89,12 +91,20 @@ public class MemberController {
 		//loadUserByUsername()메소드에서 반환하는 객체를 받을 수 있음.
 		Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		m.addAttribute("loginMember",(Member)o);
+		cSession.addLoginUser(((Member)o).getUserId());
+		System.out.println(cSession);
 		return "redirect:/";
 	}
 	
 	@RequestMapping("/successLogout.do")
 	public String successLogout(SessionStatus session) {
+		Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String id= ((Member)o).getUserId();
+		cSession.removeLoginUser(id);
+		System.out.println(cSession);
 		if(!session.isComplete()) {
+			
+			
 			session.setComplete();
 		}
 		return "redirect:/";

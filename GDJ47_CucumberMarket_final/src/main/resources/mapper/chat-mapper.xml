@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="chatroom">
+	<insert id="insertchatroom" parameterType="com.cu.cum.test.model.vo.ChatRoom">
+		insert into chatroom values(#{roomId},#{proNo},#{userId},#{otherId},1)
+	</insert>
+	<select id="checkroom" parameterType="com.cu.cum.test.model.vo.ChatRoom" resultType="_int">
+		select count(*) from chatroom where prono=#{proNo} and userid=#{userId} and otherid=#{otherId}
+	</select>
+	<select id="selectchatroom" parameterType="com.cu.cum.test.model.vo.ChatRoom" resultType="com.cu.cum.test.model.vo.ChatRoom">
+		select * from chatroom where prono=#{proNo} and userid=#{userId} and otherid=#{otherId}
+	</select>
+	<insert id="insertmessage1" parameterType="string">
+	insert into chatmessage(messageid,roomid,createdate) values(seq_msgid.nextval,#{id},sysdate)
+	</insert>
+	<select id="selectroomid" parameterType="string" resultType="com.cu.cum.test.model.vo.ChatRoom">
+	select * from chatroom where roomid=#{id}
+	</select>
+	<insert id="insertmessage" parameterType="com.cu.cum.test.model.vo.MessageContent">
+	INSERT INTO chatmessage VALUES(seq_msgid.nextval,#{roomId},#{massage},#{userid},sysdate,NULL,NULL,NULL)
+	</insert>
+	<select id="selectmessage" parameterType="string" resultType="com.cu.cum.test.model.vo.MessageContent">
+	select * from chatmessage where roomid=#{roomId} and massage is not null
+	</select>
+	<select id="selectchatlist" parameterType="string" resultType="com.cu.cum.test.model.vo.ChatRoom">
+	select * from chatroom where otherid=#{id} or userid=#{id}
+	</select>
+</mapper>
+
