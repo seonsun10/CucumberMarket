@@ -50,19 +50,19 @@
 						  		</tr>
 						  		<tr>
 						   			<th align="center">제목</th>
-						   			<td>사기꾼 잡을수 있나요?</td>
+						   			<td>사기꾼 좀 잡아라!</td>
 						  		</tr>
 						  		<tr>
 						   			<th align="center">작성자</th>
 						   			<td>goodee</td>
 						  		</tr>
 								<tr>
-						   			<td colspan="2" height="200px">사기당했는데 어떻게 신고하나요? </td>
+						   			<td colspan="2" height="200px">아 사기 당했다고! 잡아달라고 처리해달라고 </td>
 						  		</tr>
 						 	</tbody>
 							<tr>
 								<td colspan="2" align="center">
-						 			<input type="button" value="목록" onclick="location.assign('${pageContext.request.contextPath }/inquiryList')"/>
+						 			<input type="button" value="목록" onclick="location.assign('${pageContext.request.contextPath }/reportList')"/>
 						 		</td>
 						 	</tr>
 						</table>

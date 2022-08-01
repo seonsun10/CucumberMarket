@@ -38,34 +38,62 @@
 	              		<div class="banner"><a href="#"><img src="img/banner.jpg" alt="sales 2014" class="img-fluid"></a></div>
             		</div>
             		<div class="col-lg-9">
-						<table aria-label="breadcrumb" class="box" border="1" summary="게시판 상세내용" width="650" height="350" border="1" cellpadding="5" align="center" >
-						 	<colgroup>
-						  		<col width = "130px" />
-						  		<col width = "500px" />
-						 	</colgroup>
-						 	<tbody class="card-body" >
-						  		<tr>
-						   			<th align="center">글번호</th>
-						   			<td>1</td>
-						  		</tr>
-						  		<tr>
-						   			<th align="center">제목</th>
-						   			<td>사기꾼 잡을수 있나요?</td>
-						  		</tr>
-						  		<tr>
-						   			<th align="center">작성자</th>
-						   			<td>goodee</td>
-						  		</tr>
-								<tr>
-						   			<td colspan="2" height="200px">사기당했는데 어떻게 신고하나요? </td>
-						  		</tr>
-						 	</tbody>
-							<tr>
-								<td colspan="2" align="center">
-						 			<input type="button" value="목록" onclick="location.assign('${pageContext.request.contextPath }/inquiryList')"/>
-						 		</td>
-						 	</tr>
-						</table>
+                  		<div class="table-responsive">
+                  			<div class="input-group">
+              					<input type="text" placeholder="Search" class="form-control">
+				              	<div class="input-group-append">
+				                <button type="button" class="btn btn-primary"><i class="fa fa-search"></i></button>
+								<a href="${pageContext.request.contextPath }/reportWrite" class="btn btn-primary navbar-btn"><span>신고글 작성</span></a>
+				              </div>
+							<%-- <div class="input-group-append">
+								<a href="${pageContext.request.contextPath }/reportWrite" class="btn btn-primary navbar-btn"><span>신고글 작성</span></a>
+				        	</div> --%>
+			        		<br>
+                    		<table class="table">
+	                      		<thead>
+	                        		<tr>
+										<th>번호</th>
+										<th>아이디</th>
+	                          			<th colspan=2>제목</th>
+										<th>상품</th>
+										<th>등록일</th>
+	                        		</tr>
+	                      		</thead>
+								<tbody>
+		                        	<tr>
+		                          		<td>1</td>
+		                          		<td>goodee</td>
+		                          		<td colspan=2>
+		                          			<a href="${pageContext.request.contextPath }/reportView">
+												사기꾼 좀 잡아라!
+											</a>
+		                          		</td>
+		                          		<td>츄바스코 아즈텍</td>
+		                          		<td>2022.07.29</td>
+		                        	</tr>
+		                        	<tr>
+		                          		<td>2</td>
+		                          		<td>10saeki</td>
+		                          		<td colspan=2>아 욕설 오지게 함</td>
+		                          		<td>아이폰</td>
+		                          		<td>2202.07.29</td>
+		                        	</tr>
+	                      		</tbody>
+                   		 	</table>
+							</div>
+                    		<nav aria-label="Page navigation example" class="d-flex justify-content-center">
+	                  			<ul class="pagination">
+	                    			<li class="page-item"><a href="#" aria-label="Previous" class="page-link"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>
+	                    			<li class="page-item active"><a href="#" class="page-link">1</a></li>
+	                    			<li class="page-item"><a href="#" class="page-link">2</a></li>
+	                    			<li class="page-item"><a href="#" class="page-link">3</a></li>
+	                    			<li class="page-item"><a href="#" class="page-link">4</a></li>
+	                    			<li class="page-item"><a href="#" class="page-link">5</a></li>
+	                    			<li class="page-item"><a href="#" aria-label="Next" class="page-link"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>
+								</ul>
+							</nav>
+						</div>
+						<!-- /.accordion-->
 					</div>
 				</div>
 				<!-- /.col-lg-9-->

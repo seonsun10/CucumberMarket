@@ -15,6 +15,7 @@ public class Inquiry {
 	
 	private int inquiryNo;
 	private String inquiryId;
+	private String inquiryType;
 	private String inquiryPhone;
 	private String inquiryTitle;
 	private String inquiryContent;

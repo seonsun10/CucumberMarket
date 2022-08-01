@@ -27,91 +27,106 @@
                 </div>
                 <div class="card-body">
                   <ul class="nav nav-pills flex-column">
-                    <li><a href="${pageContext.request.contextPath }/inquiryView" class="nav-link">문의하기</a></li>
-                    <li><a href="contact.html" class="nav-link">신고하기</a></li>
-                    <li><a href="${pageContext.request.contextPath }/inquiry" class="nav-link">FAQ</a></li>
+                    <li><a href="${pageContext.request.contextPath }/inquiryList" class="nav-link">문의하기</a></li>
+                    <li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고하기</a></li>
+                    <li><a href="${pageContext.request.contextPath }/faqList" class="nav-link">FAQ</a></li>
                   </ul>
                 </div>
               </div>
               <!-- *** PAGES MENU END ***-->
               <div class="banner"><a href="#"><img src="img/banner.jpg" alt="sales 2014" class="img-fluid"></a></div>
             </div>
-            <div class="col-lg-9">
-              <div id="contact" class="box">
-                <h1>::오이마켓:: 오늘도 이용하는 마켓</h1>
-                <p class="lead">오이마켓에 오신 여러분을 환영합니다.</p>
-                <p>자주찾는 질문</p>
-                <hr>
-                <div id="accordion">
-                  <div class="card border-primary mb-3">
-                    <div id="headingOne" class="card-header p-0 border-0">
-                      <h4 class="mb-0"><a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="btn btn-primary d-block text-left rounded-0">1. 오이마켓 가이드라인</a></h4>
-                    </div>
-                    <div id="collapseOne" aria-labelledby="headingOne" data-parent="#accordion" class="collapse show">
-                      <div class="card-body">
-                        <p>
-                        	오이마켓은 동네 이웃 간의 연결을 도와 따스하고 활발한 교류가 있는 문화 사회를 만들기 위해 노력하고 있어요.
-							이웃을 향한 당신의 따뜻한 관심과 애정은 오이마켓의 가장 큰 동력이자 자부심이에요. 오이마켓을 사용하는 이웃 모두가 가이드라인을 지키며 따뜻한 지역 커뮤니티를 함께 만들어요. 혼자 힘으로는 할 수 없지만, 우리가 함께라면 할 수 있어요! <br>
-							<br>
-							오이마켓은 신뢰, 존중을 서비스의 중요한 가치라고 생각해요. 우리는 이 가치를 지키기 위해 언제나 최선을 다할 거예요. 더 가깝고 따뜻한 지역 커뮤니티를 위해 동참해주세요.<br>
-							<br>
-							신뢰<br>
-							우리의 따뜻함은 신뢰로부터 나와요. 우리는 가까운 이웃과의 만남이 따뜻함이 될 수 있도록 노력해요. 당근마켓은 언제나 사용자에게 귀 기울이고, 사용자를 위한 서비스를 제공하며 신뢰를 만들어요.<br>
-							<br>
-							존중<br>
-							당근마켓의 모든 사용자가 우리 동네 이웃이라는 걸 기억해주세요. 어떠한 상황에서도 우리는 이웃의 다양성을 존중하고, 배려하기로 약속해요. 당근마켓은 누구나 존중받는 따뜻한 지역 커뮤니티를 지향하고 있어요.<br>
-							</p>
-<!--                         <ul>
-                          <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-                          <li>Aliquam tincidunt mauris eu risus.</li>
-                          <li>Vestibulum auctor dapibus neque.</li>
-                        </ul> -->
-                      </div>
+			<div class="col-lg-9">
+				<div id="contact" class="box">
+                	<h1>::오이마켓:: 오늘도 이용하는 마켓</h1>
+                	<p class="lead">오이마켓에 오신 여러분을 환영합니다.</p>
+                	<p>자주찾는 질문</p>
+                	<hr>
+                	<div id="accordion">
+                  		<div class="card border-primary mb-3">
+                    		<div id="headingOne" class="card-header p-0 border-0">
+                      			<h4 class="mb-0"><a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="btn btn-primary d-block text-left rounded-0">1. 오이마켓 가이드라인</a></h4>
+                    		</div>
+                    		<div id="collapseOne" aria-labelledby="headingOne" data-parent="#accordion" class="collapse show">
+                      		<div class="card-body">
+                      			<br>
+                        		<p>
+		                        	오이마켓은 동네 이웃 간의 연결을 도와 따스하고 활발한 교류가 있는 문화 사회를 만들기 위해 노력하고 있어요.<br>
+									이웃을 향한 당신의 따뜻한 관심과 애정은 오이마켓의 가장 큰 동력이자 자부심이에요.<br> 
+									오이마켓을 사용하는 이웃 모두가 가이드라인을 지키며 따뜻한 지역 커뮤니티를 함께 만들어요.<br> 
+									혼자 힘으로는 할 수 없지만, 우리가 함께라면 할 수 있어요! <br>
+									<br>
+									오이마켓은 신뢰, 존중을 서비스의 중요한 가치라고 생각해요.<br> 
+									우리는 이 가치를 지키기 위해 언제나 최선을 다할 거예요.<br> 
+									더 가깝고 따뜻한 지역 커뮤니티를 위해 동참해주세요.<br>
+									<br>
+									신뢰<br>
+									우리의 따뜻함은 신뢰로부터 나와요.<br> 
+									우리는 가까운 이웃과의 만남이 따뜻함이 될 수 있도록 노력해요.<br>
+									당근마켓은 언제나 사용자에게 귀 기울이고, 사용자를 위한 서비스를 제공하며 신뢰를 만들어요.<br>
+									<br>
+									존중<br>
+									당근마켓의 모든 사용자가 우리 동네 이웃이라는 걸 기억해주세요.<br>
+									어떠한 상황에서도 우리는 이웃의 다양성을 존중하고, 배려하기로 약속해요.<br> 
+									당근마켓은 누구나 존중받는 따뜻한 지역 커뮤니티를 지향하고 있어요.<br>
+								</p>
+                      		</div>
+                    	</div>
+                  	</div>
+                  	<div class="card border-primary mb-3">
+                    	<div id="headingTwo" class="card-header p-0 border-0">
+                      		<h4 class="mb-0"><a href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" class="btn btn-primary d-block text-left rounded-0">2. 오이마켓 주의사항</a></h4>
+                    	</div>
+                   		<div id="collapseTwo" aria-labelledby="headingTwo" data-parent="#accordion" class="collapse">
+                      		<div class="card-body">
+                      			<br>	
+	                      		<h3>거래매너를 지키기</h3>
+	                      		<br>
+								<li>서로 존중하고 배려하며 존댓말로 대화하기.</li>
+								<li>약속은 반드시 지켜기.</li>
+								<li>언제나 따뜻한 인사로 시작하고 마무리하기.</li>
+								<li>늦은 시간, 새벽 시간에는 채팅을 자제하기.</li>
+								<li>택배 거래보다는 만나서 직거래를 우선시하기.</li>
+								<li>이웃과의 거래는 만 14세 이상 부터 하기.</li>
+								<br>
+								<h3>구매할 때</h3>
+								<br>
+								판매글을 꼼꼼히 읽고 질문해요.<br>
+								미리 신중하게 고민한 뒤 판매자와 거래 약속을 잡아요.<br>
+								직거래할 땐 판매자에게 가까운 장소에서 만나요.<br>
+								지나치게 가격을 깎지 않아요. 판매자의 가격 책정을 존중해요.<br>
+								가격제안불가 게시글에는 가격 할인을 요구하지 않아요.<br>
+								물건 금액에 맞게 현금을 미리 준비해요.<br>
+								나눔을 받으면 따뜻한 감사인사로 마무리해요.<br>
+								구매자 또한, 당근마켓의 소중한 주민이자 여러분의 이웃이에요.<br>
+								판매자의 무리한 요구는 거절할 권리가 있어요. 매너없는 이야기에 답하지 않을 권리도 있어요.<br>
+								무리한 요구나 비매너 행위를 지속한다면 '비매너 평가하기'나 '사용자 신고하기', '문의 및 제안하기'를 통해서 알려주세요. <br>
+								거래 관련 문제가 생겼을 때, 판매자의 의무에 명시된 상황에 해당하면 환불을 요구할 권리가 있어요. <br>
+								<br>
+								<h3>판매할 때</h3>
+								<br>
+								민법상 미성년자가 중고거래를 하기 위해서는 법정 대리인의 동의를 받아야 해요.<br>
+								보호자 동의 없이 거래한 경우 거래가 취소될 수 있어요.<br>
+								다만, 미성년자가 거짓으로 동의했다고 믿게 한 경우에는 거래를 취소할 수 없어요.<br>
+								판매자에게는 이런 권리가 있어요.<br>
+								판매자는 당근마켓의 소중한 주민이자 여러분의 이웃이에요. 우리는 모두 판매자이면서 구매자예요.<br>
+								구매자의 무리한 요구는 거절할 권리가 있어요. 매너없는 이야기에 답하지 않을 권리도 있어요. <br>
+								무리한 요구나 비매너 행위를 지속한다면 '비매너 평가하기'나 '사용자 신고하기', '문의 및 제안하기'를 통해서 알려주세요. <br>
+								<br>
+								<h3>신고는 어떻게 하나요?</h3>
+								<br>
+								오이마켓은 이웃 분들의 다양한 신고 제보를 받아 관련 법 또는 운영정책 기준으로 신속하고 정확하게 대응하고 있어요.<br>
+								탈퇴한 사용자라도 개인정보 처리방침에 따라 부정이용 기록은 10년 동안 보관하고 있기 때문에 동일한 기준으로 신고가 처리돼요.<br>
+						</div>
                     </div>
                   </div>
-                  <div class="card border-primary mb-3">
-                    <div id="headingTwo" class="card-header p-0 border-0">
-                      <h4 class="mb-0"><a href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" class="btn btn-primary d-block text-left rounded-0">2. 오이마켓 주의사항</a></h4>
-                    </div>
-                    <div id="collapseTwo" aria-labelledby="headingTwo" data-parent="#accordion" class="collapse">
-                      <div class="card-body">
-                      		<h3>거래매너를 지키기</h3>
-                      		<br>
-							<li>서로 존중하고 배려하며 존댓말로 대화하기.</li>
-							<li>약속은 반드시 지켜기.</li>
-							<li>언제나 따뜻한 인사로 시작하고 마무리하기.</li>
-							<li>늦은 시간, 새벽 시간에는 채팅을 자제하기.</li>
-							<li>택배 거래보다는 만나서 직거래를 우선시하기.</li>
-							<li>이웃과의 거래는 만 14세 이상 부터 하기.</li>
-							<br>
-							<h3>구매할 때</h3>
-							<br>
-							판매글을 꼼꼼히 읽고 질문해요.<br>
-							미리 신중하게 고민한 뒤 판매자와 거래 약속을 잡아요.<br>
-							직거래할 땐 판매자에게 가까운 장소에서 만나요.<br>
-							지나치게 가격을 깎지 않아요. 판매자의 가격 책정을 존중해요.<br>
-							가격제안불가 게시글에는 가격 할인을 요구하지 않아요.<br>
-							물건 금액에 맞게 현금을 미리 준비해요.<br>
-							나눔을 받으면 따뜻한 감사인사로 마무리해요.<br>
-							<br>
-							<h3>판매할 때</h3>
-							<br>
-							판매글을 꼼꼼히 읽고 질문해요.<br>
-							미리 신중하게 고민한 뒤 판매자와 거래 약속을 잡아요.<br>
-							직거래할 땐 판매자에게 가까운 장소에서 만나요.<br>
-							지나치게 가격을 깎지 않아요. 판매자의 가격 책정을 존중해요.<br>
-							가격제안불가 게시글에는 가격 할인을 요구하지 않아요.<br>
-							물건 금액에 맞게 현금을 미리 준비해요.<br>
-							나눔을 받으면 따뜻한 감사인사로 마무리해요.<br>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card border-primary mb-3">
+				<div class="card border-primary mb-3">
                     <div id="headingThree" class="card-header p-0 border-0">
                       <h4 class="mb-0"><a href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" class="btn btn-primary d-block text-left rounded-0">3. 오이마켓 운영정책</a></h4>
                     </div>
-                    <div id="collapseThree" aria-labelledby="headingThree" data-parent="#accordion" class="collapse">
-                      <div class="card-body">
+					<div id="collapseThree" aria-labelledby="headingThree" data-parent="#accordion" class="collapse">
+						<div class="card-body">
+                      		<br>
                       		<h3>판매 금지물품</h3>
 							<br>
 							<li>가품∙이미테이션 (상표권, 저작권 침해 물품, 특정 브랜드의 스타일을 모방한 물품)</li>
@@ -193,9 +208,10 @@
                     </div>
                     <div id="collapseFour" aria-labelledby="headingFour" data-parent="#accordion" class="collapse">
                       <div class="card-body">
+                      		<br>
                       		<h3>신고는 어떻게 하나요?</h3>
                       		<br>
-							오이마켓은 이웃 분들의 다양한 신고 제보를 받아 관련 법 또는 운영정책 기준으로 신속하고 정확하게 대응하고 있어요.
+							오이마켓은 이웃 분들의 다양한 신고 제보를 받아 관련 법 또는 운영정책 기준으로 신속하고 정확하게 대응하고 있어요.<br>
 							탈퇴한 사용자라도 개인정보 처리방침에 따라 부정이용 기록은 10년 동안 보관하고 있기 때문에 동일한 기준으로 신고가 처리돼요.<br>
 							<br>
 							<p><span>1. 우측의 신고하기 버튼 누르기</span></p>
@@ -208,64 +224,66 @@
                       </div>
                     </div>
                   </div>
-                  <div class="card border-primary mb-3">
-                    <div id="headingFive" class="card-header p-0 border-0">
-                      <h4 class="mb-0"><a href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" class="btn btn-primary d-block text-left rounded-0">5. 문의하기</a></h4>
+					<div class="card border-primary mb-3">
+                    	<div id="headingFive" class="card-header p-0 border-0">
+                      		<h4 class="mb-0"><a href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" class="btn btn-primary d-block text-left rounded-0">5. 오이마켓을 믿고 거래하세요</a></h4>
+                    	</div>
+                    	<div id="collapseFive" aria-labelledby="headingFive" data-parent="#accordion" class="collapse">
+                      	<div class="card-body">
+                      		<br>
+							<h3>1:1 오이채팅으로 대화해요</h3>
+							<p>
+							<br>
+							오이마켓 내의 채팅을 통해 거래하는게 가장 안전해요. <br>
+							오이채팅에서는 안전한 거래를 위해 대화 내용에 따라 다양한 안내 및 경고 메시지들을 보내고 있어요. <br>
+							교묘해지고 있는 사기 케이스들을 모니터링하고, 이를 막기 위한 시스템을 고도화하고 있어요. <br>
+							일부 사용자들을 실시간으로 제재하여 거래가 진행되지 않도록 채팅을 막기도 해요. <br>
+							1년 365일 24시간 안전하게 지켜지는 오이마켓의 채팅으로 믿고 거래하세요! <br>
+							</p>
+							<br>
+							<h3>사기꾼은 실시간으로 제재해요</h3>
+							<p>
+							<br>
+							오이마켓은 다양한 사기 사례들을 분석하고 있어요.<br>
+							비슷한 수법의 범죄가 재발하지 않도록 모니터링하여 실시간으로 제재하고 있어요. <br>
+							제재 당한 사용자는 서비스를 사용할 수 없어요.<br> 
+							사기를 저지른 사용자가 계정을 바꾸며 재가입해도 서비스를 사용할 수 없어요.<br>
+							</p>
+							<br>
+							<h3>채팅 메시지로 미리 알려줘요</h3>
+							<br>
+							<p>
+							대화 내용에 따라 다양한 안내 및 경고 메시지들을 보내고 있어요. <br>
+							사기 이력이 있는 사용자와 대화를 하면 사기 이력이 있다고 알려주고, 메신저나 문자 등으로 대화를 유도하면 주의할 수 있게 안내 메시지를 보내요. <br>
+							새롭게 등장한 사기 사례들도 채팅방에서 미리 알려주고 사용자가 피할 수 있게 돕고 있어요. <br>
+							이 외에도 정말 많은 시스템 메시지가 있어요. 안전한 거래를 만들기 위해 오늘도 개선하고 있답니다.<br>
+							</p>
+							<br>
+							<h3>오늘도 직거래를 이용해요</h3>
+							<br>
+							<p>
+							중고거래 사기의 대부분은 택배거래에서 발생한다는 사실, 알고 계셨나요? <br>
+							오이마켓에서는 직거래를 권장하고 있어요. <br>
+							직거래할 때는 누구나 찾기 쉽고 안전한 공공장소가 좋아요. 이웃과 따뜻하게 거래하세요.<br>
+							</p>
+                      	</div>
                     </div>
-                    <div id="collapseFive" aria-labelledby="headingFive" data-parent="#accordion" class="collapse">
-                      <div class="card-body">
-                      		<p>찾으시는 질문이 없으신가요? 그렇다면 오이마켓에 문의하기버튼을 클릭해서 문의해 주세요.</P>
+                  </div>
+                  
+                  <div class="card border-primary mb-3">
+                    <div id="headingSix" class="card-header p-0 border-0">
+                      <h4 class="mb-0"><a href="#" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix" class="btn btn-primary d-block text-left rounded-0">6. 문의하기</a></h4>
+                    </div>
+                    <div id="collapseSix" aria-labelledby="headingSix" data-parent="#accordion" class="collapse">
+						<div class="card-body">
+                      		<br>
+                      		<p>찾으시는 질문이 없으신가요? 그렇다면 오이마켓의 문의하기버튼을 클릭해서 문의해 주세요.</P>
 							<br>
 							<p>1. 우측의 문의하기 버튼 누르기</p>
 							<p>2. 문의할 내용을 자세하게 작성하기</p>
 							<p>3. 문의 버튼 누르기</p>
 							<br>
                       </div>
-                    </div>
-                  </div>
-                  <div class="card border-primary mb-3">
-                    <div id="headingSix" class="card-header p-0 border-0">
-                      <h4 class="mb-0"><a href="#" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix" class="btn btn-primary d-block text-left rounded-0">6. 여기에는 뭐넣냐</a></h4>
-                    </div>
-                    <div id="collapseSix" aria-labelledby="headingSix" data-parent="#accordion" class="collapse">
-                      <div class="card-body">
-                      		<h3>거래매너를 지키기</h3>
-                      		<br>
-							<li>서로 존중하고 배려하며 존댓말로 대화하기.</li>
-							<li>약속은 반드시 지켜기.</li>
-							<li>언제나 따뜻한 인사로 시작하고 마무리하기.</li>
-							<li>늦은 시간, 새벽 시간에는 채팅을 자제하기.</li>
-							<li>택배 거래보다는 만나서 직거래를 우선시하기.</li>
-							<li>이웃과의 거래는 만 14세 이상 부터 하기.</li>
-							<br>
-							<h3>구매할 때</h3>
-							<br>
-							판매글을 꼼꼼히 읽고 질문해요.<br>
-							미리 신중하게 고민한 뒤 판매자와 거래 약속을 잡아요.<br>
-							직거래할 땐 판매자에게 가까운 장소에서 만나요.<br>
-							지나치게 가격을 깎지 않아요. 판매자의 가격 책정을 존중해요.<br>
-							가격제안불가 게시글에는 가격 할인을 요구하지 않아요.<br>
-							물건 금액에 맞게 현금을 미리 준비해요.<br>
-							나눔을 받으면 따뜻한 감사인사로 마무리해요.<br>
-							<br>
-							<h3>판매할 때</h3>
-							<br>
-							판매글을 꼼꼼히 읽고 질문해요.<br>
-							미리 신중하게 고민한 뒤 판매자와 거래 약속을 잡아요.<br>
-							직거래할 땐 판매자에게 가까운 장소에서 만나요.<br>
-							지나치게 가격을 깎지 않아요. 판매자의 가격 책정을 존중해요.<br>
-							가격제안불가 게시글에는 가격 할인을 요구하지 않아요.<br>
-							물건 금액에 맞게 현금을 미리 준비해요.<br>
-							나눔을 받으면 따뜻한 감사인사로 마무리해요.<br>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card border-primary">
-                    <div id="headingFour" class="card-header p-0 border-0">
-                      <h4 class="mb-0"><a href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" class="btn btn-primary d-block text-left rounded-0">3. Do you send overseas?</a></h4>
-                    </div>
-                    <div id="collapseFour" aria-labelledby="headingThree" data-parent="#accordion" class="collapse">
-                      <div class="card-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</div>
                     </div>
                   </div>
                 </div>

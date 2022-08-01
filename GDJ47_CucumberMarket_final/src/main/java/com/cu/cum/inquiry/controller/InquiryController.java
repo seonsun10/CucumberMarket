@@ -20,24 +20,33 @@ public class InquiryController {
 	
 	public InquiryService inquiryService;
 	
-	@RequestMapping(value="/inquiry", method=RequestMethod.GET)
+	// 자주 묻는 질문 페이지
+	@RequestMapping(value="/faqList", method=RequestMethod.GET)
 	public String inquiry() {
-		return "/inquiry/inquiry";
+		return "/inquiry/faqList";
 	}
 	
-	@RequestMapping(value="/inquiryView", method=RequestMethod.GET)
-	public String inquiryView() {
-		return "/inquiry/inquiryView";
+	// 문의글 목록
+	@RequestMapping(value="/inquiryList", method=RequestMethod.GET)
+	public String inquiryList() {
+		return "/inquiry/inquiryList";
 	}
 	
-	
+	// 문의글 작성
 	@RequestMapping(value="/inquiryWrite", method=RequestMethod.GET)
 	public String inquiryWrite() {
 		return "/inquiry/inquiryWrite";
 	}
 	
-//	@RequestMapping(value="/inquiryList", method=RequestMethod.GET)
-//	public List<Inquiry> selectInquiryList() {
+	// 문의글 클릭 후 나오는 페이지 
+	@RequestMapping(value="/inquiryView", method=RequestMethod.GET)
+	public String inquiryView() {
+		return "/inquiry/inquiryView";
+	}
+	
+	// 문의글 작성 로직
+//	@RequestMapping("/inquiry/insertInquiry.do")
+//	public String  selectInquiryList() {
 //		return inquiryService.selectInquiryList();
 //	}
 

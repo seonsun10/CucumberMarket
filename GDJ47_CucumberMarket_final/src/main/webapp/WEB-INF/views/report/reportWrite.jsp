@@ -13,7 +13,7 @@
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="/">Home</a></li>
-                  <li aria-current="page" class="breadcrumb-item active">FAQ</li>
+                  <li aria-current="page" class="breadcrumb-item active">신고하기</li>
                 </ol>
               </nav>
             </div>
@@ -37,43 +37,59 @@
               <!-- *** PAGES MENU END ***-->
               <div class="banner"><a href="#"><img src="img/banner.jpg" alt="sales 2014" class="img-fluid"></a></div>
             </div>
-			<div class="col-lg-9">
-				<form action="<%=request.getContextPath()%>/insertInquiry.do" method="post">
-					<div class="row">
-						<div class="col-md-6">
-						<div class="form-group">
-	                        <label for="inquiryId">작성자ID</label>
-	                        <input id="inquiryId" type="text" value="<c:out value="${loginMember.userId }"/>" readonly class="form-control">
-                      	</div>	
-						<div class="form-group">
-							<label for="phone">전화번호</label>
-	                        <input id="phone" type="text" class="form-control">
-						</div>
-						<div class="form-group">
-                        	<label for="inquiryTitle">제목</label>
-                        	<input id="inquiryTitle" type="text" class="form-control">
-						</div>
-						<div class="form-group">
-                        	<label for="city">문의유형</label>
-                        	<input id="city" type="text" class="form-control">
-						</div>
+            <div class="col-lg-9">
+				<div id="comment-form">
+                  <h4>신고글 작성</h4>
+                  <form>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="name">아이디</label>
+                          <input id="name" type="text" class="form-control" value="<c:out value="${loginMember.userId }"/>" readonly>
+                        </div>
+                      </div>
                     </div>
-					<div class="col-md-12">
-						<div class="form-group">
-	                        <label for="inquiryContent">문의 내용</label>
-	                        <textarea id="inquiryContent" class="form-control"></textarea>
-						</div>
-                      <button type="submit" class="btn btn-primary">등록</button>
-                      <button type="reset" class="btn btn-primary">재설정</button>
-                      <button type="button" class="btn btn-primary" onclick="location.assign('${pageContext.request.contextPath }/inquiryList')">취소</button>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="proId">상품 아이디</label>
+                          <input id="proId" type="text" class="form-control">
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <!-- /.row-->
-                </form>
-			
-                <!-- /.accordion-->
-              </div>
-            </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="title">제목</label>
+                          <input id="title" type="text" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="targetId">신고할 유저 아이디</label>
+                          <input id="targetId" type="text" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label for="comment">신고 내용</label>
+                          <textarea id="comment" rows="4" class="form-control"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12 text-right">
+                        <button type="submit" class="btn btn-primary">등록하기</button>
+                      	<button type="reset" class="btn btn-primary">재설정</button>
+                      	<button type="button" class="btn btn-primary" onclick="location.assign('${pageContext.request.contextPath }/reportList')">취소</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
             <!-- /.col-lg-9-->
           </div>
         </div>

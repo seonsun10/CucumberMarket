@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" /> -->
 
     <div id="all">
       <div id="content">
@@ -38,41 +37,55 @@
               <div class="banner"><a href="#"><img src="img/banner.jpg" alt="sales 2014" class="img-fluid"></a></div>
             </div>
 			<div class="col-lg-9">
-				<form action="<%=request.getContextPath()%>/insertInquiry.do" method="post">
-					<div class="row">
-						<div class="col-md-6">
-						<div class="form-group">
-	                        <label for="inquiryId">작성자ID</label>
-	                        <input id="inquiryId" type="text" value="<c:out value="${loginMember.userId }"/>" readonly class="form-control">
-                      	</div>	
-						<div class="form-group">
-							<label for="phone">전화번호</label>
-	                        <input id="phone" type="text" class="form-control">
+				<div class="table-responsive">
+                  			<div class="input-group">
+              					<input type="text" placeholder="Search" class="form-control">
+				              	<div class="input-group-append">
+				                <button type="button" class="btn btn-primary"><i class="fa fa-search"></i></button>
+								<a href="${pageContext.request.contextPath }/inquiryWrite" class="btn btn-primary navbar-btn"><span>문의글 작성</span></a>
+				              </div>
+				            <!-- </div>
+							<div class="input-group-append"> -->
+				        	</div>
+			        		<br>
+                    		<table class="table">
+	                      		<thead>
+	                        		<tr>
+										<th>번호</th>
+										<th>아이디</th>
+	                          			<th colspan=2>제목</th>
+										<th>문의 유형</th>
+										<th>등록일</th>
+										<th>답변 여부</th>
+	                        		</tr>
+	                      		</thead>
+								<tbody>
+		                        	<tr>
+		                          		<td>1</td>
+		                          		<td>goodee</td>
+		                          		<td colspan=2>
+		                          			<a href="${pageContext.request.contextPath }/inquiryView">
+												사기꾼 잡을수 있나요?
+											</a>
+		                          		</td>
+		                          		<td>상품</td>
+		                          		<td>2022.07.29</td>
+		                          		<td>답변 미등록</td>
+		                        	</tr>
+	                      		</tbody>
+                   		 	</table>
+                    		<nav aria-label="Page navigation example" class="d-flex justify-content-center">
+	                  			<ul class="pagination">
+	                    			<li class="page-item"><a href="#" aria-label="Previous" class="page-link"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>
+	                    			<li class="page-item active"><a href="#" class="page-link">1</a></li>
+	                    			<li class="page-item"><a href="#" class="page-link">2</a></li>
+	                    			<li class="page-item"><a href="#" class="page-link">3</a></li>
+	                    			<li class="page-item"><a href="#" class="page-link">4</a></li>
+	                    			<li class="page-item"><a href="#" class="page-link">5</a></li>
+	                    			<li class="page-item"><a href="#" aria-label="Next" class="page-link"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>
+								</ul>
+							</nav>
 						</div>
-						<div class="form-group">
-                        	<label for="inquiryTitle">제목</label>
-                        	<input id="inquiryTitle" type="text" class="form-control">
-						</div>
-						<div class="form-group">
-                        	<label for="city">문의유형</label>
-                        	<input id="city" type="text" class="form-control">
-						</div>
-                    </div>
-					<div class="col-md-12">
-						<div class="form-group">
-	                        <label for="inquiryContent">문의 내용</label>
-	                        <textarea id="inquiryContent" class="form-control"></textarea>
-						</div>
-                      <button type="submit" class="btn btn-primary">등록</button>
-                      <button type="reset" class="btn btn-primary">재설정</button>
-                      <button type="button" class="btn btn-primary" onclick="location.assign('${pageContext.request.contextPath }/inquiryList')">취소</button>
-                    </div>
-                  </div>
-                  <!-- /.row-->
-                </form>
-			
-                <!-- /.accordion-->
-              </div>
             </div>
             <!-- /.col-lg-9-->
           </div>
