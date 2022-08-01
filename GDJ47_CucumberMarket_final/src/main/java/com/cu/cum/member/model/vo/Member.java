@@ -1,5 +1,6 @@
 package com.cu.cum.member.model.vo;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -7,8 +8,12 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,11 +21,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
 @Entity
+@Getter @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -34,21 +40,26 @@ public class Member implements UserDetails{
 	
 	private String password;
 	private String name;
-//	private String role;
 	private String phone;
-//	private String activated;
+	
+//	@Enumerated(EnumType.STRING)
+//	private OnlineStatus activated; //online offline
+	
 //	private double score;
+	
+	@Temporal(TemporalType.DATE)
 	private Date enrollDate;
-//	private String intro;
+	private String intro;
 	
-	
+	private String role;
 	@OneToMany(mappedBy="member")
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
 		List<GrantedAuthority> auth = new ArrayList();
-		auth.add(new SimpleGrantedAuthority("ROLE_USER"));
+		auth.add(new SimpleGrantedAuthority(this.role));
+//		if(this.role.equals("admin")) auth.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 		return auth;
 	}
 	@Override

@@ -84,7 +84,7 @@
                     </div>
                     <div class="col-md-6 col-lg-3">
                       <div class="form-group">
-                        <label for="zip">ZIP</label>
+                        <label for="zip">우편번호</label>
                         <input id="zip" type="text" class="form-control">
                       </div>
                     </div>
@@ -108,8 +108,8 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="email">Email</label>
-                        <input id="email" type="text" class="form-control">
+                        <label for="intro">자기소개</label>
+                        <input id="intro" type="text" class="form-control">
                       </div>
                     </div>
                     <div class="col-md-12 text-center">

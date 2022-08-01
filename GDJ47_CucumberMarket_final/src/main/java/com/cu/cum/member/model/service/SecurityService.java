@@ -1,4 +1,4 @@
-package com.cu.cum.model.service;
+package com.cu.cum.member.model.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

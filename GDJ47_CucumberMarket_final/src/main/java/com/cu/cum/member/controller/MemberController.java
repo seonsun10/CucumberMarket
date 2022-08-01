@@ -1,6 +1,11 @@
 package com.cu.cum.member.controller;
 
 import java.security.Principal;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,15 +15,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.cu.cum.member.model.dao.MemberRepository;
 import com.cu.cum.member.model.service.MemberService;
 import com.cu.cum.member.model.vo.Member;
 
@@ -42,16 +47,16 @@ public class MemberController {
 		return "index";
 	}
 	
-	@RequestMapping("/insertAdmin")
-	@ResponseBody
-	public Member insertAdmin() {
-		Member m = Member.builder().userId("admin").password("1234")
-				.phone("01012341234").build();
-		
-		Member result = service.insertAdmin(m);
-		
-		return result;
-	}
+//	@RequestMapping("/insertAdmin")
+//	@ResponseBody
+//	public Member insertAdmin() {
+//		Member m = Member.builder().userId("admin").password("1234")
+//				.phone("01012341234").build();
+//		
+//		Member result = service.insertAdmin(m);
+//		
+//		return result;
+//	}
 	
 	//회원가입 페이지로
 	@RequestMapping(value = "/joinForm", method =RequestMethod.GET)
@@ -62,6 +67,10 @@ public class MemberController {
 	//회원가입
 	@PostMapping("/join")
 	public ModelAndView join(@ModelAttribute Member member) {
+		
+		member.setEnrollDate(new Date());
+		member.setIntro("작성대기");
+		member.setRole("ROLE_USER");
 		service.join(member);
 		return new ModelAndView("redirect:/"); //회원가입 후, 메인 화면으로 바로 이동
  	}
@@ -116,4 +125,25 @@ public class MemberController {
 	public String wishList() {
 		return "member/wishList";
 	}
+	
+	//로그인 정보 세션 저장
+//	@RequestMapping(value = "/sessionLogin", method = RequestMethod.POST)
+//	@ResponseBody
+//	public void sessionLogin(HttpServletRequest request, HttpSession session, Principal principal) {
+//		
+//		String sessionId = principal.getName();
+//		Member member = service.getData(sessionId);
+//		
+//		session.setAttribute("sessionId", member.getUserId());
+//	}
+//	
+//	@GetMapping("/member/{id}")
+//	public Member getMember(@PathVariable String id) {
+//		return service.selectMember(id);
+//	}
+//	
+//	@GetMapping("/member/")
+//	public List<Member> getMembers(){
+//		return service.selectMembers();
+//	}
 }

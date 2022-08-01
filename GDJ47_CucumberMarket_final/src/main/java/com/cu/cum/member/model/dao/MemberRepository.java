@@ -1,18 +1,26 @@
 package com.cu.cum.member.model.dao;
 
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.cu.cum.member.model.vo.Member;
 
-public interface MemberRepository extends JpaRepository<Member, String>{
+@Repository
+public interface MemberRepository extends JpaRepository<Member, String> {
 	
-	Member save(Member member);
+//	public Member findOne(String userId);
 	
-	Member findByUserId(String userId);
+//	public List<Member> findAll();
 	
-//    Member findByUserIdAndPassword(String userId, String password);
-
-//	Member checkEmail(String email);
-
-
+	public List<Member> findByName(String name);
+	//어떻게 쓰지...
+	public Member findByUserId(String userId);
+	
+//	Member saveAndFlush(Member m);
+	
 }
