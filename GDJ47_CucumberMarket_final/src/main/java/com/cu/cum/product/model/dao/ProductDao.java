@@ -20,5 +20,7 @@ public interface ProductDao extends JpaRepository<Product, Integer>{
 	//상품 삭제
 	Product deleteById(int proNo);
 	
+	//후기 등록
+	Product save(Product p);
 	
 }

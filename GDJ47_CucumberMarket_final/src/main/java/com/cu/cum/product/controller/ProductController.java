@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.product.model.service.ProductService;
+import com.cu.cum.product.model.service.ReviewService;
 import com.cu.cum.product.model.vo.Product;
 import com.cu.cum.product.model.vo.Review;
 
@@ -19,6 +20,9 @@ public class ProductController {
 	
 	@Autowired
 	private ProductService service;
+	
+	@Autowired
+	private ReviewService rvservice;
 	
 	@RequestMapping("/product/insertProduct.do")
 	public String insertProduct(@RequestParam("image") String image,@RequestParam("proName") String proName , @RequestParam("region") String region,
@@ -49,9 +53,18 @@ public class ProductController {
 								@RequestParam String writer,
 								@RequestParam int oi,
 								Model m) {
-		int review = service.insertReview(Review.builder().proNo(proNo).writer(writer).oi(oi).build());
-		if(review>0)m.addAttribute("msg","등록성공");
-		else m.addAttribute("msg","등록실패");
+		Product p = service.selectProduct(proNo);
+//		p.setReview(Review.builder().proNo(proNo).writer(writer).oi(oi).build());
+		Review rv = Review.builder().product(p).writer(writer).oi(oi).build();
+		log.debug("rv는 무엇인가 : "+rv);
+		try {
+			Review result = rvservice.insertReview(rv);
+			
+			m.addAttribute("msg","등록성공");
+		}catch(Exception e) {
+			m.addAttribute("msg","등록실패");			
+		}
+//		Product result = service.insertReview(p);
 		return "common/msg";
 	}
 	

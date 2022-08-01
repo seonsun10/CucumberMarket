@@ -44,9 +44,9 @@ public class ProductServiceImpl implements ProductService {
 	
 	//거래후기
 	@Override
-	public int insertReview(Review review) {
+	public Product insertReview(Product p) {
 		// TODO Auto-generated method stub
-		return pmdao.insertReview(session, review);
+		return dao.save(p);
 	}
 	
 	//상품 조회
@@ -61,6 +61,7 @@ public class ProductServiceImpl implements ProductService {
 	public Product deleteProduct(int proNo) {
 		// TODO Auto-generated method stub
 		return dao.deleteById(proNo);
+		
 	}
 
 }

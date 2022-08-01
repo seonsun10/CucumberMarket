@@ -25,11 +25,11 @@ public class ProductMapperDao {
 	}
 	
 	public Product selectProduct(SqlSessionTemplate session, int proNo) {
-		return session.selectOne("product.selectProduct");
+		return session.selectOne("product.selectProduct",proNo);
 	}
-	
-	public int insertReview(SqlSessionTemplate session, Review review) {
-		return session.insert("product.insertReview",review);
-	}
+//	
+//	public int insertReview(SqlSessionTemplate session, Review review) {
+//		return session.insert("product.insertReview",review);
+//	}
 		
 }

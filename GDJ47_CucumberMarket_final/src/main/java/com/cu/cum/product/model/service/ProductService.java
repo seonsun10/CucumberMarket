@@ -17,11 +17,12 @@ public interface ProductService {
 	int selectProductCount(String userId);
 	
 	//거래 후기 등록
-	int insertReview(Review review);
+	Product insertReview(Product p);
 	
 	//상품 조회
 	Product selectProduct(int proNo);
 	
 	//상품 삭제
 	Product deleteProduct(int proNo);
+
 }

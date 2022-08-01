@@ -68,8 +68,5 @@ public class Product {
 	@JoinColumn(name="userId")
 	private Member member; //판매자 아이디
 	
-	@OneToOne()
-	@JoinColumn(name="proNo")
-	private Review review;
 	
 }
