@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.cu.cum.product.model.dao.ProductDao;
 import com.cu.cum.product.model.dao.ProductMapperDao;
 import com.cu.cum.product.model.vo.Product;
+import com.cu.cum.product.model.vo.Review;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -30,15 +31,36 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
-	public int selectProductCount() {
+	public int selectProductCount(String userId) {
 		// TODO Auto-generated method stub
-		return pmdao.selectProductCount(session);
+		return pmdao.selectProductCount(session, userId);
 	}
 	
 	@Override
 	public List<Product> selectProductList(Map page) {
 		// TODO Auto-generated method stub
 		return pmdao.selectProductList(session, page);
+	}
+	
+	//거래후기
+	@Override
+	public int insertReview(Review review) {
+		// TODO Auto-generated method stub
+		return pmdao.insertReview(session, review);
+	}
+	
+	//상품 조회
+	@Override
+	public Product selectProduct(int proNo) {
+		// TODO Auto-generated method stub
+		return pmdao.selectProduct(session, proNo);
+	}
+	
+	//상품 삭제
+	@Override
+	public Product deleteProduct(int proNo) {
+		// TODO Auto-generated method stub
+		return dao.deleteById(proNo);
 	}
 
 }

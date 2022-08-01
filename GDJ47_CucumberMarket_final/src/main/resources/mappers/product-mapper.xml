@@ -16,10 +16,18 @@
 	</resultMap>
 
 	<select id="selectProductCount" resultType="_int">
-		SELECT COUNT(*) FROM PRODUCT
+		SELECT COUNT(*) FROM PRODUCT WHERE USER_ID=#{userId}
 	</select>
 	
 	<select id="selectProductList" resultMap="productMap">
-		SELECT * FROM PRODUCT
+		SELECT * FROM PRODUCT WHERE USER_ID=#{userId}
 	</select>
+	
+	<select id="selectProduct" resultMap="productMap">
+		SELECT * FROM PRODUCT WHERE PRO_NO=#{proNo}
+	</select>
+	
+	<insert id="insertReview" parameterType="review">
+		INSERT INTO REVIEW VALUES(#{proNo},#{oi},SYSDATE,#{writer})
+	</insert>
 </mapper>

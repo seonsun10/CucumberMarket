@@ -13,16 +13,14 @@ public class PageBar {
 		if(pageNo==1) {
 			pageBar+="<span> 이전 </span>";
 		}else {
-			pageBar+="<a href="+url
-					+"?cPage="+(pageNo-1)
-					+"&numPerpage="+numPerpage+"> 이전 </a>";
+			pageBar+="<span onclick='fn_ajaxPage2("+(pageNo-1)+","+numPerpage+")' style=\"cursor:pointer;font-weight:bold;\"> 이전 </span>";
 		}
 		
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
 			if(cPage==pageNo) {
 				pageBar+="<span> "+pageNo+" </span>";
 			}else {
-				pageBar+="<span onclick='fn_ajaxPage("+pageNo+")' style=\"color:lightgreen; cursor=pointer\"> "+pageNo+" </span>";
+				pageBar+="<span onclick='fn_ajaxPage1("+pageNo+")' style=\"cursor:pointer; color:lightgreen;\"> "+pageNo+" </span>";
 			}
 			pageNo++;
 		}
@@ -30,9 +28,7 @@ public class PageBar {
 		if(pageNo>totalPage) {
 			pageBar+="<span> 다음 </span>";
 		}else {
-			pageBar+="<a href="+url+"/member/mypage.do"
-			+"?cPage="+(pageNo)
-			+"&numPerpage="+numPerpage+"> 다음 </a>";
+			pageBar+="<span onclick='fn_ajaxPage2("+pageNo+","+numPerpage+")' style=\"cursor:pointer;font-weight:bold;\"> 다음 </span>";
 		}
 		return pageBar;
 	}

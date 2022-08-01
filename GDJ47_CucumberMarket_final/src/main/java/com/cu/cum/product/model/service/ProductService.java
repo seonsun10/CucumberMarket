@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.cu.cum.product.model.vo.Product;
+import com.cu.cum.product.model.vo.Review;
 
 public interface ProductService {
 
@@ -13,5 +14,14 @@ public interface ProductService {
 	List<Product> selectProductList(Map page);
 	
 	//상품 전체 수 조회
-	int selectProductCount();
+	int selectProductCount(String userId);
+	
+	//거래 후기 등록
+	int insertReview(Review review);
+	
+	//상품 조회
+	Product selectProduct(int proNo);
+	
+	//상품 삭제
+	Product deleteProduct(int proNo);
 }

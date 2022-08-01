@@ -69,6 +69,10 @@
 				  	</div>
 				  	<div id="produce">
 				  		제 상점은 깨끗한 상점이에요&&;
+				  		<form action="${path }/product/productReview.do?proNo=2&writer=${loginMember.userId}" method="post">
+					  		<input type="number" name="oi"/>
+					  		<input type="submit" value="등록"/>
+				  		</form>
 				  	</div>
 				  </div>
 				  <div>
@@ -222,6 +226,7 @@
 					</form>
 				</div>
 			</div>
+			<input id="userIdd" type="hidden" value="${loginMember.userId }"/>
 		</div>
 <script>
 function getImageFiles(e) {

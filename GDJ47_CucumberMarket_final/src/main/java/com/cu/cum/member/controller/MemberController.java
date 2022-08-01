@@ -158,12 +158,13 @@ public class MemberController {
 	@RequestMapping("/member/mypageProduct.do")
 	public String propage(@RequestParam(defaultValue="1") int cPage,
 							@RequestParam(defaultValue="5") int numPerpage,
+							@RequestParam String userId,
 							HttpServletRequest request,
 							Model m) {
-		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage);
+		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"userId",userId);
 		List<Product> products=proservice.selectProductList(page);
 		String url=request.getRequestURI();
-		int totalProduct=proservice.selectProductCount();
+		int totalProduct=proservice.selectProductCount(userId);
 		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage, totalProduct, url));
 		m.addAttribute("product",products);
 		m.addAttribute("totalProduct",totalProduct);

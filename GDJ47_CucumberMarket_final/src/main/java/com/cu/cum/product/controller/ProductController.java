@@ -1,16 +1,15 @@
 package com.cu.cum.product.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.product.model.service.ProductService;
 import com.cu.cum.product.model.vo.Product;
-import com.cu.cum.wishlist.model.vo.WishList;
+import com.cu.cum.product.model.vo.Review;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -42,6 +41,31 @@ public class ProductController {
 		Product result = service.insertProduct(p);
 		
 		return "member/mypage";
+	}
+	
+	//거래 후기
+	@RequestMapping("/product/productReview.do")
+	public String productReview(@RequestParam int proNo,
+								@RequestParam String writer,
+								@RequestParam int oi,
+								Model m) {
+		int review = service.insertReview(Review.builder().proNo(proNo).writer(writer).oi(oi).build());
+		if(review>0)m.addAttribute("msg","등록성공");
+		else m.addAttribute("msg","등록실패");
+		return "common/msg";
+	}
+	
+	//상품 삭제
+	@RequestMapping("/product/deleteProduct.do")
+	public String deleteProduct(@RequestParam int proNo,
+								Model m) {
+		try {
+			service.deleteProduct(proNo);
+			m.addAttribute("msg","삭제 성공");
+		}catch(Exception e) {
+			m.addAttribute("msg","삭제 실패");
+		}
+		return "common/msg";
 	}
 	
 }
