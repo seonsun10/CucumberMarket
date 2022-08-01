@@ -10,6 +10,8 @@ public interface MemberService {
 
 	Member join(Member member);
 
+	Member updateMember(Member member);
+
 //	Member getData(String userId);
 //
 //	Member selectMember(String id);

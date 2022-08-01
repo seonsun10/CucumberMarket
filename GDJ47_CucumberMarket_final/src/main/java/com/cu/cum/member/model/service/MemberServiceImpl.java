@@ -43,6 +43,13 @@ public class MemberServiceImpl implements MemberService {
 		return memberRepository.save(member);
 	}
 	
+	//회원정보 수정
+	@Override
+	public Member updateMember(Member member) {
+		// TODO Auto-generated method stub
+		return memberRepository.save(member);
+	}
+	
 //	public void validateDuplicateMember(Member member) {
 //		List<Member> findMembers = memberRepository.findByName(member.getUserId());
 //		if(!findMembers.isEmpty()) {

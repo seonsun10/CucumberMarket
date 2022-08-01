@@ -125,6 +125,13 @@ public class MemberController {
 	public String wishList() {
 		return "member/wishList";
 	}
+
+	@RequestMapping("/member/update.do")
+	public String memberUpdate(@ModelAttribute Member member) {
+		service.updateMember(member);
+		return "redirect:/member/myAccount.do";
+	}
+	
 	
 	//로그인 정보 세션 저장
 //	@RequestMapping(value = "/sessionLogin", method = RequestMethod.POST)

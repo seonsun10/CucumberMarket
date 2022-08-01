@@ -108,7 +108,7 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="intro">자기소개</label>
+                        <label for="intro">자기소개 한마디!</label>
                         <input id="intro" type="text" class="form-control">
                       </div>
                     </div>
