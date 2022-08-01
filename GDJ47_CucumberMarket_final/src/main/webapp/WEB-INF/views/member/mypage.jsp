@@ -32,6 +32,8 @@
                   <a href="${path }/member/myAccount.do" class="nav-link"><i class="fa fa-user"></i>내 정보 수정</a>
                   <a href="/logout" class="nav-link"><i class="fa fa-sign-out"></i>로그아웃</a>
                   </ul>
+                  <button class="btn btn-outline-success my-2 my-sm-0"
+				data-toggle="modal" data-target="#loginModal">상품 등록</button>
                 </div>
               </div>
               <!-- /.col-lg-3-->
@@ -42,100 +44,47 @@
                 <h1>내 정보보기</h1>
                 <hr>
                 <div class="table-responsive">
-                  <!-- <table class="table table-hover">
-                    <thead>
-                      <tr>
-                        <th>Order</th>
-                        <th>Date</th>
-                        <th>Total</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th># 1735</th>
-                        <td>22/06/2013</td>
-                        <td>$ 150.00</td>
-                        <td><span class="badge badge-info">Being prepared</span></td>
-                        <td><a href="customer-order.html" class="btn btn-primary btn-sm">View</a></td>
-                      </tr>
-                      <tr>
-                        <th># 1735</th>
-                        <td>22/06/2013</td>
-                        <td>$ 150.00</td>
-                        <td><span class="badge badge-info">Being prepared</span></td>
-                        <td><a href="customer-order.html" class="btn btn-primary btn-sm">View</a></td>
-                      </tr>
-                      <tr>
-                        <th># 1735</th>
-                        <td>22/06/2013</td>
-                        <td>$ 150.00</td>
-                        <td><span class="badge badge-success">Received</span></td>
-                        <td><a href="customer-order.html" class="btn btn-primary btn-sm">View</a></td>
-                      </tr>
-                      <tr>
-                        <th># 1735</th>
-                        <td>22/06/2013</td>
-                        <td>$ 150.00</td>
-                        <td><span class="badge badge-danger">Cancelled</span></td>
-                        <td><a href="customer-order.html" class="btn btn-primary btn-sm">View</a></td>
-                      </tr>
-                      <tr>
-                        <th># 1735</th>
-                        <td>22/06/2013</td>
-                        <td>$ 150.00</td>
-                        <td><span class="badge badge-warning">On hold</span></td>
-                        <td><a href="customer-order.html" class="btn btn-primary btn-sm">View</a></td>
-                      </tr>
-                    </tbody>
-                  </table> -->
                   <br/>
-				  <div>
-				  <h3>이메일</h3>
-				  <input type="text" value="<c:out value="${loginMember.userId }"/>" readonly>
+                  <div id="mp-h">
+				  	<div id="imgBox">
+				  		<img src="https://cdn-icons-png.flaticon.com/512/149/149071.png"/>
+				  	</div>
+				  	<div id="mp-b">
+				  		<div id="havePro">
+				  		<img src="https://cdn-icons-png.flaticon.com/512/4695/4695312.png"
+				  		 width="14px"/>
+				  			방문자수&nbsp;
+				  			<span id="count">0명</span>
+				  		</div>
+				  		<div id="dibs">
+				  		<img src="https://cdn-icons-png.flaticon.com/512/6696/6696548.png" width="14px"/>
+				  			등록상품&nbsp;
+				  			<span id="count">0개</span>
+				  		</div>
+				  		<div id="report">
+				  		<img src="https://cdn-icons-png.flaticon.com/512/5132/5132236.png" width="14px"/>
+				  			상품판매&nbsp;
+				  			<span id="count">0개</span>
+				  		</div>
+				  	</div>
+				  	<div id="produce">
+				  		제 상점은 깨끗한 상점이에요&&;
+				  	</div>
 				  </div>
-				  <br/>
 				  <div>
-				  <h3>이름</h3>
-				  <input type="text" value="<c:out value="${loginMember.name }"/>" readonly>
+				  <div id="myList">
+				  	<p id="protag">상품</p>
+				  	<p id="reviewtag">후기</p>
+				  	<p id="dibstag">찜</p>
+				  	<p id="reporttag">신고</p>
+				  	<p id="chattag">채팅</p>
 				  </div>
-				  <br/>
-				  <div>
-				  <h3>휴대폰번호</h3>
-				  <input type="text" value="<c:out value="${loginMember.phone }"/>" readonly>
-				  </div>
-				  <br/>
-				  <div>
-				  <h3>소개글</h3>
-				  <input type="text" value="소개글이야~" readonly>
 				  </div>
                 </div>
               </div>
               
               <!-- 여기 이제 분기처리 해야함 등록한 상품이없으면 안보이게 -->
-              <div  class="col-lg-9 box " style="max-width:100%;">
-                  <div class="row products" style="justify-content:center" >
-                           <div style="width:200px;">
-                              <h1>1</h1>
-                           </div>
-                           <div style="width:200px;">
-                              <h1>2</h1>
-                           </div>
-                           <div style="width:200px;">
-                              <h1>3</h1>
-                           </div>
-                           <div style="width:200px;">
-                              <h1>4</h1>
-                           </div>
-                           <div style="width:200px;">
-                              <h1>5</h1>
-                           </div>
-                           <div style="width:200px;">
-                              <h1>6</h1>
-                           </div>
-                  </div>
-               </div>
+              <div id="databox" class="col-lg-9 box " style="max-width:100%;"></div>
             </div>
           </div>
         </div>
@@ -209,6 +158,7 @@
       </div>
       <!-- /.container-->
     </div>
+
     <!-- /#footer-->
     <!-- *** FOOTER END ***-->
     
@@ -218,13 +168,118 @@
     _________________________________________________________
     -->
    
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
+		aria-labelledby="loginModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h2 class="modal-title" id="loginModalLabel">상품 등록</h2>
+						<button type="button" class="close" 
+						data-dismiss="modal" aria-label="close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form action="${path }/product/insertProduct.do" method="post">
+					<div class="modal-body">
+						<label for="exampleInputFile">상품 이미지 업로드</label><br>
+   						<input type="file" id="exampleInputFile" name="image" class="real-upload" accept="image/*" required multiple>
+   						<div class="upload"></div>
+  						<ul class="image-preview"></ul>
+  						
+						<input type="text" name="proName" class="form-control"
+						placeholder="제목" required><br>
+						<select class="form-control" name="tag" aria-label="Default select example">
+						  <option selected>상품태그</option>
+						  <option value="의류">의류</option>
+						  <option value="핸드폰">핸드폰</option>
+						  <option value="컴퓨터">컴퓨터</option>
+						  <option value="자동차/오토바이">차량용품</option>
+						  <option value="가전제품">가전제품</option>
+						  <option value="상품권">상품권</option>
+						  <option value="가구/인테리어">가구/인테리어</option>
+						  <option value="스포츠">스포츠</option>
+						  <option value="기타">기타</option>
+						</select><br>
+						<input type="text" name="region" class="form-control"
+						placeholder="거래 지역" required><br>
+						<label class="radio-inline">
+						  <input type="radio" name="proStatus" id="inlineRadio1" value="y"> 중고상품
+						</label>
+						<label class="radio-inline">
+						  <input type="radio" name="proStatus" id="inlineRadio2" value="n"> 새상품
+						</label><br>
+						<input type="number" name="price" class="form-control"
+						placeholder="가격" required"><br>
+						<textarea class="form-control" name="proContent" rows="5" placeholder="상품내용"></textarea><br>
+						<!-- <input type="text" name="user" value="admin" class="form-control">		 -->								
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-outline-success">로그인</button>
+						<button type="button" class="btn btn-outline-success"
+						data-dismiss="modal">취소</button>
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
 
-    <!-- *** COPYRIGHT END ***-->
-    <!-- JavaScript files-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
-    <script src="vendor/owl.carousel/owl.carousel.min.js"></script>
-    <script src="vendor/owl.carousel2.thumbs/owl.carousel2.thumbs.js"></script>
-    <script src="js/front.js"></script>
+<style>
+  	li {
+      list-style: none;
+    }
+    img {
+      width: 200px;
+      height: 200px;
+    }
+</style>
+<script>
+function getImageFiles(e) {
+    const uploadFiles = [];
+    const files = e.currentTarget.files;
+    const imagePreview = document.querySelector('.image-preview');
+    const docFrag = new DocumentFragment();
+
+    if ([...files].length >= 7) {
+      alert('이미지는 최대 6개 까지 업로드가 가능합니다.');
+      return;
+    }
+
+    // 파일 타입 검사
+    [...files].forEach(file => {
+      if (!file.type.match("image/.*")) {
+        alert('이미지 파일만 업로드가 가능합니다.');
+        return
+      }
+
+      // 파일 갯수 검사
+      if ([...files].length < 3) {
+        uploadFiles.push(file);
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const preview = createElement(e, file);
+          imagePreview.appendChild(preview);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  }
+
+  function createElement(e, file) {
+    const li = document.createElement('li');
+    const img = document.createElement('img');
+    img.setAttribute('src', e.target.result);
+    img.setAttribute('data-file', file.name);
+    li.appendChild(img);
+
+    return li;
+  }
+
+  const realUpload = document.querySelector('.real-upload');
+  const upload = document.querySelector('.upload');
+
+  upload.addEventListener('click', () => realUpload.click());
+
+  realUpload.addEventListener('change', getImageFiles);
+</script>
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

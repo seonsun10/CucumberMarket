@@ -13,6 +13,7 @@ public interface MemberRepository extends JpaRepository<Member, String>{
 //    Member findByUserIdAndPassword(String userId, String password);
 
 //	Member checkEmail(String email);
+	
 
 
 }
