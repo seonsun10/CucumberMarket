@@ -23,4 +23,7 @@ public interface ProductDao extends JpaRepository<Product, Integer>{
 	//후기 등록
 	Product save(Product p);
 	
+	//상품 조회
+	Product findById(int proNo);
+	
 }

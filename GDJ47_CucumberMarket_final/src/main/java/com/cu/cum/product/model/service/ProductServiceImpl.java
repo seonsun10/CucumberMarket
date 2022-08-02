@@ -53,7 +53,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Product selectProduct(int proNo) {
 		// TODO Auto-generated method stub
-		return pmdao.selectProduct(session, proNo);
+		return dao.findById(proNo);
 	}
 	
 	//상품 삭제
@@ -62,6 +62,18 @@ public class ProductServiceImpl implements ProductService {
 		// TODO Auto-generated method stub
 		return dao.deleteById(proNo);
 		
+	}
+	
+	//리뷰 수 조회
+	@Override
+	public int selectReviewCount(String userId) {
+		// TODO Auto-generated method stub
+		return pmdao.selectReviewCount(session, userId);
+	}
+	
+	//상품 리뷰 리스트 조회
+	public List<Review> selectReviewList(Map map){
+		return pmdao.selectReviewList(session, map);
 	}
 
 }

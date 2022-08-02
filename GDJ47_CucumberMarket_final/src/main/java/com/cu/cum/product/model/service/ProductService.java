@@ -24,5 +24,11 @@ public interface ProductService {
 	
 	//상품 삭제
 	Product deleteProduct(int proNo);
-
+	
+	//상품 리뷰 수 조회
+	int selectReviewCount(String userId);
+	
+	//삼품 리뷰 조회
+	List<Review> selectReviewList(Map page);
+	
 }

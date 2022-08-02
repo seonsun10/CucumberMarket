@@ -64,6 +64,7 @@ $(()=>{
 	$("#reviewtag").click(e=>{
 		$.ajax({
 			url:"/member/mypageReview.do",
+			data:{"userId":$("#userIdd").val()},
 			dataType:"html",
 			success:data=>{
 				$("#databox").html(data);

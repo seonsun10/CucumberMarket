@@ -247,7 +247,7 @@
               <div id="search-not-mobile" class="navbar-collapse collapse"></div><a data-toggle="collapse" href="#search" class="btn navbar-btn btn-primary d-none d-lg-inline-block"><span class="sr-only">Toggle search</span><i class="fa fa-search"></i></a>
               <div id="basket-overview" class="navbar-collapse collapse d-none d-lg-block"><a href="basket.html" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span>3 items in cart</span></a></div>
               <div>
-              		<a href="${path }/member/mypage.do">마이페이지</a>
+              		<a href="${path }/member/mypage.do?userId=${loginMember.userId}">마이페이지</a>
               </div>
               <div>
            			<a href="${path }/product/productView.do?id=admin&no=151">제품상세보기임시용</a>

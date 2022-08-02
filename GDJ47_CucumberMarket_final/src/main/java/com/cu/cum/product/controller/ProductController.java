@@ -54,8 +54,9 @@ public class ProductController {
 								@RequestParam int oi,
 								Model m) {
 		Product p = service.selectProduct(proNo);
+		log.debug("{}",p);
 //		p.setReview(Review.builder().proNo(proNo).writer(writer).oi(oi).build());
-		Review rv = Review.builder().product(p).writer(writer).oi(oi).build();
+		Review rv = Review.builder().product(p).host(p.getMember().getUserId()).writer(writer).oi(oi).build();
 		log.debug("rv는 무엇인가 : "+rv);
 		try {
 			Review result = rvservice.insertReview(rv);
