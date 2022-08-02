@@ -100,7 +100,6 @@ public class MemberController {
 	@RequestMapping("/successLogin.do")
 	public String successLogin(Model m) {
 		//인증받은 객체의 정보를 가져올 수 있다.
-		//loadUserByUsername()메소드에서 반환하는 객체를 받을 수 있음.
 		Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		m.addAttribute("loginMember",(Member)o);
 		return "redirect:/";
