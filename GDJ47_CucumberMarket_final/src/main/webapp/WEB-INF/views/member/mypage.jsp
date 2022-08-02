@@ -69,6 +69,10 @@
 				  	</div>
 				  	<div id="produce">
 				  		제 상점은 깨끗한 상점이에요&&;
+				  		<form action="${path }/product/productReview.do?proNo=2&writer=${loginMember.userId}" method="post">
+					  		<input type="number" name="oi"/>
+					  		<input type="submit" value="등록"/>
+				  		</form>
 				  	</div>
 				  </div>
 				  <div>
@@ -84,7 +88,8 @@
               </div>
               
               <!-- 여기 이제 분기처리 해야함 등록한 상품이없으면 안보이게 -->
-              <div id="databox" class="col-lg-9 box " style="max-width:100%;"></div>
+              <div id="databox" class="col-lg-9 box " style="max-width:100%;">
+              </div>
             </div>
           </div>
         </div>
@@ -221,17 +226,8 @@
 					</form>
 				</div>
 			</div>
+			<input id="userIdd" type="hidden" value="${loginMember.userId }"/>
 		</div>
-
-<style>
-  	li {
-      list-style: none;
-    }
-    img {
-      width: 200px;
-      height: 200px;
-    }
-</style>
 <script>
 function getImageFiles(e) {
     const uploadFiles = [];
