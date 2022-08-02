@@ -38,30 +38,30 @@
               <div class="banner"><a href="#"><img src="img/banner.jpg" alt="sales 2014" class="img-fluid"></a></div>
             </div>
 			<div class="col-lg-9">
-				<form action="<%=request.getContextPath()%>/insertInquiry.do" method="post">
+				<form action="${pageContext.request.contextPath }/insertInquiry.do" method="post">
 					<div class="row">
 						<div class="col-md-6">
 						<div class="form-group">
-	                        <label for="inquiryId">작성자ID</label>
-	                        <input id="inquiryId" type="text" value="<c:out value="${loginMember.userId }"/>" readonly class="form-control">
+	                        <label for="id">작성자ID</label>
+	                        <input name="inquiryId" id="inquiryId" type="text" value="<c:out value="${loginMember.userId }"/>" readonly class="form-control">
                       	</div>	
 						<div class="form-group">
 							<label for="phone">전화번호</label>
-	                        <input id="phone" type="text" class="form-control">
+	                        <input name="inquiryPhone" id="inquiryPhone" type="text" class="form-control" value="<c:out value="${loginMember.phone }"/>" readonly>
 						</div>
 						<div class="form-group">
-                        	<label for="inquiryTitle">제목</label>
-                        	<input id="inquiryTitle" type="text" class="form-control">
+                        	<label for="title">제목</label>
+                        	<input name="inquiryTitle" id="inquiryTitle" type="text" class="form-control">
 						</div>
 						<div class="form-group">
-                        	<label for="city">문의유형</label>
-                        	<input id="city" type="text" class="form-control">
+                        	<label for="type">문의유형</label>
+                        	<input name="inquiryType" id="inquiryType" type="text" class="form-control">
 						</div>
                     </div>
 					<div class="col-md-12">
 						<div class="form-group">
 	                        <label for="inquiryContent">문의 내용</label>
-	                        <textarea id="inquiryContent" class="form-control"></textarea>
+	                        <textarea name="inquiryContent" id="inquiryContent" class="form-control"></textarea>
 						</div>
                       <button type="submit" class="btn btn-primary">등록</button>
                       <button type="reset" class="btn btn-primary">재설정</button>

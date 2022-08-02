@@ -13,7 +13,7 @@ public interface InquiryService {
 	
 	Inquiry selectInquiry(int no);
 	
-	int inserInquiry(Inquiry i);
+	Inquiry insertInquiry(Inquiry i);
 	
 	int deleteInquiry(Inquiry i);
 	

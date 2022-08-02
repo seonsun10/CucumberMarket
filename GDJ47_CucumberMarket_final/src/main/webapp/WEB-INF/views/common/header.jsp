@@ -230,7 +230,7 @@
                         <ul class="list-unstyled mb-3">
                           <li class="nav-item"><a href="blog.html" class="nav-link">Blog listing</a></li>
                           <li class="nav-item"><a href="post.html" class="nav-link">Blog Post</a></li>
-                          <li class="nav-item"><a href="${pageContext.request.contextPath }/inquiry" class="nav-link">FAQ</a></li>
+                          <li class="nav-item"><a href="${pageContext.request.contextPath }/faqList" class="nav-link">FAQ</a></li>
                           <li class="nav-item"><a href="text.html" class="nav-link">Text page</a></li>
                           <li class="nav-item"><a href="text-right.html" class="nav-link">Text page - right sidebar</a></li>
                           <li class="nav-item"><a href="404.html" class="nav-link">404 page</a></li>

@@ -3,6 +3,7 @@ package com.cu.cum.inquiry.model.service;
 import java.util.List;
 import java.util.Map;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,13 +13,16 @@ import com.cu.cum.inquiry.model.vo.Inquiry;
 @Service
 public class InquiryServiceImpl implements InquiryService {
 	
-//	@Autowired
-//	private InquiryDao dao;
+	@Autowired
+	private InquiryDao dao;
+	
+	@Autowired
+	private SqlSessionTemplate session;
 
 	@Override
 	public List<Inquiry> selectInquiryList(){
 		// TODO Auto-generated method stub
-		return null;
+		return dao.findAll();
 	}
 
 	@Override
@@ -33,10 +37,12 @@ public class InquiryServiceImpl implements InquiryService {
 		return null;
 	}
 
+	// 문의글 작성 
 	@Override
-	public int inserInquiry(Inquiry i) {
+	public Inquiry insertInquiry(Inquiry i) {
 		// TODO Auto-generated method stub
-		return 0;
+		return dao.save(i);
+		
 	}
 
 	@Override
