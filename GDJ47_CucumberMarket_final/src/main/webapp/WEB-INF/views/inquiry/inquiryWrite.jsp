@@ -38,7 +38,7 @@
               <div class="banner"><a href="#"><img src="img/banner.jpg" alt="sales 2014" class="img-fluid"></a></div>
             </div>
 			<div class="col-lg-9">
-				<form action="${pageContext.request.contextPath }/insertInquiry.do" method="post">
+				<form action="${pageContext.request.contextPath }/inquiry/insertInquiry.do" method="post">
 					<div class="row">
 						<div class="col-md-6">
 						<div class="form-group">

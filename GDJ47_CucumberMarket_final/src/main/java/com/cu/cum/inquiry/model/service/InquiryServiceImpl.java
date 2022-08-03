@@ -32,9 +32,9 @@ public class InquiryServiceImpl implements InquiryService {
 	}
 
 	@Override
-	public Inquiry selectInquiry(int no) {
+	public Inquiry selectInquiry(int inquiryno) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.findByInquiryNo(inquiryno);
 	}
 
 	// 문의글 작성 

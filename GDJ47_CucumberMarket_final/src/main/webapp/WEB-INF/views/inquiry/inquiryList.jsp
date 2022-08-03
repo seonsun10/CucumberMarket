@@ -60,18 +60,28 @@
 	                        		</tr>
 	                      		</thead>
 								<tbody>
+								<c:if test="${not empty list }">
+								<c:forEach items="${list }" var="i">
 		                        	<tr>
-		                          		<td>1</td>
-		                          		<td>goodee</td>
+		                          		<td><c:out value="${i.inquiryNo}"/></td>
+		                          		<td>${i.writer.userId }</td>
 		                          		<td colspan=2>
-		                          			<a href="${pageContext.request.contextPath }/inquiryView">
-												사기꾼 잡을수 있나요?
+		                          			<%-- <a href="${pageContext.request.contextPath }/inquiryView"> --%>
+		                          			<a href="${pageContext.request.contextPath }/inquiryView/${i.inquiryNo}">
+												<c:out value="${i.inquiryTitle}"/>
 											</a>
 		                          		</td>
-		                          		<td>상품</td>
-		                          		<td>2022.07.29</td>
-		                          		<td>답변 미등록</td>
+		                          		<td><c:out value="${i.inquiryType}"/></td>
+		                          		<td><c:out value="${i.inquiryDate}"/></td>
+		                          		<td><c:out value="${i.answer}"/></td>
 		                        	</tr>
+		                        	</c:forEach>
+		                        	</c:if>
+		                        	<c:if test="${empty list }">
+						            	<tr>
+						            		<td colspan="8" align="center">조회 결과 없음</td>
+						            	</tr>
+						            </c:if>
 	                      		</tbody>
                    		 	</table>
                     		<nav aria-label="Page navigation example" class="d-flex justify-content-center">

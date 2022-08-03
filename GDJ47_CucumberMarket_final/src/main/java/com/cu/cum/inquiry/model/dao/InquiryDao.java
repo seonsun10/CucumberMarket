@@ -10,7 +10,7 @@ import com.cu.cum.inquiry.model.vo.Inquiry;
 @Repository
 public interface InquiryDao extends JpaRepository<Inquiry, String>{
 	
-//	List<Inquiry> findAll();
+	Inquiry findByInquiryNo(int inquiryno);
 	
 	Inquiry save(Inquiry i);
 	

@@ -11,7 +11,7 @@ public interface InquiryService {
 	
 	List<Inquiry> selectBoardListPage(Map param);
 	
-	Inquiry selectInquiry(int no);
+	Inquiry selectInquiry(int inquiryno);
 	
 	Inquiry insertInquiry(Inquiry i);
 	

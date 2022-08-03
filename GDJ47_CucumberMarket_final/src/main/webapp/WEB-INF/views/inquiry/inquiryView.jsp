@@ -13,7 +13,7 @@
 						<nav aria-label="breadcrumb">
 	                		<ol class="breadcrumb">
 	                  			<li class="breadcrumb-item"><a href="/">Home</a></li>
-	                  			<li aria-current="page" class="breadcrumb-item active">신고하기</li>
+	                  			<li aria-current="page" class="breadcrumb-item active">문의글</li>
 	                		</ol>
 	             	 	</nav>
 					</div>
@@ -44,25 +44,28 @@
 						  		<col width = "500px" />
 						 	</colgroup>
 						 	<tbody class="card-body" >
-						  		<tr>
+ 						  		<tr>
 						   			<th align="center">글번호</th>
-						   			<td>1</td>
+						   			<td align="center"><c:out value="${inq.inquiryNo}"/></td>
 						  		</tr>
 						  		<tr>
 						   			<th align="center">제목</th>
-						   			<td>사기꾼 잡을수 있나요?</td>
+						   			<td align="center"><c:out value="${inq.inquiryTitle}"/></td>
 						  		</tr>
 						  		<tr>
 						   			<th align="center">작성자</th>
-						   			<td>goodee</td>
+						   			<td align="center"><c:out value="${inq.writer.userId}"/></td>
 						  		</tr>
 								<tr>
-						   			<td colspan="2" height="200px">사기당했는데 어떻게 신고하나요? </td>
+									<th align="center">내용</th>
+						   			<td align="center" colspan="2" height="200px"><c:out value="${inq.inquiryContent}"/> </td>
 						  		</tr>
 						 	</tbody>
 							<tr>
 								<td colspan="2" align="center">
+						 			<input type="button" value="수정" onclick=""/>
 						 			<input type="button" value="목록" onclick="location.assign('${pageContext.request.contextPath }/inquiryList')"/>
+						 			<input type="button" value="삭제" onclick=""/>
 						 		</td>
 						 	</tr>
 						</table>
