@@ -34,8 +34,8 @@
                     <input id="password" type="password" name="password" class="form-control">
                   </div>
                   <div class="form-group">
-                    <label for="name">이름 member 아직 안 만듬</label>
-                    <input id="name" type="text" class="form-control">
+                    <label for="name">이름</label>
+                    <input id="name" type="text" name="name" class="form-control">
                   </div>
                   <div class="form-group">
                     <label for="phone">핸드폰 번호</label>

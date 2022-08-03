@@ -9,6 +9,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,11 +20,12 @@ import com.cu.cum.product.model.vo.Files;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
 @Entity
+@Getter @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -36,13 +39,18 @@ public class Member implements UserDetails{
 	
 	private String password;
 	private String name;
-//	private String role;
 	private String phone;
-//	private String activated;
-//	private double score;
-	private Date enrollDate;
-//	private String intro;
 	
+//	@Enumerated(EnumType.STRING)
+//	private OnlineStatus activated; //online offline
+	
+//	private double score;
+	
+	@Temporal(TemporalType.DATE)
+	private Date enrollDate;
+	
+	private String intro;
+	private String role;
 	
 	@OneToMany(mappedBy="member")
 	private List<Files> files;
@@ -52,7 +60,8 @@ public class Member implements UserDetails{
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
 		List<GrantedAuthority> auth = new ArrayList();
-		auth.add(new SimpleGrantedAuthority("ROLE_USER"));
+		auth.add(new SimpleGrantedAuthority(this.role));
+//		if(this.role.equals("admin")) auth.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 		return auth;
 	}
 	@Override

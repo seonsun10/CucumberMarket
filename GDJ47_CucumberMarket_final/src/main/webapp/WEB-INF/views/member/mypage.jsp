@@ -96,7 +96,8 @@
 				  	<p id="reporttag">신고</p>
 				  	<p id="chattag">채팅</p>
 				  </div>
-				  </div>
+				  <br/>
+				  
                 </div>
               </div>
               
@@ -243,6 +244,7 @@
 			<input id="userIdd" type="hidden" value="${loginMember.userId }"/>
 		</div>
 
+
 <style>
 #myform fieldset{
     display: inline-block;
@@ -282,5 +284,14 @@
 
 </style>
 
+
+<script>
+function getImageFiles(e) {
+    const uploadFiles = [];
+    const files = e.currentTarget.files;
+    const imagePreview = document.querySelector('.image-preview');
+    const docFrag = new DocumentFragment();
+}
+</script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

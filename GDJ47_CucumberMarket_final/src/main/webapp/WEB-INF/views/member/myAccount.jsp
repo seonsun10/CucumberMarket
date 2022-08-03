@@ -44,12 +44,12 @@
               <div class="box">
               <h1>회원정보</h1>
                 <p class="text-muted">현재 페이지에서 회원님의 정보를 수정할 수 있습니다.</p>
-                <form>
+                <form action="${path }/member/update.do" method="post" enctype="multipart/form-Data">
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="email">이메일</label>
-                        <input id="email" type="text" class="form-control" style="background-color:lightgray;" readonly value="<c:out value="${loginMember.userId }"/>">
+                        <input id="email" type="text" class="form-control" name="id" style="background-color:lightgray;" readonly value="<c:out value="${loginMember.userId }"/>">
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -63,38 +63,38 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="company">전화번호</label>
-                        <input id="company" type="text" class="form-control" value="<c:out value="${loginMember.phone }"/>">
+                        <label for="company">전화번호</label> 
+                        <input id="company" type="text" name="phone" class="form-control" value="<c:out value="${loginMember.phone }"/>">
                       </div>
                     </div>
-                    <div class="col-md-6">
+<!--                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="street">Street</label>
                         <input id="street" type="text" class="form-control">
                       </div>
                     </div>
                   </div>
-                  <!-- /.row-->
+                  /.row
                   <div class="row">
                     <div class="col-md-6 col-lg-3">
                       <div class="form-group">
                         <label for="city">Company</label>
                         <input id="city" type="text" class="form-control">
                       </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
+                    </div> -->
+ <!--                    <div class="col-md-6 col-lg-3">
                       <div class="form-group">
-                        <label for="zip">ZIP</label>
+                        <label for="zip">우편번호</label>
                         <input id="zip" type="text" class="form-control">
                       </div>
-                    </div>
+                    </div> -->
                     <div class="col-md-6 col-lg-3">
                       <div class="form-group">
-                        <label for="state">State</label>
+                        <label for="state">활동지역</label>
                         <select id="state" class="form-control"></select>
                       </div>
                     </div>
-                    <div class="col-md-6 col-lg-3">
+ <!--                    <div class="col-md-6 col-lg-3">
                       <div class="form-group">
                         <label for="country">Country</label>
                         <select id="country" class="form-control"></select>
@@ -105,11 +105,11 @@
                         <label for="phone">Telephone</label>
                         <input id="phone" type="text" class="form-control">
                       </div>
-                    </div>
-                    <div class="col-md-6">
+                    </div> -->
+                    <div class="col-md-12">
                       <div class="form-group">
-                        <label for="email">Email</label>
-                        <input id="email" type="text" class="form-control">
+                        <label for="intro">자기소개 한마디!</label>
+                        <input id="intro" type="text" class="form-control" name="intro" value="<c:out value="${loginMember.intro}"/>">
                       </div>
                     </div>
                     <div class="col-md-12 text-center">
