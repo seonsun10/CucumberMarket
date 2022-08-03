@@ -61,8 +61,6 @@
 							</c:when>
 						</c:choose>
 					</div>
-					<div>
-					</div>
 				</div>
 			</div>
 			<div id="review"><c:out value="${r.ment }"/></div>

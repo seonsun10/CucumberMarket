@@ -13,10 +13,22 @@
 		<result column="region" property="region"/>
 		<result column="solve_status" property="solveStatus"/>
 		<result column="user_id" property="member.userId"/>
+		<collection property="files" ofType="com.cu.cum.product.model.vo.Files" column="pro_no">
+			<id column="files_no" property="filesNo"/>
+			<result column="original_filename" property="originalFilename"/>
+			<result column="rename_filename" property="renameFilename"/>
+		</collection>
 	</resultMap>
 	<resultMap type="review" id="reviewMap">
 		<id column="review_no" property="reviewNo"/>
 		<result column="write_date" property="writeDate"/>
+		<result column="ment" property="ment"/>
+		<result column="host" property="host"/>
+		<result column="oi" property="oi"/>
+		<result column="writer" property="writer"/>
+		<association property="product" javaType="product" column="proNo">
+			<id column="pro_no" property="proNo"/>
+		</association>
 	</resultMap>
 
 	<select id="selectProductCount" resultType="_int">
@@ -24,7 +36,8 @@
 	</select>
 	
 	<select id="selectProductList" resultMap="productMap">
-		SELECT * FROM PRODUCT WHERE USER_ID=#{userId}
+		SELECT * FROM PRODUCT P LEFT JOIN FILES  F ON F.PRO_NO=P.PRO_NO 
+			LEFT JOIN MEMBER M ON M.USERID=P.USER_ID WHERE P.USER_ID=#{userId}
 	</select>
 	
 	<insert id="insertReview" parameterType="review">

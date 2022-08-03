@@ -16,6 +16,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicInsert;
 
 import com.cu.cum.member.model.vo.Member;
@@ -75,7 +77,7 @@ public class Product {
 	private Member member; //판매자 아이디
 	
 
-
+	@Cascade(CascadeType.REMOVE)
 	@OneToMany(mappedBy="product" , fetch = FetchType.LAZY)
 	//@OneToMany(mappedBy="product")
 	private List<Files> files;
