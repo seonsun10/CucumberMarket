@@ -52,6 +52,7 @@ $(()=>{
 	$("#protag").click(e=>{
 		$.ajax({
 			url:"/member/mypageProduct.do",
+			data:{"userId":$("#userIdd").val()},
 			dataType:"html",
 			success:data=>{
 				$("#databox").html(data);
@@ -63,6 +64,7 @@ $(()=>{
 	$("#reviewtag").click(e=>{
 		$.ajax({
 			url:"/member/mypageReview.do",
+			data:{"userId":$("#userIdd").val()},
 			dataType:"html",
 			success:data=>{
 				$("#databox").html(data);
@@ -100,7 +102,28 @@ $(()=>{
 		});
 	});
 	
+	
 });
+function fn_ajaxPage1(pageNo){
+	$.ajax({
+		url:"/member/mypageProduct.do",
+		data:{"cPage":pageNo,"userId":$("#userIdd").val()},
+		dataType:"html",
+		success:data=>{
+			$("#databox").html(data);
+		}
+	});
+};
+function fn_ajaxPage2(pageNo,numPerpage){
+	$.ajax({
+		url:"/member/mypageProduct.do",
+		data:{"cPage":pageNo,"numPerpage":numPerpage,"userId":$("#userIdd").val()},
+		dataType:"html",
+		success:data=>{
+			$("#databox").html(data);
+		}
+	});
+};
 
 const pwcheck=()=>{
 	const pw1 = $("#newPw");

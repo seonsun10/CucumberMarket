@@ -1,6 +1,8 @@
 package com.cu.cum.member.controller;
 
 import java.security.Principal;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,6 +26,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cu.cum.member.model.service.MemberService;
 import com.cu.cum.member.model.vo.Member;
+import com.cu.cum.pagebar.PageBar;
+import com.cu.cum.product.model.service.ProductService;
+import com.cu.cum.product.model.vo.Product;
+import com.cu.cum.product.model.vo.Review;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,6 +45,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService service;
+	
+	@Autowired
+	private ProductService proservice;
 	
 	@GetMapping({"","/"})
 	public String index(Principal p,Model m) {
@@ -92,7 +101,6 @@ public class MemberController {
 	@RequestMapping("/successLogin.do")
 	public String successLogin(Model m) {
 		//인증받은 객체의 정보를 가져올 수 있다.
-		//loadUserByUsername()메소드에서 반환하는 객체를 받을 수 있음.
 		Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		m.addAttribute("loginMember",(Member)o);
 		return "redirect:/";
@@ -150,50 +158,32 @@ public class MemberController {
 	@RequestMapping("/member/mypageProduct.do")
 	public String propage(@RequestParam(defaultValue="1") int cPage,
 							@RequestParam(defaultValue="5") int numPerpage,
+							@RequestParam String userId,
 							HttpServletRequest request,
 							Model m) {
-//		List<Product> boards=new Service().selectBoardList(cPage, numPerpage);
-//		int totalProduct=productService().selectProductCount();
-//		int totalPage=(int)Math.ceil((double)totalProduct/numPerpage);
-//		
-//		int pageBarSize=5;
-//		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
-//		int pageEnd=pageNo+pageBarSize-1;
-//		
-//		String pageBar="";
-//		if(pageNo==1) {
-//			pageBar+="<span>[이전]</span>";
-//		}else {
-//			pageBar+="<a href="+request.getRequestURL()
-//					+"?cPage="+(pageNo-1)
-//					+"&numPerpage="+numPerpage+">[이전]</a>";
-//		}
-//		
-//		while(!(pageNo>pageEnd||pageNo>totalPage)) {
-//			if(cPage==pageNo) {
-//				pageBar+="<span>"+pageNo+"</span>";
-//			}else {
-//				pageBar+="<a href="+request.getRequestURL()
-//				+"?cPage="+(pageNo)
-//				+"&numPerpage="+numPerpage+">"+pageNo+"</a>";
-//			}
-//			pageNo++;
-//		}
-//		
-//		if(pageNo>totalPage) {
-//			pageBar+="<span>[다음]</span>";
-//		}else {
-//			pageBar+="<a href="+request.getRequestURL()
-//			+"?cPage="+(pageNo)
-//			+"&numPerpage="+numPerpage+">[다음]</a>";
-//		}
-//		m.addAttribute("pageBar",pageBar);
-//		m.addAttribute("product",product);
+		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"userId",userId);
+		List<Product> products=proservice.selectProductList(page);
+		String url=request.getRequestURI();
+		int totalProduct=proservice.selectProductCount(userId);
+		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage, totalProduct, url));
+		m.addAttribute("product",products);
+		m.addAttribute("totalProduct",totalProduct);
 		return "member/mypageProduct";
 	}
 	//마이페이지에서 후기 목록 뿌리는 페이지
 	@RequestMapping("/member/mypageReview.do")
-	public String reviewpage() {
+	public String reviewpage(@RequestParam(defaultValue="1") int cPage,
+								@RequestParam(defaultValue="5") int numPerpage,
+								@RequestParam String userId,
+								HttpServletRequest request,
+								Model m) {
+		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"userId",userId);
+		List<Review> reviews=proservice.selectReviewList(page);
+		String url=request.getRequestURI();
+		int totalReview=proservice.selectReviewCount(userId);
+		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage, totalReview, url));
+		m.addAttribute("review",reviews);
+		m.addAttribute("totalReview",totalReview);
 		return "member/mypageReview";
 	}
 	//마이페이지에서 찜 목록 뿌리는 페이지
@@ -210,6 +200,47 @@ public class MemberController {
 	@RequestMapping("/member/mypageChat.do")
 	public String chatpage() {
 		return "member/mypageChat";
+	}
+	//다른 사람 페이지 연결
+	@RequestMapping("/member/otherMember.do")
+	public String otherMember(@RequestParam String userId,
+								Model m) {
+		m.addAttribute("writer",userId);
+		return "/member/otherMember";
+	}
+	//다른 사람 물품 정보
+	@RequestMapping("/member/otherPage.do")
+	public String otherPage(@RequestParam(defaultValue="1") int cPage,
+							@RequestParam(defaultValue="20") int numPerpage,
+							@RequestParam String userId,
+							HttpServletRequest request,
+							Model m) {
+		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"userId",userId);
+		List<Product> products=proservice.selectProductList(page);
+		String url=request.getRequestURI();
+		int totalProduct=proservice.selectProductCount(userId);
+		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage, totalProduct, url));
+		m.addAttribute("product",products);
+		m.addAttribute("totalProduct",totalProduct);
+		m.addAttribute("writer",userId);
+		return "member/otherpageProduct";
+	}
+	//다른 사람 페이지 후기
+	@RequestMapping("/member/otherpageReview.do")
+	public String otherPageReview(@RequestParam(defaultValue="1") int cPage,
+									@RequestParam(defaultValue="5") int numPerpage,
+									@RequestParam String userId,
+									HttpServletRequest request,
+									Model m) {
+		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"userId",userId);
+		List<Review> reviews=proservice.selectReviewList(page);
+		String url=request.getRequestURI();
+		int totalReview=proservice.selectReviewCount(userId);
+		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage, totalReview, url));
+		m.addAttribute("review",reviews);
+		m.addAttribute("totalReview",totalReview);
+		m.addAttribute("writer",userId);
+		return "member/otherpageReview";
 	}
 	
 }
