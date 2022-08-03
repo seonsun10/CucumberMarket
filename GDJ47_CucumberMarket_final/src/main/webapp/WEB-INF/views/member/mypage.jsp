@@ -241,9 +241,7 @@
 			</div>
 			<input id="userIdd" type="hidden" value="${loginMember.userId }"/>
 		</div>
-<<<<<<< HEAD
 
-=======
 <style>
 #myform fieldset{
     display: inline-block;
