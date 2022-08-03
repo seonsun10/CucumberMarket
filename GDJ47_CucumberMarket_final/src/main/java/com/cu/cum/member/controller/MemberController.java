@@ -108,9 +108,6 @@ public class MemberController {
 	
 	@RequestMapping("/successLogout.do")
 	public String successLogout(SessionStatus session) {
-		Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String id= ((Member)o).getUserId();
-		
 		if(!session.isComplete()) {
 			session.setComplete();
 		}
@@ -118,7 +115,8 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/member/mypage.do")
-	public String myPage() {
+	public String myPage(@RequestParam String userId, Model m) {
+		m.addAttribute("userId",userId);
 		return "member/mypage";
 	}
 	

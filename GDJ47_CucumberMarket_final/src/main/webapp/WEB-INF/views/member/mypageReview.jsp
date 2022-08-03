@@ -28,7 +28,7 @@
 <c:if test="${review ne null }">
 	<c:forEach var="r" items="${review }">
 		<div id="pro-body">
-			<a id="review-a" href="${path }/member/otherMember?userId=${r.writer}"><img src="${path }/resources/img/오이.png" style="width:50px;"></a>
+			<a id="review-a" href="${path }/member/otherMember.do?writer=${r.writer}"><img src="${path }/resources/img/cucumber.png" style="width:50px;"></a>
 			<div>
 				<div>
 					<div id="writer"><c:out value="${r.writer }"/></div>

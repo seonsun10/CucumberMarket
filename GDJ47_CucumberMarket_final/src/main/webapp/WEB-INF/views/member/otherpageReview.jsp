@@ -37,7 +37,7 @@
 		<c:if test="${review ne null}">
 			<c:forEach var="r" items="${review }">
 				<tr id="tablebody">
-					<td id="lione"><img src="${path }/resources/img/오이.png" style="width:50px;"></td>
+					<td id="lione"><img src="${path }/resources/img/cucumber.png" style="width:50px;"></td>
 					<td><c:out value="${r.product.proName }"/></td>
 					<td id=""><c:out value="${r.ment }"/></td>
 					<td id="lifour"><c:out value="${r.oi}"/></td>
