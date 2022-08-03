@@ -25,7 +25,7 @@
             			<td><c:out value="${p.proNo }"/></td>
             			<td>
             			<a href="${path }/test/testview/${p.proNo}">
-            				<c:out value="${p.proName }"/>
+            				<c:out value="${p.proContent }"/>
             			</a>
             			
             			

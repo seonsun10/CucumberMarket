@@ -36,4 +36,12 @@ public class ProductMapperDao {
 		String userId = (String)page.get("userId");
 		return session.selectList("product.selectReviewList",userId,new RowBounds((cPage-1)*numPerpage,numPerpage));
 	}
+	
+	//테스트용
+	public List<Product> selectall(SqlSessionTemplate session){
+		return session.selectList("product.selectall");
+	}
+	public Product selectProduct(SqlSessionTemplate session,int id) {
+		return session.selectOne("product.selectproduct",id);
+	}
 }
