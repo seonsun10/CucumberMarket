@@ -288,6 +288,9 @@
 				  <div id="search-not-mobile" class="navbar-collapse collapse">
 				  	<a href="${path }/area.do" class="btn btn-primary navbar-btn"> 지역설정 테스트용</a>
 				  </div>
+				   <div id="search-not-mobile" class="navbar-collapse collapse">
+				  	<a href="${path }" class="btn btn-primary navbar-btn">알림</a>
+				  </div>
 			  
               </div>
             </div>
