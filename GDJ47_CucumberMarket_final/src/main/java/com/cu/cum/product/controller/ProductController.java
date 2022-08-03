@@ -50,17 +50,20 @@ public class ProductController {
 	
 
 	@RequestMapping("/product/insertProduct.do")
-	public String insertProduct(Product p, MultipartHttpServletRequest mtfRequest ,@RequestParam("proName") String proName , @RequestParam("region") String region,
+	public String insertProduct(Product p, MultipartHttpServletRequest mtfRequest ,@RequestParam("proName") String proName , 
+			@RequestParam("sido1") String sido, @RequestParam("gugun1") String gugun,
 			@RequestParam("proContent") String proContent,
 			@RequestParam("tag") String tag , @RequestParam("proStatus") String proStatus,
-			@RequestParam(name="price") int price ) {
-		String email = "admin@naver.com"; //나중엔 세션값으로 email 불러와야함
-		String userId = email.substring(0, email.indexOf("@"));
+			@RequestParam(name="price") int price , @RequestParam(name="userId") String userId) {
+		//String userId = "admin@naver.com"; //나중엔 세션값으로 email 불러와야함
+		//String userId = email.substring(0, email.indexOf("@"));
 		//파일제외 나머지 insert문
+		System.out.println(tag);
 		
-		
+		String region = sido+" "+gugun;
+		System.out.println(region);
 		Member m = Member.builder().userId(userId).build();
-		p = Product.builder().proName(proName).proContent(proContent).price(price).
+		p = Product.builder().title(proName).proContent(proContent).price(price).
 				region(region).categoryName(tag).proStatus(proStatus).member(m).
 				build();
 		
@@ -86,6 +89,7 @@ public class ProductController {
 							f.transferTo(new File(path+rename));
 							files.add(Files.builder()
 								.product(p)
+								.member(m)
 								.originalFilename(originalFilename)
 								.renameFilename(rename).build());
 						}catch(IOException e) {
@@ -101,6 +105,7 @@ public class ProductController {
 							f.transferTo(new File(path+rename));
 							files.add(Files.builder()
 								.product(p)
+								.member(m)
 								.originalFilename(originalFilename)
 								.renameFilename(rename).build());
 						}catch(IOException e) {
@@ -120,14 +125,6 @@ public class ProductController {
 //			System.out.println("파일이 들어가지 못함");
 //		}
 		
-//		for(Files f : files) {
-//			Files fresult = fservice.insertFile(f);
-//			if(fresult!=null) {
-//				System.out.println("파일이 들어갔다.");
-//			}else {
-//				System.out.println("파일이 들어가지 못했다");
-//			}
-//		}
 		return "redirect:/mypage.do";
 	}
 	
@@ -164,6 +161,16 @@ public class ProductController {
 			m.addAttribute("msg","삭제 실패");
 		}
 		return "common/msg";
+	}
+	
+	
+	
+	
+	//카테고리별 상품 결과 나오게하는거 이란 임시용
+	@RequestMapping("/product/productTotal.do")
+	public String productTotal(@RequestParam("tag") String tag) {
+		System.out.println(tag);
+		return "/";
 	}
 	
 }

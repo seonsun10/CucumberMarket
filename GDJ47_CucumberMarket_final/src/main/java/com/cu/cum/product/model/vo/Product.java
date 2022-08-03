@@ -11,14 +11,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
 import javax.persistence.OneToMany;
-
-import javax.persistence.OneToOne;
-
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.DynamicInsert;
 
 import com.cu.cum.member.model.vo.Member;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -32,6 +30,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @Builder
+@DynamicInsert
 @NoArgsConstructor
 @AllArgsConstructor
 @SequenceGenerator(name="seq_prono" , sequenceName="seq_prono", allocationSize = 1)
@@ -45,7 +44,8 @@ public class Product {
 	@Column(name="category_id")
 	private String categoryName; //카테고리아이디
 	
-	private String proName; //상품이름
+	
+	private String title; //상품제목
 	
 	
 	private String proStatus; //중고상품=y , 새상품=n
@@ -58,13 +58,13 @@ public class Product {
 	private String proContent; //상품설명
 	
 	@Temporal(TemporalType.DATE)
-	//@Column(columnDefinition = "default sysdate")
+	@Column(columnDefinition = "date default sysdate")
 	private Date enrollDate; // 상품 작성일(등록일자)
 	
 	//@Column(columnDefinition = "varchar2(10) default 'y'")
 	private String solveStatus; //y=판매중 , n=판매완료
 	
-	private String region; //거래지역
+	private String region; //거래지역 판매지역
 	
 //	@ManyToMany(cascade = CascadeType.ALL)
 //	@JoinColumn(name="products")
@@ -80,6 +80,7 @@ public class Product {
 	//@OneToMany(mappedBy="product")
 	private List<Files> files;
 	
-
+	
+	
 
 }

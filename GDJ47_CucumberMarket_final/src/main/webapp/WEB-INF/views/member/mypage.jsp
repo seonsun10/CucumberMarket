@@ -201,41 +201,42 @@
 					<div class="modal-body">
 					
 					  	<div id='image_preview'>
-						<input type='file' id='btnAtt' name="image" multiple='multiple'/><br><br>
+						<input type='file' id='btnAtt' name="image" multiple='multiple' required/><br><br>
 						<div id='att_zone' data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하거나 파일을 드래그앤드롭 하세요'></div><br>
-  						
+  						<label for="exampleInputEmail1">상품 제목</label>
 						<input type="text" name="proName" class="form-control"
-						placeholder="사움 제목" required><br>
-						<select class="form-control" name="tag" aria-label="Default select example">
-						  <option selected>상품태그</option>
-						  <option value="의류">의류</option>
-						  <option value="핸드폰">핸드폰</option>
-						  <option value="컴퓨터">컴퓨터</option>
-						  <option value="자동차/오토바이">차량용품</option>
-						  <option value="가전제품">가전제품</option>
-						  <option value="상품권">상품권</option>
-						  <option value="가구/인테리어">가구/인테리어</option>
-						  <option value="스포츠">스포츠</option>
-						  <option value="기타">기타</option>
-						</select><br>
-						<input type="text" name="region" class="form-control"
-						placeholder="거래 지역" required><br>
+						placeholder="상품 제목" required><br>
+
+						<label for="exampleInputEmail1">상품 카테고리</label>
+						<select class="form-control" style="width:200px; margin-bottom:20px;" name="tag1" id="tag1" ></select>
+						
+						<select class="form-control" style="width:200px;" name="tag" id="tag2" required></select>
+						<br>
+						
+						<label for="exampleInputEmail1">거래 지역</label>
+						<select class="form-control" style="margin-bottom:20px;" name="sido1" id="sido1"></select>
+						<select class="form-control" name="gugun1" id="gugun1" required></select>
+						<br>
+						<label for="exampleInputEmail1">상품 상태</label><br>
 						<label class="radio-inline">
-						  <input type="radio" name="proStatus" id="inlineRadio1" value="y"> 중고상품
+						  <input type="radio" name="proStatus" id="inlineRadio1" value="y" > 중고상품
 						</label>
 						<label class="radio-inline">
 						  <input type="radio" name="proStatus" id="inlineRadio2" value="n"> 새상품
 						</label><br>
+						<label for="exampleInputEmail1">상품 가격</label>
 						<input type="number" name="price" class="form-control"
-						placeholder="가격" required"><br>
-						<textarea class="form-control" name="proContent" rows="5" placeholder="상품내용"></textarea><br>
+						placeholder="상품 가격" required"><br>
+						<label for="exampleInputEmail1">상품 설명</label>
+						<textarea class="form-control" name="proContent" rows="5" placeholder="상품 설명" required></textarea><br>
 						<!-- <input type="text" name="user" value="admin" class="form-control">		 -->								
 					</div>
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-outline-success">로그인</button>
+						<button type="submit" class="btn btn-outline-success">등록</button>
 						<button type="button" class="btn btn-outline-success"
 						data-dismiss="modal">취소</button>
 					</div>
+					<input id="userIdd" name="userId"  type="hidden" value="${loginMember.userId }"/>
 					</form>
 				</div>
 			</div>
@@ -280,55 +281,6 @@
 }
 
 </style>
-<script>
-function getImageFiles(e) {
-    const uploadFiles = [];
-    const files = e.currentTarget.files;
-    const imagePreview = document.querySelector('.image-preview');
-    const docFrag = new DocumentFragment();
 
-    if ([...files].length >= 7) {
-      alert('이미지는 최대 6개 까지 업로드가 가능합니다.');
-      return;
-    }
-
-    // 파일 타입 검사
-    [...files].forEach(file => {
-      if (!file.type.match("image/.*")) {
-        alert('이미지 파일만 업로드가 가능합니다.');
-        return
-      }
-
-      // 파일 갯수 검사
-      if ([...files].length < 3) {
-        uploadFiles.push(file);
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const preview = createElement(e, file);
-          imagePreview.appendChild(preview);
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-  }
-
-  function createElement(e, file) {
-    const li = document.createElement('li');
-    const img = document.createElement('img');
-    img.setAttribute('src', e.target.result);
-    img.setAttribute('data-file', file.name);
-    li.appendChild(img);
-
-    return li;
-  }
-
-  const realUpload = document.querySelector('.real-upload');
-  const upload = document.querySelector('.upload');
-
-  upload.addEventListener('click', () => realUpload.click());
-
-  realUpload.addEventListener('change', getImageFiles);
-</script>
-<script src="${path}/resources/js/mypage.js"></script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

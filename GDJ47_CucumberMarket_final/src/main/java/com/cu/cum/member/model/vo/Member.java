@@ -14,6 +14,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.cu.cum.product.model.vo.Files;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -41,6 +43,9 @@ public class Member implements UserDetails{
 	private Date enrollDate;
 //	private String intro;
 	
+	
+	@OneToMany(mappedBy="member")
+	private List<Files> files;
 	
 	
 	@Override

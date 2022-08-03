@@ -33,7 +33,9 @@
 	<!-- 활동지역 -->
 	<script src="${path}/resources/js/activity.js"></script>
 
-    
+
+	<!-- 상품카테고리 -->
+    <script src="${path }/resources/js/productTag.js"></script>
 
 
   </body>
