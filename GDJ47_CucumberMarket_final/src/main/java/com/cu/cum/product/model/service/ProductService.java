@@ -1,8 +1,8 @@
 package com.cu.cum.product.model.service;
 
-import com.cu.cum.member.model.vo.Member;
+import java.util.List;
+
 import com.cu.cum.product.model.vo.Product;
-import com.cu.cum.wishlist.model.vo.WishList;
 
 public interface ProductService {
 

@@ -14,6 +14,14 @@ spring:
       auto-commit: false
       connection-test-query: select 1 from dual
       pool-name: cupool
+#파일 업로드 처리  
+  servlet:
+    multipart:
+      location: c:\\project\\upload
+      max-file-size: 10MB
+      max-request-size: 50MB
+        
+        
 #mvc패턴으로 jsp페이지 연결하기
   mvc:
     view:
@@ -34,4 +42,4 @@ logging:
   level:
     root: info
     com.cu.cum: debug
-    
+

@@ -1,5 +1,7 @@
 package com.cu.cum.wishlist.controller;
 
+import java.sql.Date;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,27 +40,42 @@ public class WishListController {
 		request.setAttribute("no", no);
 		return "product/productview";
 	}
-	
-	
-	@RequestMapping("/product/insertWish.do")
-	public String insertWishList() {
-		return "";
-	}
 
+	
+	@RequestMapping("/wishlist/insertWishList.do")
+	public String insertWishList(HttpServletRequest request) {
+		String id = request.getParameter("id");
+		int no = Integer.parseInt(request.getParameter("no"));
+		System.out.println(id);
+		System.out.println(no);
+		Product p = Product.builder().proNo(no).build();
+		Member m = Member.builder().userId(id).build();
+		WishList wl = WishList.builder().member(m).product(p).build();
+		WishList result = service.insertWishlist(wl);
+		int count = 0;
+		if(result!=null) {
+			count = 1;
+		}
+		
+		request.setAttribute("count", count);
+		request.setAttribute("id", id);
+		request.setAttribute("no", no);
+		return "product/productview";
+	}
+	
 	@RequestMapping("/wishlist/deleteWishList.do")
 	public String deleteWishList(HttpServletRequest request) {
 		String id = request.getParameter("id");
 		int no = Integer.parseInt(request.getParameter("no"));
 		System.out.println(id);
 		System.out.println(no);
-		Member m = Member.builder().userId(id).build();
-		Product p = Product.builder().proNo(no).build();
-		//int count = service.deleteWishlist(m,p);
-//		if(wl!=null) {
-//			count = 1;
-//		}
+		int result = service.deleteWishlist(id,no);
+		int count = 1;
+		if(result>0) {
+			count = 0;
+		}
 		
-		//request.setAttribute("count", count);
+		request.setAttribute("count", count);
 		request.setAttribute("id", id);
 		request.setAttribute("no", no);
 		return "product/productview";
