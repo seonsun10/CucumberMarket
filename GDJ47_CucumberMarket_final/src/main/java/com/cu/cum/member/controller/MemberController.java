@@ -1,24 +1,32 @@
 package com.cu.cum.member.controller;
 
 import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -29,6 +37,8 @@ import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.pagebar.PageBar;
 import com.cu.cum.product.model.service.ProductService;
 import com.cu.cum.product.model.vo.Product;
+import com.cu.cum.product.model.vo.Review;
+
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -40,8 +50,11 @@ public class MemberController {
 	private Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	@Autowired
+
+	
 	private BCryptPasswordEncoder pwEncoder; 
 	
+
 	@Autowired
 	private MemberService service;
 	
@@ -52,20 +65,19 @@ public class MemberController {
 	public String index(Principal p,Model m) {
 		log.debug("{}",p);
 		
-//		m.getAttribute(); //무엇을 해야하는 건지 다시 생각해보기
 		return "index";
 	}
 	
-	@RequestMapping("/insertAdmin")
-	@ResponseBody
-	public Member insertAdmin() {
-		Member m = Member.builder().userId("admin").password("1234")
-				.phone("01012341234").build();
-		
-		Member result = service.insertAdmin(m);
-		
-		return result;
-	}
+//	@RequestMapping("/insertAdmin")
+//	@ResponseBody
+//	public Member insertAdmin() {
+//		Member m = Member.builder().userId("admin").password("1234")
+//				.phone("01012341234").build();
+//		
+//		Member result = service.insertAdmin(m);
+//		
+//		return result;
+//	}
 	
 	//회원가입 페이지로
 	@RequestMapping(value = "/joinForm", method =RequestMethod.GET)
@@ -76,43 +88,36 @@ public class MemberController {
 	//회원가입
 	@PostMapping("/join")
 	public ModelAndView join(@ModelAttribute Member member) {
+		
+		member.setEnrollDate(new Date());
+		member.setIntro("안녕하세요 :D");
+		member.setRole("ROLE_USER");
 		service.join(member);
 		return new ModelAndView("redirect:/"); //회원가입 후, 메인 화면으로 바로 이동
  	}
-	
-//	@PostMapping("/join")
-//	public String join(Member member) {
-//		logger.debug("원본 :{}", member.getPassword());
-//		String rawPassword = member.getPassword();
-//		String encPassword = pwEncoder.encode(rawPassword);
-//		//패스워드 암호화
-//		logger.debug("암호화 :{}",pwEncoder.encode(member.getPassword()));
-//		member.setPassword(pwEncoder.encode(member.getPassword()));
-//		member.setPassword(encPassword);
-//		
-//		dao.save(member);
-//	
-//		return "redirect:/login";
-//	}
-	
-
 	
 	@RequestMapping("/successLogin.do")
 	public String successLogin(Model m) {
 		//인증받은 객체의 정보를 가져올 수 있다.
 		Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		m.addAttribute("loginMember",(Member)o);
+	
+		
 		return "redirect:/";
 	}
 	
 	@RequestMapping("/successLogout.do")
 	public String successLogout(SessionStatus session) {
+		Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String id= ((Member)o).getUserId();
+		
 		if(!session.isComplete()) {
+			
+			
 			session.setComplete();
 		}
 		return "redirect:/";
 	}
-	
 	
 	@RequestMapping("/member/mypage.do")
 	public String myPage() {
@@ -128,6 +133,41 @@ public class MemberController {
 	@RequestMapping("/member/wishList.do")
 	public String wishList() {
 		return "member/wishList";
+	}
+
+//	회원정보 수정 myAccount에서 넘어옴
+	@RequestMapping("/member/update.do")
+	public String memberUpdate(@RequestParam("phone") String phone,
+			@RequestParam("intro") String intro , @RequestParam("id") String userId) {
+		Member m = service.selectMember(userId);
+		m.setPhone(phone);
+		m.setIntro(intro);
+		service.updateMember(m);
+//		member.setPhone(null);
+//		member.setIntro(null);
+		return "redirect:/member/myAccount.do";
+	}
+	
+	
+	//로그인 정보 세션 저장
+	@RequestMapping(value = "/sessionLogin", method = RequestMethod.POST)
+	@ResponseBody
+	public void sessionLogin(HttpServletRequest request, HttpSession session, Principal principal) {
+		
+		String sessionId = principal.getName();
+		Member member = service.getData(sessionId);
+		
+		session.setAttribute("sessionId", member.getUserId());
+	}
+	
+	@GetMapping("/member/{id}")
+	public Member getMember(@PathVariable String id) {
+		return service.selectMember(id);
+	}
+	
+	@GetMapping("/member/")
+	public List<Member> getMembers(){
+		return service.selectMembers();
 	}
 	
 	//비밀번호 변경
@@ -171,7 +211,18 @@ public class MemberController {
 	}
 	//마이페이지에서 후기 목록 뿌리는 페이지
 	@RequestMapping("/member/mypageReview.do")
-	public String reviewpage() {
+	public String reviewpage(@RequestParam(defaultValue="1") int cPage,
+								@RequestParam(defaultValue="5") int numPerpage,
+								@RequestParam String userId,
+								HttpServletRequest request,
+								Model m) {
+		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"userId",userId);
+		List<Review> reviews=proservice.selectReviewList(page);
+		String url=request.getRequestURI();
+		int totalReview=proservice.selectReviewCount(userId);
+		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage, totalReview, url));
+		m.addAttribute("review",reviews);
+		m.addAttribute("totalReview",totalReview);
 		return "member/mypageReview";
 	}
 	//마이페이지에서 찜 목록 뿌리는 페이지
@@ -189,5 +240,45 @@ public class MemberController {
 	public String chatpage() {
 		return "member/mypageChat";
 	}
-	
+	//다른 사람 페이지 연결
+	@RequestMapping("/member/otherMember.do")
+	public String otherMember(@RequestParam String userId,
+								Model m) {
+		m.addAttribute("writer",userId);
+		return "/member/otherMember";
+	}
+	//다른 사람 물품 정보
+	@RequestMapping("/member/otherPage.do")
+	public String otherPage(@RequestParam(defaultValue="1") int cPage,
+							@RequestParam(defaultValue="20") int numPerpage,
+							@RequestParam String userId,
+							HttpServletRequest request,
+							Model m) {
+		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"userId",userId);
+		List<Product> products=proservice.selectProductList(page);
+		String url=request.getRequestURI();
+		int totalProduct=proservice.selectProductCount(userId);
+		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage, totalProduct, url));
+		m.addAttribute("product",products);
+		m.addAttribute("totalProduct",totalProduct);
+		m.addAttribute("writer",userId);
+		return "member/otherpageProduct";
+	}
+	//다른 사람 페이지 후기
+	@RequestMapping("/member/otherpageReview.do")
+	public String otherPageReview(@RequestParam(defaultValue="1") int cPage,
+									@RequestParam(defaultValue="5") int numPerpage,
+									@RequestParam String userId,
+									HttpServletRequest request,
+									Model m) {
+		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"userId",userId);
+		List<Review> reviews=proservice.selectReviewList(page);
+		String url=request.getRequestURI();
+		int totalReview=proservice.selectReviewCount(userId);
+		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage, totalReview, url));
+		m.addAttribute("review",reviews);
+		m.addAttribute("totalReview",totalReview);
+		m.addAttribute("writer",userId);
+		return "member/otherpageReview";
+	}
 }

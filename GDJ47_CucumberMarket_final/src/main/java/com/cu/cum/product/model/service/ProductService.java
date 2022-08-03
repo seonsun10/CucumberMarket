@@ -1,10 +1,15 @@
 package com.cu.cum.product.model.service;
 
 import java.util.List;
+
 import java.util.Map;
 
+
 import com.cu.cum.product.model.vo.Product;
+
+
 import com.cu.cum.product.model.vo.Review;
+
 
 public interface ProductService {
 
@@ -24,5 +29,11 @@ public interface ProductService {
 	
 	//상품 삭제
 	Product deleteProduct(int proNo);
-
+	
+	//상품 리뷰 수 조회
+	int selectReviewCount(String userId);
+	
+	//삼품 리뷰 조회
+	List<Review> selectReviewList(Map page);
+	
 }

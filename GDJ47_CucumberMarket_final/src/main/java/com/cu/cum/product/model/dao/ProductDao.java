@@ -7,10 +7,16 @@ import org.springframework.data.jpa.repository.Query;
 import com.cu.cum.product.model.vo.Product;
 import com.cu.cum.product.model.vo.Review;
 
+
 public interface ProductDao extends JpaRepository<Product, Integer>{
 
 
-	Product saveAndFlush(Product p);
+
+
+	Product saveAndFlush(Product p); //주객체 
+	
+
+
 	
 //	//거래 후기
 //	@Modifying
@@ -23,4 +29,8 @@ public interface ProductDao extends JpaRepository<Product, Integer>{
 	//후기 등록
 	Product save(Product p);
 	
+	//상품 조회
+	Product findById(int proNo);
+	
+
 }

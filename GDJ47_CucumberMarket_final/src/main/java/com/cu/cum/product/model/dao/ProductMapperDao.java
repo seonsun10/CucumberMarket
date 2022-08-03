@@ -24,12 +24,16 @@ public class ProductMapperDao {
 		return session.selectOne("product.selectProductCount",userId);
 	}
 	
-	public Product selectProduct(SqlSessionTemplate session, int proNo) {
-		return session.selectOne("product.selectProduct",proNo);
+	//전체 리뷰 수 조회
+	public int selectReviewCount(SqlSessionTemplate session, String userId) {
+		return session.selectOne("product.selectReviewCount",userId);
 	}
-//	
-//	public int insertReview(SqlSessionTemplate session, Review review) {
-//		return session.insert("product.insertReview",review);
-//	}
-		
+	
+	//상품 리뷰 리스트 조회
+	public List<Review> selectReviewList(SqlSessionTemplate session, Map page){
+		int cPage = (int)page.get("cPage");
+		int numPerpage = (int)page.get("numPerpage");
+		String userId = (String)page.get("userId");
+		return session.selectList("product.selectReviewList",userId,new RowBounds((cPage-1)*numPerpage,numPerpage));
+	}
 }

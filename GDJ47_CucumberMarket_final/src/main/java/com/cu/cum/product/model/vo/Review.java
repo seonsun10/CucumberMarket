@@ -13,6 +13,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
