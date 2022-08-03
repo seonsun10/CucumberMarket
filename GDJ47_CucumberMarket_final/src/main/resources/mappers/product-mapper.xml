@@ -4,7 +4,7 @@
 	<resultMap type="product" id="productMap">
 		<id column="pro_no" property="proNo"/>
 		<result column="category_id" property="categoryName"/>
-		<result column="pro_name" property="proName"/>
+		
 		<result column="pro_status" property="proStatus"/>
 		<result column="price" property="price"/>
 		<result column="pro_count" property="proCount"/>
@@ -12,6 +12,7 @@
 		<result column="enroll_date" property="enrollDate"/>
 		<result column="region" property="region"/>
 		<result column="solve_status" property="solveStatus"/>
+		<result column="user_id" property="member.userId"/>
 		<collection property="files" ofType="com.cu.cum.product.model.vo.Files" column="pro_no">
 			<id column="files_no" property="filesNo"/>
 			<result column="original_filename" property="originalFilename"/>
@@ -49,5 +50,11 @@
 	
 	<select id="selectReviewList" resultMap="reviewMap">
 		SELECT * FROM REVIEW WHERE WRITER=#{userId}
+	</select>
+ 	<select id="selectall" resultMap="productMap">
+ 	select * from product
+	</select>
+	<select id="selectproduct" resultMap="productMap" parameterType="_int">
+	select * from product where pro_no=#{id}
 	</select>
 </mapper>
