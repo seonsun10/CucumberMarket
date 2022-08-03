@@ -91,7 +91,7 @@ public class MemberController {
 		
 		member.setEnrollDate(new Date());
 		member.setIntro("안녕하세요 :D");
-		member.setRole("ROLE_USER");
+//		member.setRole("ROLE_USER");
 		service.join(member);
 		return new ModelAndView("redirect:/"); //회원가입 후, 메인 화면으로 바로 이동
  	}
@@ -108,13 +108,13 @@ public class MemberController {
 	
 	@RequestMapping("/successLogout.do")
 	public String successLogout(SessionStatus session) {
-		Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String id= ((Member)o).getUserId();
-		
+//		Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//		String id= ((Member)o).getUserId();
+//		System.out.println("로그아웃 확인");
 		if(!session.isComplete()) {
 			
-			
 			session.setComplete();
+			
 		}
 		return "redirect:/";
 	}
