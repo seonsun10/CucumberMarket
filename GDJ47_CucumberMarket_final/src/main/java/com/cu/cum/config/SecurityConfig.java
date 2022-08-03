@@ -33,7 +33,11 @@ public class SecurityConfig {
 					.successForwardUrl("/successLogin.do")
 					.and() //http부터 또 설정 가능
 				.authorizeRequests() //인증 권한
-					.antMatchers("/**").hasRole("USER")
+					.antMatchers("/member").hasRole("USER")
+					// /admin 요청에 대해서는 ROLE_ADMIN 역할을 가지고 있어야 함
+//	                .antMatchers("/admin").hasRole("ADMIN")
+	                // 나머지 요청에 대해서는 로그인을 요구하지 않음
+	                .anyRequest().permitAll()
 					.and()
 				.logout()
 					.logoutUrl("/logout")

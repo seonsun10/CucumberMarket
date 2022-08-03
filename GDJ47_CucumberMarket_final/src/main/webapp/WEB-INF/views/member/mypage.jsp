@@ -101,7 +101,8 @@
 				  	<p id="reporttag">신고</p>
 				  	<p id="chattag">채팅</p>
 				  </div>
-				  </div>
+				  <br/>
+				  
                 </div>
               </div>
               
