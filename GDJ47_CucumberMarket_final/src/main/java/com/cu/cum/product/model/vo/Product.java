@@ -11,7 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 import javax.persistence.OneToMany;
+
+import javax.persistence.OneToOne;
+
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -71,9 +75,11 @@ public class Product {
 	private Member member; //판매자 아이디
 	
 
+
 	@OneToMany(mappedBy="product" , fetch = FetchType.LAZY)
 	//@OneToMany(mappedBy="product")
 	private List<Files> files;
 	
+
 
 }

@@ -12,7 +12,118 @@ $(()=>{
   			$("#pwBox").text("");
   		}
 	})
+	if($("#protag").click(e=>{
+		$("#protag").css("backgroundColor","lightgray");
+		$("#reviewtag").css("backgroundColor","white");
+		$("#dibstag").css("backgroundColor","white");
+		$("#reporttag").css("backgroundColor","white");
+		$("#chattag").css("backgroundColor","white");
+	}));
+	if($("#reviewtag").click(e=>{
+		$("#reviewtag").css("backgroundColor","lightgray");
+		$("#protag").css("backgroundColor","white");
+		$("#dibstag").css("backgroundColor","white");
+		$("#reporttag").css("backgroundColor","white");
+		$("#chattag").css("backgroundColor","white");
+	}));
+	if($("#dibstag").click(e=>{
+		$("#dibstag").css("backgroundColor","lightgray");
+		$("#protag").css("backgroundColor","white");
+		$("#reviewtag").css("backgroundColor","white");
+		$("#reporttag").css("backgroundColor","white");
+		$("#chattag").css("backgroundColor","white");
+	}));
+	if($("#reporttag").click(e=>{
+		$("#reporttag").css("backgroundColor","lightgray");
+		$("#protag").css("backgroundColor","white");
+		$("#reviewtag").css("backgroundColor","white");
+		$("#dibstag").css("backgroundColor","white");
+		$("#chattag").css("backgroundColor","white");
+	}));
+	if($("#chattag").click(e=>{
+		$("#chattag").css("backgroundColor","lightgray");
+		$("#protag").css("backgroundColor","white");
+		$("#reviewtag").css("backgroundColor","white");
+		$("#dibstag").css("backgroundColor","white");
+		$("#reporttag").css("backgroundColor","white");
+	}));
+	
+	//마이페이지 상품목록 출력 연결
+	$("#protag").click(e=>{
+		$.ajax({
+			url:"/member/mypageProduct.do",
+			data:{"userId":$("#userIdd").val()},
+			dataType:"html",
+			success:data=>{
+				$("#databox").html(data);
+			}
+		});
+	});
+	
+	//마이페이지 후기 목록 출력 연결
+	$("#reviewtag").click(e=>{
+		$.ajax({
+			url:"/member/mypageReview.do",
+			data:{"userId":$("#userIdd").val()},
+			dataType:"html",
+			success:data=>{
+				$("#databox").html(data);
+			}
+		});
+	});
+	//마이페이지 찜 목록 출력 연결
+	$("#dibstag").click(e=>{
+		$.ajax({
+			url:"/member/mypageDibs.do",
+			dataType:"html",
+			success:data=>{
+				$("#databox").html(data);
+			}
+		});
+	});
+	//마이페이지 신고 목록 출력 연결
+	$("#reporttag").click(e=>{
+		$.ajax({
+			url:"/member/mypageReport.do",
+			dataType:"html",
+			success:data=>{
+				$("#databox").html(data);
+			}
+		});
+	});
+	//마이페이지 채팅 목록 출력 연결
+	$("#chattag").click(e=>{
+		$.ajax({
+			url:"/member/mypageChat.do",
+			dataType:"html",
+			success:data=>{
+				$("#databox").html(data);
+			}
+		});
+	});
+	
+	
 });
+function fn_ajaxPage1(pageNo){
+	$.ajax({
+		url:"/member/mypageProduct.do",
+		data:{"cPage":pageNo,"userId":$("#userIdd").val()},
+		dataType:"html",
+		success:data=>{
+			$("#databox").html(data);
+		}
+	});
+};
+function fn_ajaxPage2(pageNo,numPerpage){
+	$.ajax({
+		url:"/member/mypageProduct.do",
+		data:{"cPage":pageNo,"numPerpage":numPerpage,"userId":$("#userIdd").val()},
+		dataType:"html",
+		success:data=>{
+			$("#databox").html(data);
+		}
+	});
+};
 
 const pwcheck=()=>{
 	const pw1 = $("#newPw");

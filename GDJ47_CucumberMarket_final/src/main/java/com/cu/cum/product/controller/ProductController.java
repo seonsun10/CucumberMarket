@@ -1,12 +1,15 @@
 package com.cu.cum.product.controller;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,8 +18,15 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.product.model.service.FilesService;
 import com.cu.cum.product.model.service.ProductService;
+
 import com.cu.cum.product.model.vo.Files;
+
+import com.cu.cum.product.model.service.ReviewService;
+
 import com.cu.cum.product.model.vo.Product;
+
+import com.cu.cum.product.model.vo.Review;
+
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,6 +45,10 @@ public class ProductController {
 	
 		return "member/mypage";
 	}
+
+	private ReviewService rvservice;
+	
+
 	@RequestMapping("/product/insertProduct.do")
 	public String insertProduct(Product p, MultipartHttpServletRequest mtfRequest ,@RequestParam("proName") String proName , @RequestParam("region") String region,
 			@RequestParam("proContent") String proContent,
@@ -115,6 +129,41 @@ public class ProductController {
 //			}
 //		}
 		return "redirect:/mypage.do";
+	}
+	
+	//거래 후기
+	@RequestMapping("/product/productReview.do")
+	public String productReview(@RequestParam int proNo,
+								@RequestParam String writer,
+								@RequestParam int oi,
+								Model m) {
+		Product p = service.selectProduct(proNo);
+		log.debug("{}",p);
+//		p.setReview(Review.builder().proNo(proNo).writer(writer).oi(oi).build());
+		Review rv = Review.builder().product(p).host(p.getMember().getUserId()).writer(writer).oi(oi).build();
+		log.debug("rv는 무엇인가 : "+rv);
+		try {
+			Review result = rvservice.insertReview(rv);
+			
+			m.addAttribute("msg","등록성공");
+		}catch(Exception e) {
+			m.addAttribute("msg","등록실패");			
+		}
+//		Product result = service.insertReview(p);
+		return "common/msg";
+	}
+	
+	//상품 삭제
+	@RequestMapping("/product/deleteProduct.do")
+	public String deleteProduct(@RequestParam int proNo,
+								Model m) {
+		try {
+			service.deleteProduct(proNo);
+			m.addAttribute("msg","삭제 성공");
+		}catch(Exception e) {
+			m.addAttribute("msg","삭제 실패");
+		}
+		return "common/msg";
 	}
 	
 }
