@@ -17,13 +17,30 @@
 	select * from chatroom where roomid=#{id}
 	</select>
 	<insert id="insertmessage" parameterType="com.cu.cum.test.model.vo.MessageContent">
-	INSERT INTO chatmessage VALUES(seq_msgid.nextval,#{roomId},#{massage},#{userid},sysdate,NULL,NULL,NULL)
+	INSERT INTO chatmessage VALUES(seq_msgid.nextval,#{roomId},#{massage},#{userid},sysdate,NULL,NULL,1)
 	</insert>
 	<select id="selectmessage" parameterType="string" resultType="com.cu.cum.test.model.vo.MessageContent">
-	select * from chatmessage where roomid=#{roomId} and massage is not null
+	select * from chatmessage where roomid=#{roomId} and massage is not null order by senddate asc
 	</select>
 	<select id="selectchatlist" parameterType="string" resultType="com.cu.cum.test.model.vo.ChatRoom">
-	select * from chatroom where otherid=#{id} or userid=#{id}
+	select * from prochat where otherid=#{id} or userid=#{id}
 	</select>
+	<update id="updateroom" parameterType="string">
+	update chatroom set unreadcount=0 where roomid=#{id}
+	</update>
+	<update id="updatemessage" parameterType="string">
+	update chatmessage set unreadcount=0 where roomid=#{id}
+	</update>
+	<select id="unreadmessage" parameterType="com.cu.cum.test.model.vo.ChatRoom" resultType="_int">
+	 select count(*) from chatview where roomid=#{roomId} and id=#{otherId} and unread=1 order by senddate desc
+	</select>
+	<select id="unreadmessage2" parameterType="com.cu.cum.test.model.vo.ChatRoom" resultType="_int">
+	 select count(*) from chatview where roomid=#{roomId} and id=#{userId} and unread=1 order by senddate desc
+	</select>
+	<select id="updateroom2" parameterType="string">
+	update chatroom set unreadcount=1 where roomid=#{id}
+	</select>
+	
+	
 </mapper>
 

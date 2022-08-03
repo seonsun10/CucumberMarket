@@ -12,7 +12,7 @@
  	<div> 판매중 채팅방 목록</div>
    	<table id="tbl-board" class="table table-striped table-hover">
             <tr>
-                <th>상품명</th>
+                <th colspan="2">상품명</th>
                 <th>대화상대</th>
                 <th>채팅방입장</th>
             </tr>
@@ -23,10 +23,23 @@
             	<c:if test="${c.userId eq loginMember.userId }">
             	
             	
-            		<tr>
-            			<td><c:out value="${c.proNo }"/></td>
+            		<tr> 
+            			<c:if test="${c.unReadCount ne 0 }">
+            			<td style='color:#ff0a00'> 
+            			<c:out value="${c.unReadCount }개의 새로운메시지가 있습니다"/> 
+            			</td>
+            			</c:if>
+            			<c:if test="${c.unReadCount eq 0 }">
+            			<td> 
+            			 
+            			</td>
+            			</c:if>
+            			
+            			
+            			
+            			<td><c:out value="${c.pro_name }"/></td>
             			<td> <c:out value="${c.otherId }"/></td>       			
-            			<td><button id="chatBtn23" onclick="open('${path}/testchat.do/${c.roomId }','_blank','width=300,height=500');" >채팅하기</button></td>
+            			<td><button id="chatBtn23" onclick="open('${path}/ptestchat.do/${c.roomId }','_blank','width=570,height=750');setTimeout(function(){location.reload()}, 1000);" >채팅하기</button></td>
             		</tr>
             	</c:if>
           
@@ -42,7 +55,7 @@
         <div> 구매중 채팅방목록</div>
    	<table id="tbl-board" class="table table-striped table-hover">
             <tr>
-                <th>상품명</th>
+                <th colspan="2">상품명</th>
                 <th>대화상대</th>
                 <th>채팅방입장</th>
             </tr>
@@ -54,9 +67,19 @@
             	
             	
             		<tr>
-            			<td><c:out value="${c.proNo }"/></td>
+            			<c:if test="${c.unReadCount ne 0 }">
+            			<td style='color:#ff0a00'> 
+            			<c:out value="${c.unReadCount }개의 새로운메시지가 있습니다"/> 
+            			</td>
+            			</c:if>
+            			<c:if test="${c.unReadCount eq 0 }">
+            			<td> 
+            			 
+            			</td>
+            			</c:if>
+            			<td><c:out value="${c.pro_name }"/></td>
             			<td> <c:out value="${c.userId }"/></td>       			
-            			<td><button id="chatBtn23" onclick="open('${path}/testchat.do/${c.roomId }','_blank','width=300,height=500');" >채팅하기</button></td>
+            			<td><button id="chatBtn23" onclick="open('${path}/ptestchat.do/${c.roomId }','_blank','width=570,height=750');setTimeout(function(){location.reload()}, 1000);" >채팅하기</button></td>
             		</tr>
             	</c:if>
           
@@ -71,10 +94,13 @@
         
         
         <script type="text/javascript">
+        $(function(){
+           
+        });
         
-        const openChatting=()=>{
-			open("${path}/chatting/openChatting.do","_blank","width=300,height=500");
-		}
+        
+        
+        
 		</script>
   
 

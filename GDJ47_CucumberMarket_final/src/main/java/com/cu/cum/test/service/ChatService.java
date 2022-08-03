@@ -47,5 +47,30 @@ public class ChatService {
 		return dao.selectChatList(session,id);
 		
 	}
+	public int roomInCheck(String otherId) {
+		return dao.roomInCheck(session,otherId);
+	}
+	
+	
+	
+	//리드카운트 1->0
+	public int updateroomreadcount(String id) {
+		return dao.updateroomreadcount(session,id);
+	}
+	//읽지않은 메세지 개수 구하기 
+	public int unreadmessage(ChatRoom c) {
+		return dao.unreadmessage(session, c);
+	}
+	public int unreadmessage2(ChatRoom c) {
+		return dao.unreadmessage2(session, c);
+	}
+	//방 리드카운드 0->1
+	
+	public int updateroom2(String roomid) {
+		return dao.updateroom2(session,roomid);
+			
+		
+	}
+	
 	
 }

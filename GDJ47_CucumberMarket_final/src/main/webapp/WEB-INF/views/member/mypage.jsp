@@ -223,15 +223,7 @@
 			</div>
 		</div>
 
-<style>
-  	li {
-      list-style: none;
-    }
-    img {
-      width: 200px;
-      height: 200px;
-    }
-</style>
+
 <script>
 function getImageFiles(e) {
     const uploadFiles = [];
