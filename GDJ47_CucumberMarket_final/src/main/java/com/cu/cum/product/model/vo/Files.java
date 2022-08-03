@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
+import com.cu.cum.member.model.vo.Member;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,12 +28,11 @@ public class Files {
 	@GeneratedValue(generator = "seq_filesno" , strategy = GenerationType.SEQUENCE)
 	private int filesNo;
 	
-//	@ManyToOne
-//	@JoinColumn(name="userId") //member
-//	private Member member;
+	@ManyToOne
+	@JoinColumn(name="userId") //member
+	private Member member;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	//@ManyToOne
 	@JoinColumn(name="proNo")//eager
 	private Product product;
 	

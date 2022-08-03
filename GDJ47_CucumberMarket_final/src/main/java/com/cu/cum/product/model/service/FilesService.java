@@ -9,5 +9,4 @@ import com.cu.cum.product.model.vo.Files;
 public interface FilesService {
 
 	List<Files> insertFiles(List<Files> files);
-
 }
