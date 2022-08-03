@@ -243,7 +243,7 @@
 						<button type="button" class="btn btn-outline-success"
 						data-dismiss="modal">취소</button>
 					</div>
-					<input id="userIdd" name="userId"  type="hidden" value="${loginMember.userId }"/>
+					<input id="userId" name="userId"  type="hidden" value="${loginMember.userId }"/>
 					</form>
 				</div>
 			</div>

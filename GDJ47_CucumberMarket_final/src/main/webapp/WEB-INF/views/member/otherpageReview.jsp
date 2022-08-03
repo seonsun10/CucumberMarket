@@ -38,7 +38,7 @@
 			<c:forEach var="r" items="${review }">
 				<tr id="tablebody">
 					<td id="lione"><img src="${path }/resources/img/cucumber.png" style="width:50px;"></td>
-					<td><c:out value="${r.product.proName }"/></td>
+					<td><c:out value=""/></td>
 					<td id=""><c:out value="${r.ment }"/></td>
 					<td id="lifour"><c:out value="${r.oi}"/></td>
 					<td id="lithr"><button>삭제</button></td>
