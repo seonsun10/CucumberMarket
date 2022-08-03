@@ -12,7 +12,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +24,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -34,6 +39,7 @@ import com.cu.cum.product.model.service.ProductService;
 import com.cu.cum.product.model.vo.Product;
 import com.cu.cum.product.model.vo.Review;
 
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -44,8 +50,11 @@ public class MemberController {
 	private Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	@Autowired
+
+	
 	private BCryptPasswordEncoder pwEncoder; 
 	
+
 	@Autowired
 	private MemberService service;
 	
@@ -92,12 +101,19 @@ public class MemberController {
 		//인증받은 객체의 정보를 가져올 수 있다.
 		Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		m.addAttribute("loginMember",(Member)o);
+	
+		
 		return "redirect:/";
 	}
 	
 	@RequestMapping("/successLogout.do")
 	public String successLogout(SessionStatus session) {
+		Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String id= ((Member)o).getUserId();
+		
 		if(!session.isComplete()) {
+			
+			
 			session.setComplete();
 		}
 		return "redirect:/";
