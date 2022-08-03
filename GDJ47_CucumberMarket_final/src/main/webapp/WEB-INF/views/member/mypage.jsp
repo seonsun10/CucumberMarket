@@ -69,12 +69,12 @@
 				  		</div>
 				  	</div>
 				  	<div id="produce">
-				  		<c:if test="${loginMember.intro ne null }">
+				  		<%-- <c:if test="${loginMember.intro ne null }">
 				  			<c:out value="${loginMember.intro }"/>
 				  		</c:if>
 				  		<c:if test="${loginMember.intro eq null }">
 				  			소개 내용이 없습니다~.~;;
-				  		</c:if>
+				  		</c:if> --%>
 				  		<form class="mb-3" name="myform" id="myform"
 				  		 action="${path }/product/productReview.do?proNo=151&writer=${loginMember.userId}" method="post">
 					  		<fieldset>
