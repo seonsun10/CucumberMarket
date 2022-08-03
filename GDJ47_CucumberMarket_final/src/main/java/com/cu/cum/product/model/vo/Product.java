@@ -3,7 +3,6 @@ package com.cu.cum.product.model.vo;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,6 +16,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicInsert;
 
 import com.cu.cum.member.model.vo.Member;
@@ -77,7 +78,10 @@ public class Product {
 	
 
 
-	@OneToMany(mappedBy="product" , fetch = FetchType.LAZY , cascade = CascadeType.REMOVE)
+
+
+	@Cascade(CascadeType.REMOVE)
+	@OneToMany(mappedBy="product" , fetch = FetchType.LAZY)
 	//@OneToMany(mappedBy="product")
 	private List<Files> files;
 	

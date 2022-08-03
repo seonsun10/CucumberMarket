@@ -163,7 +163,8 @@ public class ProductController {
 			service.deleteProduct(proNo);
 			m.addAttribute("msg","삭제 성공");
 		}catch(Exception e) {
-			m.addAttribute("msg","삭제 실패");
+//			m.addAttribute("msg","삭제 실패");
+			e.printStackTrace();
 		}
 		return "common/msg";
 	}
