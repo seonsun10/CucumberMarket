@@ -108,7 +108,7 @@
 				  <br/>
 				  <div>
 				  <h3>소개글</h3>
-				  <input type="text" value="소개글이야~" readonly>
+				  <input type="text" value="<c:out value="${loginMember.intro }"/>" readonly>
 				  </div>
                 </div>
               </div>

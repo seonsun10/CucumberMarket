@@ -1,16 +1,14 @@
 package com.cu.cum.member.model.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.cu.cum.member.model.dao.MemberRepository;
 import com.cu.cum.member.model.vo.Member;
-
-import lombok.RequiredArgsConstructor;
 
 @Service
 //@Transactional //final 활용
@@ -43,12 +41,23 @@ public class MemberServiceImpl implements MemberService {
 		return memberRepository.save(member);
 	}
 	
+	// 전체 회원 조회
+    public List<Member> findMembers() {
+        return memberRepository.findAll();
+    }
+ 
+    public Member findOne(String memberId) {
+        return memberRepository.findByUserId(memberId);
+    }
+	
 	//회원정보 수정
-	@Override
-	public Member updateMember(Member member) {
-		// TODO Auto-generated method stub
-		return memberRepository.save(member);
-	}
+//	@Override
+//	public Member updateMember(String userId ) {
+//		// TODO Auto-generated method stub
+//		memberRepository.findByUserId(String userId);
+//		
+//		return memberRepository.save(member);
+//	}
 	
 //	public void validateDuplicateMember(Member member) {
 //		List<Member> findMembers = memberRepository.findByName(member.getUserId());
@@ -56,37 +65,34 @@ public class MemberServiceImpl implements MemberService {
 //			throw new IllegalStateException("이미 존재하는 회원입니다.");
 //		}
 //	}
+    public Member selectMember(String userId) {
+		return memberRepository.findByUserId(userId);
+	}
 	
-	//회원 정보 가져오기 - 미구현
+	public List<Member> selectMembers(){
+		return memberRepository.findAll();
+	}
+
+	@Override
+	public Member getData(String userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Member updateMember(Member m) {
+		// TODO Auto-generated method stub
+//		m=memberRepository.findByUserId(m.getUserId());
+		return memberRepository.save(m);
+	}
+
 //	@Override
-//	public Member getData(String userId) {
-//		// TODO Auto-generated method stub
-//		return memberRepository.findOne(userId);
+//	public Member updateMember(Member member) {
+//		memberRepository.findByUserId(member.getUserId());		
+//		return memberRepository.save(member);
 //	}
-//
-//	@Override
-//	public Member findOne(String userId) {
-//		// TODO Auto-generated method stub
-//		return memberRepository.findOne(userId);
-//	}
-//
-//	@Override
-//	public List<Member> findMembers() {
-//		// TODO Auto-generated method stub
-//		return memberRepository.findAll();
-//	}
-//
-//	@Override
-//	public Member selectMember(String id) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public List<Member> selectMembers() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	
+	
 	
 	
 	
