@@ -96,19 +96,8 @@
 				  	<p id="reporttag">신고</p>
 				  	<p id="chattag">채팅</p>
 				  </div>
-<<<<<<< HEAD
 				  <br/>
-				  <div>
-				  <h3>휴대폰번호</h3>
-				  <input type="text" value="<c:out value="${loginMember.phone }"/>" readonly>
-				  </div>
-				  <br/>
-				  <div>
-				  <h3>소개글</h3>
-				  <input type="text" value="<c:out value="${loginMember.intro }"/>" readonly>
-=======
->>>>>>> branch 'main' of https://github.com/seonsun10/CucumberMarket.git
-				  </div>
+				  
                 </div>
               </div>
               
