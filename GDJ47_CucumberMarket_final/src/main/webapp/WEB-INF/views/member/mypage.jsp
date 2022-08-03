@@ -247,6 +247,7 @@
 			<input id="userIdd" type="hidden" value="${loginMember.userId }"/>
 		</div>
 
+
 <style>
 #myform fieldset{
     display: inline-block;
@@ -285,6 +286,7 @@
 }
 
 </style>
+>>>>>>> branch 'main' of https://github.com/seonsun10/CucumberMarket.git
 <script>
 function getImageFiles(e) {
     const uploadFiles = [];
