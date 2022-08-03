@@ -1,19 +1,23 @@
 package com.cu.cum.member.model.dao;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.cu.cum.member.model.vo.Member;
 
-public interface MemberRepository extends JpaRepository<Member, String>{
+@Repository
+public interface MemberRepository extends JpaRepository<Member, String> {
 	
-	Member save(Member member);
+//	public Member findOne(String userId);
 	
-	Member findByUserId(String userId);
-	
-//    Member findByUserIdAndPassword(String userId, String password);
+//	public List<Member> findAll();
 
-//	Member checkEmail(String email);
+	public List<Member> findByName(String name);
 	
-
+	public Member findByUserId(String userId);
+	
+//	Member saveAndFlush(Member m);
 
 }
