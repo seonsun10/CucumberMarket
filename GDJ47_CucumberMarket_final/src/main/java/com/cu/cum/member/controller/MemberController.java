@@ -237,7 +237,9 @@ public class MemberController {
 		String url=request.getRequestURI();
 		int totalReview=proservice.selectReviewCount(userId);
 		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage, totalReview, url));
-		m.addAttribute("review",reviews);
+		if(reviews.size()!=0) {
+			m.addAttribute("review",reviews);
+		}
 		m.addAttribute("totalReview",totalReview);
 		m.addAttribute("writer",userId);
 		return "member/otherpageReview";

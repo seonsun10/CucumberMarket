@@ -69,7 +69,12 @@
 				  		</div>
 				  	</div>
 				  	<div id="produce">
-				  		제 상점은 깨끗한 상점이에요&&;
+				  		<c:if test="${loginMember.intro ne null }">
+				  			<c:out value="${loginMember.intro }"/>
+				  		</c:if>
+				  		<c:if test="${loginMember.intro eq null }">
+				  			소개 내용이 없습니다~.~;;
+				  		</c:if>
 				  		<form class="mb-3" name="myform" id="myform"
 				  		 action="${path }/product/productReview.do?proNo=151&writer=${loginMember.userId}" method="post">
 					  		<fieldset>

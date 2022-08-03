@@ -13,8 +13,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.ColumnDefault;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -41,9 +39,9 @@ public class Review implements Serializable{
 	private Product product; //상품 번호
 	
 	private String writer; //후기작성자(거래자)
+	private String ment;//후기
 	private String host; //상품 판매자
 	@Temporal(TemporalType.DATE)
-	@Column(columnDefinition = "date default sysdate")
 	private Date writeDate;
 	private int oi; //평점 1~5
 }

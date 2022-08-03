@@ -49,21 +49,24 @@ public class ProductController {
 	
 	//거래 후기
 	@RequestMapping("/product/productReview.do")
-	public String productReview(@RequestParam int proNo,
-								@RequestParam String writer,
-								@RequestParam int oi,
+	public String productReview(@RequestParam(defaultValue="0") int proNo,
+								@RequestParam(defaultValue ="신원미상") String writer,
+								@RequestParam(defaultValue ="5") int oi,
+								@RequestParam(defaultValue ="짱이에요") String ment,
 								Model m) {
-		Product p = service.selectProduct(proNo);
-		log.debug("{}",p);
-//		p.setReview(Review.builder().proNo(proNo).writer(writer).oi(oi).build());
-		Review rv = Review.builder().product(p).host(p.getMember().getUserId()).writer(writer).oi(oi).build();
-		log.debug("rv는 무엇인가 : "+rv);
-		try {
-			Review result = rvservice.insertReview(rv);
-			
-			m.addAttribute("msg","등록성공");
-		}catch(Exception e) {
-			m.addAttribute("msg","등록실패");			
+		if(proNo==0) {m.addAttribute("msg","등록실패");}
+		else {
+			Product p = service.selectProduct(proNo);
+			log.debug("{}",p);
+	//		p.setReview(Review.builder().proNo(proNo).writer(writer).oi(oi).build());
+			Review rv = Review.builder().product(p).ment(ment).host(p.getMember().getUserId()).writer(writer).oi(oi).build();
+			log.debug("rv는 무엇인가 : "+rv);
+			try {
+				rvservice.insertReview(rv);
+				m.addAttribute("msg","등록성공");
+			}catch(Exception e) {
+				m.addAttribute("msg","등록실패");			
+			}
 		}
 //		Product result = service.insertReview(p);
 		return "common/msg";
