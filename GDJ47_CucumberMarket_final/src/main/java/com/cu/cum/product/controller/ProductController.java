@@ -45,7 +45,7 @@ public class ProductController {
 	
 		return "member/mypage";
 	}
-
+	@Autowired
 	private ReviewService rvservice;
 	
 
@@ -149,6 +149,7 @@ public class ProductController {
 				rvservice.insertReview(rv);
 				m.addAttribute("msg","등록성공");
 			}catch(Exception e) {
+//				e.printStackTrace();
 				m.addAttribute("msg","등록실패");			
 			}
 		}

@@ -112,8 +112,6 @@ public class MemberController {
 		String id= ((Member)o).getUserId();
 		
 		if(!session.isComplete()) {
-			
-			
 			session.setComplete();
 		}
 		return "redirect:/";
@@ -221,7 +219,9 @@ public class MemberController {
 		String url=request.getRequestURI();
 		int totalReview=proservice.selectReviewCount(userId);
 		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage, totalReview, url));
-		m.addAttribute("review",reviews);
+		if(reviews.size()!=0) {
+			m.addAttribute("review",reviews);
+		}
 		m.addAttribute("totalReview",totalReview);
 		return "member/mypageReview";
 	}
@@ -242,9 +242,11 @@ public class MemberController {
 	}
 	//다른 사람 페이지 연결
 	@RequestMapping("/member/otherMember.do")
-	public String otherMember(@RequestParam String userId,
+	public String otherMember(@RequestParam String writer,
 								Model m) {
-		m.addAttribute("writer",userId);
+		Member member = service.selectMember(writer);
+		m.addAttribute("member",member);
+		m.addAttribute("writer",writer);
 		return "/member/otherMember";
 	}
 	//다른 사람 물품 정보

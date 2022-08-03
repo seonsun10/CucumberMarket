@@ -50,7 +50,9 @@
 			</div>
 		</c:forEach>
 	</c:if>
+	<c:if test="${product eq null }">
+		조회된 결과가 없습니다.
+	</c:if>
 </div>
 <div id="pageBar"><c:out value="${pageBar }" escapeXml="false"/></div>
-<script src="${path}/resources/js/otherpage.js"></script>
 				
