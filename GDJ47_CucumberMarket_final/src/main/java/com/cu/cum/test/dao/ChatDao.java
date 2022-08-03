@@ -52,4 +52,7 @@ public class ChatDao {
 	public int updateroom2(SqlSessionTemplate session,String id) {
 		return session.update("chatroom.updateroom2",id);
 	}
+	public int deleteChatRoom(SqlSessionTemplate session,String id) {
+		return session.delete("chatroom.deletechatroom",id);
+	}
 }

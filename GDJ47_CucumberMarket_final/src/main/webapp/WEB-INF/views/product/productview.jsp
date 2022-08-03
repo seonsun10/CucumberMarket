@@ -155,11 +155,13 @@
                     <p class="text-center buttons"><a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a>
                     <c:if test="${count==0}">
                     <!-- <a href="basket.html" class="btn btn-outline-primary" style="background-color:lightgreen"><i class="fa fa-heart" style="color:white"></i></a></p> -->
-                    <a href="${path }/wishlist/insertWishList.do?id=${loginMember.userId}&no=${no}">관심상품 등록</a>
+                    
+                    <button  class="btn btn-primary" onclick="location.assign('${path }/wishlist/insertWishList.do?id=${loginMember.userId}&no=${no}'); alert('관심상품등록');">관심상품등록</button>
                     </c:if>
                     <c:if test="${count==1}">
                     <!-- <a href="basket.html" class="btn btn-outline-primary "><i class="fa fa-heart"></i></a></p> -->
-                    <a href="${path }/wishlist/deleteWishList.do?id=${loginMember.userId}&no=${no}">관심상품 삭제</a>
+                    
+                    <button class="btn btn-primary" onclick="location.assign('${path }/wishlist/deleteWishList.do?id=${loginMember.userId}&no=${no}'); alert('관심상품삭제');">관심상품삭제</button>
                     </c:if>
                   </div>
                   <div data-slider-id="1" class="owl-thumbs">
