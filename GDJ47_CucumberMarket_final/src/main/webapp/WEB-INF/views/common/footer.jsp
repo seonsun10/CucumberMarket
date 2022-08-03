@@ -22,5 +22,19 @@
     <script src="${path}/resources/vendor/owl.carousel/owl.carousel.min.js"></script>
     <script src="${path}/resources/vendor/owl.carousel2.thumbs/owl.carousel2.thumbs.js"></script>
     <script src="${path}/resources/js/front.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+    
+    <script src="${path}/resources/js/mypage.js"></script>
+	<script src="${path}/resources/file/js/fileupload.js"></script>
+	<!-- 카카오 지도 -->
+	<script src="${path}/resources/map/map.js"></script>
+	<!-- 활동지역 -->
+	<script src="${path}/resources/js/activity.js"></script>
+
+    
+
+
   </body>
 </html>

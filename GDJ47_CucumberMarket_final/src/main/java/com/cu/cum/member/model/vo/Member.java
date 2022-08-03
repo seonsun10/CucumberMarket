@@ -1,6 +1,5 @@
 package com.cu.cum.member.model.vo;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -8,8 +7,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -49,11 +46,11 @@ public class Member implements UserDetails{
 	
 	@Temporal(TemporalType.DATE)
 	private Date enrollDate;
+	
 	private String intro;
-	
 	private String role;
-	@OneToMany(mappedBy="member")
 	
+	@OneToMany(mappedBy="member")
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub

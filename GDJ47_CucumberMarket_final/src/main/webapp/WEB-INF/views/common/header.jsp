@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+  	<link rel="icon" href="${path }/resources/img/오이.png"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>::오이마켓::오늘도 이용하는 마켓</title>
@@ -25,11 +26,16 @@
     <link rel="stylesheet" href="${path}/resources/css/style.default.css" id="theme-stylesheet">
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="${path}/resources/css/custom.css">
+    <link rel="stylesheet" href="${path}/resources/css/mypage/mypage.css">
+    
     <!-- Favicon-->
     <link rel="shortcut icon" href="favicon.png">
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    
+    
+    <link rel="stylesheet" href="${path}/resources/file/css/fileupload.css">
   </head>
   <body>
   <header class="header mb-5">
@@ -242,8 +248,15 @@
               <!-- /.nav-collapse-->
               <div id="search-not-mobile" class="navbar-collapse collapse"></div><a data-toggle="collapse" href="#search" class="btn navbar-btn btn-primary d-none d-lg-inline-block"><span class="sr-only">Toggle search</span><i class="fa fa-search"></i></a>
               <div id="basket-overview" class="navbar-collapse collapse d-none d-lg-block"><a href="basket.html" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span>3 items in cart</span></a></div>
-              <div><a href="${path }/member/mypage.do">마이페이지</a></div>
-              <div><a href="${path }/product/insertProduct.do">상품등록</a></div>
+              		<a href="${path }/member/mypage.do?userId=${loginMember.userId}">마이페이지</a>
+              </div>
+
+              <div>
+           			<a href="${path }/product/productView.do?id=${loginMember.userId }&no=151">제품상세보기 테스트용 </a> <!-- 나중에 id는 세션값(이때 input hidden사용도 해볼것) link에서 no도 넣어서 해야함 -->
+			  </div>
+			  <div>
+			  	<a href="${path }/area.do"> 지역설정 테스트용</a>
+			  </div>
             </div>
           </div>
         </div>

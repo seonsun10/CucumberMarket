@@ -37,7 +37,7 @@ public class MemberServiceImpl implements MemberService {
 	public Member join(Member member) {
 		//패스워드 암호화
 		member.setPassword(pwEncoder.encode(member.getPassword()));
-	
+
 		return memberRepository.save(member);
 	}
 	
@@ -91,10 +91,19 @@ public class MemberServiceImpl implements MemberService {
 //		memberRepository.findByUserId(member.getUserId());		
 //		return memberRepository.save(member);
 //	}
+
+	//회원찾기
+	@Override
+	public Member searchMember(String userId) {
+		
+		return memberRepository.findByUserId(userId);
+	}
 	
-	
-	
-	
-	
+	//비밀번호 변경
+	@Override
+	public Member updatePassword(Member m) {
+		
+		return memberRepository.save(m);
+	}
 	
 }

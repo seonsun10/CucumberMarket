@@ -119,12 +119,13 @@
                 </form>
                 
                 <h3>비밀번호 변경</h3>
-                <form action="${path }/member/pwChange.do" method="post">
+                <form action="${path }/member/pwUpdate.do" method="post"  onsubmit="return pwcheck();">
+                  <input name="userId" type="hidden" value="${loginMember.userId }">
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="oldPw">현재 비밀번호</label>
-                        <input name="passwordOld" id="oldPw" type="password" class="form-control">
+                        <input name="oldPw" id="oldPw" type="password" class="form-control">
                       </div>
                     </div>
                   </div>
@@ -132,7 +133,7 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="newPw">새로운 비밀번호</label>
-                        <input name="passwordNew" id="newPw" type="password" class="form-control">
+                        <input name="newPw" id="newPw" type="password" class="form-control">
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -220,53 +221,7 @@
       </div>
       <!-- /.container-->
     </div>
-    <!-- /#footer-->
-    <!-- *** FOOTER END ***-->
-    
-    
-    <!--
-    *** COPYRIGHT ***
-    _________________________________________________________
-    -->
-    <div id="copyright">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 mb-2 mb-lg-0">
-            <p class="text-center text-lg-left">©2019 Your name goes here.</p>
-          </div>
-          <div class="col-lg-6">
-            <p class="text-center text-lg-right">Template design by <a href="https://bootstrapious.com/">Bootstrapious</a>
-              <!-- If you want to remove this backlink, pls purchase an Attribution-free License @ https://bootstrapious.com/p/obaju-e-commerce-template. Big thanks!-->
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- *** COPYRIGHT END ***-->
-    <!-- JavaScript files-->
-  <!--   <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
-    <script src="vendor/owl.carousel/owl.carousel.min.js"></script>
-    <script src="vendor/owl.carousel2.thumbs/owl.carousel2.thumbs.js"></script>
-    <script src="js/front.js"></script> -->
   </body>
-  <script>
-  	$(()=>{
-  		$("#password_2").keyup(e=>{
-	  		const pw = $("#newPw").val();
-	  		const pw2 = $(e.target).val();
-	  		if(pw2.trim().length>2){
-	  			if(pw === pw2){
-	  				$("#pwBox").text("비밀번호가 일치합니다.").css('color','green');
-	  			}else{
-	  				$("#pwBox").text("비밀번호가 일치하지 않습니다.").css('color','red');
-	  			}
-	  		}else{
-	  			$("#pwBox").text("");
-	  		}
-  		})
-  	});
-  </script>
+  
 </html>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

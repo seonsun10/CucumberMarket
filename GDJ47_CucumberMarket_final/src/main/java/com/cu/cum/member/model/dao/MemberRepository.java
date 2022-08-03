@@ -13,11 +13,11 @@ public interface MemberRepository extends JpaRepository<Member, String> {
 //	public Member findOne(String userId);
 	
 //	public List<Member> findAll();
-	
+
 	public List<Member> findByName(String name);
 	
 	public Member findByUserId(String userId);
 	
 //	Member saveAndFlush(Member m);
-	
+
 }
