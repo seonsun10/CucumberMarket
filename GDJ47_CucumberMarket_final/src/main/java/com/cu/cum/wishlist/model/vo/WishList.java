@@ -14,6 +14,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+
 import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.product.model.vo.Product;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -29,7 +30,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@SequenceGenerator(name="seq_wishno" , sequenceName="seq_wishno")
+@SequenceGenerator(name="seq_wishno" , sequenceName="seq_wishno" , allocationSize = 1)
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class WishList {
 	
