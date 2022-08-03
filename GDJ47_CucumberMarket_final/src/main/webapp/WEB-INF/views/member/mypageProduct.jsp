@@ -37,7 +37,7 @@
 			<c:if test="${product ne null}">
 				<c:forEach var="p" items="${product }">
 					<tr id="tablebody">
-						<td><img src="${path }/resources/img/오이.png" style="width:50px;"></td>
+						<td><img src="${path }/resources/img/cucumber.png" style="width:50px;"></td>
 						<td><c:out value="${p.title}"/></td>
 						<td><c:out value="${p.price }"/>원</td>
 						<td><fmt:formatDate value="${p.enrollDate}" pattern="yyyy-MM-dd"/></td>

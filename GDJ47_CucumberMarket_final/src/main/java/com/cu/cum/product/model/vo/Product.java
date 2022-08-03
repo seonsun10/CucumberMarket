@@ -3,6 +3,7 @@ package com.cu.cum.product.model.vo;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -76,7 +77,7 @@ public class Product {
 	
 
 
-	@OneToMany(mappedBy="product" , fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="product" , fetch = FetchType.LAZY , cascade = CascadeType.REMOVE)
 	//@OneToMany(mappedBy="product")
 	private List<Files> files;
 	

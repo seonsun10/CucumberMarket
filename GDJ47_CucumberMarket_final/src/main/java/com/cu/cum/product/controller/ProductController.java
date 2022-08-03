@@ -154,6 +154,7 @@ public class ProductController {
 	@RequestMapping("/product/deleteProduct.do")
 	public String deleteProduct(@RequestParam int proNo,
 								Model m) {
+		System.out.println(proNo);
 		try {
 			service.deleteProduct(proNo);
 			m.addAttribute("msg","삭제 성공");
