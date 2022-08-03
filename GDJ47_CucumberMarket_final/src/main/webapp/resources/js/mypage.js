@@ -93,8 +93,9 @@ $(()=>{
 	});
 	//마이페이지 채팅 목록 출력 연결
 	$("#chattag").click(e=>{
+		
 		$.ajax({
-			url:"/member/mypageChat.do",
+			url: "/member/mypageChat.do",
 			dataType:"html",
 			success:data=>{
 				$("#databox").html(data);
