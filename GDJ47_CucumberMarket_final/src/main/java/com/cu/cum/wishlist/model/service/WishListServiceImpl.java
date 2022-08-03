@@ -18,11 +18,16 @@ public class WishListServiceImpl implements WishListService {
 	public WishList checkWishlist(Member m, Product p) {
 		return dao.findByMemberAndProduct(m,p);
 	}
-	
-	
 
-//	@Override
-//	public int deleteWishlist(Member m, Product p) {
-//		return dao.deleteById(m,p);
-//	}
+	@Override
+	public WishList insertWishlist(WishList wl) {
+		return dao.save(wl);
+	}
+	
+	@Override
+	public int deleteWishlist(String id, int no) {
+		return dao.deleteWishList(id,no);
+	}
+
+
 }

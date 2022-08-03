@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -46,4 +47,9 @@ public class WishList {
 	
 	@Temporal(TemporalType.DATE)
 	private Date createDate;
+	
+	@PrePersist
+	public void prePersist(){
+        this.createDate = new Date();
+    }
 }

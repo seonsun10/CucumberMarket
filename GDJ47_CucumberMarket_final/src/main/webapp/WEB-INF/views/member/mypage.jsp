@@ -202,15 +202,15 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<form action="${path }/product/insertProduct.do" method="post">
+					<form action="${path }/product/insertProduct.do" method="post" enctype="multipart/form-data">
 					<div class="modal-body">
-						<label for="exampleInputFile">상품 이미지 업로드</label><br>
-   						<input type="file" id="exampleInputFile" name="image" class="real-upload" accept="image/*" required multiple>
-   						<div class="upload"></div>
-  						<ul class="image-preview"></ul>
+					
+					  	<div id='image_preview'>
+						<input type='file' id='btnAtt' name="image" multiple='multiple'/><br><br>
+						<div id='att_zone' data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하거나 파일을 드래그앤드롭 하세요'></div><br>
   						
 						<input type="text" name="proName" class="form-control"
-						placeholder="제목" required><br>
+						placeholder="사움 제목" required><br>
 						<select class="form-control" name="tag" aria-label="Default select example">
 						  <option selected>상품태그</option>
 						  <option value="의류">의류</option>
@@ -246,6 +246,7 @@
 			</div>
 			<input id="userIdd" type="hidden" value="${loginMember.userId }"/>
 		</div>
+
 <style>
 #myform fieldset{
     display: inline-block;
@@ -334,4 +335,5 @@ function getImageFiles(e) {
   realUpload.addEventListener('change', getImageFiles);
 </script>
 <script src="${path}/resources/js/mypage.js"></script>
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
