@@ -69,9 +69,15 @@
 				  		</div>
 				  	</div>
 				  	<div id="produce">
-				  		제 상점은 깨끗한 상점이에요&&;
+				  		<c:if test="${loginMember.intro ne null }">
+				  			<c:out value="${loginMember.intro }"/>
+				  		</c:if>
+				  		<c:if test="${loginMember.intro eq null }">
+				  			소개 내용이 없습니다~.~;;
+				  			${loginMember.intro }
+				  		</c:if>
 				  		<form class="mb-3" name="myform" id="myform"
-				  		 action="${path }/product/productReview.do?proNo=151&writer=${loginMember.userId}" method="post">
+				  		 action="${path }/product/productReview.do?proNo=251&writer=${loginMember.userId}" method="post">
 					  		<fieldset>
 								<input type="radio" name="oi" value="5" id="rate1"><label
 									for="rate1">★</label>
@@ -283,8 +289,6 @@
 }
 
 </style>
-
-
 <script>
 function getImageFiles(e) {
     const uploadFiles = [];

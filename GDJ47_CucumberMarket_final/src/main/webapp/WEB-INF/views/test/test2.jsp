@@ -15,7 +15,7 @@
     div#board-container label.custom-file-label{text-align:left;}
     </style>
  <div id="board-container">
-        <input type="text" class="form-control" placeholder="제목" name="boardTitle" id="boardTitle"  required value="${pro.proName}">
+        <input type="text" class="form-control" placeholder="제목" name="boardTitle" id="boardTitle"  required value="${pro.title}">
         <input type="text" class="form-control" name="boardWriter"  readonly required value="${pro.member.userId}">
         <input type="text" class="form-control" name="boardWriter"  readonly required value="${pro.proContent}">
 		
