@@ -133,6 +133,7 @@ public class ProductController {
 	public String productReview(@RequestParam(defaultValue="0") int proNo,
 								@RequestParam(defaultValue ="신원미상") String writer,
 								@RequestParam(defaultValue ="5") int oi,
+								@RequestParam(defaultValue="0") String host,
 								@RequestParam(defaultValue ="짱이에요") String ment,
 								Model m) {
 		if(proNo==0) {m.addAttribute("msg","등록실패");}
@@ -140,7 +141,7 @@ public class ProductController {
 			Product p = service.selectProduct(proNo);
 			log.debug("{}",p);
 	//		p.setReview(Review.builder().proNo(proNo).writer(writer).oi(oi).build());
-			Review rv = Review.builder().product(p).ment(ment).host(p.getMember().getUserId()).writer(writer).oi(oi).build();
+			Review rv = Review.builder().product(p).ment(ment).host(host).writer(writer).oi(oi).build();
 			log.debug("rv는 무엇인가 : "+rv);
 			try {
 				rvservice.insertReview(rv);

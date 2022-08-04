@@ -49,7 +49,7 @@
 	</select>
 	
 	<select id="selectReviewList" resultMap="reviewMap">
-		SELECT * FROM REVIEW WHERE WRITER=#{userId}
+		SELECT * FROM REVIEW WHERE HOST=#{userId}
 	</select>
  	<select id="selectall" resultMap="productMap">
  	select * from product

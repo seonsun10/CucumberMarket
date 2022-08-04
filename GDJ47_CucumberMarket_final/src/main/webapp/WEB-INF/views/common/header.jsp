@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  	<link rel="icon" href="${path }/resources/img/오이.png"/>
+  	<link rel="icon" href="${path }/resources/img/cucumber.png"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>::오이마켓::오늘도 이용하는 마켓</title>
