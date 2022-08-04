@@ -51,7 +51,6 @@ public class MemberController {
 	
 	@Autowired
 	private ProductDao dao;
-	
 
 	@Autowired
 	private MemberService service;
@@ -89,10 +88,16 @@ public class MemberController {
 		
 		member.setEnrollDate(new Date());
 		member.setIntro("안녕하세요 :D");
-		member.setRole("ROLE_USER");
+//		member.setRole("ROLE_USER");
 		service.join(member);
 		return new ModelAndView("redirect:/"); //회원가입 후, 메인 화면으로 바로 이동
  	}
+	
+	@RequestMapping("/loginpage")
+	public String login() {
+		System.out.println("로그인 과정 거침?");
+		return "member/login";
+	}
 	
 	@RequestMapping("/successLogin.do")
 	public String successLogin(Model m) {
@@ -306,5 +311,11 @@ public class MemberController {
 		m.addAttribute("totalReview",totalReview);
 		m.addAttribute("writer",userId);
 		return "member/otherpageReview";
+	}
+	
+	@RequestMapping("/denie")
+	public String denine() {
+		return "common/test";
+				
 	}
 }

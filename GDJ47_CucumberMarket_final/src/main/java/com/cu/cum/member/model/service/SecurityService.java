@@ -1,6 +1,10 @@
 package com.cu.cum.member.model.service;
 
+import java.util.Collections;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,6 +28,18 @@ public class SecurityService implements UserDetailsService {
 		
 		return m;
 	}
+	
+//	private UserDetails createUserDetails(Member member) {
+//
+//        String role = member.getRole().value();
+//        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role);
+//
+//        return new org.springframework.security.core.userdetails.User(
+//                String.valueOf(member.getUserId()),
+//                member.getPassword(),
+//                Collections.singleton(grantedAuthority)
+//        );
+//    }
 
 	
 	
