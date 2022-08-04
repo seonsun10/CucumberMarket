@@ -234,8 +234,23 @@ public class MemberController {
 	}
 	//마이페이지에서 찜 목록 뿌리는 페이지
 	@RequestMapping("/member/mypageDibs.do")
-	public String dibspage() {
-		return "member/mypageDibs";
+	public ModelAndView dibspage(@RequestParam(defaultValue = "1") int cPage,
+							@RequestParam(defaultValue = "5") int numPerpage,
+							HttpServletRequest request,ModelAndView mv) {
+		String userId= ((Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
+		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"userId",userId);
+		List<Product> wishlist = proservice.selectWishList(page);
+		String url=request.getRequestURI();
+		int totalwish=proservice.selectWishCount(userId);
+		System.out.println("사이즈: "+totalwish);
+		System.out.println("ftx: "+wishlist);
+		mv.addObject("pageBar",PageBar.getPageBar(cPage, numPerpage, totalwish, url));
+		if(wishlist.size()>0) {
+			mv.addObject("wish",wishlist);
+		}
+		mv.addObject("totalWish",totalwish);
+		mv.setViewName("member/mypageDibs");
+		return mv;
 	}
 	//마이페이지에서 신고 목록 뿌리는 페이지
 	@RequestMapping("/member/mypageReport.do")
