@@ -44,4 +44,17 @@ public class ProductMapperDao {
 	public Product selectProduct(SqlSessionTemplate session,int id) {
 		return session.selectOne("product.selectproduct",id);
 	}
+	//찜목록 페이징처리
+	public List<Product> selectWishList(SqlSessionTemplate session,Map page){
+		int cPage = (int)page.get("cPage");
+		int numPerpage = (int)page.get("numPerpage");
+		String userId = (String)page.get("userId");
+		return session.selectList("product.selectWishList", userId, new RowBounds((cPage-1)*numPerpage,numPerpage));
+	}
+	//찜목록 카운트
+	public int selectWishCount(SqlSessionTemplate session,String id) {
+		return session.selectOne("product.selectWishCount",id);
+		
+	}
+	
 }

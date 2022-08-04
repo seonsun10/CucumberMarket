@@ -4,7 +4,7 @@
 	<resultMap type="product" id="productMap">
 		<id column="pro_no" property="proNo"/>
 		<result column="category_id" property="categoryName"/>
-		
+		<result column="title" property="title"/>
 		<result column="pro_status" property="proStatus"/>
 		<result column="price" property="price"/>
 		<result column="pro_count" property="proCount"/>
@@ -17,7 +17,7 @@
 			<id column="files_no" property="filesNo"/>
 			<result column="original_filename" property="originalFilename"/>
 			<result column="rename_filename" property="renameFilename"/>
-		</collection>
+		</collection>   
 	</resultMap>
 	<resultMap type="review" id="reviewMap">
 		<id column="review_no" property="reviewNo"/>
@@ -56,5 +56,11 @@
 	</select>
 	<select id="selectproduct" resultMap="productMap" parameterType="_int">
 	select * from product where pro_no=#{id}
+	</select>
+	<select id="selectWishList" parameterType="string" resultMap="productMap">
+	select * from product where pro_no in (select pro_no from wish_list where user_id = #{userId})
+	</select>
+	<select id="selectWishCount" parameterType="string" resultType="_int">
+	select count(*) from wish_list where user_id=#{id}
 	</select>
 </mapper>
