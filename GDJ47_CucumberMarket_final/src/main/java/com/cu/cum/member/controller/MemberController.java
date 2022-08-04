@@ -32,6 +32,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cu.cum.member.model.service.MemberService;
 import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.pagebar.PageBar;
+import com.cu.cum.pagebar.PageBarBasic;
+import com.cu.cum.pagebar.TestPageBar;
 import com.cu.cum.product.model.dao.ProductDao;
 import com.cu.cum.product.model.service.ProductService;
 import com.cu.cum.product.model.vo.Product;
@@ -203,8 +205,8 @@ public class MemberController {
 		Product p1 = (Product)products.get(3);
 		//log.debug("{}",p1.getFiles().get(0).getRenameFilename());
 		log.debug("product : "+p1);
-		log.debug("{}",p1.getFiles().get(0).getRenameFilename());
 		String url=request.getRequestURI();
+		
 		int totalProduct=proservice.selectProductCount(userId);
 		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage, totalProduct, url));
 		m.addAttribute("product",products);
@@ -227,7 +229,7 @@ public class MemberController {
 								Model m) {
 		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"userId",userId);
 		List<Review> reviews=proservice.selectReviewList(page);
-		log.debug("리뷰값 : "+reviews.get(1));
+		
 		String url=request.getRequestURI();
 		int totalReview=proservice.selectReviewCount(userId);
 		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage, totalReview, url));
@@ -247,9 +249,10 @@ public class MemberController {
 		List<Product> wishlist = proservice.selectWishList(page);
 		String url=request.getRequestURI();
 		int totalwish=proservice.selectWishCount(userId);
+		System.out.println(url);
 		System.out.println("사이즈: "+totalwish);
 		System.out.println("ftx: "+wishlist);
-		mv.addObject("pageBar",PageBar.getPageBar(cPage, numPerpage, totalwish, url));
+		mv.addObject("pageBar",TestPageBar.getPageBar(cPage, numPerpage, totalwish, url));
 		if(wishlist.size()>0) {
 			mv.addObject("wish",wishlist);
 		}
