@@ -1,6 +1,7 @@
 package com.cu.cum.member.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -121,6 +122,8 @@ public class MemberController {
 	@RequestMapping("/member/mypage.do")
 	public String myPage(@RequestParam String userId, Model m) {
 		m.addAttribute("userId",userId);
+		int productCount = proservice.selectProductCount(userId);
+		m.addAttribute("productCount",productCount);
 		return "member/mypage";
 	}
 	
@@ -213,7 +216,6 @@ public class MemberController {
 		m.addAttribute("totalProduct",totalProduct);
 		Member loginMember=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		List<Product> list=dao.findAllByMember(loginMember);
-		
 		//페이징처리 jpa
 		List<Product> list2=dao.findAll(PageRequest.of(0,5,Sort.by("enrollDate").descending())).getContent();
 		//list2=list2.stream().filter(v -> v.getMember().equals(loginMember)).collect(Collectors.toList());
@@ -229,7 +231,7 @@ public class MemberController {
 								Model m) {
 		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"userId",userId);
 		List<Review> reviews=proservice.selectReviewList(page);
-		
+
 		String url=request.getRequestURI();
 		int totalReview=proservice.selectReviewCount(userId);
 		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage, totalReview, url));
@@ -280,7 +282,7 @@ public class MemberController {
 		return "/member/otherMember";
 	}
 	//다른 사람 물품 정보
-	@RequestMapping("/member/otherPage.do")
+	@RequestMapping("/member/otherpageProduct.do")
 	public String otherPage(@RequestParam(defaultValue="1") int cPage,
 							@RequestParam(defaultValue="20") int numPerpage,
 							@RequestParam String userId,

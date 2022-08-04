@@ -1142,7 +1142,7 @@ h1 {
 }
 
 #content #customer-orders table tr th, #content #customer-orders table tr td {
-  vertical-align: baseline;
+  /* vertical-align: baseline; */
 }
 
 #content #customer-order .table tfoot th {

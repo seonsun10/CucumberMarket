@@ -33,31 +33,54 @@
 				  		<img src="https://cdn-icons-png.flaticon.com/512/149/149071.png"/>
 				  	</div>
 				  	<div id="mp-b">
-				  		<div id="havePro">
-				  		<img src="https://cdn-icons-png.flaticon.com/512/4695/4695312.png"
-				  		 width="14px"/>
-				  			방문자수&nbsp;
-				  			<span id="count">0명</span>
+				  		<div id="mp-ba">
+					  		<div id="havePro">
+					  		<img src="https://cdn-icons-png.flaticon.com/512/4695/4695312.png"
+					  		 width="14px"/>
+					  			방문자수&nbsp;
+					  			<span id="count">0명</span>
+					  		</div>
+					  		<div id="dibs">
+					  		<img src="https://cdn-icons-png.flaticon.com/512/6696/6696548.png" width="14px"/>
+					  			등록상품&nbsp;
+					  			<span id="count">0개</span>
+					  		</div>
+					  		<div id="sale">
+					  		<img src="https://cdn-icons-png.flaticon.com/512/5132/5132236.png" width="14px"/>
+					  			상품판매&nbsp;
+					  			<span id="count">0개</span>
+					  		</div>
 				  		</div>
-				  		<div id="dibs">
-				  		<img src="https://cdn-icons-png.flaticon.com/512/6696/6696548.png" width="14px"/>
-				  			등록상품&nbsp;
-				  			<span id="count">0개</span>
-				  		</div>
-				  		<div id="report">
-				  		<img src="https://cdn-icons-png.flaticon.com/512/5132/5132236.png" width="14px"/>
-				  			상품판매&nbsp;
-				  			<span id="count">0개</span>
-				  		</div>
+
+					  	<div id="intro">
+					  		${member.intro}
+					  		<form class="mb-3" name="myform" id="myform"
+					  				 action="${path }/product/productReview.do?proNo=251&writer=${loginMember.userId}&host=${writer}" method="post">
+							  		<fieldset>
+										<input type="radio" name="oi" value="5" id="rate1"><label
+											for="rate1">★</label>
+										<input type="radio" name="oi" value="4" id="rate2"><label
+											for="rate2">★</label>
+										<input type="radio" name="oi" value="3" id="rate3"><label
+											for="rate3">★</label>
+										<input type="radio" name="oi" value="2" id="rate4"><label
+											for="rate4">★</label>
+										<input type="radio" name="oi" value="1" id="rate5"><label
+											for="rate5">★</label>
+									</fieldset>
+									<input type="submit" value="제출" />
+					  		</form>
+					  	</div>
 				  	</div>
-				  	<div id="produce">
-				  		제 상점은 깨끗한 상점이에요&&;
+				  	<div id="report">
+				  		<img src="${path }/resources/img/report.png">
+				  		신고하기
 				  	</div>
 				  </div>
 				  <div>
 				  <div id="myList">
-				  	<p id="protag">상품</p>
-				  	<p id="reviewtag">후기</p>
+				  	<p id="protag1">상품</p>
+				  	<p id="reviewtag1">후기</p>
 				  </div>
 				  </div>
                 </div>
@@ -204,5 +227,43 @@
 			</div>
 			<input id="userIdd" type="hidden" value="${writer }"/>
 		</div>
+<style>
+#myform fieldset{
+    display: inline-block;
+    direction: rtl;
+    border:0;
+}
+#myform fieldset legend{
+    text-align: right;
+}
+#myform input[type=radio]{
+    display: none;
+}
+#myform label{
+    font-size: 3em;
+    color: transparent;
+    text-shadow: 0 0 0 #f0f0f0;
+}
+#myform label:hover{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+#myform label:hover ~ label{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+#myform input[type=radio]:checked ~ label{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+#reviewContents {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: solid 1.5px #D3D3D3;
+    border-radius: 5px;
+    font-size: 16px;
+    resize: none;
+}
+
+</style>
 <script src="${path}/resources/js/otherpage.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

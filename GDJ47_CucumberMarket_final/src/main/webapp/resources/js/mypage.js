@@ -106,8 +106,9 @@ $(()=>{
 	
 });
 function fn_ajaxPage1(pageNo){
+	const page = $("#page").val();
 	$.ajax({
-		url:"/member/mypageProduct.do",
+		url:"/member/mypage"+$("#page").val()+".do",
 		data:{"cPage":pageNo,"userId":$("#userIdd").val()},
 		dataType:"html",
 		success:data=>{

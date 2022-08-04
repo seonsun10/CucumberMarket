@@ -26,21 +26,24 @@ div#imgBox{
 
 div#mp-b>div{
 	font-size:11px;
-	color:gray;
+	color:black;
 	text-align: center;
 	position:relative;
-	padding: 0 15px 0 15px;
 }
 
-div#havePro{
-	padding-left:50px;
+div#report{
+	padding-top:20px;
+	margin-left:190px;
+	font-size:13px;
+}
+#report>img{
+	width:18px;
+	padding-left:5px;
 }
 
 div#mp-b{
-	width:500px;
-	display:flex;
 	padding-top:20px;
-	padding-left:20px;
+	padding-left:50px;
 }
 
 div>span#count{
@@ -50,6 +53,12 @@ div>span#count{
 
 div#mp-h{
 	display:flex;
+}
+#mp-ba{
+	display:flex;
+}
+#mp-ba>div{
+	padding-right:65px;
 }
 
 div#myList{
@@ -77,12 +86,7 @@ div#myList>p{
     text-decoration: none;
 }
 
-div#produce{
-	position:absolute;
-	top:320px;
-	left:50%;
-	transform: translate(-25%, -66%);
-	font-size: 13px;
+div#intro{
 	background-color:rgb(229,229,229);
 	width:400px;
 	height:180px;
@@ -91,6 +95,7 @@ div#produce{
 	padding:15px;
 	word-break:break-all;
 	font-size:15px;
+	margin-top:33px;
 }
 /*=====================================*/
 /* mypageProduct.jsp 스타일 */

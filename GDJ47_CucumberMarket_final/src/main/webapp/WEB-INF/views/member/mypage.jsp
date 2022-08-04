@@ -51,61 +51,56 @@
 				  		<img src="https://cdn-icons-png.flaticon.com/512/149/149071.png"/>
 				  	</div>
 				  	<div id="mp-b">
-				  		<div id="havePro">
-				  		<img src="https://cdn-icons-png.flaticon.com/512/4695/4695312.png"
-				  		 width="14px"/>
-				  			방문자수&nbsp;
-				  			<span id="count">0명</span>
+				  		<div id="mp-ba">
+					  		<div id="havePro">
+					  		<img src="https://cdn-icons-png.flaticon.com/512/4695/4695312.png"
+					  		 width="14px"/>
+					  			방문자수&nbsp;
+					  			<span id="count">0명</span>
+					  		</div>
+					  		<div id="dibs">
+					  		<img src="https://cdn-icons-png.flaticon.com/512/6696/6696548.png" width="14px"/>
+					  			등록상품&nbsp;
+					  			<span id="count">0개</span>
+					  		</div>
+					  		<div id="sale">
+					  		<img src="https://cdn-icons-png.flaticon.com/512/5132/5132236.png" width="14px"/>
+					  			상품판매&nbsp;
+					  			<span id="count">0개</span>
+					  		</div>
 				  		</div>
-				  		<div id="dibs">
-				  		<img src="https://cdn-icons-png.flaticon.com/512/6696/6696548.png" width="14px"/>
-				  			등록상품&nbsp;
-				  			<span id="count">0개</span>
-				  		</div>
-				  		<div id="report">
-				  		<img src="https://cdn-icons-png.flaticon.com/512/5132/5132236.png" width="14px"/>
-				  			상품판매&nbsp;
-				  			<span id="count">0개</span>
-				  		</div>
-				  	</div>
-				  	<div id="produce">
-				  		<c:if test="${loginMember.intro ne null }">
-				  			<c:out value="${loginMember.intro }"/>
-				  		</c:if>
-				  		<c:if test="${loginMember.intro eq null }">
-				  			소개 내용이 없습니다~.~;;
-				  			${loginMember.intro }
-				  		</c:if>
-				  		<form class="mb-3" name="myform" id="myform"
-				  		 action="${path }/product/productReview.do?proNo=251&writer=${loginMember.userId}" method="post">
-					  		<fieldset>
-								<input type="radio" name="oi" value="5" id="rate1"><label
-									for="rate1">★</label>
-								<input type="radio" name="oi" value="4" id="rate2"><label
-									for="rate2">★</label>
-								<input type="radio" name="oi" value="3" id="rate3"><label
-									for="rate3">★</label>
-								<input type="radio" name="oi" value="2" id="rate4"><label
-									for="rate4">★</label>
-								<input type="radio" name="oi" value="1" id="rate5"><label
-									for="rate5">★</label>
-							</fieldset>
-							<input type="submit" value="제출" />
-				  		</form>
-				  	</div>
-				  </div>
-				  <div>
-				  <div id="myList">
-				  	<p id="protag">상품</p>
-				  	<p id="reviewtag">후기</p>
-				  	<p id="dibstag">찜</p>
-				  	<p id="reporttag">신고</p>
-				  	<p id="chattag">채팅</p>
-				  </div>
-				  <br/>
-				  
-                </div>
-              </div>
+					  		<div id="intro">
+						  		${loginMember.intro}
+						  		<form class="mb-3" name="myform" id="myform"
+					  				 action="${path }/product/productReview.do?proNo=251&writer=${loginMember.userId}" method="post">
+							  		<fieldset>
+										<input type="radio" name="oi" value="5" id="rate1"><label
+											for="rate1">★</label>
+										<input type="radio" name="oi" value="4" id="rate2"><label
+											for="rate2">★</label>
+										<input type="radio" name="oi" value="3" id="rate3"><label
+											for="rate3">★</label>
+										<input type="radio" name="oi" value="2" id="rate4"><label
+											for="rate4">★</label>
+										<input type="radio" name="oi" value="1" id="rate5"><label
+											for="rate5">★</label>
+									</fieldset>
+									<input type="submit" value="제출" />
+					  		</form>
+					  	</div>
+	              </div>
+			  	</div>
+			  <div>
+			  <div id="myList">
+			  	<p id="protag">상품</p>
+			  	<p id="reviewtag">후기</p>
+			  	<p id="dibstag">찜</p>
+			  	<p id="reporttag">신고</p>
+			  	<p id="chattag">채팅</p>
+			  </div>
+			  <br/>
+			  
+               </div>
               
               <!-- 여기 이제 분기처리 해야함 등록한 상품이없으면 안보이게 -->
               <div id="databox" class="col-lg-9 box " style="max-width:100%;">
@@ -297,5 +292,5 @@ function getImageFiles(e) {
     const docFrag = new DocumentFragment();
 }
 </script>
-
+<script src="${path}/resources/js/mypage.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
