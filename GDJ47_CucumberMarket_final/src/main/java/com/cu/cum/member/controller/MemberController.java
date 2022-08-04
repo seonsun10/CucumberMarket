@@ -52,7 +52,6 @@ public class MemberController {
 	
 	@Autowired
 	private ProductDao dao;
-	
 
 	@Autowired
 	private MemberService service;
@@ -90,12 +89,18 @@ public class MemberController {
 		
 		member.setEnrollDate(new Date());
 		member.setIntro("안녕하세요 :D");
-		member.setRole("ROLE_USER");
+//		member.setRole("ROLE_USER");
 		service.join(member);
 		return new ModelAndView("redirect:/"); //회원가입 후, 메인 화면으로 바로 이동
  	}
 	
-	@RequestMapping("/successLogin.do")
+	@RequestMapping("/loginpage")
+	public String login() {
+		System.out.println("로그인 과정 거침?");
+		return "member/login";
+	}
+	
+	@RequestMapping("/loginsuccess")
 	public String successLogin(Model m) {
 		//인증받은 객체의 정보를 가져올 수 있다.
 		Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -234,8 +239,23 @@ public class MemberController {
 	}
 	//마이페이지에서 찜 목록 뿌리는 페이지
 	@RequestMapping("/member/mypageDibs.do")
-	public String dibspage() {
-		return "member/mypageDibs";
+	public ModelAndView dibspage(@RequestParam(defaultValue = "1") int cPage,
+							@RequestParam(defaultValue = "5") int numPerpage,
+							HttpServletRequest request,ModelAndView mv) {
+		String userId= ((Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
+		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"userId",userId);
+		List<Product> wishlist = proservice.selectWishList(page);
+		String url=request.getRequestURI();
+		int totalwish=proservice.selectWishCount(userId);
+		System.out.println("사이즈: "+totalwish);
+		System.out.println("ftx: "+wishlist);
+		mv.addObject("pageBar",PageBar.getPageBar(cPage, numPerpage, totalwish, url));
+		if(wishlist.size()>0) {
+			mv.addObject("wish",wishlist);
+		}
+		mv.addObject("totalWish",totalwish);
+		mv.setViewName("member/mypageDibs");
+		return mv;
 	}
 	//마이페이지에서 신고 목록 뿌리는 페이지
 	@RequestMapping("/member/mypageReport.do")
@@ -291,5 +311,11 @@ public class MemberController {
 		m.addAttribute("totalReview",totalReview);
 		m.addAttribute("writer",userId);
 		return "member/otherpageReview";
+	}
+	
+	@RequestMapping("/denie")
+	public String denine() {
+		return "common/test";
+				
 	}
 }

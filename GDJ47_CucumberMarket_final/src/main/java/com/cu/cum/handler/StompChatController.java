@@ -85,6 +85,22 @@ public class StompChatController {
 		
 		return mv;
 	}
+	@GetMapping(value="/deletechatroom/{id}")
+	public ModelAndView deleteChatRoom(@PathVariable String id,ModelAndView mv) {
+		String userid= ((Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
+		int result = service.deleteChatRoom(id);
+		if(result>0) {
+			mv.addObject("msg","채팅방삭제완료");
+			mv.addObject("loc","member/mypage.do?userId="+userid);
+			mv.setViewName("common/msg");
+			return mv;
+		}else {
+			mv.addObject("msg","채팅방삭제실패");
+			mv.addObject("loc","member/mypage.do?userId="+userid);
+			mv.setViewName("common/msg");
+			return mv;
+		}
+	}
 	
 	
 }

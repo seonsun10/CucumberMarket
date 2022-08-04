@@ -36,4 +36,10 @@ public interface ProductService {
 	//삼품 리뷰 조회
 	List<Review> selectReviewList(Map page);
 	
+	//ㅉ목록
+	List<Product> selectWishList(Map page);
+	
+	//ㅉ카운트
+	int selectWishCount(String id);
+	
 }

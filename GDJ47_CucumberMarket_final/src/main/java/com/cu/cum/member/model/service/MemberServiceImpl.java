@@ -50,15 +50,6 @@ public class MemberServiceImpl implements MemberService {
         return memberRepository.findByUserId(memberId);
     }
 	
-	//회원정보 수정
-//	@Override
-//	public Member updateMember(String userId ) {
-//		// TODO Auto-generated method stub
-//		memberRepository.findByUserId(String userId);
-//		
-//		return memberRepository.save(member);
-//	}
-	
 //	public void validateDuplicateMember(Member member) {
 //		List<Member> findMembers = memberRepository.findByName(member.getUserId());
 //		if(!findMembers.isEmpty()) {
@@ -81,16 +72,9 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public Member updateMember(Member m) {
-		// TODO Auto-generated method stub
 //		m=memberRepository.findByUserId(m.getUserId());
 		return memberRepository.save(m);
 	}
-
-//	@Override
-//	public Member updateMember(Member member) {
-//		memberRepository.findByUserId(member.getUserId());		
-//		return memberRepository.save(member);
-//	}
 
 	//회원찾기
 	@Override

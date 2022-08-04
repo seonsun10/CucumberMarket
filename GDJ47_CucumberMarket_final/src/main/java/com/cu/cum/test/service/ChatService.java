@@ -71,6 +71,10 @@ public class ChatService {
 			
 		
 	}
+	//채팅방삭제 
+	public int deleteChatRoom(String roomid) {
+		return dao.deleteChatRoom(session,roomid);
+	}
 	
 	
 }
