@@ -12,10 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-
-
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,9 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import org.springframework.web.bind.annotation.RequestParam;
-
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -39,7 +34,6 @@ import com.cu.cum.product.model.service.ProductService;
 import com.cu.cum.product.model.vo.Product;
 import com.cu.cum.product.model.vo.Review;
 
-
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -50,10 +44,7 @@ public class MemberController {
 	private Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	@Autowired
-
-	
-	private BCryptPasswordEncoder pwEncoder; 
-	
+	private BCryptPasswordEncoder pwEncoder;
 
 	@Autowired
 	private MemberService service;
@@ -95,6 +86,12 @@ public class MemberController {
 		service.join(member);
 		return new ModelAndView("redirect:/"); //회원가입 후, 메인 화면으로 바로 이동
  	}
+	
+	@RequestMapping("/loginpage")
+	public String login() {
+		System.out.println("로그인 과정 거침?");
+		return "member/login";
+	}
 	
 	@RequestMapping("/successLogin.do")
 	public String successLogin(Model m) {
@@ -280,5 +277,11 @@ public class MemberController {
 		m.addAttribute("totalReview",totalReview);
 		m.addAttribute("writer",userId);
 		return "member/otherpageReview";
+	}
+	
+	@RequestMapping("/denie")
+	public String denine() {
+		return "common/test";
+				
 	}
 }
