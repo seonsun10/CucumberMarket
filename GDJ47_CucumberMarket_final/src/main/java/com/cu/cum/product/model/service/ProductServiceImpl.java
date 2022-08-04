@@ -94,5 +94,6 @@ public class ProductServiceImpl implements ProductService {
 	public int selectWishCount(String id) {
 		return pmdao.selectWishCount(session, id);
 	}
-
+	
+	
 }

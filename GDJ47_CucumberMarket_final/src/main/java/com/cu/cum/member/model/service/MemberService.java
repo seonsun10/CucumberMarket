@@ -28,4 +28,10 @@ public interface MemberService {
 	
 	//회원정보 수정
 	Member updateMember(Member m);
+	
+	//조회수up
+	int viewCountUp(String writer);
+	
+	//조회수 가져오기
+	int selectViewCount(String writer);
 }

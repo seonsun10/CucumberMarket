@@ -56,12 +56,12 @@
 					  		<img src="https://cdn-icons-png.flaticon.com/512/4695/4695312.png"
 					  		 width="14px"/>
 					  			방문자수&nbsp;
-					  			<span id="count">0명</span>
+					  			<span id="count"><c:out value="${viewCount }"/>명</span>
 					  		</div>
 					  		<div id="dibs">
 					  		<img src="https://cdn-icons-png.flaticon.com/512/6696/6696548.png" width="14px"/>
 					  			등록상품&nbsp;
-					  			<span id="count">0개</span>
+					  			<span id="count"><c:out value="${productCount }"/>개</span>
 					  		</div>
 					  		<div id="sale">
 					  		<img src="https://cdn-icons-png.flaticon.com/512/5132/5132236.png" width="14px"/>

@@ -1,12 +1,13 @@
 package com.cu.cum.member.controller;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -122,6 +123,7 @@ public class MemberController {
 		m.addAttribute("userId",userId);
 		int productCount = proservice.selectProductCount(userId);
 		m.addAttribute("productCount",productCount);
+		m.addAttribute("viewCount",service.selectViewCount(userId));
 		return "member/mypage";
 	}
 	
@@ -270,8 +272,38 @@ public class MemberController {
 	//다른 사람 페이지 연결
 	@RequestMapping("/member/otherMember.do")
 	public String otherMember(@RequestParam String writer,
+								@RequestParam String customer,
+								HttpServletRequest request,
+								HttpServletResponse response,
 								Model m) {
+		Cookie oldCookie = null;
+	    Cookie[] cookies = request.getCookies();
+	    if (cookies != null) {
+	        for (Cookie cookie : cookies) {
+	            if (cookie.getName().equals("postView")) {
+	                oldCookie = cookie;
+	            }
+	        }
+	    }
+
+	    if (oldCookie != null) {
+	        if (!oldCookie.getValue().contains("[" + customer.toString() + "]")) {
+	            service.viewCountUp(writer);
+	            oldCookie.setValue(oldCookie.getValue() + "_[" + customer + "]");
+	            oldCookie.setPath("/");
+	            oldCookie.setMaxAge(60 * 60 * 24);
+	            response.addCookie(oldCookie);
+	        }
+	    } else {
+	        service.viewCountUp(writer);
+	        Cookie newCookie = new Cookie("postView","[" + customer + "]");
+	        newCookie.setPath("/");
+	        newCookie.setMaxAge(60 * 60 * 24);
+	        response.addCookie(newCookie);
+	    }
 		Member member = service.selectMember(writer);
+		m.addAttribute("viewCount",service.selectViewCount(writer));
+		m.addAttribute("productCount",proservice.selectProductCount(writer));
 		m.addAttribute("member",member);
 		m.addAttribute("writer",writer);
 		return "/member/otherMember";

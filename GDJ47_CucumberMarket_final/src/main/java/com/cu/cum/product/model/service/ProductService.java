@@ -42,4 +42,5 @@ public interface ProductService {
 	//ㅉ카운트
 	int selectWishCount(String id);
 	
+	
 }
