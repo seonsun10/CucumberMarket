@@ -17,7 +17,7 @@
 			<id column="files_no" property="filesNo"/>
 			<result column="original_filename" property="originalFilename"/>
 			<result column="rename_filename" property="renameFilename"/>
-		</collection>
+		</collection>   
 	</resultMap>
 	<resultMap type="review" id="reviewMap">
 		<id column="review_no" property="reviewNo"/>
