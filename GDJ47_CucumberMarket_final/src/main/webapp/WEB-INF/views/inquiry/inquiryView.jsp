@@ -63,9 +63,11 @@
 						 	</tbody>
 							<tr>
 								<td colspan="2" align="center">
-						 			<input type="button" value="수정" onclick=""/>
 						 			<input type="button" value="목록" onclick="location.assign('${pageContext.request.contextPath }/inquiryList')"/>
-						 			<input type="button" value="삭제" onclick=""/>
+									<c:if test="${loginMember.userId == inq.writer.userId}">
+						 				<input type="button" value="수정" onclick="location.assign('${pageContext.request.contextPath }/updateInquiry/${inq.inquiryNo}')"/>
+							 			<input type="button" value="삭제" onclick="location.assign('${pageContext.request.contextPath }/deleteInquiry/${inq.inquiryNo}')"/>
+						 			</c:if>
 						 		</td>
 						 	</tr>
 						</table>

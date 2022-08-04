@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" /> -->
 
     <div id="all">
       <div id="content">
@@ -38,58 +38,42 @@
               <div class="banner"><a href="#"><img src="img/banner.jpg" alt="sales 2014" class="img-fluid"></a></div>
             </div>
 			<div class="col-lg-9">
-				<div class="table-responsive">
-						<form action="${pageContext.request.contextPath }/inquiry/searchInquiry.do" method="post">
-                  			<div class="input-group">
-              					<input name="keyword" type="text" placeholder="Search" class="form-control">
-				              	<div class="input-group-append">
-					                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
-									<a href="${pageContext.request.contextPath }/inquiryWrite" class="btn btn-primary navbar-btn"><span>문의글 작성</span></a>
-				              	</div>
-				              	
-				            <!-- </div>
-							<div class="input-group-append"> -->
-				        	</div>
-				        	</form>
-			        		<br>
-                    		<table class="table">
-	                      		<thead>
-	                        		<tr>
-										<th>번호</th>
-										<th>아이디</th>
-	                          			<th colspan=2>제목</th>
-										<th>문의 유형</th>
-										<th>등록일</th>
-										<th>답변 여부</th>
-	                        		</tr>
-	                      		</thead>
-								<tbody>
-								<c:if test="${not empty list }">
-								<c:forEach items="${list }" var="i">
-		                        	<tr>
-		                          		<td><c:out value="${i.inquiryNo}"/></td>
-		                          		<td>${i.writer.userId }</td>
-		                          		<td colspan=2>
-		                          			<%-- <a href="${pageContext.request.contextPath }/inquiryView"> --%>
-		                          			<a href="${pageContext.request.contextPath }/inquiryView/${i.inquiryNo}">
-												<c:out value="${i.inquiryTitle}"/>
-											</a>
-		                          		</td>
-		                          		<td><c:out value="${i.inquiryType}"/></td>
-		                          		<td><fmt:formatDate value="${i.inquiryDate}" pattern="yyyy-MM-dd"/></td>
-		                          		<td><c:out value="${i.answer}"/></td>
-		                        	</tr>
-		                        	</c:forEach>
-		                        	</c:if>
-		                        	<c:if test="${empty list }">
-						            	<tr>
-						            		<td colspan="8" align="center">조회 결과 없음</td>
-						            	</tr>
-						            </c:if>
-	                      		</tbody>
-                   		 	</table>
-							<div id="pageBar"><c:out value="${pageBar }" escapeXml="false"/></div>
+				<form action="${pageContext.request.contextPath }/inquiry/updateInquiry.do" method="post">
+					<input type="hidden" name="id" value="${loginMember.userId}"/>
+					<div class="row">
+						<div class="col-md-6">
+						<div class="form-group">
+	                        <label for="id">글 번호</label>
+	                        <input name="inquiryNo" id="inquiryNo" type="text" value="<c:out value="${inq.inquiryNo}"/>" readonly class="form-control">
+                      	</div>	
+						<div class="form-group">
+	                        <label for="id">작성자ID</label>
+	                        <input name="inquiryId" id="inquiryId" type="text" value="<c:out value="${inq.writer.userId }"/>" readonly class="form-control">
+                      	</div>	
+						<div class="form-group">
+                        	<label for="title">제목</label>
+                        	<input name="inquiryTitle" id="inquiryTitle" type="text" value="<c:out value="${inq.inquiryTitle }"/>" class="form-control"  >
 						</div>
+						<div class="form-group">
+                        	<label for="type">문의유형</label>
+                        	<input name="inquiryType" id="inquiryType" type="text" value="<c:out value="${inq.inquiryType }"/>" class="form-control">
+						</div>
+                    </div>
+					<div class="col-md-12">
+						<div class="form-group">
+	                        <label for="inquiryContent">문의 내용</label>
+	                        <textarea name="inquiryContent" id="inquiryContent" class="form-control"><c:out value="${inq.inquiryContent }"/></textarea>
+						</div>
+                      <button type="submit" class="btn btn-primary">수정</button>
+                      <button type="reset" class="btn btn-primary">재설정</button>
+                      <button type="button" class="btn btn-primary" onclick="location.assign('${pageContext.request.contextPath }/inquiryList')">취소</button>
+                    </div>
+                  </div>
+                  <!-- /.row-->
+                </form>
+			
+                <!-- /.accordion-->
+              </div>
             </div>
             <!-- /.col-lg-9-->
           </div>

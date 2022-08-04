@@ -15,5 +15,10 @@ public interface InquiryDao extends JpaRepository<Inquiry, String>{
 	Inquiry save(Inquiry i);
 	
 	List<Inquiry> findAll();
+	
+	List<Inquiry> findByinquiryTitleContaining(String keyword);
+	
+	//Inquiry deleteByInquiryNo(int inquiryNo);
+	
 
 }

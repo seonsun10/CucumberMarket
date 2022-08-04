@@ -7,7 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+
+import com.cu.cum.member.model.vo.Member;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,9 +30,11 @@ public class Report {
 	@GeneratedValue(generator="seq_reportno", strategy=GenerationType.SEQUENCE)
 	private int reportNo;
 	
+	@ManyToOne
+	@JoinColumn(name="userid")
+	private Member userId; // 신고한 사람아이디 
 	
-	private String userId; // 신고한 사람아이디 
-	private int productId; // 상품 아이디 
+	private int proNo; // 상품 아이디 
 	private String content; // 신고 내용
 	private String title; // 제목 
 	@Column(columnDefinition = "default sysdate")

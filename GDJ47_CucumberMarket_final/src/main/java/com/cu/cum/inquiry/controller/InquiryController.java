@@ -1,6 +1,9 @@
 package com.cu.cum.inquiry.controller;
 
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cu.cum.inquiry.model.service.InquiryService;
 import com.cu.cum.inquiry.model.vo.Inquiry;
 import com.cu.cum.member.model.vo.Member;
+import com.cu.cum.pagebar.PageBarInquiry;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -44,12 +48,30 @@ public class InquiryController {
 		return "inquiry/inquiryWrite";
 	}
 	
+	// 문의글 수정 페이지
+//	@RequestMapping(value="/updateInquiry", method=RequestMethod.GET)
+//	public String updateInquiry(@RequestParam int inquiryNo,Model m) {
+//		m.addAttribute("inquiryNo",inquiryNo);
+//		return "inquiry/updateInquiry";
+//	}
+	
+	@RequestMapping(value={"/updateInquiry/{id}"})
+	public ModelAndView updateInquiry(@PathVariable  int id, ModelAndView mv) {
+		mv.addObject("inq", service.selectInquiry(id));
+		mv.setViewName("inquiry/updateInquiry");
+		System.out.println(mv);
+		return mv;
+	}
+	
+
+	
 	// 문의글 클릭 후 나오는 페이지 (각각의 문의글 내용 보기)
 //	@RequestMapping(value="/inquiryView", method=RequestMethod.GET)
 //	public String selectInquiry() {
 //		return "inquiry/inquiryView";
 //	}
 	
+	// 문의글 상세페이지 
 	@RequestMapping(value={"/inquiryView/{id}"})
 	public ModelAndView selectInquiry(@PathVariable int id, ModelAndView mv) {
 		mv.addObject("inq", service.selectInquiry(id));
@@ -61,26 +83,41 @@ public class InquiryController {
 	}
 	
 	// 문의글 불러오는 로직
+//	@RequestMapping("/inquiryList")
+//	@ResponseBody
+//	public ModelAndView selectInquiryList(ModelAndView model) {
+//		List<Inquiry> list = service.selectInquiryList();
+//		model.addObject("list",list);
+////		if(list!=null) {
+////			System.out.println(list);
+////		}
+//		
+//		model.setViewName("inquiry/inquiryList");
+//		return model;
+//	}
+	// 문의글 페이징 처리 
 	@RequestMapping("/inquiryList")
 	@ResponseBody
-	public ModelAndView selectInquiryList(ModelAndView model) {
-		List<Inquiry> list = service.selectInquiryList();
+	public ModelAndView selectInquiryList(@RequestParam(defaultValue="1") int cPage,
+			@RequestParam(defaultValue="5") int numPerpage,
+			ModelAndView model) {
+		Map param = Map.of("cPage",cPage, "numPerpage",numPerpage);
+		List<Inquiry> list = service.selectInquiryListPage(param);
+		int totalData=service.selectInquiryCount();
 		model.addObject("list",list);
-//		if(list!=null) {
-//			System.out.println(list);
-//		}
-		
+		model.addObject("pageBar",PageBarInquiry.getPageBar(cPage,numPerpage, totalData,   "inquiryList" ));
+		model.addObject("totalData", totalData);
+		//System.out.println(list);
 		model.setViewName("inquiry/inquiryList");
 		return model;
 	}
 
 	// 문의글 작성 로직 
 	@RequestMapping("/inquiry/insertInquiry.do")
-	@ResponseBody
 	public String insertInquiry(@RequestParam("inquiryId") String id,@RequestParam("inquiryTitle") String inquiryTitle,
 			@RequestParam("inquiryPhone") String phone,
 			@RequestParam("inquiryType") String type,
-			@RequestParam("inquiryContent") String content) {
+			@RequestParam("inquiryContent") String content, Model model) {
 		Member loginMember=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		Inquiry i = Inquiry.builder().inquiryTitle(inquiryTitle).inquiryPhone(phone).writer(loginMember)
@@ -88,10 +125,47 @@ public class InquiryController {
 	
 		Inquiry inq = service.insertInquiry(i);
 		
-		
-		return "inquiry/inquiryList";
+		return "redirect:/inquiryList";
 	}
 	
+	// 문의글 검색
+	
+	@RequestMapping("/inquiry/searchInquiry.do")
+	@ResponseBody
+	public ModelAndView searchList(String keyword, ModelAndView model) {
+		
+		List<Inquiry> list = service.searchList(keyword);
+		
+		model.addObject("list", list);
+		model.setViewName("inquiry/inquiryList");
+		System.out.println(list);
+		return model;
+	}
+	
+	
+	// 문의글 수정
+	@RequestMapping("inquiry/updateInquiry.do")
+	public String updateInquiry(Inquiry inquiry, String inquiryId,HttpSession session) {
+		//Inquiry inquiry = Inquiry.builder().inquiryTitle(inquiryTitle).inquiryType(inquiryTitle).inquiryContent(content).inquiryNo(inquiryNo).build();
+		//System.out.println(inquiry);
+		inquiry.setWriter((Member)session.getAttribute("loginMember"));
+		int inq = service.updateInquiry(inquiry);
+		
+		return "redirect:/inquiryList";
+	}
+	
+	// 문의글 삭제 
+	
+	@RequestMapping("/deleteInquiry/{id}")
+	public String deleteInquiry(Inquiry inquiry, @PathVariable int id,HttpSession session) {
+		//public String deleteInquiry(@RequestParam int inquiryNo, Model m) {
+		
+		inquiry.setWriter((Member)session.getAttribute("loginMember"));
+		System.out.println(inquiry);
+		int inq = service.deleteInquiry(id);
+		
+		return "redirect:/inquiryList";
+	}
 	
 	
 }

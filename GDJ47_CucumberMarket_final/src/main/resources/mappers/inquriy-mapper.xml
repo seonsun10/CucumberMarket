@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="inquiry">
+
+	<resultMap id="inquiryMap" type="inquiry">
+		<id column="inquiry_No" property="inquiryNo"/>
+		<result column="inquiry_title" property="inquiryTitle"/>
+		<result column="inquiry_content" property="inquiryContent"/>
+		<result column="inquiry_date" property="inquiryDate"/>
+		<result column="inquiry_phone" property="inquiryPhone"/>
+		<result column="inquiry_type" property="inquiryType"/>
+		<result column="answer" property="answer"/>
+		<association property="writer" javaType="Member">
+			<result column="userid" property="userId"/>
+		</association>
+	</resultMap>
+	
+	<select id="selectInquiryList" resultMap="inquiryMap">
+		SELECT * FROM INQUIRY ORDER BY INQUIRY_NO DESC
+	</select>
+	<select id="selectInquiryCount" resultType="_int">
+		SELECT COUNT(*) FROM INQUIRY
+	</select>
+	<update id="inquiry.updateInquiry" parameterType="Inquiry">
+		UPDATE INQUIRY SET INQUIRY_TITLE =#{inquiryTitle} , INQUIRY_CONTENT=#{inquiryContent},
+		INQUIRY_TYPE=#{inquiryType}
+		WHERE INQUIRY_NO=#{inquiryNo}
+	</update>
+	
+	<delete id="inquiry.deleteInquiry" parameterType="Inquiry">
+		DELETE FROM INQUIRY WHERE INQUIRY_NO=#{inquiryNo}
+	</delete>
+</mapper>
