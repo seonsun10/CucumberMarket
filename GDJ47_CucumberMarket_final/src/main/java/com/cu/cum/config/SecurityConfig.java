@@ -31,6 +31,7 @@ public class SecurityConfig {
 				.formLogin()
 					.loginPage("/loginpage")
 					.loginProcessingUrl("/loginprocess")
+					.successForwardUrl("/loginsuccess")
 					.usernameParameter("userId")
 					.passwordParameter("password")
 					.and() //http부터 또 설정 가능

@@ -99,7 +99,7 @@ public class MemberController {
 		return "member/login";
 	}
 	
-	@RequestMapping("/successLogin.do")
+	@RequestMapping("/loginsuccess")
 	public String successLogin(Model m) {
 		//인증받은 객체의 정보를 가져올 수 있다.
 		Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
