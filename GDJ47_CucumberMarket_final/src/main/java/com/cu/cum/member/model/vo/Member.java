@@ -19,6 +19,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.cu.cum.product.model.vo.Files;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -57,7 +59,8 @@ public class Member implements UserDetails{
     @Enumerated(EnumType.STRING)
 	private Role role;
 	
-	//@OneToMany(mappedBy="member")
+	@OneToMany(mappedBy="member")
+	private List<Files> files;
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -87,7 +87,7 @@
         
       </div>
       <nav class="navbar navbar-expand-lg">
-        <div class="container"><a href="${path}/" class="navbar-brand home"><img src="/resources/img/logo.png" alt="Obaju logo" class="d-none d-md-inline-block"><img src="/resources/img/logo-small.png" alt="Obaju logo" class="d-inline-block d-md-none"><span class="sr-only">Obaju - go to homepage</span></a>
+        <div class="container"><a href="${path}/" class="navbar-brand home"><img src="/resources/img/cucumber.png" style="width:90px;height:70px"alt="Obaju logo" class="d-none d-md-inline-block"><img src="/resources/img/cucumber.png" alt="Obaju logo" class="d-inline-block d-md-none"><span class="sr-only">Obaju - go to homepage</span></a>
           <div class="navbar-buttons">
             <button type="button" data-toggle="collapse" data-target="#navigation" class="btn btn-outline-secondary navbar-toggler"><span class="sr-only">Toggle navigation</span><i class="fa fa-align-justify"></i></button>
             <button type="button" data-toggle="collapse" data-target="#search" class="btn btn-outline-secondary navbar-toggler"><span class="sr-only">Toggle search</span><i class="fa fa-search"></i></button><a href="basket.html" class="btn btn-outline-secondary navbar-toggler"><i class="fa fa-shopping-cart"></i></a>
@@ -95,58 +95,88 @@
           <div id="navigation" class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item"><a href="#" class="nav-link active">Home</a></li>
-              <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">Men<b class="caret"></b></a>
+              <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">상품 카테고리<b class="caret"></b></a>
                 <ul class="dropdown-menu megamenu">
                   <li>
                     <div class="row">
                       <div class="col-md-6 col-lg-3">
-                        <h5>Clothing</h5>
+                        <h5>여성의류</h5>
                         <ul class="list-unstyled mb-3">
-                          <li class="nav-item"><a href="category.html" class="nav-link">T-shirts</a></li>
-                          <li class="nav-item"><a href="category.html" class="nav-link">Shirts</a></li>
-                          <li class="nav-item"><a href="category.html" class="nav-link">Pants</a></li>
-                          <li class="nav-item"><a href="category.html" class="nav-link">Accessories</a></li>
+                          <li class="nav-item"><a href="${path }/product/productTotal.do?tag=패딩" class="nav-link">패딩</a></li>
+                          <li class="nav-item"><a href="category.html" class="nav-link">코트</a></li>
+                          <li class="nav-item"><a href="category.html" class="nav-link">티셔츠</a></li>
+                          <li class="nav-item"><a href="category.html" class="nav-link">셔츠</a></li>
+                          <li class="nav-item"><a href="category.html" class="nav-link">바지</a></li>
                         </ul>
                       </div>
                       <div class="col-md-6 col-lg-3">
-                        <h5>Shoes</h5>
+                        <h5>남성의류</h5>
                         <ul class="list-unstyled mb-3">
-                          <li class="nav-item"><a href="category.html" class="nav-link">Trainers</a></li>
-                          <li class="nav-item"><a href="category.html" class="nav-link">Sandals</a></li>
-                          <li class="nav-item"><a href="category.html" class="nav-link">Hiking shoes</a></li>
-                          <li class="nav-item"><a href="category.html" class="nav-link">Casual</a></li>
+                          <li class="nav-item"><a href="category.html" class="nav-link">패딩</a></li>
+                          <li class="nav-item"><a href="category.html" class="nav-link">코트</a></li>
+                          <li class="nav-item"><a href="category.html" class="nav-link">티셔츠</a></li>
+                          <li class="nav-item"><a href="category.html" class="nav-link">셔츠</a></li>
+                          <li class="nav-item"><a href="category.html" class="nav-link">바지</a></li>
                         </ul>
                       </div>
                       <div class="col-md-6 col-lg-3">
-                        <h5>Accessories</h5>
+                        <h5>신발</h5>
                         <ul class="list-unstyled mb-3">
-                          <li class="nav-item"><a href="category.html" class="nav-link">Trainers</a></li>
-                          <li class="nav-item"><a href="category.html" class="nav-link">Sandals</a></li>
-                          <li class="nav-item"><a href="category.html" class="nav-link">Hiking shoes</a></li>
-                          <li class="nav-item"><a href="category.html" class="nav-link">Casual</a></li>
-                          <li class="nav-item"><a href="category.html" class="nav-link">Hiking shoes</a></li>
-                          <li class="nav-item"><a href="category.html" class="nav-link">Casual</a></li>
+                          <li class="nav-item"><a href="category.html" class="nav-link">스니커즈</a></li>
+                          <li class="nav-item"><a href="category.html" class="nav-link">구두</a></li>
+                          <li class="nav-item"><a href="category.html" class="nav-link">슬리퍼</a></li>
+                          <li class="nav-item"><a href="category.html" class="nav-link">샌들</a></li>
+                          <li class="nav-item"><a href="category.html" class="nav-link">운동화</a></li>
                         </ul>
                       </div>
                       <div class="col-md-6 col-lg-3">
-                        <h5>Featured</h5>
+                        <h5>디지털/가전</h5>
                         <ul class="list-unstyled mb-3">
-                          <li class="nav-item"><a href="category.html" class="nav-link">Trainers</a></li>
-                          <li class="nav-item"><a href="category.html" class="nav-link">Sandals</a></li>
-                          <li class="nav-item"><a href="category.html" class="nav-link">Hiking shoes</a></li>
+                          <li class="nav-item"><a href="category.html" class="nav-link">모바일</a></li>
+                          <li class="nav-item"><a href="category.html" class="nav-link">가전제품</a></li>
+                          <li class="nav-item"><a href="category.html" class="nav-link">컴퓨터</a></li>
+                          <li class="nav-item"><a href="category.html" class="nav-link">게임</a></li>
+                          <li class="nav-item"><a href="category.html" class="nav-link">카메라</a></li>
                         </ul>
-                        <h5>Looks and trends</h5>
+                      </div>
+                      <div class="col-md-6 col-lg-3">
+                        <h5>차량/오토바이</h5>
                         <ul class="list-unstyled mb-3">
-                          <li class="nav-item"><a href="category.html" class="nav-link">Trainers</a></li>
-                          <li class="nav-item"><a href="category.html" class="nav-link">Sandals</a></li>
-                          <li class="nav-item"><a href="category.html" class="nav-link">Hiking shoes</a></li>
+                          <li class="nav-item"><a href="category.html" class="nav-link">국산차</a></li>
+                          <li class="nav-item"><a href="category.html" class="nav-link">수입차</a></li>
+                          <li class="nav-item"><a href="category.html" class="nav-link">차량용품</a></li>
+                          <li class="nav-item"><a href="category.html" class="nav-link">오토바이</a></li>
+                          <li class="nav-item"><a href="category.html" class="nav-link">오토바이 용품</a></li>
+                        </ul>
+                      </div>
+                      <div class="col-md-6 col-lg-3">
+                        <h5>도서/티켓/문구</h5>
+                        <ul class="list-unstyled mb-3">
+                          <li class="nav-item"><a href="category.html" class="nav-link">도서</a></li>
+                          <li class="nav-item"><a href="category.html" class="nav-link">티켓</a></li>
+                          <li class="nav-item"><a href="category.html" class="nav-link">문구</a></li>
+                        </ul>
+                        <h5>가구/인테리어</h5>
+                        <ul class="list-unstyled mb-3">
+                          <li class="nav-item"><a href="category.html" class="nav-link">가구</a></li>
+                          <li class="nav-item"><a href="category.html" class="nav-link">인테리어</a></li>
+                        </ul>
+                      </div>
+                      <div class="col-md-6 col-lg-3">
+                        <h5>스포츠</h5>
+                        <ul class="list-unstyled mb-3">
+                          <li class="nav-item"><a href="category.html" class="nav-link">골프</a></li>
+                          <li class="nav-item"><a href="category.html" class="nav-link">캠핑</a></li>
+                          <li class="nav-item"><a href="category.html" class="nav-link">낚시</a></li>
+                          <li class="nav-item"><a href="category.html" class="nav-link">축구</a></li>
+                          <li class="nav-item"><a href="category.html" class="nav-link">헬스</a></li>
                         </ul>
                       </div>
                     </div>
                   </li>
                 </ul>
               </li>
-              <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">Ladies<b class="caret"></b></a>
+              <%-- <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">Ladies<b class="caret"></b></a>
                 <ul class="dropdown-menu megamenu">
                   <li>
                     <div class="row">
@@ -242,21 +272,24 @@
                     </div>
                   </li>
                 </ul>
-              </li>
+              </li> --%>
             </ul>
             <div class="navbar-buttons d-flex justify-content-end">
-              <!-- /.nav-collapse-->
               <div id="search-not-mobile" class="navbar-collapse collapse"></div><a data-toggle="collapse" href="#search" class="btn navbar-btn btn-primary d-none d-lg-inline-block"><span class="sr-only">Toggle search</span><i class="fa fa-search"></i></a>
-              <div id="basket-overview" class="navbar-collapse collapse d-none d-lg-block"><a href="basket.html" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span>3 items in cart</span></a></div>
-              		<a href="${path }/member/mypage.do?userId=${loginMember.userId}">마이페이지</a>
+              
+	              <div id="search-not-mobile" class="navbar-collapse collapse">
+	              		<a href="${path }/member/mypage.do?userId=${loginMember.userId}" class="btn btn-primary navbar-btn">마이페이지</a>
+	              </div>
+	
+	              <div id="search-not-mobile" class="navbar-collapse collapse">
+	           			<a href="${path }/product/productView.do?id=${loginMember.userId }&no=151" class="btn btn-primary navbar-btn">제품상세보기 테스트용 </a> <!-- 나중에 id는 세션값(이때 input hidden사용도 해볼것) link에서 no도 넣어서 해야함 -->
+				  </div>
+				  
+				  <div id="search-not-mobile" class="navbar-collapse collapse">
+				  	<a href="${path }/area.do" class="btn btn-primary navbar-btn"> 지역설정 테스트용</a>
+				  </div>
+			  
               </div>
-
-              <div>
-           			<a href="${path }/product/productView.do?id=${loginMember.userId }&no=151">제품상세보기 테스트용 </a> <!-- 나중에 id는 세션값(이때 input hidden사용도 해볼것) link에서 no도 넣어서 해야함 -->
-			  </div>
-			  <div>
-			  	<a href="${path }/area.do"> 지역설정 테스트용</a>
-			  </div>
             </div>
           </div>
         </div>

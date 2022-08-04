@@ -31,7 +31,7 @@
 			<div id="pro-box">
 				<a href="#">
 					<div id="pro-img">
-						<img src="${path }/resources/img/오이.png"/>
+						<img src="${path }/resources/img/cucumber.png"/>
 					</div>
 					<div id="pro-title">
 						<div id="pro-head2">제목</div>
@@ -41,7 +41,7 @@
 						</div>
 					</div>
 					<div id="pro-foot">
-						<img id="add-img" src="https://cdn-icons.flaticon.com/png/512/4621/premium/4621991.png?token=exp=1659408043~hmac=ef04019d8c5da51eacd21c5dd0501a4b">
+						<img id="add-img" src="${path }/resources/img/위치.png">
 						<div id="pro-add">									
 							서울특별시 은평구 불광제3동
 						</div>
@@ -50,7 +50,9 @@
 			</div>
 		</c:forEach>
 	</c:if>
+	<c:if test="${product eq null }">
+		조회된 결과가 없습니다.
+	</c:if>
 </div>
 <div id="pageBar"><c:out value="${pageBar }" escapeXml="false"/></div>
-<script src="${path}/resources/js/otherpage.js"></script>
 				

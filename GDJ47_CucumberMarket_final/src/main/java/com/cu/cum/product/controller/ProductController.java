@@ -45,22 +45,25 @@ public class ProductController {
 	
 		return "member/mypage";
 	}
-
+	@Autowired
 	private ReviewService rvservice;
 	
 
 	@RequestMapping("/product/insertProduct.do")
-	public String insertProduct(Product p, MultipartHttpServletRequest mtfRequest ,@RequestParam("proName") String proName , @RequestParam("region") String region,
+	public String insertProduct(Product p, MultipartHttpServletRequest mtfRequest ,@RequestParam("proName") String proName , 
+			@RequestParam("sido1") String sido, @RequestParam("gugun1") String gugun,
 			@RequestParam("proContent") String proContent,
 			@RequestParam("tag") String tag , @RequestParam("proStatus") String proStatus,
-			@RequestParam(name="price") int price ) {
-		String email = "admin@naver.com"; //나중엔 세션값으로 email 불러와야함
-		String userId = email.substring(0, email.indexOf("@"));
+			@RequestParam(name="price") int price , @RequestParam(name="userId") String userId) {
+		//String userId = "admin@naver.com"; //나중엔 세션값으로 email 불러와야함
+		//String userId = email.substring(0, email.indexOf("@"));
 		//파일제외 나머지 insert문
+		System.out.println(tag);
 		
-		
+		String region = sido+" "+gugun;
+		System.out.println(region);
 		Member m = Member.builder().userId(userId).build();
-		p = Product.builder().proName(proName).proContent(proContent).price(price).
+		p = Product.builder().title(proName).proContent(proContent).price(price).
 				region(region).categoryName(tag).proStatus(proStatus).member(m).
 				build();
 		
@@ -86,6 +89,7 @@ public class ProductController {
 							f.transferTo(new File(path+rename));
 							files.add(Files.builder()
 								.product(p)
+								.member(m)
 								.originalFilename(originalFilename)
 								.renameFilename(rename).build());
 						}catch(IOException e) {
@@ -101,6 +105,7 @@ public class ProductController {
 							f.transferTo(new File(path+rename));
 							files.add(Files.builder()
 								.product(p)
+								.member(m)
 								.originalFilename(originalFilename)
 								.renameFilename(rename).build());
 						}catch(IOException e) {
@@ -120,34 +125,30 @@ public class ProductController {
 //			System.out.println("파일이 들어가지 못함");
 //		}
 		
-//		for(Files f : files) {
-//			Files fresult = fservice.insertFile(f);
-//			if(fresult!=null) {
-//				System.out.println("파일이 들어갔다.");
-//			}else {
-//				System.out.println("파일이 들어가지 못했다");
-//			}
-//		}
 		return "redirect:/mypage.do";
 	}
 	
 	//거래 후기
 	@RequestMapping("/product/productReview.do")
-	public String productReview(@RequestParam int proNo,
-								@RequestParam String writer,
-								@RequestParam int oi,
+	public String productReview(@RequestParam(defaultValue="0") int proNo,
+								@RequestParam(defaultValue ="신원미상") String writer,
+								@RequestParam(defaultValue ="5") int oi,
+								@RequestParam(defaultValue ="짱이에요") String ment,
 								Model m) {
-		Product p = service.selectProduct(proNo);
-		log.debug("{}",p);
-//		p.setReview(Review.builder().proNo(proNo).writer(writer).oi(oi).build());
-		Review rv = Review.builder().product(p).host(p.getMember().getUserId()).writer(writer).oi(oi).build();
-		log.debug("rv는 무엇인가 : "+rv);
-		try {
-			Review result = rvservice.insertReview(rv);
-			
-			m.addAttribute("msg","등록성공");
-		}catch(Exception e) {
-			m.addAttribute("msg","등록실패");			
+		if(proNo==0) {m.addAttribute("msg","등록실패");}
+		else {
+			Product p = service.selectProduct(proNo);
+			log.debug("{}",p);
+	//		p.setReview(Review.builder().proNo(proNo).writer(writer).oi(oi).build());
+			Review rv = Review.builder().product(p).ment(ment).host(p.getMember().getUserId()).writer(writer).oi(oi).build();
+			log.debug("rv는 무엇인가 : "+rv);
+			try {
+				rvservice.insertReview(rv);
+				m.addAttribute("msg","등록성공");
+			}catch(Exception e) {
+//				e.printStackTrace();
+				m.addAttribute("msg","등록실패");			
+			}
 		}
 //		Product result = service.insertReview(p);
 		return "common/msg";
@@ -161,9 +162,20 @@ public class ProductController {
 			service.deleteProduct(proNo);
 			m.addAttribute("msg","삭제 성공");
 		}catch(Exception e) {
-			m.addAttribute("msg","삭제 실패");
+//			m.addAttribute("msg","삭제 실패");
+			e.printStackTrace();
 		}
 		return "common/msg";
+	}
+	
+	
+	
+	
+	//카테고리별 상품 결과 나오게하는거 이란 임시용
+	@RequestMapping("/product/productTotal.do")
+	public String productTotal(@RequestParam("tag") String tag) {
+		System.out.println(tag);
+		return "/";
 	}
 	
 }

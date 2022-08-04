@@ -168,9 +168,11 @@ $(document).ready(function(){
            const temp=$("#chatLog").html();
            if(writer=='${loginMember.userId}'){
            $("#chatLog").html(temp+"<div class='myMsg'><span class='msg'><b>"+ message + "</b></span><span class='anotherTime'><fmt:formatDate value="<%=new java.util.Date() %>" type="time"/></span></div>");
+           
           
            }else{
-           $("#chatLog").html(temp+"<div class='anotherMsg'><span class='anotherName'>"+writer+"</span><span class='msg'><b>"+ message + "</b></span><span class='anotherTime'><fmt:formatDate value="<%=new java.util.Date() %>" type="time"/></span></div>");   
+           $("#chatLog").html(temp+"<div class='anotherMsg'><span class='anotherName'>"+writer+"</span><span class='msg'><b>"+ message + "</b></span><span class='anotherTime'><fmt:formatDate value="<%=new java.util.Date() %>" type="time"/></span></div>"); 
+           
            }
            
            
@@ -235,9 +237,10 @@ $(document).ready(function(){
                 roodId: '${room.roomId}'
             };
             stomp.send("/pub/chat/message", {}, JSON.stringify(MessageContent));
+            event.preventDefault();
             msg = '';
         }
-        event.preventDefault();
+       
     }
     
     

@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -30,6 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cu.cum.member.model.service.MemberService;
 import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.pagebar.PageBar;
+import com.cu.cum.product.model.dao.ProductDao;
 import com.cu.cum.product.model.service.ProductService;
 import com.cu.cum.product.model.vo.Product;
 import com.cu.cum.product.model.vo.Review;
@@ -44,7 +47,10 @@ public class MemberController {
 	private Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	@Autowired
-	private BCryptPasswordEncoder pwEncoder;
+	private BCryptPasswordEncoder pwEncoder; 
+	
+	@Autowired
+	private ProductDao dao;
 
 	@Autowired
 	private MemberService service;
@@ -98,26 +104,21 @@ public class MemberController {
 		//인증받은 객체의 정보를 가져올 수 있다.
 		Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		m.addAttribute("loginMember",(Member)o);
-	
 		
 		return "redirect:/";
 	}
 	
 	@RequestMapping("/successLogout.do")
 	public String successLogout(SessionStatus session) {
-//		Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//		String id= ((Member)o).getUserId();
-//		System.out.println("로그아웃 확인");
 		if(!session.isComplete()) {
-			
 			session.setComplete();
-			
 		}
 		return "redirect:/";
 	}
 	
 	@RequestMapping("/member/mypage.do")
-	public String myPage() {
+	public String myPage(@RequestParam String userId, Model m) {
+		m.addAttribute("userId",userId);
 		return "member/mypage";
 	}
 	
@@ -199,11 +200,22 @@ public class MemberController {
 							Model m) {
 		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"userId",userId);
 		List<Product> products=proservice.selectProductList(page);
+		Product p1 = (Product)products.get(3);
+		//log.debug("{}",p1.getFiles().get(0).getRenameFilename());
+		log.debug("product : "+p1);
+		log.debug("{}",p1.getFiles().get(0).getRenameFilename());
 		String url=request.getRequestURI();
 		int totalProduct=proservice.selectProductCount(userId);
 		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage, totalProduct, url));
 		m.addAttribute("product",products);
 		m.addAttribute("totalProduct",totalProduct);
+		Member loginMember=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		List<Product> list=dao.findAllByMember(loginMember);
+		
+		//페이징처리 jpa
+		List<Product> list2=dao.findAll(PageRequest.of(0,5,Sort.by("enrollDate").descending())).getContent();
+		//list2=list2.stream().filter(v -> v.getMember().equals(loginMember)).collect(Collectors.toList());
+		
 		return "member/mypageProduct";
 	}
 	//마이페이지에서 후기 목록 뿌리는 페이지
@@ -215,10 +227,13 @@ public class MemberController {
 								Model m) {
 		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"userId",userId);
 		List<Review> reviews=proservice.selectReviewList(page);
+		log.debug("리뷰값 : "+reviews.get(1));
 		String url=request.getRequestURI();
 		int totalReview=proservice.selectReviewCount(userId);
 		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage, totalReview, url));
-		m.addAttribute("review",reviews);
+		if(reviews.size()> 0) {
+			m.addAttribute("review",reviews);
+		}
 		m.addAttribute("totalReview",totalReview);
 		return "member/mypageReview";
 	}
@@ -239,9 +254,11 @@ public class MemberController {
 	}
 	//다른 사람 페이지 연결
 	@RequestMapping("/member/otherMember.do")
-	public String otherMember(@RequestParam String userId,
+	public String otherMember(@RequestParam String writer,
 								Model m) {
-		m.addAttribute("writer",userId);
+		Member member = service.selectMember(writer);
+		m.addAttribute("member",member);
+		m.addAttribute("writer",writer);
 		return "/member/otherMember";
 	}
 	//다른 사람 물품 정보
@@ -273,7 +290,9 @@ public class MemberController {
 		String url=request.getRequestURI();
 		int totalReview=proservice.selectReviewCount(userId);
 		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage, totalReview, url));
-		m.addAttribute("review",reviews);
+		if(reviews.size()!=0) {
+			m.addAttribute("review",reviews);
+		}
 		m.addAttribute("totalReview",totalReview);
 		m.addAttribute("writer",userId);
 		return "member/otherpageReview";

@@ -57,8 +57,49 @@ public class StompChatController {
 		
 		System.out.println(chatList);
 		mv.addObject("chatList", chatList);
-		mv.setViewName("test/test5");
+		mv.setViewName("member/mypageGchat");
+		
 		return mv;
+	}
+	@GetMapping(value="/chatlist2/{id}")
+	public ModelAndView chatlist2(@PathVariable String id,ModelAndView mv){
+		System.out.println("판매채팅창");
+		System.out.println(id);
+		String userid= ((Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
+		
+		
+		List<ChatRoom> chatList = service.selectChatList(id);
+			
+		for(ChatRoom c:chatList) {
+			if(c.getUserId().equals(userid)) {
+			c.setUnReadCount(service.unreadmessage(c));
+			}else {
+			c.setUnReadCount(service.unreadmessage2(c));
+			}
+			
+		}
+		
+		System.out.println(chatList);
+		mv.addObject("chatList", chatList);
+		mv.setViewName("member/myPagePchat");
+		
+		return mv;
+	}
+	@GetMapping(value="/deletechatroom/{id}")
+	public ModelAndView deleteChatRoom(@PathVariable String id,ModelAndView mv) {
+		String userid= ((Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
+		int result = service.deleteChatRoom(id);
+		if(result>0) {
+			mv.addObject("msg","채팅방삭제완료");
+			mv.addObject("loc","member/mypage.do?userId="+userid);
+			mv.setViewName("common/msg");
+			return mv;
+		}else {
+			mv.addObject("msg","채팅방삭제실패");
+			mv.addObject("loc","member/mypage.do?userId="+userid);
+			mv.setViewName("common/msg");
+			return mv;
+		}
 	}
 	
 	
