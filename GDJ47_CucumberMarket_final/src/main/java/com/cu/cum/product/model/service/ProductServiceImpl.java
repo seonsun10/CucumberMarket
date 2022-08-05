@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.cu.cum.product.model.dao.ProductDao;
 import com.cu.cum.product.model.dao.ProductMapperDao;
+import com.cu.cum.product.model.vo.Files;
 import com.cu.cum.product.model.vo.Product;
 import com.cu.cum.product.model.vo.Review;
 
@@ -81,6 +82,13 @@ public class ProductServiceImpl implements ProductService {
 	public List<Review> selectReviewList(Map map){
 		return pmdao.selectReviewList(session, map);
 	}
+
+
+
+	//유저가 가지고 있는 상품 조회
+	public List<Product> selectUserProductList(Map page, String userId) {
+		return pmdao.selectUserProductList(session,page,userId);
+	}
 	//ㅉ리스트
 	public List<Product> selectWishList(Map map){
 		return pmdao.selectWishList(session, map);
@@ -88,6 +96,7 @@ public class ProductServiceImpl implements ProductService {
 	//ㅉ카운트
 	public int selectWishCount(String id) {
 		return pmdao.selectWishCount(session, id);
+
 	}
 
 	//방번호로 상품정보가져오기
