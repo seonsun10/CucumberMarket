@@ -39,4 +39,5 @@ public interface InquiryService {
 	List<Inquiry> searchList(String keyword);
 	
 	List<Inquiry> searchListType(String keyword);
+	
 }

@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cu.cum.inquiry.model.service.InquiryService;
 import com.cu.cum.inquiry.model.vo.Inquiry;
 import com.cu.cum.member.model.vo.Member;
+import com.cu.cum.pagebar.PageBarBasic;
 import com.cu.cum.pagebar.PageBarInquiry;
 
 import lombok.extern.slf4j.Slf4j;
@@ -106,7 +107,7 @@ public class InquiryController {
 		List<Inquiry> list = service.selectInquiryListPage(param);
 		int totalData=service.selectInquiryCount();
 		model.addObject("list",list);
-		model.addObject("pageBar",PageBarInquiry.getPageBar(cPage,numPerpage, totalData,   "inquiryList" ));
+		model.addObject("pageBar",PageBarBasic.getPageBar(cPage,numPerpage, totalData,   "inquiryList" ));
 		model.addObject("totalData", totalData);
 		//System.out.println(list);
 		model.setViewName("inquiry/inquiryList");
@@ -129,15 +130,15 @@ public class InquiryController {
 		return "redirect:/inquiryList";
 	}
 	
-	// 문의글 검색
+	// 문의글 검색 jpa
 	
-	@RequestMapping("/inquiry/searchInquiry.do")
-	@ResponseBody
+	@RequestMapping("/searchInquiry.do")
 	public ModelAndView searchList(@RequestParam("searchType") String searchType, String keyword, ModelAndView model) {
 		log.debug(searchType);
 		List<Inquiry> list = new ArrayList();
 		if(searchType.equals("inquiryTitle")) {
 			list = service.searchList(keyword);
+			
 		}else if(searchType.equals("inquiryType")) {
 			list = service.searchListType(keyword);
 		}
@@ -147,6 +148,8 @@ public class InquiryController {
 		System.out.println(list);
 		return model;
 	}
+	
+
 	
 	
 	// 문의글 수정

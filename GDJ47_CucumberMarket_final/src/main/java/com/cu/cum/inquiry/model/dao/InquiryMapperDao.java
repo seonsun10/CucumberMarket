@@ -31,4 +31,6 @@ public class InquiryMapperDao {
 	public int deleteInquiry(SqlSessionTemplate session, int id) {
 		return session.delete("inquiry.deleteInquiry",id);
 	}
+	
+
 }

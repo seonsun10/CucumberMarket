@@ -30,4 +30,6 @@
 	<delete id="inquiry.deleteInquiry" parameterType="Inquiry">
 		DELETE FROM INQUIRY WHERE INQUIRY_NO=#{inquiryNo}
 	</delete>
+	
+	
 </mapper>

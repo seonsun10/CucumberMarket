@@ -82,16 +82,15 @@ public class InquiryServiceImpl implements InquiryService {
 	public Inquiry findByInquiryNo(int inquiryNo) {
 		return dao.findByInquiryNo(inquiryNo);
 	}
-	// 문의 글 검색
+	// 문의 글 검색 // 제목 / 유형 // jpa로 작성
 	@Override
 	public List<Inquiry> searchList(String keyword) {
 		return dao.findByinquiryTitleContaining(keyword);
 	}
-	
+	@Override
 	public List<Inquiry> searchListType(String keyword){
 		return dao.findByInquiryTypeContaining(keyword);
 	}
-	
 	
 
 }

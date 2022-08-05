@@ -39,7 +39,7 @@
             </div>
 			<div class="col-lg-9">
 				<div class="table-responsive">
-						<form action="${pageContext.request.contextPath }/inquiry/searchInquiry.do" method="post">
+						<form action="${pageContext.request.contextPath }/searchInquiry.do" method="post">
                   			<div class="input-group">
               					<input name="keyword" type="text" placeholder="Search" class="form-control">
 	                      		<div class="products-sort-by mt-2 mt-lg-0">
@@ -53,7 +53,6 @@
 					                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
 									<a href="${pageContext.request.contextPath }/inquiryWrite" class="btn btn-primary navbar-btn"><span>문의글 작성</span></a>
 				              	</div>
-				              	
 				            <!-- </div>
 							<div class="input-group-append"> -->
 				        	</div>
