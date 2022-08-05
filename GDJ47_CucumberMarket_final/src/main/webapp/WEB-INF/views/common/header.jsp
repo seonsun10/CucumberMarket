@@ -225,7 +225,7 @@
                   </li>
                 </ul>
               </li>
-              <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">Template<b class="caret"></b></a>
+              <--<li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">Template<b class="caret"></b></a>
                 <ul class="dropdown-menu megamenu">
                   <li>
                     <div class="row">
@@ -289,6 +289,9 @@
 				  
 				  <div id="search-not-mobile" class="navbar-collapse collapse">
 				  	<a href="${path }/area.do" class="btn btn-primary navbar-btn"> 지역설정 테스트용</a>
+				  </div>
+				  <div id="search-not-mobile" class="navbar-collapse collapse">
+				  	<a href="${path }/board/boardlist.do" class="btn btn-primary navbar-btn"> 커뮤니티 테스트</a>
 				  </div>
 			  
               </div>

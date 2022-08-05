@@ -105,19 +105,20 @@
 </head>
 <body>
   <div id="chatWrap">
-            <div id="chatHeader">오이마켓 채팅방
-            	
-            	<div id="dealcheck">
-	            <c:if test="${product ne null}">
-	            	<div id="pinfo" style='color:blue;font-size:15px'>거래를 완료하셨으면 후기를 작성해보세요!</div>
-		            <span><button onclick="fn_review();" class='btn btn-primary btn-sm'>${product.member.userId }에게 후기작성</button></span>
-	            </c:if>
-	            
-	            <c:if test="${product eq null }">
-	            
-	            </c:if>	
-            	
-            </div>
+            <div id="chatHeader">
+            	<img src="/resources/img/cucumber.png" alt="Obaju logo" class="d-inline-block d-md-none" style="width:50px;height:40px">&nbsp오이마켓 채팅방
+	            	<div id="dealcheck">
+			            <c:if test="${product ne null}">
+			            	<div id="pinfo" style='color:blue;font-size:15px'>거래를 완료하셨으면 후기를 작성해보세요!</div>
+				            <span><button onclick="fn_review();" class='btn btn-primary btn-sm'>${product.member.userId }에게 후기작성</button></span>
+			            </c:if>
+			            
+			            <c:if test="${product eq null }">
+			            
+			            </c:if>	
+	            	
+	                 </div>
+	                 
             </div>
             
             <div id="chatLog">
