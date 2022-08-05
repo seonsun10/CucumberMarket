@@ -34,10 +34,15 @@
 			<th>최근수정일</th>
 			<th>삭제</th>
 		</tr>
-			<c:if test="${product ne null}">
-				<c:forEach var="p" items="${product }">
+			<c:if test="${products ne null}">
+				<c:forEach var="p" items="${products}">
 					<tr id="tablebody">
-						<td><img src="${path }/resources/img/cucumber.png" style="width:50px;"></td>
+						<c:forEach var="pp" items="${pp }">
+							<c:if test="${pp.product.proNo eq p.proNo}">
+								<td><img src="${path }/resources/upload/product/${loginMember.userId}/${pp.renameFilename}" style="width:50px;"></td>
+								</c:if>
+						</c:forEach>
+					
 						<td><c:out value="${p.title}"/></td>
 						<td><c:out value="${p.price }"/>원</td>
 						<td><fmt:formatDate value="${p.enrollDate}" pattern="yyyy-MM-dd"/></td>
@@ -45,7 +50,7 @@
 					</tr>
 				</c:forEach>
 			</c:if>
-			<c:if test="${product eq null }">
+			<c:if test="${products eq null }">
 				<tr>
 					<td colspan="5">등록된 상품이 없습니다.</td>
 				</tr>

@@ -4,7 +4,7 @@ import java.util.List;
 
 import java.util.Map;
 
-
+import com.cu.cum.product.model.vo.Files;
 import com.cu.cum.product.model.vo.Product;
 
 
@@ -35,5 +35,8 @@ public interface ProductService {
 	
 	//삼품 리뷰 조회
 	List<Review> selectReviewList(Map page);
+
+	//유저가 가지고 있는 상품 조회
+	List<Product> selectUserProductList(Map page, String userId);
 	
 }

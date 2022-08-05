@@ -41,7 +41,7 @@ public class Product {
 	
 	@Id
 	@GeneratedValue(generator = "seq_prono" , strategy = GenerationType.SEQUENCE)
-	private int proNo;
+	private int proNo; //상품번호 pk값
 	
 	@Column(name="category_id")
 	private String categoryName; //카테고리아이디
@@ -76,9 +76,6 @@ public class Product {
 	@JoinColumn(name="userId")
 	private Member member; //판매자 아이디
 	
-
-
-
 
 	@Cascade(CascadeType.REMOVE)
 	@OneToMany(mappedBy="product" , fetch = FetchType.LAZY)

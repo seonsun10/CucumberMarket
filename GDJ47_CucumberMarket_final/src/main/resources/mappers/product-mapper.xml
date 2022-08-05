@@ -4,7 +4,7 @@
 	<resultMap type="product" id="productMap">
 		<id column="pro_no" property="proNo"/>
 		<result column="category_id" property="categoryName"/>
-		
+		<result column="title" property="title"/>
 		<result column="pro_status" property="proStatus"/>
 		<result column="price" property="price"/>
 		<result column="pro_count" property="proCount"/>
@@ -13,10 +13,13 @@
 		<result column="region" property="region"/>
 		<result column="solve_status" property="solveStatus"/>
 		<result column="user_id" property="member.userId"/>
-		<collection property="files" ofType="com.cu.cum.product.model.vo.Files" column="pro_no">
+		<collection property="files" ofType="files" column="pro_no">
 			<id column="files_no" property="filesNo"/>
 			<result column="original_filename" property="originalFilename"/>
 			<result column="rename_filename" property="renameFilename"/>
+			<association property="product" javaType="product" column="proNo">
+			<id column="pro_no" property="proNo"/>
+			</association>
 		</collection>
 	</resultMap>
 	<resultMap type="review" id="reviewMap">
@@ -30,7 +33,19 @@
 			<id column="pro_no" property="proNo"/>
 		</association>
 	</resultMap>
-
+	<resultMap type="files" id="filesMap">
+		<id column="files_no" property="filesNo"/>
+		<result column="original_filename" property="originalFilename"/>
+		<result column="rename_filename" property="renameFilename"/>
+		<result column="thumbnail_status" property="thumbnailStatus"/>
+		<association property="member" javaType="com.cu.cum.member.model.vo.Member" column="userId">	
+			<id column="user_id" property="userId"/>
+		</association>
+		<association property="product" javaType="product" column="proNo">
+			<id column="pro_no" property="proNo"/>
+		</association>
+	</resultMap>
+	
 	<select id="selectProductCount" resultType="_int">
 		SELECT COUNT(*) FROM PRODUCT WHERE USER_ID=#{userId}
 	</select>
@@ -56,5 +71,14 @@
 	</select>
 	<select id="selectproduct" resultMap="productMap" parameterType="_int">
 	select * from product where pro_no=#{id}
+	</select>
+	
+	<select id="selectUserProductList" resultMap="productMap">
+		SELECT * FROM PRODUCT P LEFT JOIN FILES  F ON F.PRO_NO=P.PRO_NO 
+			WHERE P.USER_ID=#{userId} 
+	</select>
+	
+	<select id="selectUserFiles" resultMap="filesMap">
+		select * from files where user_id=#{userId} and thumbnail_status='y'
 	</select>
 </mapper>

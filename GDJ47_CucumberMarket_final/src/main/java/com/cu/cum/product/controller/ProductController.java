@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,15 +19,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.product.model.service.FilesService;
 import com.cu.cum.product.model.service.ProductService;
-
-import com.cu.cum.product.model.vo.Files;
-
 import com.cu.cum.product.model.service.ReviewService;
-
+import com.cu.cum.product.model.vo.Files;
 import com.cu.cum.product.model.vo.Product;
-
 import com.cu.cum.product.model.vo.Review;
-
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -48,20 +44,19 @@ public class ProductController {
 	@Autowired
 	private ReviewService rvservice;
 	
-
+	
+	//MultipartHttpServletRequest mtfRequest
 	@RequestMapping("/product/insertProduct.do")
 	public String insertProduct(Product p, MultipartHttpServletRequest mtfRequest ,@RequestParam("proName") String proName , 
 			@RequestParam("sido1") String sido, @RequestParam("gugun1") String gugun,
 			@RequestParam("proContent") String proContent,
 			@RequestParam("tag") String tag , @RequestParam("proStatus") String proStatus,
-			@RequestParam(name="price") int price , @RequestParam(name="userId") String userId) {
+			@RequestParam(name="price") int price , @RequestParam(name="userId") String userId, HttpServletRequest rs) {
 		//String userId = "admin@naver.com"; //나중엔 세션값으로 email 불러와야함
 		//String userId = email.substring(0, email.indexOf("@"));
 		//파일제외 나머지 insert문
-		System.out.println(tag);
 		
 		String region = sido+" "+gugun;
-		System.out.println(region);
 		Member m = Member.builder().userId(userId).build();
 		p = Product.builder().title(proName).proContent(proContent).price(price).
 				region(region).categoryName(tag).proStatus(proStatus).member(m).
@@ -70,60 +65,84 @@ public class ProductController {
 		Product product = service.insertProduct(p); //productdao
 		
 		//파일 업로드 처리하고 db에 insert문처리
-		List<MultipartFile> fileList = mtfRequest.getFiles("image");
+		List<MultipartFile> fileList = mtfRequest.getFiles("image"); //나머지 이미지 3개
+		MultipartFile thumbnail = mtfRequest.getFile("image1"); //썸네일 이미지 1개
 		System.out.println(fileList);
-		String path = mtfRequest.getServletContext().getRealPath("/resources/upload/product/");
+		//System.out.println(upFile);
+		String path = mtfRequest.getServletContext().getRealPath("/resources/upload/product/"+userId+"/");
 		File uploadDir = new File(path);
 		if(!uploadDir.exists()) uploadDir.mkdirs();
 		List<Files> files = new ArrayList();
-		if(fileList!=null) {
-			int index=0;
-			for(MultipartFile f : fileList) {
-				if(!f.isEmpty()) {
-					if(index==0) { //대표이미지 썸네일
-						String originalFilename = f.getOriginalFilename();
-						String ext = originalFilename.substring(originalFilename.lastIndexOf("."));
-						int rndNum=(int)(Math.random()*10000);
-						String rename = "s_"+userId+"_"+rndNum+ext;
-						try {
-							f.transferTo(new File(path+rename));
-							files.add(Files.builder()
-								.product(p)
-								.member(m)
-								.originalFilename(originalFilename)
-								.renameFilename(rename).build());
-						}catch(IOException e) {
-							e.printStackTrace();
-						}
-						index++;
-					}else { //나머지 이미지 
-						String originalFilename = f.getOriginalFilename();
-						String ext = originalFilename.substring(originalFilename.lastIndexOf("."));
-						int rndNum=(int)(Math.random()*10000);
-						String rename = userId+"_"+rndNum+ext;
-						try {
-							f.transferTo(new File(path+rename));
-							files.add(Files.builder()
-								.product(p)
-								.member(m)
-								.originalFilename(originalFilename)
-								.renameFilename(rename).build());
-						}catch(IOException e) {
-							e.printStackTrace();
-						}
-					}
-				}
-			}
+		
+		//썸네일 이미지 처리
+		String originalFilename1 = thumbnail.getOriginalFilename();
+		String ext = originalFilename1.substring(originalFilename1.lastIndexOf("."));
+		int rndNum=(int)(Math.random()*10000);
+		String rename = "s_"+userId+"_"+rndNum+ext;
+		try {
+			thumbnail.transferTo(new File(path+rename));
+			files.add(Files.builder()
+					.product(p)
+					.member(m)
+					.originalFilename(originalFilename1)
+					.renameFilename(rename)
+					.thumbnailStatus("y")
+					.build());
+		}catch(IOException e) {
+			e.printStackTrace();
 		}
 		
+		//나머지 이미지 처리
+		if(fileList!=null) {
+			for(MultipartFile f : fileList) {
+					if(f!=null) {
+						String originalFilename2 = f.getOriginalFilename();
+						if(originalFilename2!=null) {
+							System.out.println(originalFilename2);
+							System.out.println("아래꺼 : "+originalFilename2.lastIndexOf("."));
+							String extt = originalFilename2.substring(originalFilename2.lastIndexOf("."));
+							
+							rndNum=(int)(Math.random()*10000);
+							String rename1 = userId+"_"+rndNum+extt;
+							try {
+								f.transferTo(new File(path+rename1));
+								files.add(Files.builder()
+									.product(p)
+									.member(m)
+									.originalFilename(originalFilename2)
+									.thumbnailStatus("n")
+									.renameFilename(rename1).build());
+							}catch(IOException e) {
+								e.printStackTrace();
+							}
+						}
+					}
+				//}
+			}
+		}		
+					
+//			 else { //나머지 이미지 System.out.println("productcontroller else문 들어오냐?"); 
+//							  String originalFilename = f.getOriginalFilename();
+//							  String ext =
+//						  originalFilename.substring(originalFilename.lastIndexOf("."));
+//							  int
+//						  rndNum=(int)(Math.random()*10000);
+//							  String rename = userId+"_"+rndNum+ext;
+//						  try
+//						  { 
+//							  f.transferTo(new File(path+rename)); 
+//							  files.add(Files.builder()
+//							  .product(p)
+//							  .member(m) .originalFilename(originalFilename)
+//							  .renameFilename(rename).build()); }
+//						  catch(IOException e) {
+//							  e.printStackTrace(); 
+//						  } 
+//					}
+
+
 		List<Files> f = fService.insertFiles(files);
-		
-		//Product product = service.insertProduct(p);
-//		if(p!=null) {
-//			System.out.println("파일이 들어갔다.");
-//		}else {
-//			System.out.println("파일이 들어가지 못함");
-//		}
+		System.out.println(f);
 		
 		return "redirect:/mypage.do";
 	}
@@ -172,11 +191,18 @@ public class ProductController {
 	
 	
 	
-	//카테고리별 상품 결과 나오게하는거 이란 임시용
+	//카테고리별 상품 결과 나오게하는거 일단 임시용
 	@RequestMapping("/product/productTotal.do")
 	public String productTotal(@RequestParam("tag") String tag) {
 		System.out.println(tag);
 		return "/";
 	}
 	
+	
+	
+	
+	@RequestMapping("/product/insertProductStart.do")
+	public String insertProductStart() {
+		return "product/insertProduct";
+	}
 }

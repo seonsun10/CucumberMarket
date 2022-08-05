@@ -5,17 +5,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-import com.cu.cum.product.model.dao.FilesDao;
-
 import com.cu.cum.product.model.dao.ProductDao;
 import com.cu.cum.product.model.dao.ProductMapperDao;
+import com.cu.cum.product.model.vo.Files;
 import com.cu.cum.product.model.vo.Product;
-
 import com.cu.cum.product.model.vo.Review;
 
 
@@ -85,6 +81,12 @@ public class ProductServiceImpl implements ProductService {
 	//상품 리뷰 리스트 조회
 	public List<Review> selectReviewList(Map map){
 		return pmdao.selectReviewList(session, map);
+	}
+
+
+	//유저가 가지고 있는 상품 조회
+	public List<Product> selectUserProductList(Map page, String userId) {
+		return pmdao.selectUserProductList(session,page,userId);
 	}
 
 }
