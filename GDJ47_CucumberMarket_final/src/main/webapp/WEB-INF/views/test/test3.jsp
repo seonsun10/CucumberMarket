@@ -105,6 +105,18 @@
             <div id="chatHeader">오이마켓 채팅방</div>
             
             <div id="chatLog">
+            <div id="dealcheck">
+	            <c:if test="${product ne null}">
+		            <span>거래상품명 : ${product.title }</span>
+		            <button onclick="fn_review();">후기 남기기</button>
+	            </c:if>
+	            
+	            <c:if test="${product eq null }">
+	            
+	            </c:if>	
+            	
+            </div>
+            
             <c:if test="${not empty msg }">
            	 <c:forEach items="${msg }" var="dd">
            	 	<c:if test="${dd.userid ne loginMember.userId }">
@@ -123,6 +135,7 @@
                 </c:if>
              </c:forEach>
             </c:if>
+            	
             </div>
             <form id="chatForm" >
                 <input name ="kj" type="text"  autocomplete="off" size="30" id="message" placeholder="메시지를 입력하세요">
@@ -136,11 +149,42 @@
 
 </body>
 </html>
+<style>
+
+</style>
 
 
 <script>
 
-
+const fn_review=()=>{
+	 var proNo = '${product.proNo}';
+	 console.log(proNo);
+	 
+	 if(confirm("===거래완료 하시겠습니까=== ")){
+		 $.ajax({
+				
+			 data:JSON.stringify({userId:'${room.userId}',
+   	       			otherId:'${loginMember.userId}',
+   	       			proNo:proNo
+   	       			 }),
+				headers:{"Content-Type":"application/json"},
+       		 	url: '/testreview',
+       			type: "POST",
+       			
+       			
+       		
+       		 success:data=> {
+       			
+       			open("${path}/testreview2/"+data.host+"/"+data.product.proNo,"_blank","width=400,height=500");
+       			
+       			
+       		 }
+       	 }); 
+	 }else{
+		alert("아니오")
+	 }
+	 
+}
 
 $(document).ready(function(){
 	$('body').scrollTop($('#chatWrap')[0].scrollHeight);
@@ -226,7 +270,7 @@ $(document).ready(function(){
 
     });
 
-      
+    
     
     function sendMessage(event) {
         var msg = document.getElementById("message").value.trim();

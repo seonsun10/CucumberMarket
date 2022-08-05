@@ -5,17 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
-import com.cu.cum.product.model.dao.FilesDao;
 
 import com.cu.cum.product.model.dao.ProductDao;
 import com.cu.cum.product.model.dao.ProductMapperDao;
 import com.cu.cum.product.model.vo.Product;
-
 import com.cu.cum.product.model.vo.Review;
 
 
@@ -94,5 +89,15 @@ public class ProductServiceImpl implements ProductService {
 	public int selectWishCount(String id) {
 		return pmdao.selectWishCount(session, id);
 	}
+	//방번호로 상품정보가져오기
+	public Product selectProduct(String roomid) {
+		return pmdao.selectProduct(session, roomid);
+	}
+	//상품상태 변경 
+	public int updateProductSolve(int no) {
+		return pmdao.updateProductSolve(session,no);
+	}
+
+	
 
 }

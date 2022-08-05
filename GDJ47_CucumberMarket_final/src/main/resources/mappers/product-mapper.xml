@@ -63,4 +63,10 @@
 	<select id="selectWishCount" parameterType="string" resultType="_int">
 	select count(*) from wish_list where user_id=#{id}
 	</select>
+	<select id="selectproductroomid" parameterType="string" resultMap="productMap">
+	select * from product where pro_no = (select prono from prochat3 where roomid=#{roomid})
+	</select>
+	<update id="updateproductsolve" parameterType="_int">
+	update product set solve_status ='n' where pro_no=#{no}
+	</update>
 </mapper>
