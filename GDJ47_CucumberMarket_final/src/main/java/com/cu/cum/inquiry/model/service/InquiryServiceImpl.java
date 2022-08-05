@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.cu.cum.inquiry.model.dao.InquiryDao;
@@ -92,5 +94,9 @@ public class InquiryServiceImpl implements InquiryService {
 		return dao.findByInquiryTypeContaining(keyword);
 	}
 	
+//	@Override
+//	public List<Inquiry> searchListTest(String keyword, Pageable pageable){
+//		return dao.findByInquiryTypeContaining(keyword, pageable);
+//	}
 
 }

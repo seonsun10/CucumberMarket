@@ -44,8 +44,8 @@
               					<input name="keyword" type="text" placeholder="Search" class="form-control">
 	                      		<div class="products-sort-by mt-2 mt-lg-0">
                         			<select name="searchType" class="form-control">
-                          				<option >선택</option>
-                          				<option value="inquiryTitle">제목</option>
+                          				<option selected >선택</option>
+                          				<option value="inquiryTitle" selected>제목</option>
                           				<option value="inquiryType">문의 유형</option>
                         			</select>
                      			 </div>

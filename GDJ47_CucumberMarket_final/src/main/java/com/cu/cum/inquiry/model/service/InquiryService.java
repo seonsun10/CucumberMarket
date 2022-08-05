@@ -3,7 +3,8 @@ package com.cu.cum.inquiry.model.service;
 import java.util.List;
 import java.util.Map;
 
-import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.cu.cum.inquiry.model.vo.Inquiry;
 
@@ -39,5 +40,8 @@ public interface InquiryService {
 	List<Inquiry> searchList(String keyword);
 	
 	List<Inquiry> searchListType(String keyword);
+	//List<Inquiry> searchListTest(String keyword, Pageable pageable);
+	
+	
 	
 }

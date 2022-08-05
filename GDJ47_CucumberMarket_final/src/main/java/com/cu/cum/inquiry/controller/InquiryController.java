@@ -7,6 +7,10 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +25,6 @@ import com.cu.cum.inquiry.model.service.InquiryService;
 import com.cu.cum.inquiry.model.vo.Inquiry;
 import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.pagebar.PageBarBasic;
-import com.cu.cum.pagebar.PageBarInquiry;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -130,8 +133,7 @@ public class InquiryController {
 		return "redirect:/inquiryList";
 	}
 	
-	// 문의글 검색 jpa
-	
+	// 문의글 검색 jpa 
 	@RequestMapping("/searchInquiry.do")
 	public ModelAndView searchList(@RequestParam("searchType") String searchType, String keyword, ModelAndView model) {
 		log.debug(searchType);
@@ -148,6 +150,18 @@ public class InquiryController {
 		System.out.println(list);
 		return model;
 	}
+	
+	// 문의 글 제목으로 검색
+//	@RequestMapping("/searchInquiry.do")
+//	public ModelAndView searchListTest( String keyword, ModelAndView model
+//			,@PageableDefault(size = 5, sort = "inquiryType", direction = Sort.Direction.DESC) Pageable pageable) {
+//		List<Inquiry> list = service.searchListTest(keyword, pageable);
+//		model.addObject("list", list);
+//		model.addObject("previous", pageable.previousOrFirst().getPageNumber());
+//        model.addObject("next", pageable.next().getPageNumber());
+//		model.setViewName("inquiry/inquiryList");
+//		return model;
+//	}
 	
 
 	
