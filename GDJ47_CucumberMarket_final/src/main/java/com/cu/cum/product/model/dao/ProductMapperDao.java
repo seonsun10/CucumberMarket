@@ -64,6 +64,10 @@ public class ProductMapperDao {
 	public int updateProductSolve(SqlSessionTemplate session,int no) {
 		return session.update("product.updateproductsolve",no );
 	}
+	//판매완료개수
+	public int selectSolveCount(SqlSessionTemplate session,String userId) {
+		return session.selectOne("product.selectsolvecount",userId);
+	}
 	
 	
 	

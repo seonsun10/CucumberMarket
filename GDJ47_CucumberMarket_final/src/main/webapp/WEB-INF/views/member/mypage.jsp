@@ -66,7 +66,7 @@
 					  		<div id="sale">
 					  		<img src="https://cdn-icons-png.flaticon.com/512/5132/5132236.png" width="14px"/>
 					  			상품판매&nbsp;
-					  			<span id="count">0개</span>
+					  			<span id="count"><c:out value="${solveCount }"/>개</span>
 					  		</div>
 				  		</div>
 					  		<div id="intro">

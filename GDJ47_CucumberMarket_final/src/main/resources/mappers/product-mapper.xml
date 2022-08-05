@@ -69,4 +69,7 @@
 	<update id="updateproductsolve" parameterType="_int">
 	update product set solve_status ='n' where pro_no=#{no}
 	</update>
+	<select id="selectsolvecount" parameterType="string" resultType="_int">
+	select count(*) from product where user_id=#{userId} and solve_status='n'
+	</select>
 </mapper>
