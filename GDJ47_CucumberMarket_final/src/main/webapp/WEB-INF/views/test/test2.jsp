@@ -60,7 +60,7 @@
    	       		 success:data=> {
    	       			 console.log(data.roomId);
    	       			 if(data.roomId!=null){
-   	       			open("${path}/testchat.do/"+data.roomId,"_blank","width=570,height=750");
+   	       			open("${path}/testchat.do/"+data.roomId,"_blank","width=500,height=500");
    	       			 }else{
    	       				 alert("본인 상품에는 채팅을 하실 수 없습니다.")
    	       			 }

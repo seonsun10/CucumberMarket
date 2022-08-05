@@ -98,6 +98,7 @@ public class ProductServiceImpl implements ProductService {
 	public int updateProductSolve(int no) {
 		return pmdao.updateProductSolve(session,no);
 	}
+}
 
 	
 
