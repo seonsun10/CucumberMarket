@@ -256,7 +256,7 @@ public class MemberController {
 		System.out.println(url);
 		System.out.println("사이즈: "+totalwish);
 		System.out.println("ftx: "+wishlist);
-		mv.addObject("pageBar",TestPageBar.getPageBar(cPage, numPerpage, totalwish, url));
+		mv.addObject("pageBar",PageBar.getPageBar(cPage, numPerpage, totalwish, url));
 		if(wishlist.size()>0) {
 			mv.addObject("wish",wishlist);
 		}

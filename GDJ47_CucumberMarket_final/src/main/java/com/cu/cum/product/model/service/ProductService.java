@@ -41,6 +41,10 @@ public interface ProductService {
 	
 	//ㅉ카운트
 	int selectWishCount(String id);
+	//방번호로 상품가져오기
+	Product selectProduct(String roomId);
+	//상품 판매상태 변경
+	int updateProductSolve(int no);
 	
 	
 }

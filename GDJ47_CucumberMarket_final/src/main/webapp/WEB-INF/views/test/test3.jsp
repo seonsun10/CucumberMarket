@@ -3,6 +3,8 @@
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <head>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
@@ -25,7 +27,7 @@
 }
 
 #chatLog {
-    height: 700px;
+    height: 500px;
     overflow-y: auto;
     padding: 10px;
 }
@@ -97,14 +99,30 @@
     color: #0084FF;
     font-size: 17px;
 }
+
     
 </style>
 </head>
 <body>
   <div id="chatWrap">
-            <div id="chatHeader">오이마켓 채팅방</div>
+            <div id="chatHeader">오이마켓 채팅방
+            	
+            	<div id="dealcheck">
+	            <c:if test="${product ne null}">
+	            	<div id="pinfo" style='color:blue;font-size:15px'>거래를 완료하셨으면 후기를 작성해보세요!</div>
+		            <span><button onclick="fn_review();" class='btn btn-primary btn-sm'>${product.member.userId }에게 후기작성</button></span>
+	            </c:if>
+	            
+	            <c:if test="${product eq null }">
+	            
+	            </c:if>	
+            	
+            </div>
+            </div>
             
             <div id="chatLog">
+            
+            
             <c:if test="${not empty msg }">
            	 <c:forEach items="${msg }" var="dd">
            	 	<c:if test="${dd.userid ne loginMember.userId }">
@@ -123,12 +141,13 @@
                 </c:if>
              </c:forEach>
             </c:if>
+            	
             </div>
             <form id="chatForm" >
                 <input name ="kj" type="text"  autocomplete="off" size="30" id="message" placeholder="메시지를 입력하세요">
                 <input type="submit" value="보내기" id="button-send"  ><!-- id="button-send" -->
             </form>
-        </div>
+   </div>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
@@ -136,11 +155,42 @@
 
 </body>
 </html>
+<style>
+
+</style>
 
 
 <script>
 
-
+const fn_review=()=>{
+	 var proNo = '${product.proNo}';
+	 console.log(proNo);
+	 
+	 if(confirm("===거래완료 하시겠습니까=== ")){
+		 $.ajax({
+				
+			 data:JSON.stringify({userId:'${room.userId}',
+   	       			otherId:'${loginMember.userId}',
+   	       			proNo:proNo
+   	       			 }),
+				headers:{"Content-Type":"application/json"},
+       		 	url: '/testreview',
+       			type: "POST",
+       			
+       			
+       		
+       		 success:data=> {
+       			
+       			open("${path}/testreview2/"+data.host+"/"+data.product.proNo,"_blank","width=480,height=400");
+       			
+       			
+       		 }
+       	 }); 
+	 }else{
+		alert("취소하셨습니다.")
+	 }
+	 
+}
 
 $(document).ready(function(){
 	$('body').scrollTop($('#chatWrap')[0].scrollHeight);
@@ -226,7 +276,7 @@ $(document).ready(function(){
 
     });
 
-      
+    
     
     function sendMessage(event) {
         var msg = document.getElementById("message").value.trim();

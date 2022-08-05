@@ -56,6 +56,14 @@ public class ProductMapperDao {
 		return session.selectOne("product.selectWishCount",id);
 		
 	}
+	//방번호로 상품가져오기
+	public Product selectProduct(SqlSessionTemplate session,String roomid) {
+		return session.selectOne("product.selectproductroomid",roomid);
+	}
+	//판매상태변경
+	public int updateProductSolve(SqlSessionTemplate session,int no) {
+		return session.update("product.updateproductsolve",no );
+	}
 	
 	
 	
