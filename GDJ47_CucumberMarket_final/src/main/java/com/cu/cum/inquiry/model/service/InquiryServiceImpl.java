@@ -88,6 +88,10 @@ public class InquiryServiceImpl implements InquiryService {
 		return dao.findByinquiryTitleContaining(keyword);
 	}
 	
+	public List<Inquiry> searchListType(String keyword){
+		return dao.findByInquiryTypeContaining(keyword);
+	}
+	
 	
 
 }

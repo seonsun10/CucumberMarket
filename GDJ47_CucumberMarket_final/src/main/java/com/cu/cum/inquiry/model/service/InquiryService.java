@@ -38,4 +38,5 @@ public interface InquiryService {
 	// 문의 글 검색
 	List<Inquiry> searchList(String keyword);
 	
+	List<Inquiry> searchListType(String keyword);
 }

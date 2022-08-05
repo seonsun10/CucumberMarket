@@ -42,6 +42,13 @@
 						<form action="${pageContext.request.contextPath }/inquiry/searchInquiry.do" method="post">
                   			<div class="input-group">
               					<input name="keyword" type="text" placeholder="Search" class="form-control">
+	                      		<div class="products-sort-by mt-2 mt-lg-0">
+                        			<select name="searchType" class="form-control">
+                          				<option >선택</option>
+                          				<option value="inquiryTitle">제목</option>
+                          				<option value="inquiryType">문의 유형</option>
+                        			</select>
+                     			 </div>
 				              	<div class="input-group-append">
 					                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
 									<a href="${pageContext.request.contextPath }/inquiryWrite" class="btn btn-primary navbar-btn"><span>문의글 작성</span></a>
@@ -60,7 +67,7 @@
 	                          			<th colspan=2>제목</th>
 										<th>문의 유형</th>
 										<th>등록일</th>
-										<th>답변 여부</th>
+										<!-- <th>답변 여부</th> -->
 	                        		</tr>
 	                      		</thead>
 								<tbody>
@@ -77,7 +84,7 @@
 		                          		</td>
 		                          		<td><c:out value="${i.inquiryType}"/></td>
 		                          		<td><fmt:formatDate value="${i.inquiryDate}" pattern="yyyy-MM-dd"/></td>
-		                          		<td><c:out value="${i.answer}"/></td>
+		                          		<%-- <td><c:out value="${i.answer}"/></td> --%>
 		                        	</tr>
 		                        	</c:forEach>
 		                        	</c:if>

@@ -1,5 +1,6 @@
 package com.cu.cum.inquiry.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -132,9 +133,14 @@ public class InquiryController {
 	
 	@RequestMapping("/inquiry/searchInquiry.do")
 	@ResponseBody
-	public ModelAndView searchList(String keyword, ModelAndView model) {
-		
-		List<Inquiry> list = service.searchList(keyword);
+	public ModelAndView searchList(@RequestParam("searchType") String searchType, String keyword, ModelAndView model) {
+		log.debug(searchType);
+		List<Inquiry> list = new ArrayList();
+		if(searchType.equals("inquiryTitle")) {
+			list = service.searchList(keyword);
+		}else if(searchType.equals("inquiryType")) {
+			list = service.searchListType(keyword);
+		}
 		
 		model.addObject("list", list);
 		model.setViewName("inquiry/inquiryList");
@@ -166,6 +172,8 @@ public class InquiryController {
 		
 		return "redirect:/inquiryList";
 	}
+	
+	
 	
 	
 }
