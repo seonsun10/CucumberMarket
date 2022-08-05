@@ -124,6 +124,7 @@ public class MemberController {
 	public String myPage(@RequestParam String userId, Model m) {
 		m.addAttribute("userId",userId);
 		int productCount = proservice.selectProductCount(userId);
+		m.addAttribute("solveCount",proservice.selectSolveCount(userId));
 		m.addAttribute("productCount",productCount);
 		m.addAttribute("viewCount",service.selectViewCount(userId));
 		return "member/mypage";

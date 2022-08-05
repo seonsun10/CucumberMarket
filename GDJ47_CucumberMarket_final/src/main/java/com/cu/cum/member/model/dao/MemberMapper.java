@@ -12,4 +12,5 @@ public interface MemberMapper {
 	//조회수 가져오기
 	@Select("select view_count from member where userId=#{writer}")
 	int selectViewCount(String writer);
+	//
 }

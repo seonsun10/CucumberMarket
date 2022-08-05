@@ -34,4 +34,6 @@ public interface MemberService {
 	
 	//조회수 가져오기
 	int selectViewCount(String writer);
+	
+	
 }

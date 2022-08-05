@@ -98,6 +98,10 @@ public class ProductServiceImpl implements ProductService {
 	public int updateProductSolve(int no) {
 		return pmdao.updateProductSolve(session,no);
 	}
+	//판매완료상품개수
+	public int selectSolveCount(String userId) {
+		return pmdao.selectSolveCount(session,userId);
+	}
 }
 
 	

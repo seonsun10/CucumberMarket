@@ -181,7 +181,7 @@ const fn_review=()=>{
        		
        		 success:data=> {
        			
-       			open("${path}/testreview2/"+data.host+"/"+data.product.proNo,"_blank","width=480,height=400");
+       			open("${path}/testreview2/"+data.host+"/"+data.product.proNo,"_blank","width=500,height=430");
        			
        			
        		 }
