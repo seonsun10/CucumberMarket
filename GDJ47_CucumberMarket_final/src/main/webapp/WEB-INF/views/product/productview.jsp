@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<link rel="stylesheet" href="${path}/resources/css/product/productView.css">
 <div id="all">
       <div id="content">
         <div class="container">
@@ -136,22 +137,16 @@
                     <div class="item"> <img src="img/detailbig2.jpg" alt="" class="img-fluid"></div>
                     <div class="item"> <img src="img/detailbig3.jpg" alt="" class="img-fluid"></div>
                   </div>
-                  <div class="ribbon sale">
-                    <div class="theribbon">SALE</div>
-                    <div class="ribbon-background"></div>
-                  </div>
                   <!-- /.ribbon-->
-                  <div class="ribbon new">
-                    <div class="theribbon">NEW</div>
-                    <div class="ribbon-background"></div>
+                  <div class="box" id="photoBox">
+                  	이미지 박스
                   </div>
-                  <!-- /.ribbon-->
                 </div>
                 <div class="col-md-6">
                   <div class="box">
-                    <h1 class="text-center">White Blouse Armani</h1>
+                    <h3 class="text-center">상품명</h3>
                     <p class="goToDescription"><a href="#details" class="scroll-to">Scroll to product details, material &amp; care and sizing</a></p>
-                    <p class="price">$124.00</p>
+                    <p class="price">1000원</p>
                     <p class="text-center buttons"><a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a>
                     <c:if test="${count==0}">
                     <!-- <a href="basket.html" class="btn btn-outline-primary" style="background-color:lightgreen"><i class="fa fa-heart" style="color:white"></i></a></p> -->

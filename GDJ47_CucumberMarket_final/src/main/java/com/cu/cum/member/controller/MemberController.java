@@ -277,10 +277,11 @@ public class MemberController {
 	//다른 사람 페이지 연결
 	@RequestMapping("/member/otherMember.do")
 	public String otherMember(@RequestParam String writer,
-								@RequestParam String customer,
+								@RequestParam(defaultValue="no") String customer,
 								HttpServletRequest request,
 								HttpServletResponse response,
 								Model m) {
+		
 		Cookie oldCookie = null;
 	    Cookie[] cookies = request.getCookies();
 	    if (cookies != null) {
@@ -290,21 +291,22 @@ public class MemberController {
 	            }
 	        }
 	    }
-
-	    if (oldCookie != null) {
-	        if (!oldCookie.getValue().contains("[" + customer.toString() + "]")) {
-	            service.viewCountUp(writer);
-	            oldCookie.setValue(oldCookie.getValue() + "_[" + customer + "]");
-	            oldCookie.setPath("/");
-	            oldCookie.setMaxAge(60 * 60 * 24);
-	            response.addCookie(oldCookie);
-	        }
-	    } else {
-	        service.viewCountUp(writer);
-	        Cookie newCookie = new Cookie("postView","[" + customer + "]");
-	        newCookie.setPath("/");
-	        newCookie.setMaxAge(60 * 60 * 24);
-	        response.addCookie(newCookie);
+	    if(!customer.equals("no")) {
+		    if (oldCookie != null) {
+		        if (!oldCookie.getValue().contains("[" + customer.toString() + "]")) {
+		            service.viewCountUp(writer);
+		            oldCookie.setValue(oldCookie.getValue() + "_[" + customer + "]");
+		            oldCookie.setPath("/");
+		            oldCookie.setMaxAge(60 * 60 * 12);
+		            response.addCookie(oldCookie);
+		        }
+		    } else {
+		        service.viewCountUp(writer);
+		        Cookie newCookie = new Cookie("postView","[" + customer + "]");
+		        newCookie.setPath("/");
+		        newCookie.setMaxAge(60 * 60 * 12);
+		        response.addCookie(newCookie);
+		    }
 	    }
 		Member member = service.selectMember(writer);
 		m.addAttribute("viewCount",service.selectViewCount(writer));

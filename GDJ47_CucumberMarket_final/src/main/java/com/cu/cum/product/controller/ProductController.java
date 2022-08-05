@@ -49,6 +49,7 @@ public class ProductController {
 	private ReviewService rvservice;
 	
 
+
 	@RequestMapping("/product/insertProduct.do")
 	public String insertProduct(Product p, MultipartHttpServletRequest mtfRequest ,@RequestParam("proName") String proName , 
 			@RequestParam("sido1") String sido, @RequestParam("gugun1") String gugun,
