@@ -7,6 +7,7 @@ spring:
     driver-class-name: oracle.jdbc.driver.OracleDriver
     username: cucumber
     password: cucumber123
+    
     #connection pool설정
     hikari:
       minimum-idle: 10
@@ -38,18 +39,30 @@ spring:
       ddl-auto: update
       use-new-id-generator-mappings: true
       
+<<<<<<< HEAD
     properties:
       hibernate:
         format_sql: true  
 
+=======
+#    properties:
+#      hibernate:
+#        format_sql: true
+        
+>>>>>>> branch 'main' of https://github.com/seonsun10/CucumberMarket.git
 logging:
   level:
     root: info
     '[org.hibernate.type.descriptor.sql]': trace
     com.cu.cum: debug
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> branch 'main' of https://github.com/seonsun10/CucumberMarket.git
 
+
+   
 mybatis:
   mapper-locations: classpath:mappers/**/*.xml
   config-location: classpath:mybatis-config.xml

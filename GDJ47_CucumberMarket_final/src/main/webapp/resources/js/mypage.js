@@ -93,8 +93,9 @@ $(()=>{
 	});
 	//마이페이지 채팅 목록 출력 연결
 	$("#chattag").click(e=>{
+		
 		$.ajax({
-			url:"/member/mypageChat.do",
+			url: "/member/mypageChat.do",
 			dataType:"html",
 			success:data=>{
 				$("#databox").html(data);
@@ -105,8 +106,9 @@ $(()=>{
 	
 });
 function fn_ajaxPage1(pageNo){
+	const page = $("#page").val();
 	$.ajax({
-		url:"/member/mypageProduct.do",
+		url:"/member/mypage"+$("#page").val()+".do",
 		data:{"cPage":pageNo,"userId":$("#userIdd").val()},
 		dataType:"html",
 		success:data=>{
@@ -124,6 +126,27 @@ function fn_ajaxPage2(pageNo,numPerpage){
 		}
 	});
 };
+function fn_ajaxPage5(pageNo){
+	$.ajax({
+		url:"/member/mypageDibs.do",
+		data:{"cPage":pageNo,"userId":$("#userIdd").val()},
+		dataType:"html",
+		success:data=>{
+			$("#databox").html(data);
+		}
+	});
+};
+function fn_ajaxPage6(pageNo,numPerpage){
+	$.ajax({
+		url:"/member/mypageDibs.do",
+		data:{"cPage":pageNo,"numPerpage":numPerpage,"userId":$("#userIdd").val()},
+		dataType:"html",
+		success:data=>{
+			$("#databox").html(data);
+		}
+	});
+};
+
 
 const pwcheck=()=>{
 	const pw1 = $("#newPw");

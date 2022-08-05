@@ -86,5 +86,14 @@ public class ProductServiceImpl implements ProductService {
 	public List<Review> selectReviewList(Map map){
 		return pmdao.selectReviewList(session, map);
 	}
-
+	//ㅉ리스트
+	public List<Product> selectWishList(Map map){
+		return pmdao.selectWishList(session, map);
+	}
+	//ㅉ카운트
+	public int selectWishCount(String id) {
+		return pmdao.selectWishCount(session, id);
+	}
+	
+	
 }

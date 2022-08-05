@@ -1,17 +1,25 @@
 package com.cu.cum.member.model.service;
 
+import java.util.List;
 import com.cu.cum.member.model.vo.Member;
 
 public interface MemberService {
-
-
-	Member insertAdmin(Member m);
-
-
-
-//	String checkEmail(String email);
+	
+//	Member insertAdmin(Member m);
 
 	Member join(Member member);
+
+//	Member updateMember(Member member);
+
+	Member getData(String userId);
+
+	Member selectMember(String id);
+
+	List<Member> selectMembers();
+//
+//	Member findOne(String memberId);
+//
+//	List<Member> findMembers();
 	
 	Member searchMember(String userId);
 	
@@ -20,4 +28,10 @@ public interface MemberService {
 	
 	//회원정보 수정
 	Member updateMember(Member m);
+	
+	//조회수up
+	int viewCountUp(String writer);
+	
+	//조회수 가져오기
+	int selectViewCount(String writer);
 }

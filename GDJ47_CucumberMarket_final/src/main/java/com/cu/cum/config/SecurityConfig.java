@@ -29,16 +29,29 @@ public class SecurityConfig {
 	public SecurityFilterChain authenticatePath(HttpSecurity http) throws Exception{
 		return http.csrf().disable()
 				.formLogin()
-					 //web.xml에서 설정하는 것들 설정가능
-					.successForwardUrl("/successLogin.do")
+					.loginPage("/loginpage")
+					.loginProcessingUrl("/loginprocess")
+					.successForwardUrl("/loginsuccess")
+					.usernameParameter("userId")
+					.passwordParameter("password")
 					.and() //http부터 또 설정 가능
 				.authorizeRequests() //인증 권한
-					.antMatchers("/**").hasRole("USER")
+					.antMatchers("/member/*").hasAnyRole("USER","ADMIN")
+					.antMatchers("/admin").hasRole("ADMIN")
+					// /admin 요청에 대해서는 ROLE_ADMIN 역할을 가지고 있어야 함
+//	                .antMatchers("/admin").hasRole("ADMIN")
+	                // 나머지 요청에 대해서는 로그인을 요구하지 않음
+					.antMatchers("/loginpage","/login","/resources/**").permitAll()
+					.anyRequest().authenticated()
+					                //.anyRequest().permitAll()
+					.and()
+				.exceptionHandling().accessDeniedPage("/denie")
 					.and()
 				.logout()
 					.logoutUrl("/logout")
 					.logoutSuccessUrl("/successLogout.do")
 					.and()
+				
 				.authenticationProvider(authenticationProvider())//인증 대상 빈을 받아서 설정
 				.build();
 	}

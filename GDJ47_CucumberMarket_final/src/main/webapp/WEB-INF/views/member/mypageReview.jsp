@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
+<input id="page" type="hidden" value="Review"/>
 <div id="pro-head"> 
 	<div id="pro-left">
 		후기&nbsp;
@@ -25,31 +26,85 @@
 		</select>
 	</div>
 </div>
-<div id="pro-body">
-	<table>
-		<tr id="tablehead">
-			<th>사진</th>
-			<th>제목</th>
-			<th>가격</th>
-			<th>최근수정일</th>
-			<th>삭제</th>
-		</tr>
-		<c:if test="${review ne null}">
-			<c:forEach var="r" items="${review }">
-				<tr id="tablebody">
-					<td id="lione"><img src="${path }/resources/img/오이.png" style="width:50px;"></td>
-					<td><c:out value="${p.proName }"/></td>
-					<td id=""><c:out value="${p.price }"/>원</td>
-					<td id="lifour"><fmt:formatDate value="${p.enrollDate}" pattern="yyyy-MM-dd"/></td>
-					<td id="lithr"><button>삭제</button></td>
-				</tr>
-			</c:forEach>
-		</c:if>
-		<c:if test="${review eq null }">
-			<tr>
-				<td colspan="5">등록된 후기가 없습니다.</td>
-			</tr>
-		</c:if>
-	</table>
-</div>
-<div id="pageBar"><c:out value="${pageBar }" escapeXml="false"/></div>
+<c:if test="${review ne null }">
+	<c:forEach var="r" items="${review }">
+		<div id="pro-body">
+			<a id="review-a" href="${path }/member/otherMember.do?writer=${r.writer}&customer=${loginMember.userId}"><img src="${path }/resources/img/cucumber.png" style="width:50px;"></a>
+			<div>
+				<div>
+					<div id="writer"><c:out value="${r.writer }"/></div>
+					<div id="oi">
+						<c:choose>
+							<c:when test="${r.oi eq 1 }">
+								<img src="${path }/resources/img/별.png">
+								<img src="${path }/resources/img/빈별.png">
+								<img src="${path }/resources/img/빈별.png">
+								<img src="${path }/resources/img/빈별.png">
+								<img src="${path }/resources/img/빈별.png">
+							</c:when>
+							<c:when test="${r.oi eq 2 }">
+								<img src="${path }/resources/img/별.png">
+								<img src="${path }/resources/img/별.png">
+								<img src="${path }/resources/img/빈별.png">
+								<img src="${path }/resources/img/빈별.png">
+								<img src="${path }/resources/img/빈별.png">
+							</c:when>
+							<c:when test="${r.oi eq 3 }">
+								<img src="${path }/resources/img/별.png">
+								<img src="${path }/resources/img/별.png">
+								<img src="${path }/resources/img/별.png">
+								<img src="${path }/resources/img/빈별.png">
+								<img src="${path }/resources/img/빈별.png">
+							</c:when>
+							<c:when test="${r.oi eq 4 }">
+								<img src="${path }/resources/img/별.png">
+								<img src="${path }/resources/img/별.png">
+								<img src="${path }/resources/img/별.png">
+								<img src="${path }/resources/img/별.png">
+								<img src="${path }/resources/img/빈별.png">
+							</c:when>
+							<c:when test="${r.oi eq 5 }">
+								<img src="${path }/resources/img/별.png">
+								<img src="${path }/resources/img/별.png">
+								<img src="${path }/resources/img/별.png">
+								<img src="${path }/resources/img/별.png">
+								<img src="${path }/resources/img/별.png">
+							</c:when>
+						</c:choose>
+					</div>
+				</div>
+			</div>
+			<div id="review"><c:out value="${r.ment }"/></div>
+			<div id="review-date"><fmt:formatDate value="${r.writeDate }" pattern="yyyy-MM-dd"/></div>
+		</div>
+	</c:forEach>
+</c:if>
+<c:if test="${review ne null }">
+	<div id="pageBar"><c:out value="${pageBar }" escapeXml="false"/></div>
+</c:if>
+
+<style>
+	div#pro-head{
+		border-bottom:1px solid rgb(229,229,229);
+	}
+	div#pro-body{
+		display:flex;
+		padding:20px;
+		align-items:center;
+		border-bottom:1px solid rgb(229,229,229);
+	}
+	div#oi>img{
+		width:10px;
+	}
+	a#review-a{
+		margin-right:15px;
+	}
+	div#review{
+		flex:1 1 0%;
+		align-items:center;
+		text-align:center;
+	}
+	div#review-date{
+		margin-left:15px;
+	}
+</style>

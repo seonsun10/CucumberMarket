@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,9 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 public class WishListController {
+	
+	@Autowired
+	private SqlSessionTemplate session;
 	
 	@Autowired
 	private WishListService service;
@@ -51,11 +55,19 @@ public class WishListController {
 		Product p = Product.builder().proNo(no).build();
 		Member m = Member.builder().userId(id).build();
 		WishList wl = WishList.builder().member(m).product(p).build();
-		WishList result = service.insertWishlist(wl);
-		int count = 0;
-		if(result!=null) {
-			count = 1;
+		int checkresult = service.checkidWishlist(session,wl);
+		System.out.println(wl);
+		int count;
+		
+		if(checkresult>0) {
+			count=0;
+			
+			
+		}else {
+			WishList result = service.insertWishlist(wl);
+			count=1;
 		}
+		
 		
 		request.setAttribute("count", count);
 		request.setAttribute("id", id);

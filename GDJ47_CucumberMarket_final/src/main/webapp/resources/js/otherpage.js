@@ -2,26 +2,20 @@
  * 
  */
  
- if($("#protag").click(e=>{
-	$("#protag").css("backgroundColor","lightgray");
-	$("#reviewtag").css("backgroundColor","white");
-	$("#dibstag").css("backgroundColor","white");
-	$("#reporttag").css("backgroundColor","white");
-	$("#chattag").css("backgroundColor","white");
+ if($("#protag1").click(e=>{
+	$("#protag1").css("backgroundColor","lightgray");
+	$("#reviewtag1").css("backgroundColor","white");
 }));
-if($("#reviewtag").click(e=>{
-	$("#reviewtag").css("backgroundColor","lightgray");
-	$("#protag").css("backgroundColor","white");
-	$("#dibstag").css("backgroundColor","white");
-	$("#reporttag").css("backgroundColor","white");
-	$("#chattag").css("backgroundColor","white");
+if($("#reviewtag1").click(e=>{
+	$("#reviewtag1").css("backgroundColor","lightgray");
+	$("#protag1").css("backgroundColor","white");
 }));
 
 
 //다른 사람 상점페이지 상품목록 출력 연결
-$("#protag").click(e=>{
+$("#protag1").click(e=>{
 	$.ajax({
-		url:"/member/otherPage.do",
+		url:"/member/otherpageProduct.do",
 		data:{"userId":$("#userIdd").val()},
 		dataType:"html",
 		success:data=>{
@@ -31,7 +25,7 @@ $("#protag").click(e=>{
 });
 
 //다른 사람 페이지 후기 목록 출력 연결
-$("#reviewtag").click(e=>{
+$("#reviewtag1").click(e=>{
 	$.ajax({
 		url:"/member/otherpageReview.do",
 		data:{"userId":$("#userIdd").val()},
@@ -44,7 +38,7 @@ $("#reviewtag").click(e=>{
 
 function fn_ajaxPage1(pageNo){
 	$.ajax({
-		url:"/member/otherPage.do",
+		url:"/member/otherpage"+$("#page").val()+".do",
 		data:{"cPage":pageNo,"userId":$("#userIdd").val()},
 		dataType:"html",
 		success:data=>{

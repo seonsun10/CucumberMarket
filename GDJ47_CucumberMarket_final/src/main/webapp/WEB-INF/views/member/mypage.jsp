@@ -51,54 +51,56 @@
 				  		<img src="https://cdn-icons-png.flaticon.com/512/149/149071.png"/>
 				  	</div>
 				  	<div id="mp-b">
-				  		<div id="havePro">
-				  		<img src="https://cdn-icons-png.flaticon.com/512/4695/4695312.png"
-				  		 width="14px"/>
-				  			방문자수&nbsp;
-				  			<span id="count">0명</span>
+				  		<div id="mp-ba">
+					  		<div id="havePro">
+					  		<img src="https://cdn-icons-png.flaticon.com/512/4695/4695312.png"
+					  		 width="14px"/>
+					  			방문자수&nbsp;
+					  			<span id="count"><c:out value="${viewCount }"/>명</span>
+					  		</div>
+					  		<div id="dibs">
+					  		<img src="https://cdn-icons-png.flaticon.com/512/6696/6696548.png" width="14px"/>
+					  			등록상품&nbsp;
+					  			<span id="count"><c:out value="${productCount }"/>개</span>
+					  		</div>
+					  		<div id="sale">
+					  		<img src="https://cdn-icons-png.flaticon.com/512/5132/5132236.png" width="14px"/>
+					  			상품판매&nbsp;
+					  			<span id="count">0개</span>
+					  		</div>
 				  		</div>
-				  		<div id="dibs">
-				  		<img src="https://cdn-icons-png.flaticon.com/512/6696/6696548.png" width="14px"/>
-				  			등록상품&nbsp;
-				  			<span id="count">0개</span>
-				  		</div>
-				  		<div id="report">
-				  		<img src="https://cdn-icons-png.flaticon.com/512/5132/5132236.png" width="14px"/>
-				  			상품판매&nbsp;
-				  			<span id="count">0개</span>
-				  		</div>
-				  	</div>
-				  	<div id="produce">
-				  		제 상점은 깨끗한 상점이에요&&;
-				  		<form class="mb-3" name="myform" id="myform"
-				  		 action="${path }/product/productReview.do?proNo=151&writer=${loginMember.userId}" method="post">
-					  		<fieldset>
-								<input type="radio" name="oi" value="5" id="rate1"><label
-									for="rate1">★</label>
-								<input type="radio" name="oi" value="4" id="rate2"><label
-									for="rate2">★</label>
-								<input type="radio" name="oi" value="3" id="rate3"><label
-									for="rate3">★</label>
-								<input type="radio" name="oi" value="2" id="rate4"><label
-									for="rate4">★</label>
-								<input type="radio" name="oi" value="1" id="rate5"><label
-									for="rate5">★</label>
-							</fieldset>
-							<input type="submit" value="제출" />
-				  		</form>
-				  	</div>
-				  </div>
-				  <div>
-				  <div id="myList">
-				  	<p id="protag">상품</p>
-				  	<p id="reviewtag">후기</p>
-				  	<p id="dibstag">찜</p>
-				  	<p id="reporttag">신고</p>
-				  	<p id="chattag">채팅</p>
-				  </div>
-				  </div>
-                </div>
-              </div>
+					  		<div id="intro">
+						  		${loginMember.intro}
+						  		<form class="mb-3" name="myform" id="myform"
+					  				 action="${path }/product/productReview.do?proNo=251&writer=${loginMember.userId}" method="post">
+							  		<fieldset>
+										<input type="radio" name="oi" value="5" id="rate1"><label
+											for="rate1">★</label>
+										<input type="radio" name="oi" value="4" id="rate2"><label
+											for="rate2">★</label>
+										<input type="radio" name="oi" value="3" id="rate3"><label
+											for="rate3">★</label>
+										<input type="radio" name="oi" value="2" id="rate4"><label
+											for="rate4">★</label>
+										<input type="radio" name="oi" value="1" id="rate5"><label
+											for="rate5">★</label>
+									</fieldset>
+									<input type="submit" value="제출" />
+					  		</form>
+					  	</div>
+	              </div>
+			  	</div>
+			  <div>
+			  <div id="myList">
+			  	<p id="protag">상품</p>
+			  	<p id="reviewtag">후기</p>
+			  	<p id="dibstag">찜</p>
+			  	<p id="reporttag">신고</p>
+			  	<p id="chattag">채팅</p>
+			  </div>
+			  <br/>
+			  
+               </div>
               
               <!-- 여기 이제 분기처리 해야함 등록한 상품이없으면 안보이게 -->
               <div id="databox" class="col-lg-9 box " style="max-width:100%;">
@@ -201,46 +203,48 @@
 					<div class="modal-body">
 					
 					  	<div id='image_preview'>
-						<input type='file' id='btnAtt' name="image" multiple='multiple'/><br><br>
+						<input type='file' id='btnAtt' name="image" multiple='multiple' required/><br><br>
 						<div id='att_zone' data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하거나 파일을 드래그앤드롭 하세요'></div><br>
-  						
+  						<label for="exampleInputEmail1">상품 제목</label>
 						<input type="text" name="proName" class="form-control"
-						placeholder="사움 제목" required><br>
-						<select class="form-control" name="tag" aria-label="Default select example">
-						  <option selected>상품태그</option>
-						  <option value="의류">의류</option>
-						  <option value="핸드폰">핸드폰</option>
-						  <option value="컴퓨터">컴퓨터</option>
-						  <option value="자동차/오토바이">차량용품</option>
-						  <option value="가전제품">가전제품</option>
-						  <option value="상품권">상품권</option>
-						  <option value="가구/인테리어">가구/인테리어</option>
-						  <option value="스포츠">스포츠</option>
-						  <option value="기타">기타</option>
-						</select><br>
-						<input type="text" name="region" class="form-control"
-						placeholder="거래 지역" required><br>
+						placeholder="상품 제목" required><br>
+
+						<label for="exampleInputEmail1">상품 카테고리</label>
+						<select class="form-control" style="width:200px; margin-bottom:20px;" name="tag1" id="tag1" ></select>
+						
+						<select class="form-control" style="width:200px;" name="tag" id="tag2" required></select>
+						<br>
+						
+						<label for="exampleInputEmail1">거래 지역</label>
+						<select class="form-control" style="margin-bottom:20px;" name="sido1" id="sido1"></select>
+						<select class="form-control" name="gugun1" id="gugun1" required></select>
+						<br>
+						<label for="exampleInputEmail1">상품 상태</label><br>
 						<label class="radio-inline">
-						  <input type="radio" name="proStatus" id="inlineRadio1" value="y"> 중고상품
+						  <input type="radio" name="proStatus" id="inlineRadio1" value="y" > 중고상품
 						</label>
 						<label class="radio-inline">
 						  <input type="radio" name="proStatus" id="inlineRadio2" value="n"> 새상품
 						</label><br>
+						<label for="exampleInputEmail1">상품 가격</label>
 						<input type="number" name="price" class="form-control"
-						placeholder="가격" required"><br>
-						<textarea class="form-control" name="proContent" rows="5" placeholder="상품내용"></textarea><br>
+						placeholder="상품 가격" required"><br>
+						<label for="exampleInputEmail1">상품 설명</label>
+						<textarea class="form-control" name="proContent" rows="5" placeholder="상품 설명" required></textarea><br>
 						<!-- <input type="text" name="user" value="admin" class="form-control">		 -->								
 					</div>
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-outline-success">로그인</button>
+						<button type="submit" class="btn btn-outline-success">등록</button>
 						<button type="button" class="btn btn-outline-success"
 						data-dismiss="modal">취소</button>
 					</div>
+					<input id="userId" name="userId"  type="hidden" value="${loginMember.userId }"/>
 					</form>
 				</div>
 			</div>
 			<input id="userIdd" type="hidden" value="${loginMember.userId }"/>
 		</div>
+
 
 <style>
 #myform fieldset{
@@ -286,49 +290,7 @@ function getImageFiles(e) {
     const files = e.currentTarget.files;
     const imagePreview = document.querySelector('.image-preview');
     const docFrag = new DocumentFragment();
-
-    if ([...files].length >= 7) {
-      alert('이미지는 최대 6개 까지 업로드가 가능합니다.');
-      return;
-    }
-
-    // 파일 타입 검사
-    [...files].forEach(file => {
-      if (!file.type.match("image/.*")) {
-        alert('이미지 파일만 업로드가 가능합니다.');
-        return
-      }
-
-      // 파일 갯수 검사
-      if ([...files].length < 3) {
-        uploadFiles.push(file);
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const preview = createElement(e, file);
-          imagePreview.appendChild(preview);
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-  }
-
-  function createElement(e, file) {
-    const li = document.createElement('li');
-    const img = document.createElement('img');
-    img.setAttribute('src', e.target.result);
-    img.setAttribute('data-file', file.name);
-    li.appendChild(img);
-
-    return li;
-  }
-
-  const realUpload = document.querySelector('.real-upload');
-  const upload = document.querySelector('.upload');
-
-  upload.addEventListener('click', () => realUpload.click());
-
-  realUpload.addEventListener('change', getImageFiles);
+}
 </script>
 <script src="${path}/resources/js/mypage.js"></script>
-
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
