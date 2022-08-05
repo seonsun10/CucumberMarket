@@ -54,8 +54,16 @@
                         	<input name="inquiryTitle" id="inquiryTitle" type="text" class="form-control">
 						</div>
 						<div class="form-group">
-                        	<label for="type">문의유형</label>
-                        	<input name="inquiryType" id="inquiryType" type="text" class="form-control">
+                        	<!-- <label for="type">문의유형</label>
+                        	<input name="inquiryType" id="inquiryType" type="text" class="form-control"> -->
+                        	<select name="inquiryType" class="form-control">
+                          		<option selected>문의 유형</option>
+                          		<option value="계정">계정</option>
+                          		<option value="상품">상품</option>
+                          		<option value="거래">거래</option>
+                          		<option value="채팅">채팅</option>
+                          		<option value="사기">사기</option>
+                        	</select>
 						</div>
                     </div>
 					<div class="col-md-12">

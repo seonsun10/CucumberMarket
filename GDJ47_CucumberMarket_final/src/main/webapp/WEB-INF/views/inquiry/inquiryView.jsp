@@ -56,6 +56,10 @@
 						   			<th align="center">작성자</th>
 						   			<td align="center"><c:out value="${inq.writer.userId}"/></td>
 						  		</tr>
+						  		<tr>
+						   			<th align="center">문의 유형</th>
+						   			<td align="center"><c:out value="${inq.inquiryType}"/></td>
+						  		</tr>
 								<tr>
 									<th align="center">내용</th>
 						   			<td align="center" colspan="2" height="200px"><c:out value="${inq.inquiryContent}"/> </td>
