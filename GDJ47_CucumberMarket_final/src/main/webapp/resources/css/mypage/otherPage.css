@@ -55,3 +55,23 @@ div#pro-foot>img{
 div#pro-date{
 	font-size:10px;
 }
+#lifour>img{
+	width:10px;
+}
+#intro{
+	background-color:rgb(229,229,229);
+	width:400px;
+	height:180px;
+	border-radius: 20px;
+	opacity: 0.7;
+	padding:15px;
+	word-break:break-all;
+	font-size:15px;
+	margin-top:33px;
+}
+#mp-ba{
+	display:flex;
+}
+#mp-ba>div{
+	padding-right:60px;
+}

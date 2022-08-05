@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
+<input id="page" type="hidden" value="Review"/>
 <div id="pro-head"> 
 	<div id="pro-left">
 		후기&nbsp;
@@ -29,10 +30,10 @@
 	<table>
 		<tr id="tablehead">
 			<th>사진</th>
-			<th>제목</th>
-			<th>가격</th>
-			<th>최근수정일</th>
-			<th>삭제</th>
+			<th>상품</th>
+			<th>후기</th>
+			<th>평점</th>
+			<th>작성자</th>
 		</tr>
 		<c:if test="${review ne null}">
 			<c:forEach var="r" items="${review }">
@@ -40,8 +41,46 @@
 					<td id="lione"><img src="${path }/resources/img/cucumber.png" style="width:50px;"></td>
 					<td><c:out value=""/></td>
 					<td id=""><c:out value="${r.ment }"/></td>
-					<td id="lifour"><c:out value="${r.oi}"/></td>
-					<td id="lithr"><button>삭제</button></td>
+					<td id="lifour">
+						<c:choose>
+							<c:when test="${r.oi eq 1 }">
+								<img src="${path }/resources/img/별.png">
+								<img src="${path }/resources/img/빈별.png">
+								<img src="${path }/resources/img/빈별.png">
+								<img src="${path }/resources/img/빈별.png">
+								<img src="${path }/resources/img/빈별.png">
+							</c:when>
+							<c:when test="${r.oi eq 2 }">
+								<img src="${path }/resources/img/별.png">
+								<img src="${path }/resources/img/별.png">
+								<img src="${path }/resources/img/빈별.png">
+								<img src="${path }/resources/img/빈별.png">
+								<img src="${path }/resources/img/빈별.png">
+							</c:when>
+							<c:when test="${r.oi eq 3 }">
+								<img src="${path }/resources/img/별.png">
+								<img src="${path }/resources/img/별.png">
+								<img src="${path }/resources/img/별.png">
+								<img src="${path }/resources/img/빈별.png">
+								<img src="${path }/resources/img/빈별.png">
+							</c:when>
+							<c:when test="${r.oi eq 4 }">
+								<img src="${path }/resources/img/별.png">
+								<img src="${path }/resources/img/별.png">
+								<img src="${path }/resources/img/별.png">
+								<img src="${path }/resources/img/별.png">
+								<img src="${path }/resources/img/빈별.png">
+							</c:when>
+							<c:when test="${r.oi eq 5 }">
+								<img src="${path }/resources/img/별.png">
+								<img src="${path }/resources/img/별.png">
+								<img src="${path }/resources/img/별.png">
+								<img src="${path }/resources/img/별.png">
+								<img src="${path }/resources/img/별.png">
+							</c:when>
+						</c:choose>
+					</td>
+					<td id="lithr"><c:out value="${r.writer }"/></td>
 				</tr>
 			</c:forEach>
 		</c:if>

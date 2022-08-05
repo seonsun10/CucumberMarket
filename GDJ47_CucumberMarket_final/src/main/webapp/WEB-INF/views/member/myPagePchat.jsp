@@ -17,9 +17,9 @@
 					<c:if test="${c.userId eq loginMember.userId }">
 					<tr id="tablebody">
 						<td><img src="${path }/resources/img/오이.png" style="width:50px;"></td>
-						<td><c:out value="${c.pro_name }"/></td>
+						<td><c:out value="${c.title }"/></td>
 						<td><c:out value="${c.otherId}"/></td>
-						<td><button onclick="open('${path}/ptestchat.do/${c.roomId }','_blank','width=570,height=750');setTimeout(function(){location.reload()}, 1000);">채팅하기</button></td>
+						<td><button onclick="open('${path}/ptestchat.do/${c.roomId }','_blank','width=570,height=640');setTimeout(function(){location.reload()}, 1000);">채팅하기</button></td>
 						<c:if test="${c.unReadCount ne 0 }">
             			<td style='color:#ff0a00'> 
             			<c:out value="${c.unReadCount }개의 새로운메시지가 있습니다"/> 

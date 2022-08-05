@@ -39,4 +39,17 @@ public interface ProductService {
 	//유저가 가지고 있는 상품 조회
 	List<Product> selectUserProductList(Map page, String userId);
 	
+	//ㅉ목록
+	List<Product> selectWishList(Map page);
+	
+	//ㅉ카운트
+	int selectWishCount(String id);
+	//방번호로 상품가져오기
+	Product selectProduct(String roomId);
+	//상품 판매상태 변경
+	int updateProductSolve(int no);
+	//판매완료상품개수
+	int selectSolveCount(String userId);
+	
+	
 }

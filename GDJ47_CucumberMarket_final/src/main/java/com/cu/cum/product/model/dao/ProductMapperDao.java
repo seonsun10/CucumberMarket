@@ -46,9 +46,39 @@ public class ProductMapperDao {
 		return session.selectOne("product.selectproduct",id);
 	}
 
+
 	public List<Product> selectUserProductList(SqlSessionTemplate session, Map page, String userId) {
 		int cPage = (int)page.get("cPage");
 		int numPerpage = (int)page.get("numPerpage");
 		return session.selectList("product.selectUserProductList",userId,new RowBounds((cPage-1)*numPerpage,numPerpage));
 	}
+
+	//찜목록 페이징처리
+	public List<Product> selectWishList(SqlSessionTemplate session,Map page){
+		int cPage = (int)page.get("cPage");
+		int numPerpage = (int)page.get("numPerpage");
+		String userId = (String)page.get("userId");
+		return session.selectList("product.selectWishList", userId, new RowBounds((cPage-1)*numPerpage,numPerpage));
+	}
+	//찜목록 카운트
+	public int selectWishCount(SqlSessionTemplate session,String id) {
+		return session.selectOne("product.selectWishCount",id);
+		
+	}
+	//방번호로 상품가져오기
+	public Product selectProduct(SqlSessionTemplate session,String roomid) {
+		return session.selectOne("product.selectproductroomid",roomid);
+	}
+	//판매상태변경
+	public int updateProductSolve(SqlSessionTemplate session,int no) {
+		return session.update("product.updateproductsolve",no );
+	}
+	//판매완료개수
+	public int selectSolveCount(SqlSessionTemplate session,String userId) {
+		return session.selectOne("product.selectsolvecount",userId);
+	}
+	
+	
+	
+
 }

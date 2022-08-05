@@ -84,9 +84,34 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 
+
 	//유저가 가지고 있는 상품 조회
 	public List<Product> selectUserProductList(Map page, String userId) {
 		return pmdao.selectUserProductList(session,page,userId);
 	}
+	//ㅉ리스트
+	public List<Product> selectWishList(Map map){
+		return pmdao.selectWishList(session, map);
+	}
+	//ㅉ카운트
+	public int selectWishCount(String id) {
+		return pmdao.selectWishCount(session, id);
 
+	}
+
+	//방번호로 상품정보가져오기
+	public Product selectProduct(String roomid) {
+		return pmdao.selectProduct(session, roomid);
+	}
+	//상품상태 변경 
+	public int updateProductSolve(int no) {
+		return pmdao.updateProductSolve(session,no);
+	}
+	//판매완료상품개수
+	public int selectSolveCount(String userId) {
+		return pmdao.selectSolveCount(session,userId);
+	}
 }
+
+	
+

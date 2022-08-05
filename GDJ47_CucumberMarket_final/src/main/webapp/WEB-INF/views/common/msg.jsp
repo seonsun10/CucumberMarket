@@ -11,10 +11,16 @@
 <title>Insert title here</title>
 </head>
 <body>
+	
 	<script>
+		const script='${script}';
 		alert('${msg}');
+		if(script!=null){
+			window.close();
+		}
 		location.replace('${path}/${loc}');
 	</script>
+	
 </body>
 <script src="${path}/resources/vendor/jquery/jquery.min.js"></script>
 </html>

@@ -4,11 +4,13 @@ package com.cu.cum.product.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -150,23 +152,27 @@ public class ProductController {
 	//거래 후기
 	@RequestMapping("/product/productReview.do")
 	public String productReview(@RequestParam(defaultValue="0") int proNo,
-								@RequestParam(defaultValue ="신원미상") String writer,
+								
 								@RequestParam(defaultValue ="5") int oi,
+								@RequestParam(defaultValue="0") String host,
 								@RequestParam(defaultValue ="짱이에요") String ment,
 								Model m) {
 		if(proNo==0) {m.addAttribute("msg","등록실패");}
 		else {
+			String userid= ((Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
 			Product p = service.selectProduct(proNo);
 			log.debug("{}",p);
 	//		p.setReview(Review.builder().proNo(proNo).writer(writer).oi(oi).build());
-			Review rv = Review.builder().product(p).ment(ment).host(p.getMember().getUserId()).writer(writer).oi(oi).build();
+			Review rv = Review.builder().writeDate(new Date()).product(Product.builder().proNo(proNo).build()).ment(ment).host(host).writer(userid).oi(oi).build();
 			log.debug("rv는 무엇인가 : "+rv);
 			try {
 				rvservice.insertReview(rv);
 				m.addAttribute("msg","등록성공");
+				m.addAttribute("script","zz");
 			}catch(Exception e) {
 //				e.printStackTrace();
-				m.addAttribute("msg","등록실패");			
+				m.addAttribute("msg","등록실패");
+				
 			}
 		}
 //		Product result = service.insertReview(p);

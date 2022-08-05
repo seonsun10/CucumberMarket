@@ -1,5 +1,6 @@
 package com.cu.cum.wishlist.model.service;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,11 @@ public class WishListServiceImpl implements WishListService {
 	@Override
 	public int deleteWishlist(String id, int no) {
 		return dao.deleteWishList(id,no);
+	}
+	
+	@Override
+	public int checkidWishlist(SqlSessionTemplate session,WishList wl) {
+		return session.selectOne("wish.checkwish",wl);
 	}
 
 

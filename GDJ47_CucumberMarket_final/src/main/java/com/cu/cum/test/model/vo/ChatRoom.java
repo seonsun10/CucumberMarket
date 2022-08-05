@@ -24,5 +24,5 @@ public class ChatRoom {
 	private String otherId;//구매자 로그인
 	
 	private int unReadCount;//
-	private String pro_name;
+	private String title;
 }

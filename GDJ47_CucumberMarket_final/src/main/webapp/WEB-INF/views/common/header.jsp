@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  	<link rel="icon" href="${path }/resources/img/오이.png"/>
+  	<link rel="icon" href="${path }/resources/img/cucumber.png"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>::오이마켓::오늘도 이용하는 마켓</title>
@@ -48,7 +48,9 @@
             <div class="col-lg-6 offer mb-3 mb-lg-0"><a href="#" class="btn btn-success btn-sm">Offer of the day</a><a href="#" class="ml-1">Get flat 35% off on orders over $50!</a></div>
             <div class="col-lg-6 text-center text-lg-right">
               <ul class="menu list-inline mb-0">
-                <li class="list-inline-item"><a href="#" data-toggle="modal" data-target="#login-modal">Login</a></li>
+              	<li class="list-inline-item"><a href="#" data-toggle="modal" data-target="#login-modal">Login</a></li>
+              	<li class="list-inline-item"><a href="/logout">Logout</a></li>
+              	
                 <li class="list-inline-item"><a href="${pageContext.request.contextPath}/joinForm">Register</a></li>
                 <li class="list-inline-item"><a href="contact.html">Contact</a></li>
                 <li class="list-inline-item"><a href="#">Recently viewed</a></li>
@@ -64,19 +66,19 @@
                 <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
               </div>
               <div class="modal-body">
-                <form action="customer-orders.html" method="post">
+                <form action="/loginprocess" method="post">
                   <div class="form-group">
-                    <input id="email-modal" type="text" placeholder="email" class="form-control">
+                    <input id="email-modal" type="text" name="userId" placeholder="email" class="form-control">
                   </div>
                   <div class="form-group">
-                    <input id="password-modal" type="password" placeholder="password" class="form-control">
+                    <input id="password-modal" type="password" name="password" placeholder="password" class="form-control">
                   </div>
                   <p class="text-center">
                     <button class="btn btn-primary"><i class="fa fa-sign-in"></i> Log in</button>
                   </p>
                 </form>
-                <p class="text-center text-muted">Not registered yet?</p>
-                <p class="text-center text-muted"><a href="register.html"><strong>Register now</strong></a>! It is easy and done in 1 minute and gives you access to special discounts and much more!</p>
+                <p class="text-center text-muted">아직 가입하지 않으셨나요?</p>
+                <p class="text-center text-muted"><a href="${path }/joinForm"><strong>Register now</strong></a>! It is easy and done in 1 minute and gives you access to special discounts and much more!</p>
               </div>
             </div>
           </div>
@@ -222,7 +224,7 @@
                   </li>
                 </ul>
               </li>
-              <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">Template<b class="caret"></b></a>
+              <--<li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">Template<b class="caret"></b></a>
                 <ul class="dropdown-menu megamenu">
                   <li>
                     <div class="row">
@@ -286,6 +288,9 @@
 				  
 				  <div id="search-not-mobile" class="navbar-collapse collapse">
 				  	<a href="${path }/area.do" class="btn btn-primary navbar-btn"> 지역설정 테스트용</a>
+				  </div>
+				  <div id="search-not-mobile" class="navbar-collapse collapse">
+				  	<a href="${path }/board/boardlist.do" class="btn btn-primary navbar-btn"> 커뮤니티 테스트</a>
 				  </div>
 			  
               </div>

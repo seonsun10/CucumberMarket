@@ -2,12 +2,18 @@ package com.cu.cum.member.model.service;
 
 import java.util.List;
 
+
 import org.mybatis.spring.SqlSessionTemplate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+
 import com.cu.cum.member.model.dao.FilesMapper;
+
+import com.cu.cum.member.model.dao.MemberMapper;
+
 import com.cu.cum.member.model.dao.MemberRepository;
 import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.product.model.dao.FilesDao;
@@ -19,6 +25,9 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private MemberRepository memberRepository; //jpa 활용 - 동시성, 최적화 고려한 코드 final
+	
+	@Autowired
+	private MemberMapper memberMapper;
 	
 	@Autowired
 	public MemberServiceImpl(MemberRepository memberRepository) {
@@ -60,15 +69,6 @@ public class MemberServiceImpl implements MemberService {
         return memberRepository.findByUserId(memberId);
     }
 	
-	//회원정보 수정
-//	@Override
-//	public Member updateMember(String userId ) {
-//		// TODO Auto-generated method stub
-//		memberRepository.findByUserId(String userId);
-//		
-//		return memberRepository.save(member);
-//	}
-	
 //	public void validateDuplicateMember(Member member) {
 //		List<Member> findMembers = memberRepository.findByName(member.getUserId());
 //		if(!findMembers.isEmpty()) {
@@ -91,16 +91,9 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public Member updateMember(Member m) {
-		// TODO Auto-generated method stub
 //		m=memberRepository.findByUserId(m.getUserId());
 		return memberRepository.save(m);
 	}
-
-//	@Override
-//	public Member updateMember(Member member) {
-//		memberRepository.findByUserId(member.getUserId());		
-//		return memberRepository.save(member);
-//	}
 
 	//회원찾기
 	@Override
@@ -123,6 +116,23 @@ public class MemberServiceImpl implements MemberService {
 		return fMapper.selectUserFiles(session,userId);
 	}
 
+
+
+	
+	//조회수 up
+	@Override
+	public int viewCountUp(String writer) {
+		// TODO Auto-generated method stub
+		return memberMapper.updateViewCount(writer);
+	}
+	
+	//조회수 가져오기
+	@Override
+	public int selectViewCount(String writer) {
+		// TODO Auto-generated method stub
+		return memberMapper.selectViewCount(writer);
+	}
+	
 
 	
 }

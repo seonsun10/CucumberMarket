@@ -31,5 +31,16 @@ public interface MemberService {
 	Member updateMember(Member m);
 
 
+
 	List<Files> selectUserFiles(String userId);
+
+	
+	//조회수up
+	int viewCountUp(String writer);
+	
+	//조회수 가져오기
+	int selectViewCount(String writer);
+	
+	
+
 }
