@@ -1,12 +1,12 @@
 package com.cu.cum.member.model.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.cu.cum.member.model.dao.MemberMapper;
 import com.cu.cum.member.model.dao.MemberRepository;
 import com.cu.cum.member.model.vo.Member;
 
@@ -16,6 +16,9 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private MemberRepository memberRepository; //jpa 활용 - 동시성, 최적화 고려한 코드 final
+	
+	@Autowired
+	private MemberMapper memberMapper;
 	
 	@Autowired
 	public MemberServiceImpl(MemberRepository memberRepository) {
@@ -88,6 +91,20 @@ public class MemberServiceImpl implements MemberService {
 	public Member updatePassword(Member m) {
 		
 		return memberRepository.save(m);
+	}
+	
+	//조회수 up
+	@Override
+	public int viewCountUp(String writer) {
+		// TODO Auto-generated method stub
+		return memberMapper.updateViewCount(writer);
+	}
+	
+	//조회수 가져오기
+	@Override
+	public int selectViewCount(String writer) {
+		// TODO Auto-generated method stub
+		return memberMapper.selectViewCount(writer);
 	}
 	
 }

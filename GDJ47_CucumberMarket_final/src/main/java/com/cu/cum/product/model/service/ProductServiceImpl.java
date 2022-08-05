@@ -89,6 +89,7 @@ public class ProductServiceImpl implements ProductService {
 	public int selectWishCount(String id) {
 		return pmdao.selectWishCount(session, id);
 	}
+
 	//방번호로 상품정보가져오기
 	public Product selectProduct(String roomid) {
 		return pmdao.selectProduct(session, roomid);
@@ -100,4 +101,3 @@ public class ProductServiceImpl implements ProductService {
 
 	
 
-}

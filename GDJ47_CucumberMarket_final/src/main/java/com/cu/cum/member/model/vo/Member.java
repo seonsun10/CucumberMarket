@@ -62,6 +62,8 @@ public class Member implements UserDetails{
 	@OneToMany(mappedBy="member")
 	private List<Files> files;
 	
+	private int viewCount; // 조회수
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub

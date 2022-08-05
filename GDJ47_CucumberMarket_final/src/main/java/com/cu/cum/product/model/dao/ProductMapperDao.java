@@ -65,4 +65,6 @@ public class ProductMapperDao {
 		return session.update("product.updateproductsolve",no );
 	}
 	
+	
+	
 }

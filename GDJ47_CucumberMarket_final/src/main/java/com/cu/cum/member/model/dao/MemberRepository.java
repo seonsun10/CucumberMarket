@@ -3,6 +3,8 @@ package com.cu.cum.member.model.dao;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.cu.cum.member.model.vo.Member;
@@ -20,4 +22,6 @@ public interface MemberRepository extends JpaRepository<Member, String> {
 	
 //	Member saveAndFlush(Member m);
 
+	
+	
 }
