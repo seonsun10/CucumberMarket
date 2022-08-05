@@ -4,17 +4,12 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,7 +17,6 @@ import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.product.model.service.ProductService;
 import com.cu.cum.product.model.vo.Product;
 import com.cu.cum.product.model.vo.Review;
-import com.cu.cum.test.model.vo.ChatMessage;
 import com.cu.cum.test.model.vo.ChatRoom;
 import com.cu.cum.test.model.vo.MessageContent;
 import com.cu.cum.test.service.ChatService;
@@ -35,20 +29,7 @@ public class ChatController {
 		@Autowired
 		private ProductService pservice;
 	
-		@ResponseBody
-	 	@MessageMapping("/chat.sendMessage")
-	    @SendTo("/topic/public")
-	    public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
-	        return chatMessage;
-	    }
-
 		
-	    @MessageMapping("/chat.addUser")
-	    @SendTo("/topic/public")
-	    public ChatMessage addUser(@Payload ChatMessage chatMessage, SimpMessageHeaderAccessor headerAccessor){
-	        headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
-	        return chatMessage;
-	    }
 	    //판매중일때 대화방
 	    @GetMapping("/ptestchat.do/{roomId}")
 	    public ModelAndView openchat2(@PathVariable String roomId,ModelAndView mv) {
