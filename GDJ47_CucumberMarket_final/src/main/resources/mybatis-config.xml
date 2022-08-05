@@ -7,11 +7,9 @@
 	<typeAliases>
 		<typeAlias type="com.cu.cum.product.model.vo.Product" alias="product"/>
 		<typeAlias type="com.cu.cum.product.model.vo.Review" alias="review"/>
-<<<<<<< HEAD
+
 		<typeAlias type="com.cu.cum.inquiry.model.vo.Inquiry" alias="inquiry"/>
 		<typeAlias type="com.cu.cum.member.model.vo.Member" alias="member"/>
-=======
-		
->>>>>>> branch 'main' of https://github.com/seonsun10/CucumberMarket.git
+
 	</typeAliases>
 </configuration>

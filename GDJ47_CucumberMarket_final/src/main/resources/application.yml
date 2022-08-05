@@ -39,27 +39,23 @@ spring:
       ddl-auto: update
       use-new-id-generator-mappings: true
       
-<<<<<<< HEAD
+
     properties:
       hibernate:
         format_sql: true  
 
-=======
+
 #    properties:
 #      hibernate:
 #        format_sql: true
         
->>>>>>> branch 'main' of https://github.com/seonsun10/CucumberMarket.git
+
 logging:
   level:
     root: info
     '[org.hibernate.type.descriptor.sql]': trace
     com.cu.cum: debug
-<<<<<<< HEAD
 
-
-=======
->>>>>>> branch 'main' of https://github.com/seonsun10/CucumberMarket.git
 
 
    
