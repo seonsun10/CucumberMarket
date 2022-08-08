@@ -128,7 +128,7 @@ function fn_ajaxPage2(pageNo,numPerpage){
 };
 function fn_ajaxPage5(pageNo){
 	$.ajax({
-		url:"/member/mypageDibs.do",
+		url:"/board/boardlist.do",
 		data:{"cPage":pageNo,"userId":$("#userIdd").val()},
 		dataType:"html",
 		success:data=>{
@@ -138,7 +138,7 @@ function fn_ajaxPage5(pageNo){
 };
 function fn_ajaxPage6(pageNo,numPerpage){
 	$.ajax({
-		url:"/member/mypageDibs.do",
+		url:"/board/boardlist.do",
 		data:{"cPage":pageNo,"numPerpage":numPerpage,"userId":$("#userIdd").val()},
 		dataType:"html",
 		success:data=>{
