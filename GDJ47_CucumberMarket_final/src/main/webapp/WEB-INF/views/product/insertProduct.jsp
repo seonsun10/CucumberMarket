@@ -30,11 +30,9 @@
                   <a href="${path }/member/mypage.do${loginMember.userId}" class="nav-link"><i class="fa fa-list"></i>내 정보 보기</a>
                   <a href="${path }/member/wishList.do" class="nav-link"><i class="fa fa-heart"></i>찜 목록</a>
                   <a href="${path }/member/myAccount.do" class="nav-link"><i class="fa fa-user"></i>내 정보 수정</a>
-                  <a href="${path }/product/insertProductStart.do" class="nav-link active"><i class="fa fa-sign-out"></i>상품 등록</a>
+                  <a href="${path }/product/insertProductStart.do" class="nav-link active"><i class="fa fa-sign-out"></i>판매 하기</a>
                   <a href="/logout" class="nav-link"><i class="fa fa-sign-out"></i>로그아웃</a>
                   </ul>
-                  <button class="btn btn-outline-success my-2 my-sm-0"
-				data-toggle="modal" data-target="#loginModal">상품 등록</button>
                 </div>
 		
              </div>
@@ -54,12 +52,12 @@
 						<!-- </div> -->
 						</div>
 						</div>
-						
-						
 						<br>
 						<label for="exampleInputEmail1">상품 제목</label>
 						<input type="text" name="proName" class="form-control"
 						placeholder="상품 제목" required><br>
+						<label for="exampleInputEmail1">상품 설명</label>
+						<textarea class="form-control" name="proContent" rows="6" placeholder="상품 설명" required></textarea><br>
 						<div class="row">
 		                    <div class="col-md-4">
 		                      <div class="form-group">
@@ -77,6 +75,11 @@
 		                    </div>
 		                </div>
 						
+						
+						<label for="exampleInputEmail1">상품 가격</label>
+						<input type="number" name="price" class="form-control"
+						placeholder="상품 가격" required"><br>
+						
 						<label for="exampleInputEmail1">상품 상태</label><br>
 						<label class="radio-inline">
 						  <input type="radio" name="proStatus" id="inlineRadio1" value="y" > 중고상품
@@ -84,13 +87,8 @@
 						<label class="radio-inline">
 						  <input type="radio" name="proStatus" id="inlineRadio2" value="n"> 새상품
 						</label><br>
-						<label for="exampleInputEmail1">상품 가격</label>
-						<input type="number" name="price" class="form-control"
-						placeholder="상품 가격" required"><br>
-						<label for="exampleInputEmail1">상품 설명</label>
-						<textarea class="form-control" name="proContent" rows="6" placeholder="상품 설명" required></textarea><br>
 						<input id="userId" name="userId"  type="hidden" value="${loginMember.userId }"/>
-                    <button type="submit" onclick="fn_aaa();" class="btn btn-primary"><i class="fa fa-save"></i>상품 등록 하기</button>
+                    <button type="submit" onclick="fn_aaa();" class="btn btn-primary"></i>상품 등록 하기</button>
                   </div>
                 </form>
                 

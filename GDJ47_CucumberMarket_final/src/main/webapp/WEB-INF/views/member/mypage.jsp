@@ -31,7 +31,7 @@
                   <a href="${path }/member/mypage.do?${loginMember.userId}" class="nav-link active"><i class="fa fa-list"></i>내 정보 보기</a>
                   <a href="${path }/member/wishList.do" class="nav-link"><i class="fa fa-heart"></i>찜 목록</a>
                   <a href="${path }/member/myAccount.do" class="nav-link"><i class="fa fa-user"></i>내 정보 수정</a>
-                  <a href="${path }/product/insertProductStart.do" class="nav-link"><i class="fa fa-sign-out"></i>상품 등록</a>
+                  <a href="${path }/product/insertProductStart.do" class="nav-link"><i class="fa fa-sign-out"></i>판매하기</a>
                   <a href="/logout" class="nav-link"><i class="fa fa-sign-out"></i>로그아웃</a>
                   </ul>
                   <!-- <button class="btn btn-outline-success my-2 my-sm-0"
