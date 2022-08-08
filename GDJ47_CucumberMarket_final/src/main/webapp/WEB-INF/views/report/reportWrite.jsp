@@ -47,28 +47,28 @@
             <div class="col-lg-9">
 				<div id="comment-form">
                   <h4>신고글 작성</h4>
-                  <form>
+                  <form action="${pageContext.request.contextPath }/request/insertRequest.do" method="post">
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label for="name">아이디</label>
-                          <input id="name" type="text" class="form-control" value="<c:out value="${loginMember.userId }"/>" readonly>
+                          <label for="id">아이디</label>
+                          <input id="reportId" type="text" class="form-control" value="<c:out value="${loginMember.userId }"/>" readonly>
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label for="proId">상품 아이디</label>
-                          <input id="proId" type="text" class="form-control">
+                          <label for="proNo">상품 번호</label>
+                          <input id="proNo" type="text" class="form-control">
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label for="title">제목</label>
-                          <input id="title" type="text" class="form-control">
+                          <label for="repTitle">제목</label>
+                          <input id="repTitle" type="text" class="form-control">
                         </div>
                       </div>
                     </div>
@@ -83,8 +83,8 @@
                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">
-                          <label for="comment">신고 내용</label>
-                          <textarea id="comment" rows="4" class="form-control"></textarea>
+                          <label for="repComment">신고 내용</label>
+                          <textarea id="repComment" rows="4" class="form-control"></textarea>
                         </div>
                       </div>
                     </div>

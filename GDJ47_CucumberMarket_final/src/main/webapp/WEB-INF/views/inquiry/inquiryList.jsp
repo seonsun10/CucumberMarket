@@ -70,7 +70,7 @@
 										<th>번호</th>
 										<th>아이디</th>
 	                          			<th colspan=2>제목</th>
-										<th>문의 유형</th>
+										<th>문의 종류</th>
 										<th>등록일</th>
 										<c:if test="${loginMember.userId  eq 'admin'}">
 											<th>삭제</th>
