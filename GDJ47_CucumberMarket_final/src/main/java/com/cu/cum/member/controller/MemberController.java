@@ -208,37 +208,21 @@ public class MemberController {
 							@RequestParam String userId,
 							HttpServletRequest request,
 							Model m) {
-		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"userId",userId);
-		List<Product> products=proservice.selectProductList(page);
-
-		List<Product> userProduct = proservice.selectUserProductList(page,userId);
-		System.out.println("이건 위쪽 : "+userProduct);
-		//Member m1 = Member.builder().userId(userId).build();
-		List<Files> pp = service.selectUserFiles(userId);//db거쳐서 회원이 가진 모든 파일 가져오기;
-		System.out.println("pp : "+pp);
-//		if(products.size()!=0) {
-//			for(Product result : products) { 
-//				pp.add(result.getFiles().get(0));
-//				System.out.println("result값 맞는지 : "+result.getFiles().get(0));
-//			}
-//		}
-		//System.out.println("이건 아래쪽 : "+pp);
-		
-
-		Product p1 = (Product)products.get(3);
-		//log.debug("{}",p1.getFiles().get(0).getRenameFilename());
-		log.debug("product : "+p1);
 
 		String url=request.getRequestURI();
 		
+		
 		int totalProduct=proservice.selectProductCount(userId);
-		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage , totalProduct, url));
-		m.addAttribute("products",products);
-		m.addAttribute("totalProduct",totalProduct);
-		m.addAttribute("pp",pp);
 		Member loginMember=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
+		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"userId",userId);
+		List<Product> products=proservice.selectProductList(page);
+
+		System.out.println("유저가 가지고 있는 상품 목록 : "+products);
+
 		
+		List<Files> pp = service.selectUserFiles(userId);//db거쳐서 회원이 가진 모든 파일 가져오기;
+		System.out.println("유저가 가지고 잇는 상품 대표이미지 : "+pp);
 		
 
 		List<Product> list=dao.findAllByMember(loginMember);
@@ -246,8 +230,15 @@ public class MemberController {
 		List<Product> list2=dao.findAll(PageRequest.of(0,5,Sort.by("enrollDate").descending())).getContent();
 		//list2=list2.stream().filter(v -> v.getMember().equals(loginMember)).collect(Collectors.toList());
 		
+		
+		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage , totalProduct, url));
+		m.addAttribute("products",products);
+		m.addAttribute("totalProduct",totalProduct);
+		m.addAttribute("pp",pp);
+		
 		return "member/mypageProduct";
 	}
+	
 	//마이페이지에서 후기 목록 뿌리는 페이지
 	@RequestMapping("/member/mypageReview.do")
 	public String reviewpage(@RequestParam(defaultValue="1") int cPage,

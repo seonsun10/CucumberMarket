@@ -37,13 +37,15 @@
 		</tr>
 			<c:if test="${products ne null}">
 				<c:forEach var="p" items="${products}">
-					<tr id="tablebody">
-						<c:forEach var="pp" items="${pp }">
-							<c:if test="${pp.product.proNo eq p.proNo}">
-								<td><img src="${path }/resources/upload/product/${loginMember.userId}/${pp.renameFilename}" style="width:50px;"></td>
-								</c:if>
-						</c:forEach>
 					
+					<tr id="tablebody">
+					
+						<%-- <c:forEach var="pp" items="${pp }">
+							<c:if test="${pp.product.proNo eq p.proNo}"> --%>
+								<td><img src="${path }/resources/upload/product/${loginMember.userId}/" style="width:50px;"></td>
+					<%-- 		</c:if>
+						</c:forEach> --%>
+						
 						<td><c:out value="${p.title}"/></td>
 						<td><c:out value="${p.price }"/>원</td>
 						<td><fmt:formatDate value="${p.enrollDate}" pattern="yyyy-MM-dd"/></td>
