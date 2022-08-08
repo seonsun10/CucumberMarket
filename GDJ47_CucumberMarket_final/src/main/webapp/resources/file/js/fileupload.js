@@ -1,10 +1,10 @@
 
 
 ( /* att_zone : 이미지들이 들어갈 위치 id, btn : file tag id */
-  imageView = function imageView(att_zone, btn){
+  imageView = function imageView(att_zone, btnAtt){
 
     var attZone = document.getElementById(att_zone);
-    var btnAtt = document.getElementById(btn)
+    var btnAtt = document.getElementById(btnAtt)
     var sel_files = [];
     
     // 이미지와 체크 박스를 감싸고 있는 div 속성
@@ -22,8 +22,8 @@
       for(f of fileArr){
         imageLoader(f);
       }
-    }  
-    
+    } 
+
   
     // 탐색기에서 드래그앤 드롭 사용
     attZone.addEventListener('dragenter', function(e){
@@ -34,7 +34,6 @@
     attZone.addEventListener('dragover', function(e){
       e.preventDefault();
       e.stopPropagation();
-      
     }, false)
   
     attZone.addEventListener('drop', function(e){
@@ -49,7 +48,14 @@
       
     }, false)
     
-
+    
+    
+    
+    
+   
+   
+    
+    
     
     /*첨부된 이미리즐을 배열에 넣고 미리보기 */
     imageLoader = function(file){
@@ -61,9 +67,14 @@
         img.src = ee.target.result;
         attZone.appendChild(makeDiv(img, file));
       }
-      
       reader.readAsDataURL(file);
     }
+    
+    
+    
+
+
+    
     
     /*첨부된 파일이 있는 경우 checkbox와 함께 attZone에 추가할 div를 만들어 반환 */
     makeDiv = function(img, file){
@@ -99,3 +110,6 @@
     }
   }
 )('att_zone', 'btnAtt')
+
+
+

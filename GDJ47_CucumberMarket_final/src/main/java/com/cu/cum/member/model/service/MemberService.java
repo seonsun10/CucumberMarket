@@ -2,6 +2,7 @@ package com.cu.cum.member.model.service;
 
 import java.util.List;
 import com.cu.cum.member.model.vo.Member;
+import com.cu.cum.product.model.vo.Files;
 
 public interface MemberService {
 	
@@ -28,10 +29,18 @@ public interface MemberService {
 	
 	//회원정보 수정
 	Member updateMember(Member m);
+
+
+
+	List<Files> selectUserFiles(String userId);
+
 	
 	//조회수up
 	int viewCountUp(String writer);
 	
 	//조회수 가져오기
 	int selectViewCount(String writer);
+	
+	
+
 }

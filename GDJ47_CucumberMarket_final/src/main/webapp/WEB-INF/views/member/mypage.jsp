@@ -28,13 +28,14 @@
                 </div>
                 <div class="card-body">
                   <ul class="nav nav-pills flex-column">
-                  <a href="${path }/member/mypage.do" class="nav-link active"><i class="fa fa-list"></i>내 정보 보기</a>
+                  <a href="${path }/member/mypage.do?${loginMember.userId}" class="nav-link active"><i class="fa fa-list"></i>내 정보 보기</a>
                   <a href="${path }/member/wishList.do" class="nav-link"><i class="fa fa-heart"></i>찜 목록</a>
                   <a href="${path }/member/myAccount.do" class="nav-link"><i class="fa fa-user"></i>내 정보 수정</a>
+                  <a href="${path }/product/insertProductStart.do" class="nav-link"><i class="fa fa-sign-out"></i>상품 등록</a>
                   <a href="/logout" class="nav-link"><i class="fa fa-sign-out"></i>로그아웃</a>
                   </ul>
-                  <button class="btn btn-outline-success my-2 my-sm-0"
-				data-toggle="modal" data-target="#loginModal">상품 등록</button>
+                  <!-- <button class="btn btn-outline-success my-2 my-sm-0"
+				data-toggle="modal" data-target="#loginModal">상품 등록</button> -->
                 </div>
               </div>
               <!-- /.col-lg-3-->
@@ -66,7 +67,7 @@
 					  		<div id="sale">
 					  		<img src="https://cdn-icons-png.flaticon.com/512/5132/5132236.png" width="14px"/>
 					  			상품판매&nbsp;
-					  			<span id="count">0개</span>
+					  			<span id="count"><c:out value="${solveCount }"/>개</span>
 					  		</div>
 				  		</div>
 					  		<div id="intro">
@@ -202,9 +203,22 @@
 					<form action="${path }/product/insertProduct.do" method="post" enctype="multipart/form-data">
 					<div class="modal-body">
 					
-					  	<div id='image_preview'>
-						<input type='file' id='btnAtt' name="image" multiple='multiple' required/><br><br>
-						<div id='att_zone' data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하거나 파일을 드래그앤드롭 하세요'></div><br>
+					  	<!-- <div id='image_preview'>
+						<input type='file' id='btnAtt' name="image" required/><br><br>
+						<div id='att_zone' data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하거나 파일을 드래그앤드롭 하세요. 첫번째 이미지 파일은 대표 이미지로 설정됩니다.'></div><br>
+						<input type='file' id='btnAtt1' name="image" required/><br><br>
+						<div id='att_zone1' data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하거나 파일을 드래그앤드롭 하세요'></div><br>
+						<input type='file' id='btnAtt2' name="image" required/><br><br>
+						<div id='att_zone2' data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하거나 파일을 드래그앤드롭 하세요'></div><br> -->
+						
+						<input type="file" onchange="readURL(this);"> 
+						<img id="preview"  style="width:300px;height:300px"/><br>
+						<input type="file" onchange="readURL1(this);"> 
+						<img id="preview1"  style="width:200px;height:200px"/><br>
+						<input type="file" onchange="readURL2(this);"> 
+						<img id="preview2"  style="width:200px;height:200px"/><br>
+						
+						
   						<label for="exampleInputEmail1">상품 제목</label>
 						<input type="text" name="proName" class="form-control"
 						placeholder="상품 제목" required><br>
@@ -283,6 +297,10 @@
     resize: none;
 }
 
+<<<<<<< HEAD
+</style>
+
+=======
 </style>
 <script>
 function getImageFiles(e) {
@@ -293,4 +311,5 @@ function getImageFiles(e) {
 }
 </script>
 <script src="${path}/resources/js/mypage.js"></script>
+>>>>>>> branch 'main' of https://github.com/seonsun10/CucumberMarket.git
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

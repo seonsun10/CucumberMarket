@@ -5,17 +5,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-import com.cu.cum.product.model.dao.FilesDao;
-
 import com.cu.cum.product.model.dao.ProductDao;
 import com.cu.cum.product.model.dao.ProductMapperDao;
+import com.cu.cum.product.model.vo.Files;
 import com.cu.cum.product.model.vo.Product;
-
 import com.cu.cum.product.model.vo.Review;
 
 
@@ -86,6 +82,13 @@ public class ProductServiceImpl implements ProductService {
 	public List<Review> selectReviewList(Map map){
 		return pmdao.selectReviewList(session, map);
 	}
+
+
+
+	//유저가 가지고 있는 상품 조회
+	public List<Product> selectUserProductList(Map page, String userId) {
+		return pmdao.selectUserProductList(session,page,userId);
+	}
 	//ㅉ리스트
 	public List<Product> selectWishList(Map map){
 		return pmdao.selectWishList(session, map);
@@ -93,7 +96,22 @@ public class ProductServiceImpl implements ProductService {
 	//ㅉ카운트
 	public int selectWishCount(String id) {
 		return pmdao.selectWishCount(session, id);
+
 	}
-	
-	
+
+	//방번호로 상품정보가져오기
+	public Product selectProduct(String roomid) {
+		return pmdao.selectProduct(session, roomid);
+	}
+	//상품상태 변경 
+	public int updateProductSolve(int no) {
+		return pmdao.updateProductSolve(session,no);
+	}
+	//판매완료상품개수
+	public int selectSolveCount(String userId) {
+		return pmdao.selectSolveCount(session,userId);
+	}
 }
+
+	
+

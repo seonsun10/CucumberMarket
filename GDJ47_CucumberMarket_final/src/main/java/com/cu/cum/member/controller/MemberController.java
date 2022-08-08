@@ -1,6 +1,7 @@
 package com.cu.cum.member.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +39,7 @@ import com.cu.cum.pagebar.PageBarBasic;
 import com.cu.cum.pagebar.TestPageBar;
 import com.cu.cum.product.model.dao.ProductDao;
 import com.cu.cum.product.model.service.ProductService;
+import com.cu.cum.product.model.vo.Files;
 import com.cu.cum.product.model.vo.Product;
 import com.cu.cum.product.model.vo.Review;
 
@@ -124,6 +126,7 @@ public class MemberController {
 	public String myPage(@RequestParam String userId, Model m) {
 		m.addAttribute("userId",userId);
 		int productCount = proservice.selectProductCount(userId);
+		m.addAttribute("solveCount",proservice.selectSolveCount(userId));
 		m.addAttribute("productCount",productCount);
 		m.addAttribute("viewCount",service.selectViewCount(userId));
 		return "member/mypage";
@@ -207,16 +210,37 @@ public class MemberController {
 							Model m) {
 		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"userId",userId);
 		List<Product> products=proservice.selectProductList(page);
+
+		List<Product> userProduct = proservice.selectUserProductList(page,userId);
+		System.out.println("이건 위쪽 : "+userProduct);
+		//Member m1 = Member.builder().userId(userId).build();
+		List<Files> pp = service.selectUserFiles(userId);//db거쳐서 회원이 가진 모든 파일 가져오기;
+		System.out.println("pp : "+pp);
+//		if(products.size()!=0) {
+//			for(Product result : products) { 
+//				pp.add(result.getFiles().get(0));
+//				System.out.println("result값 맞는지 : "+result.getFiles().get(0));
+//			}
+//		}
+		//System.out.println("이건 아래쪽 : "+pp);
+		
+
 		Product p1 = (Product)products.get(3);
 		//log.debug("{}",p1.getFiles().get(0).getRenameFilename());
 		log.debug("product : "+p1);
+
 		String url=request.getRequestURI();
 		
 		int totalProduct=proservice.selectProductCount(userId);
-		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage, totalProduct, url));
-		m.addAttribute("product",products);
+		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage , totalProduct, url));
+		m.addAttribute("products",products);
 		m.addAttribute("totalProduct",totalProduct);
+		m.addAttribute("pp",pp);
 		Member loginMember=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		
+		
+
 		List<Product> list=dao.findAllByMember(loginMember);
 		//페이징처리 jpa
 		List<Product> list2=dao.findAll(PageRequest.of(0,5,Sort.by("enrollDate").descending())).getContent();
@@ -256,7 +280,7 @@ public class MemberController {
 		System.out.println(url);
 		System.out.println("사이즈: "+totalwish);
 		System.out.println("ftx: "+wishlist);
-		mv.addObject("pageBar",TestPageBar.getPageBar(cPage, numPerpage, totalwish, url));
+		mv.addObject("pageBar",PageBar.getPageBar(cPage, numPerpage, totalwish, url));
 		if(wishlist.size()>0) {
 			mv.addObject("wish",wishlist);
 		}
