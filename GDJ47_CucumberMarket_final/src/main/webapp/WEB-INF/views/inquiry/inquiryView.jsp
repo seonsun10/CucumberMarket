@@ -42,7 +42,7 @@
 		                	</div>
 	              		</div>
 	              		<!-- *** PAGES MENU END ***-->
-	              		<div class="banner"><a href="#"><img src="img/banner.jpg" alt="sales 2014" class="img-fluid"></a></div>
+	              		<div class="banner"><a href="#"><img src="/resources/img/cucumber.png" alt="" class="img-fluid"></a></div>
             		</div>
             		<div class="col-lg-9">
 						<table aria-label="breadcrumb" class="box" border="1" summary="게시판 상세내용" width="650" height="350" border="1" cellpadding="5" align="center" >

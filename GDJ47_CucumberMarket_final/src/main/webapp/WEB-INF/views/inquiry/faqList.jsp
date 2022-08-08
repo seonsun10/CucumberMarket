@@ -41,7 +41,7 @@
                 </div>
               </div>
               <!-- *** PAGES MENU END ***-->
-              <div class="banner"><a href="#"><img src="img/banner.jpg" alt="sales 2014" class="img-fluid"></a></div>
+              <div class="banner"><a href="#"><img src="/resources/img/cucumber.png" alt="" class="img-fluid"></a></div>
             </div>
 			<div class="col-lg-9">
 				<div id="contact" class="box">
@@ -73,9 +73,9 @@
 									당근마켓은 언제나 사용자에게 귀 기울이고, 사용자를 위한 서비스를 제공하며 신뢰를 만들어요.<br>
 									<br>
 									존중<br>
-									당근마켓의 모든 사용자가 우리 동네 이웃이라는 걸 기억해주세요.<br>
+									오이마켓의 모든 사용자가 우리 동네 이웃이라는 걸 기억해주세요.<br>
 									어떠한 상황에서도 우리는 이웃의 다양성을 존중하고, 배려하기로 약속해요.<br> 
-									당근마켓은 누구나 존중받는 따뜻한 지역 커뮤니티를 지향하고 있어요.<br>
+									오이마켓은 누구나 존중받는 따뜻한 지역 커뮤니티를 지향하고 있어요.<br>
 								</p>
                       		</div>
                     	</div>
@@ -221,9 +221,9 @@
 							오이마켓은 이웃 분들의 다양한 신고 제보를 받아 관련 법 또는 운영정책 기준으로 신속하고 정확하게 대응하고 있어요.<br>
 							탈퇴한 사용자라도 개인정보 처리방침에 따라 부정이용 기록은 10년 동안 보관하고 있기 때문에 동일한 기준으로 신고가 처리돼요.<br>
 							<br>
-							<p><span>1. 우측의 신고하기 버튼 누르기</span></p>
+							<p><span>1. 신고할 회원의 프로필에서 우측에 위치한 신고 버튼 클릭하기</span></p>
 							<p><span>2. 신고할 사용자 및 사유 입력하기</span></p>
-							<p><span>3. 신고 버튼 누르기</span></p>
+							<p><span>3. 신고하기</span></p>
 							
 							<br>
 							

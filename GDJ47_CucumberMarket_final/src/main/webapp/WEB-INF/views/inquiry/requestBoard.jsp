@@ -35,7 +35,7 @@
                 </div>
               </div>
               <!-- *** PAGES MENU END ***-->
-              <div class="banner"><a href="#"><img src="img/banner.jpg" alt="sales 2014" class="img-fluid"></a></div>
+              <div class="banner"><a href="#"><img src="/resources/img/cucumber.png" alt="" class="img-fluid"></a></div>
             </div>
 			<div class="col-lg-9">
 				<form action="${pageContext.request.contextPath }/inquiry/insertInquiry.do" method="post">
@@ -51,7 +51,7 @@
                       	</div>
 						<div class="form-group">
                         	<label for="title">제목</label>
-                        	<input name="inquiryTitle" id="inquiryTitle" type="text" class="form-control" value="[답변] : <c:out value="${inq.inquiryTitle}"/>" readonly>
+                        	<input name="inquiryTitle" id="inquiryTitle" type="text" class="form-control" value="<c:out value="${inq.inquiryTitle}"/>" readonly>
 						</div>
                     </div>
 					<div class="col-md-12">

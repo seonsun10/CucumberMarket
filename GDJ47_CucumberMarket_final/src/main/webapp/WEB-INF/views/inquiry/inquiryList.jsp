@@ -42,19 +42,19 @@
                 </div>
               </div>
               <!-- *** PAGES MENU END ***-->
-              <div class="banner"><a href="#"><img src="img/banner.jpg" alt="sales 2014" class="img-fluid"></a></div>
+              <div class="banner"><a href="#"><img src="/resources/img/cucumber.png" alt="" class="img-fluid"></a></div>
             </div>
 			<div class="col-lg-9">
 				<div class="table-responsive">
 						<form action="${pageContext.request.contextPath }/searchInquiry.do" method="post">
                   			<div class="input-group">
-              					<input name="keyword" type="text" placeholder="Search" class="form-control">
 	                      		<div class="products-sort-by mt-2 mt-lg-0">
                         			<select name="searchType" class="form-control">
                           				<option value="inquiryTitle" selected>제목</option>
                           				<option value="inquiryType">문의 유형</option>
                         			</select>
                      			 </div>
+              					<input name="keyword" type="text" placeholder="Search" class="form-control">
 				              	<div class="input-group-append">
 					                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
 									<a href="${pageContext.request.contextPath }/inquiryWrite" class="btn btn-primary navbar-btn"><span>문의글 작성</span></a>
