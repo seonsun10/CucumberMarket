@@ -193,10 +193,10 @@ public class InquiryController {
 	
 	// 문의글 답변 페이지
 	
-	@RequestMapping("/requestBoard/{id}")
-	public ModelAndView requestBoard(@PathVariable int id, ModelAndView mv) {
+	@RequestMapping("/replyBoard/{id}")
+	public ModelAndView replyBoard(@PathVariable int id, ModelAndView mv) {
 		mv.addObject("inq", service.selectInquiry(id));
-		mv.setViewName("inquiry/requestBoard");
+		mv.setViewName("inquiry/replyBoard");
 		return mv;
 	}
 	

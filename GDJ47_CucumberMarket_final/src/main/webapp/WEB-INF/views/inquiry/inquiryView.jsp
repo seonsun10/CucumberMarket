@@ -76,7 +76,7 @@
 								<td colspan="2" align="center">
 						 			<input type="button" value="목록" onclick="location.assign('${pageContext.request.contextPath }/inquiryList')"/>
 						 			<c:if test="${loginMember.userId eq 'admin'}">
-							 			<input type="button" value="답변" onclick="location.assign('${pageContext.request.contextPath }/requestBoard/${inq.inquiryNo}')"/>
+							 			<input type="button" value="답변" onclick="location.assign('${pageContext.request.contextPath }/replyBoard/${inq.inquiryNo}')"/>
 						 			</c:if>
 									<c:if test="${loginMember.userId == inq.writer.userId}">
 						 				<input type="button" value="수정" onclick="location.assign('${pageContext.request.contextPath }/updateInquiry/${inq.inquiryNo}')"/>
