@@ -46,6 +46,7 @@
             		</div>
             		<div class="col-lg-9">
                   		<div class="box">
+                  		<h1 align ="center">신고하기전 읽어주세요.</h1>
                   			<ol class="card-body">
 			                	<li class="breadcrumb-item">오이마켓에서는 깨끗하고 편안한 마켓운영을 위하여 신고게시판을 개설하여 운영하고 있어요.</li>
 								<li>신고인의 비밀은 절대 보장되며, 사실확인을 위하여 인적사항 및 연락처를 정확히 입력하여 주세요.</li>

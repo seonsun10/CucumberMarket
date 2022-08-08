@@ -290,11 +290,10 @@
 				  	<a href="${path }/area.do" class="btn btn-primary navbar-btn"> 지역설정 테스트용</a>
 				  </div>
 				  <div id="search-not-mobile" class="navbar-collapse collapse">
-<<<<<<< HEAD
 				  	<a href="${path }/faqList" class="btn btn-primary navbar-btn"> FAQ</a>
-=======
+
 				  	<a href="${path }/board/boardlist.do" class="btn btn-primary navbar-btn"> 커뮤니티 테스트</a>
->>>>>>> branch 'main' of https://github.com/seonsun10/CucumberMarket.git
+
 				  </div>
 			  
               </div>
