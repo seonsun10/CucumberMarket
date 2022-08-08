@@ -35,19 +35,22 @@
                  
               </div>
              
-              <c:if test="${not empty board}">
+              <c:if test="${not empty boards}">
               <!-- post-->
-              <div class="post">
-                <h2><a href="post.html">Fashion now</a></h2>
-                <p class="author-category">By <a href="#">John Slim</a> in <a href="">Fashion and style</a></p>
+              <c:forEach items="${boards }" var="b">
+              	 <div class="post">
+                <h2><a href="post.html">${b.boardTitle }</a></h2>
+                <p class="author-category">작성자 <a href="#">${b.userId }</a>  &nbsp <a href="">#${b.boardCategory }</a></p>
                 <hr>
-                <p class="date-comments"><a href="post.html"><i class="fa fa-calendar-o"></i> June 20, 2013</a><a href="post.html"><i class="fa fa-comment-o"></i> 8 Comments</a></p>
+                <p class="date-comments"><a href="post.html"><i class="fa fa-calendar-o"></i> ${b.createDate }</a><a href="post.html"><i class="fa fa-comment-o"></i>  Comments</a></p>
                 <div class="image"><a href="post.html"><img src="img/blog2.jpg" alt="Example blog post alt" class="img-fluid"></a></div>
-                <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+                <p class="intro">${b.boardContent }</p>
                 <p class="read-more"><a href="post.html" class="btn btn-primary">추천하기</a></p>
               </div>
+              </c:forEach>
+             
               </c:if>
-              <c:if test="${empty board }">
+              <c:if test="${empty boards }">
               	<div class="post">
               	조회결과 없습니다
               	</div>

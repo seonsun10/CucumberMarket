@@ -1,9 +1,7 @@
 package com.cu.cum.handler;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cu.cum.member.model.vo.Member;
-import com.cu.cum.test.model.vo.ChatMessage;
 import com.cu.cum.test.model.vo.ChatRoom;
 import com.cu.cum.test.model.vo.MessageContent;
 import com.cu.cum.test.service.ChatService;

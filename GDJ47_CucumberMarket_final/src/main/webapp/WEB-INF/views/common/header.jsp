@@ -263,7 +263,7 @@
                         <ul class="list-unstyled mb-3">
                           <li class="nav-item"><a href="blog.html" class="nav-link">Blog listing</a></li>
                           <li class="nav-item"><a href="post.html" class="nav-link">Blog Post</a></li>
-                          <li class="nav-item"><a href="faq.html" class="nav-link">FAQ</a></li>
+                          <li class="nav-item"><a href="${pageContext.request.contextPath }/faqList" class="nav-link">FAQ</a></li>
                           <li class="nav-item"><a href="text.html" class="nav-link">Text page</a></li>
                           <li class="nav-item"><a href="text-right.html" class="nav-link">Text page - right sidebar</a></li>
                           <li class="nav-item"><a href="404.html" class="nav-link">404 page</a></li>
@@ -290,7 +290,10 @@
 				  	<a href="${path }/area.do" class="btn btn-primary navbar-btn"> 지역설정 테스트용</a>
 				  </div>
 				  <div id="search-not-mobile" class="navbar-collapse collapse">
+				  	<a href="${path }/faqList" class="btn btn-primary navbar-btn"> FAQ</a>
+
 				  	<a href="${path }/board/boardlist.do" class="btn btn-primary navbar-btn"> 커뮤니티 테스트</a>
+
 				  </div>
 			  
               </div>
