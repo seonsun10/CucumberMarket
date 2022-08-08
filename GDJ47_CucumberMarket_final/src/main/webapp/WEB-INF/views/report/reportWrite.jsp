@@ -29,7 +29,14 @@
                 <div class="card-body">
                   <ul class="nav nav-pills flex-column">
                     <li><a href="${pageContext.request.contextPath }/inquiryList" class="nav-link">문의하기</a></li>
-                    <li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고하기</a></li>
+                    <c:choose>
+			        	<c:when test="${loginMember.userId eq 'admin'}">
+			            	<li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고하기</a></li>
+			            </c:when>
+			            <c:when test="${loginMember.userId ne 'admin'}">
+			            	<li><a href="${pageContext.request.contextPath }/reportInfo" class="nav-link">신고하기</a></li>
+			            </c:when>
+		            </c:choose>
                     <li><a href="${pageContext.request.contextPath }/faqList" class="nav-link">FAQ</a></li>
                   </ul>
                 </div>
@@ -83,7 +90,7 @@
                     </div>
                     <div class="row">
                       <div class="col-md-12 text-right">
-                        <button type="submit" class="btn btn-primary">등록하기</button>
+                        <button type="submit" class="btn btn-primary">등록</button>
                       	<button type="reset" class="btn btn-primary">재설정</button>
                       	<button type="button" class="btn btn-primary" onclick="location.assign('${pageContext.request.contextPath }/reportList')">취소</button>
                       </div>

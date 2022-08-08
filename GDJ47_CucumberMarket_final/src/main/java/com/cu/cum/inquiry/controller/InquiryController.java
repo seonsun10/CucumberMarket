@@ -25,6 +25,7 @@ import com.cu.cum.inquiry.model.service.InquiryService;
 import com.cu.cum.inquiry.model.vo.Inquiry;
 import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.pagebar.PageBarBasic;
+import com.cu.cum.pagebar.PageBarInquiry;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -188,6 +189,15 @@ public class InquiryController {
 		int inq = service.deleteInquiry(id);
 		
 		return "redirect:/inquiryList";
+	}
+	
+	// 문의글 답변 페이지
+	
+	@RequestMapping("/requestBoard/{id}")
+	public ModelAndView requestBoard(@PathVariable int id, ModelAndView mv) {
+		mv.addObject("inq", service.selectInquiry(id));
+		mv.setViewName("inquiry/requestBoard");
+		return mv;
 	}
 	
 	

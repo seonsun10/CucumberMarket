@@ -29,7 +29,7 @@
 		                	<div class="card-body">
 		                  		<ul class="nav nav-pills flex-column">
 		                    		<li><a href="${pageContext.request.contextPath }/inquiryList" class="nav-link">문의하기</a></li>
-		                    		<li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고하기</a></li>
+			                    	<li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고하기</a></li>
 		                    		<li><a href="${pageContext.request.contextPath }/faqList" class="nav-link">FAQ</a></li>
 		                  		</ul>
 		                	</div>
@@ -70,13 +70,6 @@
 		                          		</td>
 		                          		<td>츄바스코 아즈텍</td>
 		                          		<td>2022.07.29</td>
-		                        	</tr>
-		                        	<tr>
-		                          		<td>2</td>
-		                          		<td>10saeki</td>
-		                          		<td colspan=2>아 욕설 오지게 함</td>
-		                          		<td>아이폰</td>
-		                          		<td>2202.07.29</td>
 		                        	</tr>
 	                      		</tbody>
                    		 	</table>

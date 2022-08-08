@@ -13,7 +13,7 @@
 						<nav aria-label="breadcrumb">
 	                		<ol class="breadcrumb">
 	                  			<li class="breadcrumb-item"><a href="/">Home</a></li>
-	                  			<li aria-current="page" class="breadcrumb-item active">문의글</li>
+	                  			<li aria-current="page" class="breadcrumb-item active">신고하기</li>
 	                		</ol>
 	             	 	</nav>
 					</div>
@@ -29,7 +29,7 @@
 		                	<div class="card-body">
 		                  		<ul class="nav nav-pills flex-column">
 		                    		<li><a href="${pageContext.request.contextPath }/inquiryList" class="nav-link">문의하기</a></li>
-		                    		<c:choose>
+			                    	<c:choose>
 							        	<c:when test="${loginMember.userId eq 'admin'}">
 							            	<li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고하기</a></li>
 							            </c:when>
@@ -45,44 +45,22 @@
 	              		<div class="banner"><a href="#"><img src="img/banner.jpg" alt="sales 2014" class="img-fluid"></a></div>
             		</div>
             		<div class="col-lg-9">
-						<table aria-label="breadcrumb" class="box" border="1" summary="게시판 상세내용" width="650" height="350" border="1" cellpadding="5" align="center" >
-						 	<colgroup>
-						  		<col width = "130px" />
-						  		<col width = "500px" />
-						 	</colgroup>
-						 	<tbody class="card-body" >
- 						  		<tr>
-						   			<th align="center">글번호</th>
-						   			<td align="center"><c:out value="${inq.inquiryNo}"/></td>
-						  		</tr>
-						  		<tr>
-						   			<th align="center">제목</th>
-						   			<td align="center"><c:out value="${inq.inquiryTitle}"/></td>
-						  		</tr>
-						  		<tr>
-						   			<th align="center">작성자</th>
-						   			<td align="center"><c:out value="${inq.writer.userId}"/></td>
-						  		</tr>
-						  		<tr>
-						   			<th align="center">문의 유형</th>
-						   			<td align="center"><c:out value="${inq.inquiryType}"/></td>
-						  		</tr>
-								<tr>
-									<th align="center">내용</th>
-						   			<td align="center" colspan="2" height="200px"><c:out value="${inq.inquiryContent}"/> </td>
-						  		</tr>
-						 	</tbody>
-							<tr>
-								<td colspan="2" align="center">
-						 			<input type="button" value="목록" onclick="location.assign('${pageContext.request.contextPath }/inquiryList')"/>
-									<c:if test="${loginMember.userId == inq.writer.userId}">
-						 				<input type="button" value="수정" onclick="location.assign('${pageContext.request.contextPath }/updateInquiry/${inq.inquiryNo}')"/>
-							 			<input type="button" value="삭제" onclick="location.assign('${pageContext.request.contextPath }/deleteInquiry/${inq.inquiryNo}')"/>
-						 			</c:if>
-							 			<input type="button" value="답변" onclick="location.assign('${pageContext.request.contextPath }/requestBoard/${inq.inquiryNo}')"/>
-						 		</td>
-						 	</tr>
-						</table>
+                  		<div class="box">
+                  			<ol class="card-body">
+			                	<li class="breadcrumb-item">오이마켓에서는 깨끗하고 편안한 마켓운영을 위하여 신고게시판을 개설하여 운영하고 있어요.</li>
+								<li>신고인의 비밀은 절대 보장되며, 사실확인을 위하여 인적사항 및 연락처를 정확히 입력하여 주세요.</li>
+								<li>신고사항을 구체적으로 작성해 주세요.</li>
+								<li>허위 사실인 경우 횟수에 상관없이 계정이 삭제되요. 그러니 신중히 작성해주세요</li>
+								<li>이 메뉴의 책임자는 전적으로 관리자에게 있어요.</li>
+								<li>공익신고 보호법에 따라 신고자는 보호되고 지원됨을 알려드려요.</li>
+							</ol>
+							<br>
+							<div class="input-group" align="right">
+				              	<div class="input-group-append">
+									<a href="${pageContext.request.contextPath }/reportWrite" class="btn btn-primary navbar-btn"><span>신고 글 작성</span></a>
+								</div> 
+							</div>
+						<!-- /.accordion-->
 					</div>
 				</div>
 				<!-- /.col-lg-9-->

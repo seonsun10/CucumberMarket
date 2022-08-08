@@ -291,7 +291,7 @@
 				  	<a href="${path }/area.do" class="btn btn-primary navbar-btn"> 지역설정 테스트용</a>
 				  </div>
 				  <div id="search-not-mobile" class="navbar-collapse collapse">
-				  	<a href="${path }/faqList" class="btn btn-primary navbar-btn"> 문의사항 테스트용</a>
+				  	<a href="${path }/faqList" class="btn btn-primary navbar-btn"> FAQ</a>
 				  </div>
 			  
               </div>

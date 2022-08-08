@@ -42,44 +42,28 @@
 					<div class="row">
 						<div class="col-md-6">
 						<div class="form-group">
+                        	<label for="title">글번호</label>
+                        	<input name="inquiryTitle" id="inquiryTitle" type="text" class="form-control" value="<c:out value="${inq.inquiryNo}"/>" readonly>
+						</div>
+						<div class="form-group">
 	                        <label for="id">작성자ID</label>
 	                        <input name="inquiryId" id="inquiryId" type="text" value="<c:out value="${loginMember.userId }"/>" readonly class="form-control">
-                      	</div>	
-						<div class="form-group">
-							<label for="phone">전화번호</label>
-	                        <input name="inquiryPhone" id="inquiryPhone" type="text" class="form-control" value="<c:out value="${loginMember.phone }"/>" readonly>
-						</div>
+                      	</div>
 						<div class="form-group">
                         	<label for="title">제목</label>
-                        	<input name="inquiryTitle" id="inquiryTitle" type="text" class="form-control">
-						</div>
-						<div class="form-group">
-                        	<!-- <label for="type">문의유형</label>
-                        	<input name="inquiryType" id="inquiryType" type="text" class="form-control"> -->
-                        	<select name="inquiryType" class="form-control">
-                          		<option selected>문의 유형</option>
-                          		<option value="계정">계정</option>
-                          		<option value="상품">상품</option>
-                          		<option value="거래">거래</option>
-                          		<option value="채팅">채팅</option>
-                          		<option value="사기">사기</option>
-                        	</select>
+                        	<input name="inquiryTitle" id="inquiryTitle" type="text" class="form-control" value="[답변] : <c:out value="${inq.inquiryTitle}"/>" readonly>
 						</div>
                     </div>
 					<div class="col-md-12">
 						<div class="form-group">
-	                        <label for="inquiryContent">문의 내용</label>
+	                        <label for="inquiryContent">답변 내용</label>
 	                        <textarea name="inquiryContent" id="inquiryContent" class="form-control"></textarea>
 						</div>
+                      <button type="submit" class="btn btn-primary">등록</button>
+                      <button type="reset" class="btn btn-primary">재설정</button>
+                      <button type="button" class="btn btn-primary" onclick="location.assign('${pageContext.request.contextPath }/inquiryList')">취소</button>
                     </div>
                   </div>
-                  	<div class="row">
-						<div class="col-md-12 text-right">
-                      		<button type="submit" class="btn btn-primary">등록</button>
-                      		<button type="reset" class="btn btn-primary">재설정</button>
-                      		<button type="button" class="btn btn-primary" onclick="location.assign('${pageContext.request.contextPath }/inquiryList')">취소</button>
-						</div>
-                    </div>
                   <!-- /.row-->
                 </form>
 			

@@ -13,7 +13,7 @@
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="/">Home</a></li>
-                  <li aria-current="page" class="breadcrumb-item active">FAQ</li>
+                  <li aria-current="page" class="breadcrumb-item active">문의하기</li>
                 </ol>
               </nav>
             </div>
@@ -29,7 +29,14 @@
                 <div class="card-body">
                   <ul class="nav nav-pills flex-column">
                     <li><a href="${pageContext.request.contextPath }/inquiryList" class="nav-link">문의하기</a></li>
-                    <li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고하기</a></li>
+                    <c:choose>
+			        	<c:when test="${loginMember.userId eq 'admin'}">
+			            	<li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고하기</a></li>
+			            </c:when>
+			            <c:when test="${loginMember.userId ne 'admin'}">
+			            	<li><a href="${pageContext.request.contextPath }/reportInfo" class="nav-link">신고하기</a></li>
+			            </c:when>
+		            </c:choose>
                     <li><a href="${pageContext.request.contextPath }/faqList" class="nav-link">FAQ</a></li>
                   </ul>
                 </div>
@@ -44,7 +51,6 @@
               					<input name="keyword" type="text" placeholder="Search" class="form-control">
 	                      		<div class="products-sort-by mt-2 mt-lg-0">
                         			<select name="searchType" class="form-control">
-                          				<option selected >선택</option>
                           				<option value="inquiryTitle" selected>제목</option>
                           				<option value="inquiryType">문의 유형</option>
                         			</select>
@@ -66,6 +72,9 @@
 	                          			<th colspan=2>제목</th>
 										<th>문의 유형</th>
 										<th>등록일</th>
+										<c:if test="${loginMember.userId  eq 'admin'}">
+											<th>삭제</th>
+										</c:if>
 										<!-- <th>답변 여부</th> -->
 	                        		</tr>
 	                      		</thead>
@@ -84,6 +93,9 @@
 		                          		<td><c:out value="${i.inquiryType}"/></td>
 		                          		<td><fmt:formatDate value="${i.inquiryDate}" pattern="yyyy-MM-dd"/></td>
 		                          		<%-- <td><c:out value="${i.answer}"/></td> --%>
+		                          		<c:if test="${loginMember.userId  eq 'admin'}">
+		                          			<td><button type="button" class="btn btn-primary" onclick="location.assign('${pageContext.request.contextPath }/deleteInquiry/${i.inquiryNo}')">삭제</button></td>
+		                          		</c:if>
 		                        	</tr>
 		                        	</c:forEach>
 		                        	</c:if>
