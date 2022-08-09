@@ -8,33 +8,43 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.cu.cum.member.model.vo.Member;
 
+
+//@Data
+//@Builder
+//@AllArgsConstructor
+//@NoArgsConstructor
+//@Entity
+//@SequenceGenerator(name="seq_replyinquiryno", sequenceName="seq_replyinquiry", allcationSize = 1)
 public class ReplyInquiry {
 	
 	// 답글 VO 클래스
 	
 //	@Id
-//	@GeneratedValue(generator = "seq_inquiryComment_no", strategy = GenerationType.SEQUENCE)
-//	private int replyinquiryt_No;  // 답글 번호
+//	@GeneratedValue(generator = "seq_replyinquiry_no",  strategy = GenerationType.SEQUENCE)
+//	private int replyinquiryNo;  // 답글 번호
 //	  
-//	@ManyToOne
+//	@OneToOne
 //	@JoinColumn(name="userid")
 //	private Member userId;  // 답글 작성자 -> admin(관리자)으로 한정 
 //	
-//	private String replyinquiry_Title; // 답글 제목 -> 원글 제목에 [답글] 추가
+//	private String replyinquiryTitle; // 답글 제목 -> 원글 제목에 [답글] 추가
 //
 //	@Column(columnDefinition = "varchar2(50) default 1 not null ")
-//	private String replyinquiry_Level; // 원글 ... 깊이..?
-//	private String replyinquiry_Content;  // 답글 내용 
-//	private int inquiry_Ref; // 원글번호 레퍼런스참조 
+//	private String replyinquiryContent;  // 답글 내용
+//	
+//	@OneToOne
+//	@JoinColumn(name="inquiryNo")
+//	private Inquiry inquiryNo; // 원 글번호 레퍼런스참조 
 //	  
 //	@Column(name="inquiryDate", columnDefinition = "date default sysdate not null " )
 //	@Temporal(TemporalType.DATE)
-//	private Date replyinquiry_Date;  // 작성일
+//	private Date replyinquiryDate;  // 작성일
 	
 
 }

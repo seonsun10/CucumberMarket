@@ -3,9 +3,11 @@ package com.cu.cum.report.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.report.model.service.ReportService;
@@ -27,9 +29,12 @@ public class ReportController {
 	}
 	
 	// 신고글 작성 페이지
-	@RequestMapping(value="/reportWrite", method=RequestMethod.GET)
-	public String report() {
-		return "/report/reportWrite";
+	@RequestMapping(value={"/reportWrite/{id}"})
+	public ModelAndView report(@PathVariable String id, ModelAndView mv) {
+		mv.addObject("id",id);
+		mv.setViewName("/report/reportWrite");
+		
+		return mv;
 	}
 	
 	// 신고글 목록 페이지

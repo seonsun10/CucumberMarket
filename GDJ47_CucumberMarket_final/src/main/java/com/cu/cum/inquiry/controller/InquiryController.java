@@ -193,12 +193,30 @@ public class InquiryController {
 	
 	// 문의글 답변 페이지
 	
-	@RequestMapping("/replyBoard/{id}")
-	public ModelAndView replyBoard(@PathVariable int id, ModelAndView mv) {
+	@RequestMapping("/replyInquiry/{id}")
+	public ModelAndView replyInquiry(@PathVariable int id, ModelAndView mv) {
 		mv.addObject("inq", service.selectInquiry(id));
-		mv.setViewName("inquiry/replyBoard");
+		mv.setViewName("inquiry/replyInquiry");
 		return mv;
 	}
+	
+	
+	// 문의글 답변 작성 로직
+//	@RequestMapping("/inquiry/replyInquiry.do")
+//	public String insertReply(
+//			@RequestParam("inquiryId") String id,
+//			@RequestParam("replyinquiryTitle") String replyinquiryTitle,
+//			@RequestParam("inquiryNo") int inquiryNo,
+//			@RequestParam("replyinquiryContent") String replycontent, Model model) {
+//		Member loginMember=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//		
+//		 ReplyInquiry r = ReplyInquiry.builder().inquiryTitle(replyinquiryTitle).inquiryNo(inquiryNo).writer(loginMember)
+//				.inquiryContent(replycontent).build();
+//	
+//		 ReplyInquiry ri = service.insertInquiry(r);
+//		
+//		return "redirect:/inquiryList";
+//	}
 	
 	
 	

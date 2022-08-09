@@ -43,7 +43,7 @@
 					<div class="row">
 						<div class="col-md-6">
 						<div class="form-group">
-	                        <label for="id">글 번호</label>
+	                        <label for="no">글 번호</label>
 	                        <input name="inquiryNo" id="inquiryNo" type="text" value="<c:out value="${inq.inquiryNo}"/>" readonly class="form-control">
                       	</div>	
 						<div class="form-group">

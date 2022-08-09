@@ -47,7 +47,7 @@
             <div class="col-lg-9">
 				<div id="comment-form">
                   <h4>신고글 작성</h4>
-                  <form action="${pageContext.request.contextPath }/request/insertRequest.do" method="post">
+                  <form action="${pageContext.request.contextPath }" method="post">
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
@@ -56,11 +56,24 @@
                         </div>
                       </div>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
                           <label for="proNo">상품 번호</label>
                           <input id="proNo" type="text" class="form-control">
+                        </div>
+                      </div>
+                    </div> -->
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <select name="reportType" class="form-control">
+                          		<option selected>신고 유형</option>
+                          		<option value="계정">욕설</option>
+                          		<option value="사기">사기</option>
+                          		<option value="상품">성희롱</option>
+                          		<option value="거래">사회적약자 비하</option>
+                        	</select>
                         </div>
                       </div>
                     </div>
@@ -76,7 +89,7 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label for="targetId">신고할 유저 아이디</label>
-                          <input id="targetId" type="text" class="form-control">
+                          <input id="targetId" type="text" value="<c:out value="${id}"/>" class="form-control" readonly>
                         </div>
                       </div>
                     </div>
@@ -97,6 +110,7 @@
                     </div>
                   </form>
                 </div>
+                <br>
             <!-- /.col-lg-9-->
           </div>
         </div>

@@ -38,12 +38,12 @@
               <div class="banner"><a href="#"><img src="/resources/img/cucumber.png" alt="" class="img-fluid"></a></div>
             </div>
 			<div class="col-lg-9">
-				<form action="${pageContext.request.contextPath }/inquiry/insertInquiry.do" method="post">
+				<form action="${pageContext.request.contextPath }/inquiry/replyInquiry.do" method="post">
 					<div class="row">
 						<div class="col-md-6">
 						<div class="form-group">
-                        	<label for="title">글번호</label>
-                        	<input name="inquiryTitle" id="inquiryTitle" type="text" class="form-control" value="<c:out value="${inq.inquiryNo}"/>" readonly>
+                        	<label for="no">글번호</label>
+                        	<input name="inquiryNo" id="inquiryTitle" type="text" class="form-control" value="<c:out value="${inq.inquiryNo}"/>" readonly>
 						</div>
 						<div class="form-group">
 	                        <label for="id">작성자ID</label>
@@ -51,18 +51,22 @@
                       	</div>
 						<div class="form-group">
                         	<label for="title">제목</label>
-                        	<input name="inquiryTitle" id="inquiryTitle" type="text" class="form-control" value="<c:out value="${inq.inquiryTitle}"/>" readonly>
+                        	<input name="replyInquiryTitle" id="inquiryTitle" type="text" class="form-control" value="<c:out value="${inq.inquiryTitle}"/>" readonly>
 						</div>
                     </div>
 					<div class="col-md-12">
 						<div class="form-group">
-	                        <label for="inquiryContent">답변 내용</label>
-	                        <textarea name="inquiryContent" id="inquiryContent" class="form-control"></textarea>
+	                        <label for="content">답변 내용</label>
+	                        <textarea name="replyContent" id="inquiryContent" class="form-control"></textarea>
 						</div>
+                    </div>
+                  </div>
+                  <div class="row">
+						<div class="col-md-12 text-right">
                       <button type="submit" class="btn btn-primary">등록</button>
                       <button type="reset" class="btn btn-primary">재설정</button>
                       <button type="button" class="btn btn-primary" onclick="location.assign('${pageContext.request.contextPath }/inquiryList')">취소</button>
-                    </div>
+                  	</div>
                   </div>
                   <!-- /.row-->
                 </form>
