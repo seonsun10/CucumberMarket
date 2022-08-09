@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class RecommendList {
 	private String recUserId;
-	private String recBoardId;
+	private int recBoardId;
 
 }

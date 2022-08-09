@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value=""/>
 </jsp:include>
@@ -41,12 +41,12 @@
               	 <div class="post" id="databox">
               	 
                 <h2><a href="${path }/board/boardinfo.do/${b.boardId}">${b.boardTitle }</a></h2>
-                <p class="author-category">작성자 <a href="#">${b.userId }</a>  &nbsp <a href="">#${b.boardCategory }</a></p>
+                <p class="author-category">작성자 <a href="">${b.userId }</a>  &nbsp <a href="">#${b.boardCategory }</a>&nbsp&nbsp  <a> 추천 : ${b.recommendCount }&nbsp 개</a></p>
                 <hr>
-                <p class="date-comments"><a href="post.html"><i class="fa fa-calendar-o"></i> ${b.createDate }</a><a href="post.html"><i class="fa fa-comment-o"></i>  Comments</a></p>
-                <div class="image"><a href="post.html"><img src="img/blog2.jpg" alt="Example blog post alt" class="img-fluid"></a></div>
+                <p class="date-comments"><a href=""><i class="fa fa-calendar-o"></i> ${b.createDate }</a><a href="post.html"><i class="fa fa-comment-o"></i>  Comments</a></p>
+                
                 <p class="intro">${b.boardContent }</p>
-                <p class="read-more"><a href="post.html" class="btn btn-primary">추천하기</a></p>
+                <p class="read-more"><button class="btn btn-primary" onclick="recommend(${b.boardId});">추천하기</button></p>
               </div>
               </c:forEach>
              
@@ -73,10 +73,10 @@
                 </div>
                 <div class="card-body">
                   <ul class="nav flex-column nav-pills">
-                    <li><a href="blog.html" class="nav-link">동네맛집</a></li>
-                    <li><a href="blog.html" class="nav-link">동네소식</a></li>
-                    <li><a href="blog.html" class="nav-link">동네질문</a></li>
-                    <li><a href="blog.html" class="nav-link">동네 분실/실종센터</a></li>
+                    <li><a href="${path }/board/boardlist.do/동네맛집" class="nav-link">동네맛집</a></li>
+                    <li><a href="${path }/board/boardlist.do/동네소식" class="nav-link">동네소식</a></li>
+                    <li><a href="${path }/board/boardlist.do/동네질문" class="nav-link">동네질문</a></li>
+                    <li><a href="${path }/board/boardlist.do/실종센터" class="nav-link">동네 분실/실종센터</a></li>
                   </ul>
                 </div>
               </div>
@@ -91,6 +91,10 @@
 <script type="text/javascript">
  const fn_boardWrite=()=>{
 		 location.assign("${path}/board/boardWrite.do");
+ }
+ function recommend(id){
+	
+	 location.assign("${path}/board/boardRecommend.do/"+id);
  }
 </script>
 

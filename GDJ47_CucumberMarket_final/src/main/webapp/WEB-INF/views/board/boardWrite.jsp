@@ -17,7 +17,7 @@
 
 		<div class="container" role="main">	
 			<h2>오이마켓 글쓰기</h2>		
-				<form name="form" id="form" role="form" method="post" action="${path}/board/saveBoard.do">
+				<form name="form" id="form" role="form" method="post" action="${path}/board/saveBoard.do" enctype="multipart/form-data">
 					<div class="mb-3">
 						
 						 <div>
@@ -40,6 +40,9 @@
 						<label for="reg_id">작성자</label>	
 						<input type="text" class="form-control" name="userId" id="reg_id" placeholder="이름을 입력해 주세요" readonly="readonly"  value="${loginMember.userId }">
 					</div>
+				<!-- <div >
+			      <input type="file" class="form-control-file border" name="picName">
+			    </div> -->
 					<div class="mb-3">
 						<label for="content">내용</label>	
 							<textarea class="form-control" rows="5" name="boardContent" id="content" placeholder="내용을 입력해 주세요" ></textarea>

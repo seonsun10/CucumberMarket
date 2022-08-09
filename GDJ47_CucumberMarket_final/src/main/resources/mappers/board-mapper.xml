@@ -11,6 +11,11 @@
 		<result column="createdate" property="createDate"/>
 		<result column="recommendcount" property="recommendCount"/>
 	</resultMap>
+	<resultMap type="com.cu.cum.board.model.vo.RecommendList" id="recommendMap">
+		<result property="recUserId" column="rec_userid"/>
+		<result property="recBoardId" column="rec_boardid"/>
+	
+	</resultMap>
 	
 	<select id="selectboardlist" resultMap="boardMap">
 	
@@ -25,5 +30,29 @@
 	<select id="selectboardcount" resultType="_int">
 	select count(*) from board
 	</select>
+	
+	<select id="selectboardlist2" resultMap="boardMap">
+	
+	select * from board where boardcategory=#{category}
+	</select>
+	<select id="selectboardcount2" resultType="_int">
+	select count(*) from board where boardcategory=#{category}
+	</select>
+	<select id="recommendcheck" parameterType="com.cu.cum.board.model.vo.RecommendList" resultType="_int">
+	select count(*) from recommendlist where rec_userid=#{recUserId} and rec_boardid=#{recBoardId}
+	</select>
+	<insert id="recommendboard" parameterType="recommend" >
+	insert into recommendlist values(#{recUserId},#{recBoardId})
+	</insert> 
+	<select id="recommendidcount" parameterType="_int" resultType="_int">
+	select count(*) from recommendlist where rec_boardid=#{BoardId}
+	</select>
+	<update id="updateboard" parameterType="board" >
+	update board set recommendcount =#{recommendCount} where boardid=#{boardId} 
+	</update>
+	
+	
+	
+	
 
 </mapper>
