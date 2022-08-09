@@ -65,7 +65,7 @@
 	</select>
 	
 	<select id="selectReviewList" resultMap="reviewMap">
-		SELECT * FROM REVIEW WHERE HOST=#{userId} order by write_date desc
+		SELECT * FROM REVIEW WHERE HOST=#{userId} order by write_date DESC
 	</select>
  	<select id="selectall" resultMap="productMap">
  	select * from product
@@ -98,4 +98,12 @@
 	<select id="selectsolvecount" parameterType="string" resultType="_int">
 	select count(*) from product where user_id=#{userId} and solve_status='n'
 	</select>
+	
+	<select id="mainProductList" resultMap="productMap">
+		<!-- SELECT a.* FROM (SELECT * FROM product ORDER BY enroll_date DESC) a WHERE ROWNUM<=30 -->
+		SELECT a.* FROM (SELECT * FROM product p INNER JOIN FILES F ON p.pro_NO=F.PRO_NO ORDER BY enroll_date DESC) a WHERE ROWNUM&lt;=20 AND THUMBNAIL_STATUS='y'
+	</select>
+<!-- 	<select id="mainFilesList" resultType="filesMap">
+	
+	</select> -->
 </mapper>

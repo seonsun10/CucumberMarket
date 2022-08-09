@@ -111,6 +111,21 @@ public class ProductServiceImpl implements ProductService {
 	public int selectSolveCount(String userId) {
 		return pmdao.selectSolveCount(session,userId);
 	}
+
+
+	
+	
+	@Override
+	public List<Product> mainProductList() {
+		
+		return pmdao.mainProductList(session);
+	}
+
+
+//	@Override
+//	public List<Files> mainFilesList() {
+//		return pmdao.mainFilesList(session);
+//	}
 }
 
 	

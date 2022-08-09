@@ -77,6 +77,17 @@ public class ProductMapperDao {
 	public int selectSolveCount(SqlSessionTemplate session,String userId) {
 		return session.selectOne("product.selectsolvecount",userId);
 	}
+
+	public List<Product> mainProductList(SqlSessionTemplate session) {
+		// TODO Auto-generated method stub
+		return session.selectList("product.mainProductList");
+	}
+
+//	public List<Files> mainFilesList(SqlSessionTemplate session) {
+//		return session.selectList("product.mainFilesList");
+//		
+//	}
+
 	
 	
 	

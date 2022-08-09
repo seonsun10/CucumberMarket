@@ -40,11 +40,11 @@
 					
 					<tr id="tablebody">
 					
-						<%-- <c:forEach var="pp" items="${pp }">
-							<c:if test="${pp.product.proNo eq p.proNo}"> --%>
+						<c:forEach var="pp" items="${pp }">
+							<c:if test="${pp.product.proNo eq p.proNo}">
 								<td><img src="${path }/resources/upload/product/${loginMember.userId}/" style="width:50px;"></td>
-					<%-- 		</c:if>
-						</c:forEach> --%>
+					 		</c:if>
+						</c:forEach>
 						
 						<td><c:out value="${p.title}"/></td>
 						<td><c:out value="${p.price }"/>원</td>
