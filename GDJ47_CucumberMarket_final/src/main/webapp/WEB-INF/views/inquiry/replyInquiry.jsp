@@ -49,11 +49,12 @@
 						</div>
 						<div class="form-group">
 	                        <label for="id">작성자ID</label>
-	                        <input name="inquiryId" id="inquiryId" type="text" value="<c:out value="${loginMember.userId }"/>" readonly class="form-control">
+	                        <%-- <input name="writer" id="writer" type="text" value="<c:out value="${loginMember.userId }"/>" readonly class="form-control"> --%>
+	                        <input name="writer" id="writer" type="text" value="admin" readonly class="form-control">
                       	</div>
 						<div class="form-group">
                         	<label for="title">제목</label>
-                        	<input name="replyInquiryTitle" id="inquiryTitle" type="text" class="form-control" value="<c:out value="     [답변] : ${inq.inquiryTitle}"/>" readonly>
+                        	<input name="replyTitle" id="inquiryTitle" type="text" class="form-control" >
 						</div>
                     </div>
 					<div class="col-md-12">

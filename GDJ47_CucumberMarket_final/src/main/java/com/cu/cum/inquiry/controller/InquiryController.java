@@ -7,10 +7,6 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,11 +18,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cu.cum.inquiry.model.service.InquiryService;
+import com.cu.cum.inquiry.model.service.ReplyInquiryService;
 import com.cu.cum.inquiry.model.vo.Inquiry;
 import com.cu.cum.inquiry.model.vo.ReplyInquiry;
 import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.pagebar.PageBarBasic;
-import com.cu.cum.pagebar.PageBarInquiry;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,6 +32,9 @@ public class InquiryController {
 	
 	@Autowired
 	public InquiryService service;
+	
+	@Autowired
+	public ReplyInquiryService riservice;
 	
 	// 자주 묻는 질문 페이지
 	@RequestMapping(value="/faqList", method=RequestMethod.GET)
@@ -141,9 +140,11 @@ public class InquiryController {
 		log.debug(searchType);
 		List<Inquiry> list = new ArrayList();
 		if(searchType.equals("inquiryTitle")) {
+			// 제목으로 검색
 			list = service.searchList(keyword);
 			
 		}else if(searchType.equals("inquiryType")) {
+			// 유형으로 검색
 			list = service.searchListType(keyword);
 		}
 		
@@ -203,21 +204,25 @@ public class InquiryController {
 	
 	
 	// 문의글 답변 작성 로직
-//	@RequestMapping("/inquiry/replyInquiry.do")
-//	public String insertReply(
-//			@RequestParam("inquiryId") String id,
-//			@RequestParam("replyinquiryTitle") String replyinquiryTitle,
-//			@RequestParam("inquiryNo") int inquiryNo,
-//			@RequestParam("replyinquiryContent") String replycontent, Model model) {
-//		Member loginMember=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//		
-//		 ReplyInquiry r = ReplyInquiry.builder().inquiryTitle(replyinquiryTitle).inquiryNo(inquiryNo).writer(loginMember)
-//				.inquiryContent(replycontent).build();
-//	
-//		 ReplyInquiry ri = service.insertInquiry(r);
-//		
-//		return "redirect:/inquiryList";
-//	}
+	@RequestMapping("/inquiry/replyInquiry.do")
+	public String insertReply(
+			
+			
+			@RequestParam("writer") String writer,
+			@RequestParam("replyTitle") String replyTitle,
+			@RequestParam("replyContent") String replyContent, 
+			@RequestParam("inquiryNo") int inquiryNo, ModelAndView mv) {
+		
+		// inquiry객체를 못받아왔으니 select로 불러와서 Inquiry객체에 집어넣는다.
+		Inquiry iq = service.selectInquiry(inquiryNo);
+		
+		ReplyInquiry r = ReplyInquiry.builder().replyinquiryTitle(replyTitle).writer(writer).inquiry(iq)
+				.replyinquiryContent(replyContent).build();
+	
+		ReplyInquiry ri = riservice.insertReply(r);
+		
+		return "redirect:/inquiryList";
+	}
 	
 	
 	// 문의글 수정 로직
