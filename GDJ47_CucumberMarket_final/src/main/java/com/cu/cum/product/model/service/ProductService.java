@@ -1,13 +1,12 @@
 package com.cu.cum.product.model.service;
 
-import java.util.List;
 
+import java.util.List;
 import java.util.Map;
 
+import org.springframework.data.domain.Pageable;
 
 import com.cu.cum.product.model.vo.Product;
-
-
 import com.cu.cum.product.model.vo.Review;
 
 
@@ -48,5 +47,9 @@ public interface ProductService {
 	//판매완료상품개수
 	int selectSolveCount(String userId);
 	
+	//jpa페이징
+	List<Product> findAllByCategoryName(Pageable p, String tag);
 	
+	//카테고리 상품 개수
+	int selectCategoryCount(String tag);
 }

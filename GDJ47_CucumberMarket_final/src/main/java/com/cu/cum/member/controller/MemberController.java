@@ -208,9 +208,7 @@ public class MemberController {
 							Model m) {
 		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"userId",userId);
 		List<Product> products=proservice.selectProductList(page);
-		Product p1 = (Product)products.get(3);
 		//log.debug("{}",p1.getFiles().get(0).getRenameFilename());
-		log.debug("product : "+p1);
 		String url=request.getRequestURI();
 		
 		int totalProduct=proservice.selectProductCount(userId);
@@ -218,9 +216,9 @@ public class MemberController {
 		m.addAttribute("product",products);
 		m.addAttribute("totalProduct",totalProduct);
 		Member loginMember=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		List<Product> list=dao.findAllByMember(loginMember);
+		//List<Product> list=dao.findAllByMember(loginMember);
 		//페이징처리 jpa
-		List<Product> list2=dao.findAll(PageRequest.of(0,5,Sort.by("enrollDate").descending())).getContent();
+		//List<Product> list2=dao.findAll(PageRequest.of(0,5,Sort.by("enrollDate").descending())).getContent();
 		//list2=list2.stream().filter(v -> v.getMember().equals(loginMember)).collect(Collectors.toList());
 		
 		return "member/mypageProduct";

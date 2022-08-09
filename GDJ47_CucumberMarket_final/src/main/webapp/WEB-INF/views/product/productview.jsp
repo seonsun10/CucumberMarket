@@ -144,10 +144,9 @@
                 </div>
                 <div class="col-md-6">
                   <div class="box">
-                    <h3 class="text-center">상품명</h3>
-                    <p class="goToDescription"><a href="#details" class="scroll-to">Scroll to product details, material &amp; care and sizing</a></p>
-                    <p class="price">1000원</p>
-                    <p class="text-center buttons"><a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                    <h4>상품명</h4>
+                    <p>1000원</p>
+                    채팅하기 추가 / 신고하기추가 / 
                     <c:if test="${count==0}">
                     <!-- <a href="basket.html" class="btn btn-outline-primary" style="background-color:lightgreen"><i class="fa fa-heart" style="color:white"></i></a></p> -->
                     
@@ -158,6 +157,8 @@
                     
                     <button class="btn btn-primary" onclick="location.assign('${path }/wishlist/deleteWishList.do?id=${loginMember.userId}&no=${no}'); alert('관심상품삭제');">관심상품삭제</button>
                     </c:if>
+                    /상품상태(중고,새거)/판매지역/찜 개수/ 올린 날 / /
+                    /올린 사람 상점으로 갈 수 있도록
                   </div>
                   <div data-slider-id="1" class="owl-thumbs">
                     <button class="owl-thumb-item"><img src="img/detailsquare.jpg" alt="" class="img-fluid"></button>

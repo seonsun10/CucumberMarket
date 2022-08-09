@@ -19,6 +19,9 @@
             </div>
           </div>
         </div>
+        <div id="banner-container" style="text-align: center;">
+        	<img src="${path }/resources/img/오이배너.jpg" width="73%"/>
+        </div>
         <!--
         *** ADVANTAGES HOMEPAGE ***
         _________________________________________________________

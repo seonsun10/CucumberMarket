@@ -72,7 +72,7 @@
 					  		<div id="intro">
 						  		${loginMember.intro}
 						  		<form class="mb-3" name="myform" id="myform"
-					  				 action="${path }/product/productReview.do?proNo=251&writer=${loginMember.userId}" method="post">
+					  				 action="${path }/product/productReview.do?proNo=6301&writer=${loginMember.userId}&host=manager" method="post">
 							  		<fieldset>
 										<input type="radio" name="oi" value="5" id="rate1"><label
 											for="rate1">★</label>

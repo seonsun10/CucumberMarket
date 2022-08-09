@@ -3,12 +3,15 @@ package com.cu.cum.product.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,15 +23,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.product.model.service.FilesService;
 import com.cu.cum.product.model.service.ProductService;
-
-import com.cu.cum.product.model.vo.Files;
-
 import com.cu.cum.product.model.service.ReviewService;
-
+import com.cu.cum.product.model.vo.Files;
 import com.cu.cum.product.model.vo.Product;
-
 import com.cu.cum.product.model.vo.Review;
-
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -136,7 +134,7 @@ public class ProductController {
 	public String productReview(@RequestParam(defaultValue="0") int proNo,
 								
 								@RequestParam(defaultValue ="5") int oi,
-								@RequestParam(defaultValue="0") String host,
+								@RequestParam(defaultValue="0") String host,//상품 주인
 								@RequestParam(defaultValue ="짱이에요") String ment,
 								Model m) {
 		if(proNo==0) {m.addAttribute("msg","등록실패");}
@@ -180,9 +178,25 @@ public class ProductController {
 	
 	//카테고리별 상품 결과 나오게하는거 이란 임시용
 	@RequestMapping("/product/productTotal.do")
-	public String productTotal(@RequestParam("tag") String tag) {
+	public String productTotal(@RequestParam("tag") String tag,
+								@RequestParam(defaultValue="1") int cPage,
+								@RequestParam(defaultValue="40") int numPerpage,
+								Model m) throws Exception{
 		System.out.println(tag);
-		return "/";
+		List<Product> products = service.findAllByCategoryName(PageRequest.of((cPage-1)*numPerpage, numPerpage,Sort.by("enrollDate").descending()), tag);
+		List daylist = new ArrayList();
+		for(int i=0; i<products.size(); i++) {
+	       LocalDate today=LocalDate.now();
+	       LocalDate targetDay=new java.sql.Date(products.get(i).getEnrollDate().getTime()).toLocalDate();
+	       Long day= ChronoUnit.DAYS.between(today, targetDay);
+	       log.debug("{}",Math.abs(day));
+	       daylist.add(Math.abs(day));
+	    }
+		m.addAttribute("productCount",service.selectCategoryCount(tag));
+		m.addAttribute("product",products);
+		m.addAttribute("tag",tag);
+		m.addAttribute("daylist",daylist);
+		return "product/productTotal";
 	}
 	
 }

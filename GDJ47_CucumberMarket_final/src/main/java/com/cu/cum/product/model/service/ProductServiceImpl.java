@@ -1,11 +1,13 @@
 package com.cu.cum.product.model.service;
 
 
+
 import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.cu.cum.product.model.dao.ProductDao;
@@ -101,6 +103,16 @@ public class ProductServiceImpl implements ProductService {
 	//판매완료상품개수
 	public int selectSolveCount(String userId) {
 		return pmdao.selectSolveCount(session,userId);
+	}
+	public List<Product> findAllByCategoryName(Pageable p,String tag){
+		return dao.findAllByCategoryName(p,tag).getContent();
+	}
+	
+	//카테고리 상품 개수
+	@Override
+	public int selectCategoryCount(String tag) {
+		// TODO Auto-generated method stub
+		return pmdao.selectCategoryCount(session,tag);
 	}
 }
 
