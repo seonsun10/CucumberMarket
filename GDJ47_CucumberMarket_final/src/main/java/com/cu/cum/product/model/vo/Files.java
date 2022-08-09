@@ -40,4 +40,6 @@ public class Files {
 	private String originalFilename;
 	
 	private String renameFilename;
+	
+	private String thumbnailStatus; //썸네일 이미지면 y  , 나머지 이미지면 n
 }

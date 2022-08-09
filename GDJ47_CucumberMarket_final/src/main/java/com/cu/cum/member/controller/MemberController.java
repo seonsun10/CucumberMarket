@@ -1,6 +1,7 @@
 package com.cu.cum.member.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +39,7 @@ import com.cu.cum.pagebar.PageBarBasic;
 import com.cu.cum.pagebar.TestPageBar;
 import com.cu.cum.product.model.dao.ProductDao;
 import com.cu.cum.product.model.service.ProductService;
+import com.cu.cum.product.model.vo.Files;
 import com.cu.cum.product.model.vo.Product;
 import com.cu.cum.product.model.vo.Review;
 
@@ -211,18 +213,31 @@ public class MemberController {
 		//log.debug("{}",p1.getFiles().get(0).getRenameFilename());
 		String url=request.getRequestURI();
 		
+		
 		int totalProduct=proservice.selectProductCount(userId);
-		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage, totalProduct, url));
-		m.addAttribute("product",products);
-		m.addAttribute("totalProduct",totalProduct);
 		Member loginMember=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		//List<Product> list=dao.findAllByMember(loginMember);
+
+		System.out.println("유저가 가지고 있는 상품 목록 : "+products);
+
+		
+		List<Files> pp = service.selectUserFiles(userId);//db거쳐서 회원이 가진 모든 파일 가져오기;
+		System.out.println("유저가 가지고 잇는 상품 대표이미지 : "+pp);
+		
+
+//		List<Product> list=dao.findAllByMember(loginMember);
 		//페이징처리 jpa
 		//List<Product> list2=dao.findAll(PageRequest.of(0,5,Sort.by("enrollDate").descending())).getContent();
 		//list2=list2.stream().filter(v -> v.getMember().equals(loginMember)).collect(Collectors.toList());
 		
+		
+		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage , totalProduct, url));
+		m.addAttribute("products",products);
+		m.addAttribute("totalProduct",totalProduct);
+		m.addAttribute("pp",pp);
+		
 		return "member/mypageProduct";
 	}
+	
 	//마이페이지에서 후기 목록 뿌리는 페이지
 	@RequestMapping("/member/mypageReview.do")
 	public String reviewpage(@RequestParam(defaultValue="1") int cPage,

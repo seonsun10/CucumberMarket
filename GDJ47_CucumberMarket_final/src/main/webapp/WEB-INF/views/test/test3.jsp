@@ -105,19 +105,20 @@
 </head>
 <body>
   <div id="chatWrap">
-            <div id="chatHeader">오이마켓 채팅방
-            	
-            	<div id="dealcheck">
-	            <c:if test="${product ne null}">
-	            	<div id="pinfo" style='color:blue;font-size:15px'>거래를 완료하셨으면 후기를 작성해보세요!</div>
-		            <span><button onclick="fn_review();" class='btn btn-primary btn-sm'>${product.member.userId }에게 후기작성</button></span>
-	            </c:if>
-	            
-	            <c:if test="${product eq null }">
-	            
-	            </c:if>	
-            	
-            </div>
+            <div id="chatHeader">
+            	<img src="/resources/img/cucumber.png" alt="Obaju logo" class="d-inline-block d-md-none" style="width:50px;height:40px">&nbsp오이마켓 채팅방
+	            	<div id="dealcheck">
+			            <c:if test="${product ne null}">
+			            	<div id="pinfo" style='color:blue;font-size:15px'>거래를 완료하셨으면 후기를 작성해보세요!</div>
+				            <span><button onclick="fn_review();" class='btn btn-primary btn-sm'>${product.member.userId }에게 후기작성</button></span>
+			            </c:if>
+			            
+			            <c:if test="${product eq null }">
+			            
+			            </c:if>	
+	            	
+	                 </div>
+	                 
             </div>
             
             <div id="chatLog">
@@ -193,7 +194,7 @@ const fn_review=()=>{
 }
 
 $(document).ready(function(){
-	$('body').scrollTop($('#chatWrap')[0].scrollHeight);
+	
 	$('#chatLog').scrollTop($('#chatLog')[0].scrollHeight);
 	$('#message').focus();
 
@@ -222,7 +223,7 @@ $(document).ready(function(){
           
            }else{
            $("#chatLog").html(temp+"<div class='anotherMsg'><span class='anotherName'>"+writer+"</span><span class='msg'><b>"+ message + "</b></span><span class='anotherTime'><fmt:formatDate value="<%=new java.util.Date() %>" type="time"/></span></div>"); 
-           
+          
            }
            
            
@@ -239,9 +240,13 @@ $(document).ready(function(){
             
             if(msg.value.length!=0){
             	
+            	 $('#chatLog').scrollTop($('#chatLog')[0].scrollHeight);
             	 stomp.send('/pub/chat/message', {}, JSON.stringify({roomId: '${room.roomId}', massage: msg.value, userid: '${loginMember.userId}'}));
+            	 event.preventDefault;
             	 
+            		
                  msg.value = '';
+            	 
             }else{
             	alert("메세지를 입력하세요");
             }
@@ -257,11 +262,11 @@ $(document).ready(function(){
             console.log(msg.value.length);
             
             if(msg.value.length!=0){
-            	 $('#chatLog').scrollTop($('#chatLog').scrollHeight);
-            	 $('body').scrollTop($('#chatWrap')[0].scrollHeight);
+            	
             	 stomp.send('/pub/chat/message', {}, JSON.stringify({roomId: '${room.roomId}', massage: msg.value, userid: '${loginMember.userId}'}));
-            	  
+            	 
                  msg.value = '';
+            	
             }else{
             	alert("메세지를 입력하세요");
             }
@@ -287,7 +292,8 @@ $(document).ready(function(){
                 roodId: '${room.roomId}'
             };
             stomp.send("/pub/chat/message", {}, JSON.stringify(MessageContent));
-            event.preventDefault();
+            
+           
             msg = '';
         }
        

@@ -7,6 +7,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.cu.cum.product.model.vo.Files;
 import com.cu.cum.product.model.vo.Product;
 import com.cu.cum.product.model.vo.Review;
 
@@ -44,6 +45,14 @@ public class ProductMapperDao {
 	public Product selectProduct(SqlSessionTemplate session,int id) {
 		return session.selectOne("product.selectproduct",id);
 	}
+
+
+	public List<Product> selectUserProductList(SqlSessionTemplate session, Map page, String userId) {
+		int cPage = (int)page.get("cPage");
+		int numPerpage = (int)page.get("numPerpage");
+		return session.selectList("product.selectUserProductList",userId,new RowBounds((cPage-1)*numPerpage,numPerpage));
+	}
+
 	//찜목록 페이징처리
 	public List<Product> selectWishList(SqlSessionTemplate session,Map page){
 		int cPage = (int)page.get("cPage");
@@ -76,4 +85,5 @@ public class ProductMapperDao {
 	
 	
 	
+
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.data.domain.Pageable;
 
+import com.cu.cum.product.model.vo.Files;
 import com.cu.cum.product.model.vo.Product;
 import com.cu.cum.product.model.vo.Review;
 
@@ -34,6 +35,9 @@ public interface ProductService {
 	
 	//삼품 리뷰 조회
 	List<Review> selectReviewList(Map page);
+
+	//유저가 가지고 있는 상품 조회
+	List<Product> selectUserProductList(Map page, String userId);
 	
 	//ㅉ목록
 	List<Product> selectWishList(Map page);

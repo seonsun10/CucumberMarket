@@ -66,7 +66,7 @@
             <div class="container">
               <div class="row">
                 <div class="col-md-12">
-                  <h2 class="mb-0">Hot this week</h2>
+                  <h2 class="mb-0">오늘의 추천 상품</h2>
                 </div>
               </div>
             </div>
@@ -284,7 +284,7 @@
         *** GET INSPIRED ***
         _________________________________________________________
         -->
-        <div class="container">
+        <!-- <div class="container">
           <div class="col-md-12">
             <div class="box slideshow">
               <h3>Get Inspired</h3>
@@ -296,13 +296,13 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
         <!-- *** GET INSPIRED END ***-->
         <!--
         *** BLOG HOMEPAGE ***
         _________________________________________________________
         -->
-        <div class="box text-center">
+        <!-- <div class="box text-center">
           <div class="container">
             <div class="col-md-12">
               <h3 class="text-uppercase">From our blog</h3>
@@ -332,13 +332,13 @@
                 </div>
               </div>
             </div>
-            <!-- /#blog-homepage-->
+            /#blog-homepage
           </div>
         </div>
-        <!-- /.container-->
-        <!-- *** BLOG HOMEPAGE END ***-->
+        /.container
+        *** BLOG HOMEPAGE END ***
       </div>
-    </div>
+    </div> -->
     <!--
     *** FOOTER ***
     _________________________________________________________

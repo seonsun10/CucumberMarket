@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -33,9 +32,9 @@
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+        
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
     
-    
-    <link rel="stylesheet" href="${path}/resources/file/css/fileupload.css">
   </head>
   <body>
   <header class="header mb-5">
@@ -96,7 +95,8 @@
           </div>
           <div id="navigation" class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
-              <li class="nav-item"><a href="#" class="nav-link active">Home</a></li>
+              <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+              
               <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">상품 카테고리<b class="caret"></b></a>
                 <ul class="dropdown-menu megamenu">
                   <li>
@@ -178,6 +178,7 @@
                   </li>
                 </ul>
               </li>
+              <li class="nav-item"><a href="${path }/board/boardlist.do" class="nav-link">동네생활</a></li>
               <%-- <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">Ladies<b class="caret"></b></a>
                 <ul class="dropdown-menu megamenu">
                   <li>
@@ -225,7 +226,7 @@
                   </li>
                 </ul>
               </li>
-              <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">Template<b class="caret"></b></a>
+              <--<li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">Template<b class="caret"></b></a>
                 <ul class="dropdown-menu megamenu">
                   <li>
                     <div class="row">
@@ -264,7 +265,7 @@
                         <ul class="list-unstyled mb-3">
                           <li class="nav-item"><a href="blog.html" class="nav-link">Blog listing</a></li>
                           <li class="nav-item"><a href="post.html" class="nav-link">Blog Post</a></li>
-                          <li class="nav-item"><a href="faq.html" class="nav-link">FAQ</a></li>
+                          <li class="nav-item"><a href="${pageContext.request.contextPath }/faqList" class="nav-link">FAQ</a></li>
                           <li class="nav-item"><a href="text.html" class="nav-link">Text page</a></li>
                           <li class="nav-item"><a href="text-right.html" class="nav-link">Text page - right sidebar</a></li>
                           <li class="nav-item"><a href="404.html" class="nav-link">404 page</a></li>
@@ -289,6 +290,12 @@
 				  
 				  <div id="search-not-mobile" class="navbar-collapse collapse">
 				  	<a href="${path }/area.do" class="btn btn-primary navbar-btn"> 지역설정 테스트용</a>
+				  </div>
+				  <div id="search-not-mobile" class="navbar-collapse collapse">
+				  	<a href="${path }/faqList" class="btn btn-primary navbar-btn"> FAQ</a>
+
+				  	
+
 				  </div>
 			  
               </div>
