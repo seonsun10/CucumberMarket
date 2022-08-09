@@ -155,7 +155,7 @@ div#pro-date{
 							<c:if test="${pf.product.proNo eq p.proNo }">
 							<div id="pro-img">
 							<!-- 나중에 여기 /manager/ << 이부분 없애야함  -->
-								<img src="${path }/resources/upload/product/manager/${pf.renameFilename}" style="width:198px; height:200px; "/>
+								<img src="${path }/resources/upload/product/${pf.renameFilename}" style="width:198px; height:200px; "/>
 							</div>
 							</c:if>
 							</c:forEach>

@@ -13,7 +13,7 @@ $('document').ready(function() {
 
 	 
 
-	 // 시/도 선택 박스 초기화
+	 
 
 	 $("select[name^=tag1]").each(function() {
 	  $selsido = $(this);
@@ -25,17 +25,21 @@ $('document').ready(function() {
 
 	 
 
-	 // 시/도 선택시 구/군 설정
+	 
 
 	 $("select[name^=tag1]").change(function() {
 	  var area = "area"+$("option",$(this)).index($("option:selected",$(this))); // 선택지역의 구군 Array
 	  var $tag2 = $(this).next(); // 선택영역 군구 객체
 	  $("option",$tag2).remove(); // 구군 초기화
 
-	  if(area == "area0")
+	  if(area == "area0"){
 	   $tag2.append("<option value=''>세부 카테고리</option>");
-	  else {
+	  }else if(area =="area2"){
 	   $.each(eval(area), function() {
+	    $tag2.append("<option value='"+this+"'>"+this.substr(2,3)+"</option>");
+	   });
+	  }else{
+		$.each(eval(area), function() {
 	    $tag2.append("<option value='"+this+"'>"+this+"</option>");
 	   });
 	  }
