@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<link rel="stylesheet" href="${path}/resources/css/product/productView.css">
 <div id="all">
       <div id="content">
         <div class="container">
@@ -187,6 +188,7 @@
                     <div class="item"> <img src="img/detailbig2.jpg" alt="" class="img-fluid"></div>
                     <div class="item"> <img src="img/detailbig3.jpg" alt="" class="img-fluid"></div>
                   </div>
+
 <!--                   <div class="ribbon sale">
                     <div class="theribbon">SALE</div>
                     <div class="ribbon-background"></div>
@@ -198,7 +200,14 @@
                   </div> -->
                   <!-- /.ribbon-->
                 <img style="width:400px; height:350px;">
+
+                  <!-- /.ribbon-->
+                  <div class="box" id="photoBox">
+                  	이미지 박스
+                  </div>
+
                 </div>
+
                 <div class="col-md-6" style="height:350px;">
                   <div class="box" style="height:350px;">
                   	<br>
@@ -210,6 +219,13 @@
                     <br>
                     <p class="text-center buttons">
                     <button class="btn btn-primary">오이채팅</button>
+
+                <div class="col-md-6">
+                  <div class="box">
+                    <h4>상품명</h4>
+                    <p>1000원</p>
+                    채팅하기 추가 / 신고하기추가 / 
+
                     <c:if test="${count==0}">
                     <!-- <a href="basket.html" class="btn btn-outline-primary" style="background-color:lightgreen"><i class="fa fa-heart" style="color:white"></i></a></p> -->
                     
@@ -220,7 +236,12 @@
                     
                     <button class="btn btn-primary" onclick="location.assign('${path }/wishlist/deleteWishList.do?id=${loginMember.userId}&no=${no}'); alert('관심상품삭제');">관심상품삭제</button>
                     </c:if>
+
                     </p>
+
+                    /상품상태(중고,새거)/판매지역/찜 개수/ 올린 날 / /
+                    /올린 사람 상점으로 갈 수 있도록
+
                   </div>
  <!--                  <div data-slider-id="1" class="owl-thumbs">
                     <button class="owl-thumb-item"><img src="img/detailsquare.jpg" alt="" class="img-fluid"></button>
@@ -357,7 +378,7 @@
       </div>
     </div>
     <script>
-/*     const count = ${count}
+     const count = ${count}
     const id = "${id}"
     const no = ${no}
     if(count==1){
@@ -382,6 +403,6 @@
     	function jjim_insert(){
     		console.log(count);
     	}
-    } */
+    }
     </script>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

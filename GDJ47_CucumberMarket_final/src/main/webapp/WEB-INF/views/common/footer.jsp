@@ -92,6 +92,9 @@
     <script src="${path}/resources/js/mypage.js"></script>
 	<%-- <script src="${path}/resources/file/js/fileupload.js"></script> --%>
 
+    
+	<script src="${path}/resources/file/js/fileupload.js"></script>
+
 
 <%-- 	<!-- 카카오 지도 -->
 	<script src="${path}/resources/map/map.js"></script> --%>

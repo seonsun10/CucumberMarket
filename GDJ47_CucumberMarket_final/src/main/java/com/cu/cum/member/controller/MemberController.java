@@ -239,15 +239,14 @@ public class MemberController {
 							@RequestParam String userId,
 							HttpServletRequest request,
 							Model m) {
-
+		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"userId",userId);
+		List<Product> products=proservice.selectProductList(page);
+		//log.debug("{}",p1.getFiles().get(0).getRenameFilename());
 		String url=request.getRequestURI();
 		
 		
 		int totalProduct=proservice.selectProductCount(userId);
 		Member loginMember=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"userId",userId);
-		List<Product> products=proservice.selectProductList(page);
 
 		System.out.println("유저가 가지고 있는 상품 목록 : "+products);
 
@@ -256,9 +255,9 @@ public class MemberController {
 		System.out.println("유저가 가지고 잇는 상품 대표이미지 : "+pp);
 		
 
-		List<Product> list=dao.findAllByMember(loginMember);
+//		List<Product> list=dao.findAllByMember(loginMember);
 		//페이징처리 jpa
-		List<Product> list2=dao.findAll(PageRequest.of(0,5,Sort.by("enrollDate").descending())).getContent();
+		//List<Product> list2=dao.findAll(PageRequest.of(0,5,Sort.by("enrollDate").descending())).getContent();
 		//list2=list2.stream().filter(v -> v.getMember().equals(loginMember)).collect(Collectors.toList());
 		
 		
@@ -323,10 +322,11 @@ public class MemberController {
 	//다른 사람 페이지 연결
 	@RequestMapping("/member/otherMember.do")
 	public String otherMember(@RequestParam String writer,
-								@RequestParam String customer,
+								@RequestParam(defaultValue="no") String customer,
 								HttpServletRequest request,
 								HttpServletResponse response,
 								Model m) {
+		
 		Cookie oldCookie = null;
 	    Cookie[] cookies = request.getCookies();
 	    if (cookies != null) {
@@ -336,21 +336,22 @@ public class MemberController {
 	            }
 	        }
 	    }
-
-	    if (oldCookie != null) {
-	        if (!oldCookie.getValue().contains("[" + customer.toString() + "]")) {
-	            service.viewCountUp(writer);
-	            oldCookie.setValue(oldCookie.getValue() + "_[" + customer + "]");
-	            oldCookie.setPath("/");
-	            oldCookie.setMaxAge(60 * 60 * 24);
-	            response.addCookie(oldCookie);
-	        }
-	    } else {
-	        service.viewCountUp(writer);
-	        Cookie newCookie = new Cookie("postView","[" + customer + "]");
-	        newCookie.setPath("/");
-	        newCookie.setMaxAge(60 * 60 * 24);
-	        response.addCookie(newCookie);
+	    if(!customer.equals("no")) {
+		    if (oldCookie != null) {
+		        if (!oldCookie.getValue().contains("[" + customer.toString() + "]")) {
+		            service.viewCountUp(writer);
+		            oldCookie.setValue(oldCookie.getValue() + "_[" + customer + "]");
+		            oldCookie.setPath("/");
+		            oldCookie.setMaxAge(60 * 60 * 12);
+		            response.addCookie(oldCookie);
+		        }
+		    } else {
+		        service.viewCountUp(writer);
+		        Cookie newCookie = new Cookie("postView","[" + customer + "]");
+		        newCookie.setPath("/");
+		        newCookie.setMaxAge(60 * 60 * 12);
+		        response.addCookie(newCookie);
+		    }
 	    }
 		Member member = service.selectMember(writer);
 		m.addAttribute("viewCount",service.selectViewCount(writer));

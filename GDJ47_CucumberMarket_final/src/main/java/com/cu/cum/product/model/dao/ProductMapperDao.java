@@ -89,6 +89,11 @@ public class ProductMapperDao {
 //	}
 
 	
+	//카테고리 상품 개수
+	public int selectCategoryCount(SqlSessionTemplate session, String tag) {
+		return session.selectOne("product.selectCategoryCount",tag);
+	}
+	
 	
 	
 

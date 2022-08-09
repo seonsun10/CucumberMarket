@@ -1,7 +1,8 @@
 /**
  * 
  */
- 
+
+
  if($("#protag1").click(e=>{
 	$("#protag1").css("backgroundColor","lightgray");
 	$("#reviewtag1").css("backgroundColor","white");
@@ -46,3 +47,8 @@ function fn_ajaxPage1(pageNo){
 		}	
 	});
 };
+
+$("#more-box").click(e=>{
+	$("#pro-box:nth-child(n+21)").css("display","inherit");
+	$("#more-box").css("display","none");
+})

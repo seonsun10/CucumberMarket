@@ -45,7 +45,7 @@
       <div id="top">
         <div class="container">
           <div class="row">
-            <div class="col-lg-6 offer mb-3 mb-lg-0"><a href="#" class="btn btn-success btn-sm">Offer of the day</a><a href="#" class="ml-1">Get flat 35% off on orders over $50!</a></div>
+            <div class="col-lg-6 offer mb-3 mb-lg-0"></div>
             <div class="col-lg-6 text-center text-lg-right">
               <ul class="menu list-inline mb-0">
               	<li class="list-inline-item"><a href="#" data-toggle="modal" data-target="#login-modal">Login</a></li>
@@ -96,7 +96,12 @@
           <div id="navigation" class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+<<<<<<< HEAD
               <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">전체 카테고리<b class="caret"></b></a>
+=======
+              
+              <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">상품 카테고리<b class="caret"></b></a>
+
                 <ul class="dropdown-menu megamenu">
                   <li>
                     <div class="row">
@@ -105,8 +110,12 @@
                         <ul class="list-unstyled mb-3">
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=패딩" class="nav-link">패딩</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=코트" class="nav-link">코트</a></li>
+
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=반팔" class="nav-link">반팔</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=긴팔" class="nav-link">긴팔</a></li>
+
+                          <li class="nav-item"><a href="${path }/product/productTotal.do?tag=티셔츠" class="nav-link">티셔츠</a></li>
+
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=셔츠" class="nav-link">셔츠</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=바지" class="nav-link">바지</a></li>
                         </ul>
@@ -114,12 +123,20 @@
                       <div class="col-md-6 col-lg-3">
                         <h5>남성의류</h5>
                         <ul class="list-unstyled mb-3">
+<<<<<<< HEAD
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=남성패딩" class="nav-link">패딩</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=남성코트" class="nav-link">코트</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=남성반팔" class="nav-link">반팔</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=남성긴팔" class="nav-link">긴팔</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=남성셔츠" class="nav-link">셔츠</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=남성바지" class="nav-link">바지</a></li>
+=======
+                          <li class="nav-item"><a href="${path }/product/productTotal.do?tag=패딩" class="nav-link">패딩</a></li>
+                          <li class="nav-item"><a href="${path }/product/productTotal.do?tag=코트" class="nav-link">코트</a></li>
+                          <li class="nav-item"><a href="${path }/product/productTotal.do?tag=티셔츠" class="nav-link">티셔츠</a></li>
+                          <li class="nav-item"><a href="${path }/product/productTotal.do?tag=셔츠" class="nav-link">셔츠</a></li>
+                          <li class="nav-item"><a href="${path }/product/productTotal.do?tag=바지" class="nav-link">바지</a></li>
+>>>>>>> branch 'main' of https://github.com/seonsun10/CucumberMarket.git
                         </ul>
                       </div>
                       <div class="col-md-6 col-lg-3">
@@ -149,7 +166,11 @@
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=수입차" class="nav-link">수입차</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=차량용품" class="nav-link">차량용품</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=오토바이" class="nav-link">오토바이</a></li>
+<<<<<<< HEAD
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=오토바이용품" class="nav-link">오토바이 용품</a></li>
+=======
+                          <li class="nav-item"><a href="${path }/product/productTotal.do?tag=오토바이 용품" class="nav-link">오토바이 용품</a></li>
+>>>>>>> branch 'main' of https://github.com/seonsun10/CucumberMarket.git
                         </ul>
                       </div>
                       <div class="col-md-6 col-lg-3">
@@ -181,6 +202,7 @@
                   </li>
                 </ul>
               </li>
+              <li class="nav-item"><a href="${path }/board/boardlist.do" class="nav-link">동네생활</a></li>
               <%-- <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">Ladies<b class="caret"></b></a>
                 <ul class="dropdown-menu megamenu">
                   <li>
@@ -297,7 +319,7 @@
 				  <div id="search-not-mobile" class="navbar-collapse collapse">
 				  	<a href="${path }/faqList" class="btn btn-primary navbar-btn"> FAQ</a>
 
-				  	<a href="${path }/board/boardlist.do" class="btn btn-primary navbar-btn"> 커뮤니티 테스트</a>
+				  	
 
 				  </div>
 			  

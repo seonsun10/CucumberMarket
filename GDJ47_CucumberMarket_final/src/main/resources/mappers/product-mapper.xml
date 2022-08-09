@@ -98,6 +98,7 @@
 	<select id="selectsolvecount" parameterType="string" resultType="_int">
 	select count(*) from product where user_id=#{userId} and solve_status='n'
 	</select>
+
 	
 	<select id="mainProductList" resultMap="productMap">
 		<!-- SELECT a.* FROM (SELECT * FROM product ORDER BY enroll_date DESC) a WHERE ROWNUM<=30 -->
@@ -106,4 +107,9 @@
 <!-- 	<select id="mainFilesList" resultType="filesMap">
 	
 	</select> -->
+
+	<select id="selectCategoryCount" resultType="_int">
+		select count(*) from product where category_id=#{tag}
+	</select>
+
 </mapper>

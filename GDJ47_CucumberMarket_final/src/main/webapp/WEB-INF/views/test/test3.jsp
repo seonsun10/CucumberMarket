@@ -194,7 +194,7 @@ const fn_review=()=>{
 }
 
 $(document).ready(function(){
-	$('body').scrollTop($('#chatWrap')[0].scrollHeight);
+	
 	$('#chatLog').scrollTop($('#chatLog')[0].scrollHeight);
 	$('#message').focus();
 
@@ -223,7 +223,7 @@ $(document).ready(function(){
           
            }else{
            $("#chatLog").html(temp+"<div class='anotherMsg'><span class='anotherName'>"+writer+"</span><span class='msg'><b>"+ message + "</b></span><span class='anotherTime'><fmt:formatDate value="<%=new java.util.Date() %>" type="time"/></span></div>"); 
-           
+          
            }
            
            
@@ -240,9 +240,13 @@ $(document).ready(function(){
             
             if(msg.value.length!=0){
             	
+            	 $('#chatLog').scrollTop($('#chatLog')[0].scrollHeight);
             	 stomp.send('/pub/chat/message', {}, JSON.stringify({roomId: '${room.roomId}', massage: msg.value, userid: '${loginMember.userId}'}));
+            	 event.preventDefault;
             	 
+            		
                  msg.value = '';
+            	 
             }else{
             	alert("메세지를 입력하세요");
             }
@@ -258,11 +262,11 @@ $(document).ready(function(){
             console.log(msg.value.length);
             
             if(msg.value.length!=0){
-            	 $('#chatLog').scrollTop($('#chatLog').scrollHeight);
-            	 $('body').scrollTop($('#chatWrap')[0].scrollHeight);
+            	
             	 stomp.send('/pub/chat/message', {}, JSON.stringify({roomId: '${room.roomId}', massage: msg.value, userid: '${loginMember.userId}'}));
-            	  
+            	 
                  msg.value = '';
+            	
             }else{
             	alert("메세지를 입력하세요");
             }
@@ -288,7 +292,8 @@ $(document).ready(function(){
                 roodId: '${room.roomId}'
             };
             stomp.send("/pub/chat/message", {}, JSON.stringify(MessageContent));
-            event.preventDefault();
+            
+           
             msg = '';
         }
        
