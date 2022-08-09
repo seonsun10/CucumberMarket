@@ -20,22 +20,20 @@ import com.cu.cum.member.model.vo.Member;
 //@AllArgsConstructor
 //@NoArgsConstructor
 //@Entity
-//@SequenceGenerator(name="seq_replyinquiryno", sequenceName="seq_replyinquiry", allcationSize = 1)
+//@SequenceGenerator(name="seq_replyinquiryno", sequenceName="seq_replyinquiryno", allocationSize = 1)
 public class ReplyInquiry {
 	
 	// 답글 VO 클래스
 	
 //	@Id
-//	@GeneratedValue(generator = "seq_replyinquiry_no",  strategy = GenerationType.SEQUENCE)
+//	@GeneratedValue(generator = "seq_replyinquiryno",  strategy = GenerationType.SEQUENCE)
 //	private int replyinquiryNo;  // 답글 번호
 //	  
 //	@OneToOne
 //	@JoinColumn(name="userid")
-//	private Member userId;  // 답글 작성자 -> admin(관리자)으로 한정 
+//	private Member writer;  // 답글 작성자 -> admin(관리자)으로 한정 
 //	
 //	private String replyinquiryTitle; // 답글 제목 -> 원글 제목에 [답글] 추가
-//
-//	@Column(columnDefinition = "varchar2(50) default 1 not null ")
 //	private String replyinquiryContent;  // 답글 내용
 //	
 //	@OneToOne

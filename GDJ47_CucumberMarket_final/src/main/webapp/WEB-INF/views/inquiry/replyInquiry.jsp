@@ -28,8 +28,10 @@
                 </div>
                 <div class="card-body">
                   <ul class="nav nav-pills flex-column">
-                    <li><a href="${pageContext.request.contextPath }/inquiryList" class="nav-link">문의하기</a></li>
-                    <li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고하기</a></li>
+                    <li><a href="${pageContext.request.contextPath }/inquiryList" class="nav-link">1:1 문의</a></li>
+                    <c:if test="${loginMember.userId eq 'admin'}">
+                    	<li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고</a></li>
+                    </c:if>
                     <li><a href="${pageContext.request.contextPath }/faqList" class="nav-link">FAQ</a></li>
                   </ul>
                 </div>
@@ -51,7 +53,7 @@
                       	</div>
 						<div class="form-group">
                         	<label for="title">제목</label>
-                        	<input name="replyInquiryTitle" id="inquiryTitle" type="text" class="form-control" value="<c:out value="${inq.inquiryTitle}"/>" readonly>
+                        	<input name="replyInquiryTitle" id="inquiryTitle" type="text" class="form-control" value="<c:out value="     [답변] : ${inq.inquiryTitle}"/>" readonly>
 						</div>
                     </div>
 					<div class="col-md-12">

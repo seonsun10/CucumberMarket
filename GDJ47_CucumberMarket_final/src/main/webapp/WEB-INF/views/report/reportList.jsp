@@ -28,8 +28,8 @@
 		                	</div>
 		                	<div class="card-body">
 		                  		<ul class="nav nav-pills flex-column">
-		                    		<li><a href="${pageContext.request.contextPath }/inquiryList" class="nav-link">문의하기</a></li>
-			                    	<li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고하기</a></li>
+		                    		<li><a href="${pageContext.request.contextPath }/inquiryList" class="nav-link">1:1 문의</a></li>
+			                    	<li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고</a></li>
 		                    		<li><a href="${pageContext.request.contextPath }/faqList" class="nav-link">FAQ</a></li>
 		                  		</ul>
 		                	</div>
@@ -43,7 +43,7 @@
               					<input type="text" placeholder="Search" class="form-control">
 				              	<div class="input-group-append">
 				                <button type="button" class="btn btn-primary"><i class="fa fa-search"></i></button>
-								<a href="${pageContext.request.contextPath }/reportWrite" class="btn btn-primary navbar-btn"><span>신고글 작성</span></a>
+								<%-- <a href="${pageContext.request.contextPath }/reportWrite" class="btn btn-primary navbar-btn"><span>신고글 작성</span></a> --%>
 				              </div>
 							<%-- <div class="input-group-append">
 								<a href="${pageContext.request.contextPath }/reportWrite" class="btn btn-primary navbar-btn"><span>신고글 작성</span></a>
@@ -53,9 +53,9 @@
 	                      		<thead>
 	                        		<tr>
 										<th>번호</th>
-										<th>아이디</th>
+										<th>신고자 아이디</th>
 	                          			<th colspan=2>제목</th>
-										<th>상품</th>
+										<th>신고 회원</th>
 										<th>등록일</th>
 	                        		</tr>
 	                      		</thead>
@@ -68,7 +68,7 @@
 												사기꾼 좀 잡아라!
 											</a>
 		                          		</td>
-		                          		<td>츄바스코 아즈텍</td>
+		                          		<td>Nohongchul</td>
 		                          		<td>2022.07.29</td>
 		                        	</tr>
 	                      		</tbody>

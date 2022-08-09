@@ -27,15 +27,17 @@
                 </div>
                 <div class="card-body">
                   <ul class="nav nav-pills flex-column">
-                    <li><a href="${pageContext.request.contextPath }/inquiryList" class="nav-link">문의하기</a></li>
-                    <c:choose>
-			        	<c:when test="${loginMember.userId eq 'admin'}">
-			            	<li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고하기</a></li>
-			            </c:when>
+                    <li><a href="${pageContext.request.contextPath }/inquiryList" class="nav-link">1:1 문의</a></li>
+                    <%-- <c:choose>
+			        	<c:when test="${loginMember.userId eq 'admin'}"> --%>
+			        	<c:if test="${loginMember.userId eq 'admin'}">
+			            	<li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고</a></li>
+			            </c:if>
+			            <%-- </c:when>
 			            <c:when test="${loginMember.userId ne 'admin'}">
-			            	<li><a href="${pageContext.request.contextPath }/reportInfo" class="nav-link">신고하기</a></li>
+			            	<li><a href="${pageContext.request.contextPath }/reportInfo" class="nav-link">신고</a></li>
 			            </c:when>
-		            </c:choose>
+		            </c:choose> --%>
                     <li><a href="${pageContext.request.contextPath }/faqList" class="nav-link">FAQ</a></li>
                   </ul>
                 </div>

@@ -28,8 +28,8 @@
 		                	</div>
 		                	<div class="card-body">
 		                  		<ul class="nav nav-pills flex-column">
-		                    		<li><a href="${pageContext.request.contextPath }/inquiryList" class="nav-link">문의하기</a></li>
-		                    		<li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고하기</a></li>
+		                    		<li><a href="${pageContext.request.contextPath }/inquiryList" class="nav-link">1:1 문의</a></li>
+		                    		<li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고</a></li>
 		                    		<li><a href="${pageContext.request.contextPath }/faqList" class="nav-link">FAQ</a></li>
 		                  		</ul>
 		                	</div>
@@ -45,24 +45,25 @@
 						 	</colgroup>
 						 	<tbody class="card-body" >
 						  		<tr>
-						   			<th align="center">글번호</th>
-						   			<td>1</td>
+						   			<th align="center" style="text-align: center">글번호</th>
+						   			<td style="text-align: center">1</td>
 						  		</tr>
 						  		<tr>
-						   			<th align="center">제목</th>
-						   			<td>사기꾼 좀 잡아라!</td>
+						   			<th align="center" style="text-align: center">제목</th>
+						   			<td style="text-align: center">사기꾼 좀 잡아라!</td>
 						  		</tr>
 						  		<tr>
-						   			<th align="center">작성자</th>
-						   			<td>goodee</td>
+						   			<th align="center" style="text-align: center">작성자</th>
+						   			<td style="text-align: center">goodee</td>
 						  		</tr>
 								<tr>
-						   			<td colspan="2" height="200px">아 사기 당했다고! 잡아달라고 처리해달라고 </td>
+						   			<td colspan="2" height="200px" style="text-align: center">아 사기 당했다고! 잡아달라고 처리해달라고 </td>
 						  		</tr>
 						 	</tbody>
 							<tr>
 								<td colspan="2" align="center">
 						 			<input type="button" value="목록" onclick="location.assign('${pageContext.request.contextPath }/reportList')"/>
+						 			<input type="button" value="삭제" onclick="location.assign('${pageContext.request.contextPath }/reportList')"/>
 						 		</td>
 						 	</tr>
 						</table>

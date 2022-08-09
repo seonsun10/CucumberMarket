@@ -72,7 +72,7 @@
                           		<option value="계정">욕설</option>
                           		<option value="사기">사기</option>
                           		<option value="상품">성희롱</option>
-                          		<option value="거래">사회적약자 비하</option>
+                          		<option value="거래">정치적발언</option>
                         	</select>
                         </div>
                       </div>

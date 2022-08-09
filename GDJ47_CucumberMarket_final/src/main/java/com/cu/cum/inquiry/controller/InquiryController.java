@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cu.cum.inquiry.model.service.InquiryService;
 import com.cu.cum.inquiry.model.vo.Inquiry;
+import com.cu.cum.inquiry.model.vo.ReplyInquiry;
 import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.pagebar.PageBarBasic;
 import com.cu.cum.pagebar.PageBarInquiry;
@@ -217,6 +218,11 @@ public class InquiryController {
 //		
 //		return "redirect:/inquiryList";
 //	}
+	
+	
+	// 문의글 수정 로직
+//	@RequsetMapping("/")
+
 	
 	
 	
