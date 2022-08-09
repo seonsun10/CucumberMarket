@@ -19,7 +19,7 @@
 	
 	<select id="selectboardlist" resultMap="boardMap">
 	
-	select * from board
+	select * from board order by createdate desc
 	</select>
 	<insert id="insertboard" parameterType="board" >
 	insert into board values(seq_boardid.nextval,#{userId},#{boardCategory},#{boardTitle},#{boardContent},null,sysdate,0)

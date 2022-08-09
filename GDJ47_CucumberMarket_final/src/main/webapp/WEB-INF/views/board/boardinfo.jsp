@@ -23,7 +23,7 @@
                 &nbsp&nbsp&nbsp&nbsp&nbsp
                 <!-- /#post-content-->
                 <div id="comments">
-                  <h4>댓글</h4>
+                <!--   <h4>댓글</h4>
                   <div class="row comment">
                     <div class="col-md-3 col-lg-2 text-center text-md-center">
                       <p><img src="img/blog-avatar2.jpg" alt="" class="img-fluid rounded-circle"></p>
@@ -34,13 +34,13 @@
                       <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
                       <p class="reply"><a href="#"><i class="fa fa-reply"></i> Reply</a></p>
                     </div>
-                  </div>
+                  </div> -->
                   <!-- /.comment-->
                
                 </div>
                 <!-- /#comments-->
                 <div id="comment-form">
-                  <h4>댓글</h4>
+                 <%--  <h4>댓글</h4>
                   <form>
                     <div class="row">
                       <div class="col-md-6">
@@ -62,8 +62,10 @@
                         <button class="btn btn-primary"><i class="fa fa-comment-o"></i> 댓글 남기기</button>
                       </div>
                     </div>
-                  </form>
-                  <div id="disqus_thread"></div>
+                  </form> --%>
+                    <div id="disqus_thread"></div>
+                 
+                
 <script>
     /**
     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
@@ -105,7 +107,7 @@
                 </div>
                 <div class="card-body">
                   <ul class="nav flex-column nav-pills">
-                    <li><a href="blog.html" class="nav-link">글 목록</a></li>
+                    <li><a href="${path }/board/boardlist.do" class="nav-link">글 목록</a></li>
                     
                   </ul>
                 </div>

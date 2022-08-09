@@ -95,7 +95,8 @@
           </div>
           <div id="navigation" class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
-              <li class="nav-item"><a href="#" class="nav-link active">Home</a></li>
+              <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+              
               <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">상품 카테고리<b class="caret"></b></a>
                 <ul class="dropdown-menu megamenu">
                   <li>
@@ -177,6 +178,7 @@
                   </li>
                 </ul>
               </li>
+              <li class="nav-item"><a href="${path }/board/boardlist.do" class="nav-link">동네생활</a></li>
               <%-- <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">Ladies<b class="caret"></b></a>
                 <ul class="dropdown-menu megamenu">
                   <li>
@@ -292,7 +294,7 @@
 				  <div id="search-not-mobile" class="navbar-collapse collapse">
 				  	<a href="${path }/faqList" class="btn btn-primary navbar-btn"> FAQ</a>
 
-				  	<a href="${path }/board/boardlist.do" class="btn btn-primary navbar-btn"> 커뮤니티 테스트</a>
+				  	
 
 				  </div>
 			  
