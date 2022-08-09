@@ -10,10 +10,10 @@
           <div class="row">
             <div class="col-md-12">
               <div id="main-slider" class="owl-carousel owl-theme">
-                <div class="item"><img src="resources/img/main-slider1.jpg" alt="" class="img-fluid"></div>
-                <div class="item"><img src="resources/img/main-slider2.jpg" alt="" class="img-fluid"></div>
-                <div class="item"><img src="resources/img/main-slider3.jpg" alt="" class="img-fluid"></div>
-                <div class="item"><img src="resources/img/main-slider4.jpg" alt="" class="img-fluid"></div>
+                <div class="item"><img src="resources/img/cucumber.png" alt="" class="img-fluid"></div>
+                <div class="item"><img src="resources/img/cucumber.png" alt="" class="img-fluid"></div>
+                <div class="item"><img src="resources/img/cucumber.png" alt="" class="img-fluid"></div>
+                <div class="item"><img src="resources/img/cucumber.png" alt="" class="img-fluid"></div>
               </div>
               <!-- /#main-slider-->
             </div>
@@ -178,10 +178,10 @@
                 <div class="product">
                   <div class="flip-container">
                     <div class="flipper">
-                      <div class="front"><a href="detail.html"><img src="resources/img/product2.jpg" alt="" class="img-fluid"></a></div>
-                      <div class="back"><a href="detail.html"><img src="resources/img/product2_2.jpg" alt="" class="img-fluid"></a></div>
+                      <div class="front"><a href="detail.html"><img src="resources/img/cucumber.png" alt="" class="img-fluid"></a></div>
+                      <div class="back"><a href="detail.html"><img src="resources/img/cucumber.png" alt="" class="img-fluid"></a></div>
                     </div>
-                  </div><a href="detail.html" class="invisible"><img src="resources/img/product2.jpg" alt="" class="img-fluid"></a>
+                  </div><a href="detail.html" class="invisible"><img src="resources/img/cucumber.png" alt="" class="img-fluid"></a>
                   <div class="text">
                     <h3><a href="detail.html">White Blouse Versace</a></h3>
                     <p class="price"> 
