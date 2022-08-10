@@ -147,6 +147,7 @@
                     <h4>상품명</h4>
                     <p>1000원</p>
                     채팅하기 추가 / 신고하기추가 / 
+                    <button  class="btn btn-primary" onclick="openchat();">채팅하기</button>
                     <c:if test="${count==0}">
                     <!-- <a href="basket.html" class="btn btn-outline-primary" style="background-color:lightgreen"><i class="fa fa-heart" style="color:white"></i></a></p> -->
                     
@@ -328,4 +329,34 @@
     	}
     } */
     </script>
+    <script type="text/javascript">
+   			const openchat=()=>{
+   				$.ajax({
+   					
+   					data:JSON.stringify({userId:'${pro.member.userId}',
+   	   	       			otherId:'${loginMember.userId}',
+   	   	       			proNo:${pro.proNo}
+   	   	       			 }),
+   					headers:{"Content-Type":"application/json"},
+   	       		 	url: '/chatingRoom',
+   	       			type: "POST",
+   	       			
+   	       			
+   	       		
+   	       		 success:data=> {
+   	       			 console.log(data.roomId);
+   	       			 if(data.roomId!=null){
+   	       			open("${path}/testchat.do/"+data.roomId,"_blank","width=580,height=600");
+   	       			 }else{
+   	       				 alert("본인 상품에는 채팅을 하실 수 없습니다.")
+   	       			 }
+   	       			
+   	       			
+   	       		 }
+   	       	 }); 
+   			};
+        	
+        
+	
+		</script>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

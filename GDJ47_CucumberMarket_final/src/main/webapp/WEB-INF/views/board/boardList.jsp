@@ -43,7 +43,7 @@
                 <h2><a href="${path }/board/boardinfo.do/${b.boardId}">${b.boardTitle }</a></h2>
                 <p class="author-category">작성자 <a href="">${b.userId }</a>  &nbsp <a href="">#${b.boardCategory }</a>&nbsp&nbsp  <a> 추천 : ${b.recommendCount }&nbsp 개</a></p>
                 <hr>
-                <p class="date-comments"><a href=""><i class="fa fa-calendar-o"></i> ${b.createDate }</a><a href="post.html"><i class="fa fa-comment-o"></i>  Comments</a></p>
+                <p class="date-comments"><a href=""><i class="fa fa-calendar-o"></i> ${b.createDate }</a><a href=""><i class="fa fa-comment-o"></i>  Comments</a></p>
                 
                 <p class="intro">${b.boardContent }</p>
                 <p class="read-more"><button class="btn btn-primary" onclick="recommend(${b.boardId});">추천하기</button></p>
