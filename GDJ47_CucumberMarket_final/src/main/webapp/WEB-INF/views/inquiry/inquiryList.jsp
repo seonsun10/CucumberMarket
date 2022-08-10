@@ -70,9 +70,9 @@
 	                      		<thead>
 	                        		<tr>
 										<th>번호</th>
-										<th>아이디</th>
-	                          			<th colspan=2>제목</th>
 										<th>문의 유형</th>
+	                          			<th colspan=2>제목</th>
+										<th>아이디</th>
 										<th>등록일</th>
 										<c:if test="${loginMember.userId  eq 'admin'}">
 											<th>삭제</th>
@@ -82,23 +82,53 @@
 	                      		</thead>
 								<tbody>
 								<c:if test="${not empty list }">
+								<%-- ${list } --%>
 								<c:forEach items="${list }" var="i">
 		                        	<tr>
 		                          		<td><c:out value="${i.inquiryNo}"/></td>
-		                          		<td>${i.writer.userId }</td>
-		                          		<td colspan=2>
+		                          		<td><c:out value="${i.inquiryType}"/></td>
+		                          		<td colspan=1>
 		                          			<%-- <a href="${pageContext.request.contextPath }/inquiryView"> --%>
 		                          			<a href="${pageContext.request.contextPath }/inquiryView/${i.inquiryNo}">
 												<c:out value="${i.inquiryTitle}"/>
 											</a>
 		                          		</td>
-		                          		<td><c:out value="${i.inquiryType}"/></td>
+		                          		<td></td>
+		                          		<td>${i.writer.userId }</td>
 		                          		<td><fmt:formatDate value="${i.inquiryDate}" pattern="yyyy-MM-dd"/></td>
 		                          		<%-- <td><c:out value="${i.answer}"/></td> --%>
 		                          		<c:if test="${loginMember.userId  eq 'admin'}">
-		                          			<td><button type="button" class="btn btn-primary" onclick="location.assign('${pageContext.request.contextPath }/deleteInquiry/${i.inquiryNo}')">삭제</button></td>
+		                          			<td>
+		                          				<%-- <button type="button" class="btn btn-primary" onclick="location.assign('${pageContext.request.contextPath }/deleteInquiry/${i.inquiryNo}')">삭제</button> --%>
+		                          				<a href="${pageContext.request.contextPath }/deleteInquiry/${i.inquiryNo}""><i class="fa fa-trash-o"></i></a>
+		                          			</td>
+		                          			
 		                          		</c:if>
 		                        	</tr>
+		                        	<!-- 여기서부터 답글  -->
+		                        	<c:if test="${i.reInquiry.replyinquiryNo ne null }">
+		                        	<tr>
+		                          		<td><%-- <c:out value="${i.inquiryNo}"/> --%></td>
+		                          		<td><c:out value="${i.inquiryType}"/></td>
+		                          		<td colspan=1>
+		                          			<%-- <a href="${pageContext.request.contextPath }/inquiryView"> --%>
+		                          				<img src="/resources/img/replyLogo.png" style="width:50px; height:20px; margin : 0;" class="img-fluid">
+		                          			<a href="${pageContext.request.contextPath }/replyView/${i.inquiryNo}">
+												<c:out value="${i.reInquiry.replyinquiryTitle}"/>
+											</a>
+		                          		</td>
+		                          		<td></td>
+		                          		<td style="color:blue">관리자</td>
+		                          		<td><fmt:formatDate value="${i.reInquiry.replyinquiryDate}" pattern="yyyy-MM-dd"/></td>
+		                          		<%-- <td><c:out value="${i.answer}"/></td> --%>
+		                          		<c:if test="${loginMember.userId  eq 'admin'}">
+		                          			<td>
+		                          				<%-- <button type="button" class="btn btn-primary" onclick="location.assign('${pageContext.request.contextPath }/deleteInquiry/${i.inquiryNo}')">삭제</button> --%>
+		                          				<a href="${pageContext.request.contextPath }/deleteInquiry/${i.inquiryNo}""><i class="fa fa-trash-o"></i></a>
+		                          			</td>
+		                          		</c:if>
+		                        	</tr>
+		                        	</c:if>
 		                        	</c:forEach>
 		                        	</c:if>
 		                        	<c:if test="${empty list }">

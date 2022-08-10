@@ -115,6 +115,7 @@ public class InquiryController {
 		model.addObject("totalData", totalData);
 		//System.out.println(list);
 		model.setViewName("inquiry/inquiryList");
+		System.out.println(list);
 		return model;
 	}
 
@@ -201,7 +202,14 @@ public class InquiryController {
 		mv.setViewName("inquiry/replyInquiry");
 		return mv;
 	}
+	// 문의글 답변 상세 페이지
 	
+	@RequestMapping("/replyView/{id}")
+	public ModelAndView replyView(@PathVariable int id, ModelAndView mv) {
+		mv.addObject("inq", service.selectInquiry(id));
+		mv.setViewName("inquiry/replyView");
+		return mv;
+	}
 	
 	// 문의글 답변 작성 로직
 	@RequestMapping("/inquiry/replyInquiry.do")
@@ -225,11 +233,17 @@ public class InquiryController {
 	}
 	
 	
-	// 문의글 수정 로직
-//	@RequsetMapping("/")
+	// 문의 답글 수정 페이지이동
+	@RequestMapping("/updateReply/{id}")
+	public ModelAndView updateReply(@PathVariable  int id, ModelAndView mv) {
+		mv.addObject("inq", service.selectInquiry(id));
+		mv.setViewName("inquiry/updateReply");
+		System.out.println(mv);
+		return mv;
+	}
 
 	
-	
+	// 문의 답글 삭제 로직
 	
 	
 }

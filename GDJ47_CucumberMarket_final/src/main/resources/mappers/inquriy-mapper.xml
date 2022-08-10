@@ -13,10 +13,18 @@
 		<association property="writer" javaType="Member">
 			<result column="userid" property="userId"/>
 		</association>
+		<association property="reInquiry" javaType="ReplyInquiry">
+			<result column="replyinquiry_No" property="replyinquiryNo"/>
+			<result column="writer" property="writer"/>
+			<result column="replyinquiry_Title" property="replyinquiryTitle"/>
+			<result column="replyinquiry_Content" property="replyinquiryContent"/>
+			<result column="reply_Date" property="replyinquiryDate"/>
+		</association>
 	</resultMap>
 	
 	<select id="selectInquiryList" resultMap="inquiryMap">
-		SELECT * FROM INQUIRY ORDER BY INQUIRY_NO DESC
+		<!-- SELECT * FROM INQUIRY ORDER BY INQUIRY_NO DESC -->
+		SELECT * FROM INQUIRY I LEFT JOIN REPLY_INQUIRY R ON I.INQUIRY_NO=R.INQUIRY_NO ORDER BY I.INQUIRY_NO DESC
 	</select>
 	<select id="selectInquiryCount" resultType="_int">
 		SELECT COUNT(*) FROM INQUIRY

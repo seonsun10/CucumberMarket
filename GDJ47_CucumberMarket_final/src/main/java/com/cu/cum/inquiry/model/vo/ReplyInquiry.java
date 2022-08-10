@@ -18,6 +18,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 
 @Data
@@ -42,6 +43,7 @@ public class ReplyInquiry {
 	private String replyinquiryTitle; // 답글 제목 -> 원글 제목에 '[답글] : ' 추가
 	private String replyinquiryContent;  // 답글 내용
 	
+	@ToString.Exclude
 	@OneToOne
 	@JoinColumn(name="inquiryNo")
 	private Inquiry inquiry; // 원 글번호 레퍼런스참조 
@@ -52,6 +54,8 @@ public class ReplyInquiry {
 	@Temporal(TemporalType.DATE)
 	private Date replyinquiryDate;  // 작성일
 	
+	
+	// 이 설정을 하지 않으면 아무리 not null을 해도 null값이 들어간다. 
 	@PrePersist
 	public void prepersist() {
 		this.replyinquiryDate=this.replyinquiryDate==null?new Date():this.replyinquiryDate;
