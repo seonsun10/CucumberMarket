@@ -1,6 +1,11 @@
 package com.cu.cum.member.controller;
 
 import java.security.Principal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -64,10 +69,36 @@ public class MemberController {
 	@Autowired
 	private ProductService proservice;
 	
+	
+	//메인 페이지 오늘의 추천 상품 리스트 출력
 	@GetMapping({"","/"})
-	public String index(Principal p,Model m) {
+	public String index(Principal p,Model m) throws ParseException {
 		log.debug("{}",p);
+		//메인 페이지 오늘의 추천 상품 리스트 출력
+		List<Product> mp = proservice.mainProductList();
+		System.out.println("mp : "+mp);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		List days = new ArrayList();
+		for(int i=0; i<mp.size(); i++) {
+			LocalDate today=LocalDate.now();
+			//LocalDate targetDay=mp.get(i).getEnrollDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			LocalDate targetDay = new java.sql.Date(mp.get(i).getEnrollDate().getTime()).toLocalDate();
+			
+			Long day= ChronoUnit.DAYS.between(today, targetDay);
+			days.add(Math.abs(day));	
+		}
+		System.out.println("날짜 처리후 mp : "+mp);	
 		
+		
+		//추천 상품 리스트에 이미지
+		List<Files> mpf = new ArrayList();
+		for(Product pp : mp) {
+			mpf.addAll(pp.getFiles());
+		}
+		System.out.println("mpf : "+mpf);
+		m.addAttribute("mp",mp);
+		m.addAttribute("mpf",mpf);
+		m.addAttribute("days",days);
 		return "index";
 	}
 	
@@ -371,4 +402,6 @@ public class MemberController {
 		return "common/test";
 				
 	}
+	
+	
 }

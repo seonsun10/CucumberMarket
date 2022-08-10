@@ -42,7 +42,7 @@ public class ProductController {
 	
 	@RequestMapping("/mypage.do")
 	public String myPage() {
-	
+		
 		return "member/mypage";
 	}
 	@Autowired
@@ -71,13 +71,17 @@ public class ProductController {
 		MultipartFile thumbnail = mtfRequest.getFile("image1"); //썸네일 이미지 1개
 		System.out.println(fileList);
 		//System.out.println(upFile);
-		String path = mtfRequest.getServletContext().getRealPath("/resources/upload/product/"+userId+"/");
+		String path = mtfRequest.getServletContext().getRealPath("/resources/upload/product/");
 		File uploadDir = new File(path);
 		if(!uploadDir.exists()) uploadDir.mkdirs();
 		List<Files> files = new ArrayList();
-		
 		//썸네일 이미지 처리
 		String originalFilename1 = thumbnail.getOriginalFilename();
+//		류원희.txt
+//		ext = .txt
+//		
+//		123123+ext
+//		123123.txt
 		String ext = originalFilename1.substring(originalFilename1.lastIndexOf("."));
 		int rndNum=(int)(Math.random()*10000);
 		String rename = "s_"+userId+"_"+rndNum+ext;

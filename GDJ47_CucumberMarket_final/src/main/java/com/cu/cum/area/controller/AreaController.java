@@ -24,15 +24,16 @@ public class AreaController {
 	@RequestMapping("/testarea.do")
 	public String testArea(@RequestParam("address") String address) {
 		log.debug(address+" 입니다.");
-		String[] addr = address.split(" ");
+		String[] addrr = address.split(" ");
 		String addr1 = ""; //시도
 		String addr2 = ""; //시군구
+		String addr = "";
 		for(int i=0; i<2; i++) {
-			addr1 = addr[0];
-			addr2 = addr[1];
+			addr1 = addrr[0];
+			addr2 = addrr[1];
+			addr = addr1+" "+addr2;
 		}
-		System.out.println("이건 시/도 야 : "+addr1);
-		System.out.println("이건 시/군/구 야 : "+addr2);
+		System.out.println("주소 : "+addr); 
 		return "area/testarea"; //그러면 이제 여기에 이 주소에 해당하는 물품으로 
 	}
 	

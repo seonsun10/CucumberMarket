@@ -13,9 +13,9 @@
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item"><a href="#">Ladies</a></li>
-                  <li class="breadcrumb-item"><a href="#">Tops</a></li>
-                  <li aria-current="page" class="breadcrumb-item active">White Blouse Armani</li>
+                  <li class="breadcrumb-item"><a href="#">카테고리</a></li>
+                  <li class="breadcrumb-item"><a href="#">상세카테고리</a></li>
+                  <li aria-current="page" class="breadcrumb-item active">제품이름</li>
                 </ol>
               </nav>
             </div>
@@ -26,38 +26,89 @@
               -->
               <div class="card sidebar-menu mb-4">
                 <div class="card-header">
-                  <h3 class="h4 card-title">Categories</h3>
+                  <h3 class="h4 card-title">카테고리</h3>
                 </div>
                 <div class="card-body">
                   <ul class="nav nav-pills flex-column category-menu">
-                    <li><a href="category.html" class="nav-link">Men <span class="badge badge-secondary">42</span></a>
+                    <li><a href="category.html" class="nav-link active">여성의류<span class="badge badge-secondary"></span></a>
                       <ul class="list-unstyled">
-                        <li><a href="category.html" class="nav-link">T-shirts</a></li>
-                        <li><a href="category.html" class="nav-link">Shirts</a></li>
-                        <li><a href="category.html" class="nav-link">Pants</a></li>
-                        <li><a href="category.html" class="nav-link">Accessories</a></li>
+                        <li><a href="${path }/product/productTotal.do?tag=패딩" class="nav-link">패딩</a></li>
+                        <li><a href="${path }/product/productTotal.do?tag=코트" class="nav-link">코트</a></li>
+                        <li><a href="${path }/product/productTotal.do?tag=반팔" class="nav-link">반팔</a></li>
+                        <li><a href="${path }/product/productTotal.do?tag=긴팔" class="nav-link">긴팔</a></li>
+                        <li><a href="${path }/product/productTotal.do?tag=셔츠" class="nav-link">셔츠</a></li>
+                        <li><a href="${path }/product/productTotal.do?tag=바지" class="nav-link">바지</a></li>
                       </ul>
                     </li>
-                    <li><a href="category.html" class="nav-link active">Ladies  <span class="badge badge-light">123</span></a>
+                    <li><a href="category.html" class="nav-link active">남성의류<span class="badge badge-light"></span></a>
                       <ul class="list-unstyled">
-                        <li><a href="category.html" class="nav-link">T-shirts</a></li>
-                        <li><a href="category.html" class="nav-link">Skirts</a></li>
-                        <li><a href="category.html" class="nav-link">Pants</a></li>
-                        <li><a href="category.html" class="nav-link">Accessories</a></li>
+                        <li><a href="${path }/product/productTotal.do?tag=남성패딩" class="nav-link">패딩</a></li>
+                        <li><a href="${path }/product/productTotal.do?tag=남성코트" class="nav-link">코트</a></li>
+                        <li><a href="${path }/product/productTotal.do?tag=남성반팔" class="nav-link">반팔</a></li>
+                        <li><a href="${path }/product/productTotal.do?tag=남성긴팔" class="nav-link">긴팔</a></li>
+                        <li><a href="${path }/product/productTotal.do?tag=남성셔츠" class="nav-link">셔츠</a></li>
+                        <li><a href="${path }/product/productTotal.do?tag=남성바지" class="nav-link">바지</a></li>
                       </ul>
                     </li>
-                    <li><a href="category.html" class="nav-link">Kids  <span class="badge badge-secondary">11</span></a>
+                    <li><a href="category.html" class="nav-link active">신발<span class="badge badge-secondary">11</span></a>
                       <ul class="list-unstyled">
-                        <li><a href="category.html" class="nav-link">T-shirts</a></li>
-                        <li><a href="category.html" class="nav-link">Skirts</a></li>
-                        <li><a href="category.html" class="nav-link">Pants</a></li>
-                        <li><a href="category.html" class="nav-link">Accessories</a></li>
+                        <li><a href="${path }/product/productTotal.do?tag=스니커즈" class="nav-link">스니커즈</a></li>
+                        <li><a href="${path }/product/productTotal.do?tag=구두" class="nav-link">구두</a></li>
+                        <li><a href="${path }/product/productTotal.do?tag=슬리퍼" class="nav-link">슬리퍼</a></li>
+                        <li><a href="${path }/product/productTotal.do?tag=샌들" class="nav-link">샌들</a></li>
+                        <li><a href="${path }/product/productTotal.do?tag=운동화" class="nav-link">운동화</a></li>
+                        
                       </ul>
                     </li>
+                    <li><a href="category.html" class="nav-link active">디지털/가전<span class="badge badge-secondary"></span></a>
+                      <ul class="list-unstyled">
+                        <li><a href="${path }/product/productTotal.do?tag=모바일" class="nav-link">모바일</a></li>
+                        <li><a href="${path }/product/productTotal.do?tag=가전제품" class="nav-link">가전제품</a></li>
+                        <li><a href="${path }/product/productTotal.do?tag=컴퓨터" class="nav-link">컴퓨터</a></li>
+                        <li><a href="${path }/product/productTotal.do?tag=게임" class="nav-link">게임</a></li>
+                        <li><a href="${path }/product/productTotal.do?tag=카메라" class="nav-link">카메라</a></li>
+                        
+                      </ul>
+                    </li>
+                    <li><a href="category.html" class="nav-link active">차량/오토바이<span class="badge badge-secondary"></span></a>
+                      <ul class="list-unstyled">
+                        <li><a href="${path }/product/productTotal.do?tag=국산차" class="nav-link">국산차</a></li>
+                        <li><a href="${path }/product/productTotal.do?tag=수입차" class="nav-link">수입차</a></li>
+                        <li><a href="${path }/product/productTotal.do?tag=차량용품" class="nav-link">차량용품</a></li>
+                        <li><a href="${path }/product/productTotal.do?tag=오토바이" class="nav-link">오토바이</a></li>
+                        <li><a href="${path }/product/productTotal.do?tag=오토바이용품" class="nav-link">오토바이 용품</a></li>
+                        
+                      </ul>
+                    </li>
+                    <li><a href="category.html" class="nav-link active">도서/티켓/문구<span class="badge badge-secondary"></span></a>
+                      <ul class="list-unstyled">
+                        <li><a href="${path }/product/productTotal.do?tag=도서" class="nav-link">도서</a></li>
+                        <li><a href="${path }/product/productTotal.do?tag=티켓" class="nav-link">티켓</a></li>
+                        <li><a href="${path }/product/productTotal.do?tag=문구" class="nav-link">문구</a></li>
+                        
+                      </ul>
+                    </li>
+                    <li><a href="category.html" class="nav-link active">가구/인테리어<span class="badge badge-secondary"></span></a>
+                      <ul class="list-unstyled">
+                        <li><a href="${path }/product/productTotal.do?tag=가구" class="nav-link">가구</a></li>
+                        <li><a href="${path }/product/productTotal.do?tag=인테리어" class="nav-link">인테리어</a></li>
+                       
+                      </ul>
+                    </li>
+                    <li><a href="category.html" class="nav-link active">스포츠<span class="badge badge-secondary"></span></a>
+                      <ul class="list-unstyled">
+                        <li><a href="${path }/product/productTotal.do?tag=골프" class="nav-link">골프</a></li>
+                        <li><a href="${path }/product/productTotal.do?tag=캠핑" class="nav-link">캠핑</a></li>
+                        <li><a href="${path }/product/productTotal.do?tag=낚시" class="nav-link">낚시</a></li>
+                        <li><a href="${path }/product/productTotal.do?tag=축구" class="nav-link">축구</a></li>
+                        <li><a href="${path }/product/productTotal.do?tag=헬스" class="nav-link">헬스</a></li>
+                        
+                      </ul>
+                    </li>                                        
                   </ul>
                 </div>
               </div>
-              <div class="card sidebar-menu mb-4">
+              <!-- <div class="card sidebar-menu mb-4">
                 <div class="card-header">
                   <h3 class="h4 card-title">Brands <a href="#" class="btn btn-sm btn-danger pull-right"><i class="fa fa-times-circle"></i> Clear</a></h3>
                 </div>
@@ -125,9 +176,9 @@
                     <button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button>
                   </form>
                 </div>
-              </div>
-              <!-- *** MENUS AND FILTERS END ***-->
-              <div class="banner"><a href="#"><img src="img/banner.jpg" alt="sales 2014" class="img-fluid"></a></div>
+              </div>-->
+             
+              <!-- <div class="banner"><a href="#"><img src="img/banner.jpg" alt="sales 2014" class="img-fluid"></a></div> -->
             </div>
             <div class="col-lg-9 order-1 order-lg-2">
               <div id="productMain" class="row">
@@ -137,17 +188,48 @@
                     <div class="item"> <img src="img/detailbig2.jpg" alt="" class="img-fluid"></div>
                     <div class="item"> <img src="img/detailbig3.jpg" alt="" class="img-fluid"></div>
                   </div>
+
+<!--                   <div class="ribbon sale">
+                    <div class="theribbon">SALE</div>
+                    <div class="ribbon-background"></div>
+                  </div>
+                  /.ribbon
+                  <div class="ribbon new">
+                    <div class="theribbon">NEW</div>
+                    <div class="ribbon-background"></div>
+                  </div> -->
+                  <!-- /.ribbon-->
+                <img style="width:400px; height:350px;">
+
                   <!-- /.ribbon-->
                   <div class="box" id="photoBox">
                   	이미지 박스
                   </div>
+
                 </div>
+
+                <div class="col-md-6" style="height:350px;">
+                  <div class="box" style="height:350px;">
+                  	<br>
+                    <h1 class="text-center">상품 제목</h1>
+                    <br>
+                    
+                    <p class="price" style="font-size:20px;">상품가격 원</p>
+                    <br>
+                    <br>
+                    <p class="text-center buttons">
+                    <button class="btn btn-primary">오이채팅</button>
+
                 <div class="col-md-6">
                   <div class="box">
                     <h4>상품명</h4>
                     <p>1000원</p>
                     채팅하기 추가 / 신고하기추가 / 
+<<<<<<< HEAD
                     <button  class="btn btn-primary" onclick="openchat();">채팅하기</button>
+=======
+
+>>>>>>> branch 'main' of https://github.com/seonsun10/CucumberMarket.git
                     <c:if test="${count==0}">
                     <!-- <a href="basket.html" class="btn btn-outline-primary" style="background-color:lightgreen"><i class="fa fa-heart" style="color:white"></i></a></p> -->
                     
@@ -158,39 +240,36 @@
                     
                     <button class="btn btn-primary" onclick="location.assign('${path }/wishlist/deleteWishList.do?id=${loginMember.userId}&no=${no}'); alert('관심상품삭제');">관심상품삭제</button>
                     </c:if>
+
+                    </p>
+
                     /상품상태(중고,새거)/판매지역/찜 개수/ 올린 날 / /
                     /올린 사람 상점으로 갈 수 있도록
+
                   </div>
-                  <div data-slider-id="1" class="owl-thumbs">
+ <!--                  <div data-slider-id="1" class="owl-thumbs">
                     <button class="owl-thumb-item"><img src="img/detailsquare.jpg" alt="" class="img-fluid"></button>
                     <button class="owl-thumb-item"><img src="img/detailsquare2.jpg" alt="" class="img-fluid"></button>
                     <button class="owl-thumb-item"><img src="img/detailsquare3.jpg" alt="" class="img-fluid"></button>
-                  </div>
+                  </div> -->
                 </div>
               </div>
               <div id="details" class="box">
                 <p></p>
-                <h4>Product details</h4>
-                <p>White lace top, woven, has a round neck, short sleeves, has knitted lining attached</p>
-                <h4>Material &amp; care</h4>
-                <ul>
-                  <li>Polyester</li>
-                  <li>Machine wash</li>
-                </ul>
-                <h4>Size &amp; Fit</h4>
-                <ul>
-                  <li>Regular fit</li>
-                  <li>The model (height 5'8" and chest 33") is wearing a size S</li>
-                </ul>
-                <blockquote>
+                <h4>상품 정보</h4>
+				<h2>상품 설명</h2>
+                <!-- <blockquote>
                   <p><em>Define style this season with Armani's new range of trendy tops, crafted with intricate details. Create a chic statement look by teaming this lace number with skinny jeans and pumps.</em></p>
-                </blockquote>
+                </blockquote> -->
                 <hr>
                 <div class="social">
-                  <h4>Show it to your friends</h4>
+                  <h4>상품 공유하기</h4>
                   <p><a href="#" class="external facebook"><i class="fa fa-facebook"></i></a><a href="#" class="external gplus"><i class="fa fa-google-plus"></i></a><a href="#" class="external twitter"><i class="fa fa-twitter"></i></a><a href="#" class="email"><i class="fa fa-envelope"></i></a></p>
                 </div>
               </div>
+              <div id="details" class="box">
+              <h2>연관 상품</h2>
+              <br>
               <div class="row same-height-row">
                 <div class="col-md-3 col-sm-6">
                   <div class="box same-height">
@@ -296,13 +375,14 @@
                 </div>
               </div>
             </div>
+            </div>
             <!-- /.col-md-9-->
           </div>
         </div>
       </div>
     </div>
     <script>
-/*     const count = ${count}
+     const count = ${count}
     const id = "${id}"
     const no = ${no}
     if(count==1){
@@ -327,7 +407,7 @@
     	function jjim_insert(){
     		console.log(count);
     	}
-    } */
+    }
     </script>
     <script type="text/javascript">
    			const openchat=()=>{

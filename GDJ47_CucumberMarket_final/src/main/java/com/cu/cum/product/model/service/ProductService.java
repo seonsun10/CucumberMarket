@@ -50,6 +50,12 @@ public interface ProductService {
 	int updateProductSolve(int no);
 	//판매완료상품개수
 	int selectSolveCount(String userId);
+
+	
+	//메인페이지에 추천상품 리스트
+	List<Product> mainProductList();
+	//추천상품 이미지
+//	List<Files> mainFilesList();
 	
 	//jpa페이징
 	List<Product> findAllByCategoryName(Pageable p, String tag);

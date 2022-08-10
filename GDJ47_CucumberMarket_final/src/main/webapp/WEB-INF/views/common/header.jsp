@@ -26,14 +26,14 @@
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="${path}/resources/css/custom.css">
     <link rel="stylesheet" href="${path}/resources/css/mypage/mypage.css">
-    
     <!-- Favicon-->
     <link rel="shortcut icon" href="favicon.png">
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
         
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
+   <script src="https://kit.fontawesome.com/e4c89f4cce.js" crossorigin="anonymous"></script>
+    
     
   </head>
   <body>
@@ -83,7 +83,7 @@
             </div>
           </div>
         </div>
-        <!-- *** TOP BAR END ***-->
+
         
         
       </div>
@@ -96,8 +96,12 @@
           <div id="navigation" class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+<<<<<<< HEAD
+              <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">전체 카테고리<b class="caret"></b></a>
+=======
               
               <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">상품 카테고리<b class="caret"></b></a>
+
                 <ul class="dropdown-menu megamenu">
                   <li>
                     <div class="row">
@@ -106,7 +110,12 @@
                         <ul class="list-unstyled mb-3">
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=패딩" class="nav-link">패딩</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=코트" class="nav-link">코트</a></li>
+
+                          <li class="nav-item"><a href="${path }/product/productTotal.do?tag=반팔" class="nav-link">반팔</a></li>
+                          <li class="nav-item"><a href="${path }/product/productTotal.do?tag=긴팔" class="nav-link">긴팔</a></li>
+
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=티셔츠" class="nav-link">티셔츠</a></li>
+
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=셔츠" class="nav-link">셔츠</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=바지" class="nav-link">바지</a></li>
                         </ul>
@@ -114,11 +123,20 @@
                       <div class="col-md-6 col-lg-3">
                         <h5>남성의류</h5>
                         <ul class="list-unstyled mb-3">
+<<<<<<< HEAD
+                          <li class="nav-item"><a href="${path }/product/productTotal.do?tag=남성패딩" class="nav-link">패딩</a></li>
+                          <li class="nav-item"><a href="${path }/product/productTotal.do?tag=남성코트" class="nav-link">코트</a></li>
+                          <li class="nav-item"><a href="${path }/product/productTotal.do?tag=남성반팔" class="nav-link">반팔</a></li>
+                          <li class="nav-item"><a href="${path }/product/productTotal.do?tag=남성긴팔" class="nav-link">긴팔</a></li>
+                          <li class="nav-item"><a href="${path }/product/productTotal.do?tag=남성셔츠" class="nav-link">셔츠</a></li>
+                          <li class="nav-item"><a href="${path }/product/productTotal.do?tag=남성바지" class="nav-link">바지</a></li>
+=======
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=패딩" class="nav-link">패딩</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=코트" class="nav-link">코트</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=티셔츠" class="nav-link">티셔츠</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=셔츠" class="nav-link">셔츠</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=바지" class="nav-link">바지</a></li>
+>>>>>>> branch 'main' of https://github.com/seonsun10/CucumberMarket.git
                         </ul>
                       </div>
                       <div class="col-md-6 col-lg-3">
@@ -148,7 +166,11 @@
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=수입차" class="nav-link">수입차</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=차량용품" class="nav-link">차량용품</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=오토바이" class="nav-link">오토바이</a></li>
+<<<<<<< HEAD
+                          <li class="nav-item"><a href="${path }/product/productTotal.do?tag=오토바이용품" class="nav-link">오토바이 용품</a></li>
+=======
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=오토바이 용품" class="nav-link">오토바이 용품</a></li>
+>>>>>>> branch 'main' of https://github.com/seonsun10/CucumberMarket.git
                         </ul>
                       </div>
                       <div class="col-md-6 col-lg-3">
@@ -158,6 +180,8 @@
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=티켓" class="nav-link">티켓</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=문구" class="nav-link">문구</a></li>
                         </ul>
+                      </div>
+                      <div class="col-md-6 col-lg-3">
                         <h5>가구/인테리어</h5>
                         <ul class="list-unstyled mb-3">
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=가구" class="nav-link">가구</a></li>
@@ -289,7 +313,8 @@
 				  </div>
 				  
 				  <div id="search-not-mobile" class="navbar-collapse collapse">
-				  	<a href="${path }/area.do" class="btn btn-primary navbar-btn"> 지역설정 테스트용</a>
+				  	<%-- <a href="${path }/area.do" class="btn btn-primary navbar-btn">지역설정 테스트용</a> --%>
+				  	<button onclick="fn_area();" class="btn btn-primary navbar-btn">지역설정 테스트용</button>
 				  </div>
 				  <div id="search-not-mobile" class="navbar-collapse collapse">
 				  	<a href="${path }/faqList" class="btn btn-primary navbar-btn"> FAQ</a>
@@ -315,4 +340,13 @@
           </form>
         </div>
       </div>
-    </header>
+</header>
+<script>
+function fn_area() {
+    window.open(
+      "${path}/area.do",
+      "현재 내 위치 설정",
+      "width=800, height=600, top=100, left=600"
+    );
+  }
+</script>
