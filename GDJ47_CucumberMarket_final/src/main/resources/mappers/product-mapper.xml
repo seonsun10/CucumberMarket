@@ -111,5 +111,17 @@
 	<select id="selectCategoryCount" resultType="_int">
 		select count(*) from product where category_id=#{tag}
 	</select>
+	
+	
+<!-- 	<select id="relProduct" resultMap="productMap" parameterType="hashMap">
+		SELECT a.* FROM (SELECT * FROM product p INNER JOIN FILES F ON p.pro_NO=F.PRO_NO ORDER BY enroll_date DESC) a WHERE ROWNUM&lt;=8 AND category_id=#{tag} AND pro_Content!=#{proContent} and thumbnail_status='y'
+	</select> -->
+	
+	
+	<select id="relProduct" resultMap="productMap" parameterType="hashMap">
+	select a.* from(select * from product p INNER JOIN files f ON p.pro_no=f.PRO_NO 
+	order by DBMS_RANDOM.RANDOM) a where ROWNUM&lt;9 AND category_id='패딩' AND pro_Content!='1313131231' AND Thumbnail_status='y'
+	</select>
+	
 
 </mapper>

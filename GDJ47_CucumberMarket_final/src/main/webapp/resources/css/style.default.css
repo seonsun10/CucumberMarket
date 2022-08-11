@@ -772,28 +772,28 @@ h1 {
   left: 0;
 }
 
-#content .product  {
+#content .product .front {
   z-index: 2;
   -webkit-transform: rotateY(0deg);
   transform: rotateY(0deg);
 }
 
-#content .product  {
+/* #content .product .back {
   -webkit-transform: rotateY(-180deg);
   transform: rotateY(-180deg);
-}
+} */
 
-#content .product:hover  {
+/* #content .product:hover .back {
   -webkit-transform: rotateY(0deg);
   transform: rotateY(0deg);
   z-index: 2;
-}
+} */
 
-#content .product:hover  {
+/* #content .product:hover .front {
   -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg);
   z-index: 1;
-}
+} */
 
 #content .product .invisible {
   visibility: hidden;
@@ -1142,7 +1142,7 @@ h1 {
 }
 
 #content #customer-orders table tr th, #content #customer-orders table tr td {
-  /* vertical-align: baseline; */
+  vertical-align: baseline;
 }
 
 #content #customer-order .table tfoot th {

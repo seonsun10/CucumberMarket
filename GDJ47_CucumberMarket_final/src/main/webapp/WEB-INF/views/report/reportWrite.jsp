@@ -42,33 +42,46 @@
                 </div>
               </div>
               <!-- *** PAGES MENU END ***-->
-              <div class="banner"><a href="#"><img src="img/banner.jpg" alt="sales 2014" class="img-fluid"></a></div>
+              <div class="banner"><a href="#"><img src="/resources/img/cucumber.png" alt="" class="img-fluid"></a></div>
             </div>
             <div class="col-lg-9">
 				<div id="comment-form">
                   <h4>신고글 작성</h4>
-                  <form>
+                  <form action="${pageContext.request.contextPath }" method="post">
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label for="name">아이디</label>
-                          <input id="name" type="text" class="form-control" value="<c:out value="${loginMember.userId }"/>" readonly>
+                          <label for="id">아이디</label>
+                          <input id="reportId" type="text" class="form-control" value="<c:out value="${loginMember.userId }"/>" readonly>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="proNo">상품 번호</label>
+                          <input id="proNo" type="text" class="form-control">
+                        </div>
+                      </div>
+                    </div> -->
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <select name="reportType" class="form-control">
+                          		<option selected>신고 유형</option>
+                          		<option value="계정">욕설</option>
+                          		<option value="사기">사기</option>
+                          		<option value="상품">성희롱</option>
+                          		<option value="거래">정치적발언</option>
+                        	</select>
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label for="proId">상품 아이디</label>
-                          <input id="proId" type="text" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label for="title">제목</label>
-                          <input id="title" type="text" class="form-control">
+                          <label for="repTitle">제목</label>
+                          <input id="repTitle" type="text" class="form-control">
                         </div>
                       </div>
                     </div>
@@ -76,15 +89,15 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label for="targetId">신고할 유저 아이디</label>
-                          <input id="targetId" type="text" class="form-control">
+                          <input id="targetId" type="text" value="<c:out value="${id}"/>" class="form-control" readonly>
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">
-                          <label for="comment">신고 내용</label>
-                          <textarea id="comment" rows="4" class="form-control"></textarea>
+                          <label for="repComment">신고 내용</label>
+                          <textarea id="repComment" rows="4" class="form-control"></textarea>
                         </div>
                       </div>
                     </div>
@@ -97,6 +110,7 @@
                     </div>
                   </form>
                 </div>
+                <br>
             <!-- /.col-lg-9-->
           </div>
         </div>

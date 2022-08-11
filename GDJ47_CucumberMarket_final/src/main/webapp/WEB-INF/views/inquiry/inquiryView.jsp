@@ -29,20 +29,22 @@
 		                	<div class="card-body">
 		                  		<ul class="nav nav-pills flex-column">
 		                    		<li><a href="${pageContext.request.contextPath }/inquiryList" class="nav-link">문의하기</a></li>
-		                    		<c:choose>
-							        	<c:when test="${loginMember.userId eq 'admin'}">
+<%-- 		                    		<c:choose>
+							        	<c:when test="${loginMember.userId eq 'admin' } "> --%>
+							        	<c:if test="${loginMember.userId eq 'admin'}">
 							            	<li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고하기</a></li>
-							            </c:when>
+							           	</c:if>
+							            <%-- </c:when>
 							            <c:when test="${loginMember.userId ne 'admin'}">
 							            	<li><a href="${pageContext.request.contextPath }/reportInfo" class="nav-link">신고하기</a></li>
 							            </c:when>
-						            </c:choose>
+						            </c:choose> --%>
 		                    		<li><a href="${pageContext.request.contextPath }/faqList" class="nav-link">FAQ</a></li>
 		                  		</ul>
 		                	</div>
 	              		</div>
 	              		<!-- *** PAGES MENU END ***-->
-	              		<div class="banner"><a href="#"><img src="img/banner.jpg" alt="sales 2014" class="img-fluid"></a></div>
+	              		<div class="banner"><a href="#"><img src="/resources/img/cucumber.png" alt="" class="img-fluid"></a></div>
             		</div>
             		<div class="col-lg-9">
 						<table aria-label="breadcrumb" class="box" border="1" summary="게시판 상세내용" width="650" height="350" border="1" cellpadding="5" align="center" >
@@ -52,34 +54,36 @@
 						 	</colgroup>
 						 	<tbody class="card-body" >
  						  		<tr>
-						   			<th align="center">글번호</th>
-						   			<td align="center"><c:out value="${inq.inquiryNo}"/></td>
+						   			<th align="center" style="text-align: center">글번호</th>
+						   			<td align="center" style="text-align: center"><c:out value="${inq.inquiryNo}"/></td>
 						  		</tr>
 						  		<tr>
-						   			<th align="center">제목</th>
-						   			<td align="center"><c:out value="${inq.inquiryTitle}"/></td>
+						   			<th align="center" style="text-align: center">제목</th>
+						   			<td align="center" style="text-align: center"><c:out value="${inq.inquiryTitle}"/></td>
 						  		</tr>
 						  		<tr>
-						   			<th align="center">작성자</th>
-						   			<td align="center"><c:out value="${inq.writer.userId}"/></td>
+						   			<th align="center" style="text-align: center">작성자</th>
+						   			<td align="center" style="text-align: center"><c:out value="${inq.writer.userId}"/></td>
 						  		</tr>
 						  		<tr>
-						   			<th align="center">문의 유형</th>
-						   			<td align="center"><c:out value="${inq.inquiryType}"/></td>
+						   			<th align="center" style="text-align: center">문의 유형</th>
+						   			<td align="center" style="text-align: center"><c:out value="${inq.inquiryType}"/></td>
 						  		</tr>
 								<tr>
-									<th align="center">내용</th>
+									<th align="center" style="text-align: center">내용</th>
 						   			<td align="center" colspan="2" height="200px"><c:out value="${inq.inquiryContent}"/> </td>
 						  		</tr>
 						 	</tbody>
 							<tr>
 								<td colspan="2" align="center">
 						 			<input type="button" value="목록" onclick="location.assign('${pageContext.request.contextPath }/inquiryList')"/>
+						 			<c:if test="${loginMember.userId eq 'admin'}">
+							 			<input type="button" value="답변" onclick="location.assign('${pageContext.request.contextPath }/replyInquiry/${inq.inquiryNo}')"/>
+						 			</c:if>
 									<c:if test="${loginMember.userId == inq.writer.userId}">
 						 				<input type="button" value="수정" onclick="location.assign('${pageContext.request.contextPath }/updateInquiry/${inq.inquiryNo}')"/>
 							 			<input type="button" value="삭제" onclick="location.assign('${pageContext.request.contextPath }/deleteInquiry/${inq.inquiryNo}')"/>
 						 			</c:if>
-							 			<input type="button" value="답변" onclick="location.assign('${pageContext.request.contextPath }/requestBoard/${inq.inquiryNo}')"/>
 						 		</td>
 						 	</tr>
 						</table>

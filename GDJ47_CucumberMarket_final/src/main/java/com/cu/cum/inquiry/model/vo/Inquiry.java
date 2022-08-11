@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
@@ -47,6 +48,12 @@ public class Inquiry {
 	
 	@Column(columnDefinition = "varchar2(50) default 'n' not null ")
 	private String answer;  // 답변 여부
+	
+	
+	@OneToOne(mappedBy = "inquiry")
+	private ReplyInquiry reInquiry;
+	
+	
 	
 	@PrePersist
 	public void prepersist() {

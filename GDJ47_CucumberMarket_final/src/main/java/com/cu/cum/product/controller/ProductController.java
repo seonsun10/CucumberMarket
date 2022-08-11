@@ -7,8 +7,12 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -27,6 +31,7 @@ import com.cu.cum.product.model.service.ReviewService;
 import com.cu.cum.product.model.vo.Files;
 import com.cu.cum.product.model.vo.Product;
 import com.cu.cum.product.model.vo.Review;
+import com.cu.cum.wishlist.model.vo.WishList;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -123,28 +128,9 @@ public class ProductController {
 							}
 						}
 					}
-				//}
 			}
 		}		
 					
-//			 else { //나머지 이미지 System.out.println("productcontroller else문 들어오냐?"); 
-//							  String originalFilename = f.getOriginalFilename();
-//							  String ext =
-//						  originalFilename.substring(originalFilename.lastIndexOf("."));
-//							  int
-//						  rndNum=(int)(Math.random()*10000);
-//							  String rename = userId+"_"+rndNum+ext;
-//						  try
-//						  { 
-//							  f.transferTo(new File(path+rename)); 
-//							  files.add(Files.builder()
-//							  .product(p)
-//							  .member(m) .originalFilename(originalFilename)
-//							  .renameFilename(rename).build()); }
-//						  catch(IOException e) {
-//							  e.printStackTrace(); 
-//						  } 
-//					}
 
 
 		List<Files> f = fService.insertFiles(files);
@@ -186,13 +172,26 @@ public class ProductController {
 	//상품 삭제
 	@RequestMapping("/product/deleteProduct.do")
 	public String deleteProduct(@RequestParam int proNo,
+								@RequestParam String userId,
+								HttpServletRequest mtfRequest,
 								Model m) {
 		System.out.println(proNo);
+		System.out.println(userId);
+		Product p = Product.builder().proNo(proNo).build();
+		List<Files> files = service.selectFiles(p);
+		List<String> filename = new ArrayList();
+		System.out.println("files : "+files);
+		String path = mtfRequest.getServletContext().getRealPath("/resources/upload/product/");
+		for(int i=0; i<files.size(); i++) {
+			filename.add(files.get(i).getRenameFilename());
+			File f = new File(path+filename.get(i));
+			if(f.exists()) f.delete();
+		}
 		try {
 			service.deleteProduct(proNo);
 			m.addAttribute("msg","삭제 성공");
 		}catch(Exception e) {
-//			m.addAttribute("msg","삭제 실패");
+			m.addAttribute("msg","삭제 실패");
 			e.printStackTrace();
 		}
 		return "common/msg";
@@ -201,7 +200,7 @@ public class ProductController {
 	
 	
 	
-	//카테고리별 상품 결과 나오게하는거 일단 임시용
+	//카테고리별 상품 결과
 	@RequestMapping("/product/productTotal.do")
 	public String productTotal(@RequestParam("tag") String tag,
 								@RequestParam(defaultValue="1") int cPage,
@@ -226,9 +225,70 @@ public class ProductController {
 	
 	
 	
-	
 	@RequestMapping("/product/insertProductStart.do")
 	public String insertProductStart() {
 		return "product/insertProduct";
+	}
+	
+	
+	//상품 상세페이지
+	@RequestMapping("/product/productView.do")
+	public String productView(HttpServletRequest request) {
+		String id = request.getParameter("id");
+		int no = Integer.parseInt(request.getParameter("no"));
+		String tag = request.getParameter("tag");
+		System.out.println(id+" "+no);
+		Member m = Member.builder().userId(id).build();
+		Product p = Product.builder().proNo(no).build();
+		
+		//상품상세페이지에 가져갈 상품 가져오기
+		Product result = service.productCheck(no);
+		System.out.println("상품정보 가져온거 : "+result);
+		List<String> filename = new ArrayList();
+		for(int i=0; i<result.getFiles().size(); i++) {
+			filename.add(result.getFiles().get(i).getRenameFilename());
+		}
+		//System.out.println("상품이 가지고 있는 이미지 파일 이름들 : "+filename);
+		
+		//상품상세페이지에서 관심상품인지 아닌지 체크하기
+		int count = 0;
+		WishList wl = service.checkWishlist(m,p);
+		if(wl!=null) {
+			count = 1;
+		}
+		System.out.println("관심상품 등록되어있으면 1 없으면 0 출력 : "+count);
+		
+		//관련상품 리스트 출력
+		Map param = new HashMap();
+		String proContent = result.getProContent();//관련상품에 상세페이지에 보이는 상품은 뺴야하므로 db에서 제외시키기 위해 받아옴
+		//String title = result.getTitle();
+		param.put("proContent", proContent);
+		param.put("tag", tag);
+		
+		List<Product> relProduct = service.relProduct(param);
+		List<Files> relFiles = new ArrayList();
+		//System.out.println("관련상품 : "+relProduct);
+		for(int i=0; i<relProduct.size(); i++) {
+			relFiles.addAll(relProduct.get(i).getFiles());
+		}
+		//관련상품 이미지
+		List<String> relFilename = new ArrayList();
+		for(int i=0; i<relFiles.size(); i++) {
+			relFilename.add(relFiles.get(i).getRenameFilename());
+		}
+		System.out.println("관련상품 이미지 파일 : "+relFilename);
+		
+		
+		
+		request.setAttribute("count",count);
+		request.setAttribute("id", id);
+		request.setAttribute("no", no);
+		
+		request.setAttribute("result", result);
+		request.setAttribute("filename", filename);
+		
+		request.setAttribute("relProduct",relProduct);
+		request.setAttribute("relFilename", relFilename);
+		return "product/productview";
 	}
 }

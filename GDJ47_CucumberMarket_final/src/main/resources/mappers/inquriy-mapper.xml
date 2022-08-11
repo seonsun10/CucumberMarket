@@ -13,23 +13,50 @@
 		<association property="writer" javaType="Member">
 			<result column="userid" property="userId"/>
 		</association>
+		<association property="reInquiry" javaType="ReplyInquiry">
+			<result column="replyinquiry_No" property="replyinquiryNo"/>
+			<result column="writer" property="writer"/>
+			<result column="replyinquiry_Title" property="replyinquiryTitle"/>
+			<result column="replyinquiry_Content" property="replyinquiryContent"/>
+			<result column="reply_Date" property="replyinquiryDate"/>
+		</association>
 	</resultMap>
 	
 	<select id="selectInquiryList" resultMap="inquiryMap">
-		SELECT * FROM INQUIRY ORDER BY INQUIRY_NO DESC
+		<!-- SELECT * FROM INQUIRY ORDER BY INQUIRY_NO DESC -->
+		SELECT * FROM INQUIRY I LEFT JOIN REPLY_INQUIRY R ON I.INQUIRY_NO=R.INQUIRY_NO ORDER BY I.INQUIRY_NO DESC
 	</select>
 	<select id="selectInquiryCount" resultType="_int">
 		SELECT COUNT(*) FROM INQUIRY
 	</select>
-	<update id="inquiry.updateInquiry" parameterType="Inquiry">
+	<update id="updateInquiry" parameterType="Inquiry">
 		UPDATE INQUIRY SET INQUIRY_TITLE =#{inquiryTitle} , INQUIRY_CONTENT=#{inquiryContent},
 		INQUIRY_TYPE=#{inquiryType}
 		WHERE INQUIRY_NO=#{inquiryNo}
 	</update>
 	
-	<delete id="inquiry.deleteInquiry" parameterType="Inquiry">
+	<delete id="deleteInquiry" parameterType="Inquiry">
 		DELETE FROM INQUIRY WHERE INQUIRY_NO=#{inquiryNo}
 	</delete>
+	
+	
+	
+	
+	<!-- 여기서부터는 문의답글 mapper  -->
+<!--  	<resultMap id="replyinquiryMap" type="replyInquiry">
+		<id column="replyinquiry_No" property="replyinquiryNo"></id>
+		<result column="replyinquiry_content" property="replyinquiryContent"/>
+		<result column="replyinquiry_title" property="replyinquiryTitle"/>
+		<result column="replyinquiry_content" property="replyinquiryContent"/>
+		<result column="reply_date" property="replyinquiryDate"/>
+		<result column="inquiry_no" property="inquiry"/>
+		<result column="writer" property="writer"/>
+	</resultMap>
+	
+	<update id="updateReply" parameterType="ReplyInquiry" >
+		UPDATE REPLY_INQUIRY SET REPLYINQUIRY_TITLE=#{replyinquiryTitle}, REPLYINQUIRY_CONTENT=#{replyinquiryContent}
+		WHERE REPLYINQUIRY_NO=#{replyinquiryNo}
+	</update>  -->
 	
 	
 </mapper>

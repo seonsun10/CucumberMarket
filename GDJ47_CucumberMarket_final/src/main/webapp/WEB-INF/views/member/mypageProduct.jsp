@@ -42,14 +42,14 @@
 					
 						<c:forEach var="pp" items="${pp }">
 							<c:if test="${pp.product.proNo eq p.proNo}">
-								<td><img src="${path }/resources/upload/product/${loginMember.userId}/" style="width:50px;"></td>
+								<td><img src="${path }/resources/upload/product/${pp.renameFilename}" style="width:50px;"></td>
 					 		</c:if>
 						</c:forEach>
 						
 						<td><c:out value="${p.title}"/></td>
 						<td><c:out value="${p.price }"/>원</td>
 						<td><fmt:formatDate value="${p.enrollDate}" pattern="yyyy-MM-dd"/></td>
-						<td><button onclick="location.assign('${path}/product/deleteProduct.do?proNo=${p.proNo }')">삭제</button></td>
+						<td><button onclick="location.assign('${path}/product/deleteProduct.do?proNo=${p.proNo }&userId=${loginMember.userId}')">삭제</button></td>
 					</tr>
 				</c:forEach>
 			</c:if>

@@ -16,9 +16,10 @@
 
 
 		<typeAlias type="com.cu.cum.product.model.vo.Files" alias="files"/>
+		<typeAlias type="com.cu.cum.inquiry.model.vo.ReplyInquiry" alias="replyinquiry"/>
 
 		
-
+		<typeAlias type="com.cu.cum.alert.model.vo.Alert" alias="notify"/>
 
 	</typeAliases>
 </configuration>

@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.product.model.vo.Files;
+import com.cu.cum.product.model.vo.Product;
+import com.cu.cum.wishlist.model.vo.WishList;
 
 public interface FilesDao extends JpaRepository<Files, Integer>{
 
@@ -15,5 +17,7 @@ public interface FilesDao extends JpaRepository<Files, Integer>{
 	
 	@Query(value="select f from Files f where f.member=:m and f.thumbnailStatus='y'")
 	List<Files> selectUserFiles(@Param("m") Member m);
-
+	
+	List<Files> findByProduct(Product p);
+	
 }

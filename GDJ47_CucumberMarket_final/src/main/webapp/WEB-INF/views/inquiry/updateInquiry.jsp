@@ -28,14 +28,16 @@
                 </div>
                 <div class="card-body">
                   <ul class="nav nav-pills flex-column">
-                    <li><a href="${pageContext.request.contextPath }/inquiryList" class="nav-link">문의하기</a></li>
-                    <li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고하기</a></li>
+                    <li><a href="${pageContext.request.contextPath }/inquiryList" class="nav-link">1:1 문의</a></li>
+                    <c:if test="${loginMember.userId eq 'admin'}">
+                    	<li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고</a></li>
+                    </c:if>
                     <li><a href="${pageContext.request.contextPath }/faqList" class="nav-link">FAQ</a></li>
                   </ul>
                 </div>
               </div>
               <!-- *** PAGES MENU END ***-->
-              <div class="banner"><a href="#"><img src="img/banner.jpg" alt="sales 2014" class="img-fluid"></a></div>
+              <div class="banner"><a href="#"><img src="/resources/img/cucumber.png" alt="" class="img-fluid"></a></div>
             </div>
 			<div class="col-lg-9">
 				<form action="${pageContext.request.contextPath }/inquiry/updateInquiry.do" method="post">
@@ -43,11 +45,11 @@
 					<div class="row">
 						<div class="col-md-6">
 						<div class="form-group">
-	                        <label for="id">글 번호</label>
+	                        <label for="no">글 번호</label>
 	                        <input name="inquiryNo" id="inquiryNo" type="text" value="<c:out value="${inq.inquiryNo}"/>" readonly class="form-control">
                       	</div>	
 						<div class="form-group">
-	                        <label for="id">작성자ID</label>
+	                        <label for="id">작성자</label>
 	                        <input name="inquiryId" id="inquiryId" type="text" value="<c:out value="${inq.writer.userId }"/>" readonly class="form-control">
                       	</div>	
 						<div class="form-group">
@@ -55,8 +57,18 @@
                         	<input name="inquiryTitle" id="inquiryTitle" type="text" value="<c:out value="${inq.inquiryTitle }"/>" class="form-control"  >
 						</div>
 						<div class="form-group">
-                        	<label for="type">문의유형</label>
-                        	<input name="inquiryType" id="inquiryType" type="text" value="<c:out value="${inq.inquiryType }"/>" class="form-control">
+                        	<label for="type">문의 유형</label>
+                        	<%-- <input name="inquiryType" id="inquiryType" type="text" value="<c:out value="${inq.inquiryType }"/>" class="form-control"> --%>
+                        	<select name="inquiryType" class="form-control">
+                          		<option selected><span>${inq.inquiryType }</span></option>
+                          		<option>---- 선택 ----</option>
+                          		<option value="계정">계정</option>
+                          		<option value="상품">상품</option>
+                          		<option value="거래">거래</option>
+                          		<option value="채팅">채팅</option>
+                          		<option value="사기">사기</option>
+                          		<option value="기타">기타</option>
+                        	</select>
 						</div>
                     </div>
 					<div class="col-md-12">

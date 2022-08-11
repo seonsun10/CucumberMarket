@@ -76,6 +76,7 @@ $(()=>{
 		$.ajax({
 			url:"/member/mypageDibs.do",
 			dataType:"html",
+			data:{"userId":$("#userIdd").val()},
 			success:data=>{
 				$("#databox").html(data);
 			}
@@ -157,7 +158,11 @@ const pwcheck=()=>{
 		alert("비밀번호를 확인해주세요!");
 		pw2.focus();
 		return false;
+	}else if(pw1.trim().length<8){
+		alert("비밀번호를 8자 이상으로 입력해주세요");	
+		return false;
 	}
+	
 	//$.ajax({
 		//url: "${path}/member/pwCheck.do",
 		//method: 'POST',
@@ -168,3 +173,4 @@ const pwcheck=()=>{
 	//});
 	return true;
 }
+

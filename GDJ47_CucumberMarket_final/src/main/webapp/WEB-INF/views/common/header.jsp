@@ -95,9 +95,15 @@
           </div>
           <div id="navigation" class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
+
               <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
 
               <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">전체 카테고리<b class="caret"></b></a>
+
+              <li class="nav-item"><a href="${path}/" class="nav-link">Home</a></li>
+
+              
+
 
               
               <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">상품 카테고리<b class="caret"></b></a>
@@ -131,11 +137,15 @@
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=남성셔츠" class="nav-link">셔츠</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=남성바지" class="nav-link">바지</a></li>
 
+<<<<<<< HEAD
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=패딩" class="nav-link">패딩</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=코트" class="nav-link">코트</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=티셔츠" class="nav-link">티셔츠</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=셔츠" class="nav-link">셔츠</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=바지" class="nav-link">바지</a></li>
+=======
+                          
+>>>>>>> refs/remotes/origin/jooho
 
                         </ul>
                       </div>
@@ -308,12 +318,8 @@
 	              		<a href="${path }/member/mypage.do?userId=${loginMember.userId}" class="btn btn-primary navbar-btn">마이페이지</a>
 	              </div>
 	
-	              <div id="search-not-mobile" class="navbar-collapse collapse">
-	           			<a href="${path }/product/productView.do?id=${loginMember.userId }&no=151" class="btn btn-primary navbar-btn">제품상세보기 테스트용 </a> <!-- 나중에 id는 세션값(이때 input hidden사용도 해볼것) link에서 no도 넣어서 해야함 -->
-				  </div>
 				  
 				  <div id="search-not-mobile" class="navbar-collapse collapse">
-				  	<%-- <a href="${path }/area.do" class="btn btn-primary navbar-btn">지역설정 테스트용</a> --%>
 				  	<button onclick="fn_area();" class="btn btn-primary navbar-btn">지역설정 테스트용</button>
 				  </div>
 				  <div id="search-not-mobile" class="navbar-collapse collapse">

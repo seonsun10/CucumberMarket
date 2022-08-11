@@ -1,10 +1,14 @@
 package com.cu.cum.member.controller;
 
 import java.security.Principal;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+
+
+
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,8 +23,6 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -40,13 +42,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cu.cum.member.model.service.MemberService;
 import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.pagebar.PageBar;
-import com.cu.cum.pagebar.PageBarBasic;
-import com.cu.cum.pagebar.TestPageBar;
-import com.cu.cum.product.model.dao.ProductDao;
 import com.cu.cum.product.model.service.ProductService;
 import com.cu.cum.product.model.vo.Files;
 import com.cu.cum.product.model.vo.Product;
 import com.cu.cum.product.model.vo.Review;
+import com.cu.cum.wishlist.model.service.WishListService;
+import com.cu.cum.wishlist.model.vo.WishList;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -59,12 +60,12 @@ public class MemberController {
 	
 	@Autowired
 	private BCryptPasswordEncoder pwEncoder; 
-	
-	@Autowired
-	private ProductDao dao;
 
 	@Autowired
 	private MemberService service;
+	
+	@Autowired
+	private WishListService wlservice;
 	
 	@Autowired
 	private ProductService proservice;
@@ -170,7 +171,24 @@ public class MemberController {
 	}
 	//찜목록 이동
 	@RequestMapping("/member/wishList.do")
-	public String wishList() {
+	public String wishList(@RequestParam("userId") String userId,
+							Model m) {
+		List<WishList> list = wlservice.selectWishList(service.searchMember(userId));
+		List<Product> products = new ArrayList();
+		List dayList = new ArrayList();
+		for(WishList w : list) {
+			products.add(proservice.selectProduct(w.getProduct().getProNo()));
+			LocalDate today=LocalDate.now();
+			LocalDate targetDay=new java.sql.Date(w.getCreateDate().getTime()).toLocalDate();
+			Long day= ChronoUnit.DAYS.between(today, targetDay);
+			dayList.add(Math.abs(day));
+		}
+		m.addAttribute("products",products);
+		log.debug("결과 : "+list);
+		if(list.size()!=0) {
+			m.addAttribute("wishList",list);
+		}
+		m.addAttribute("dayList",dayList);
 		return "member/wishList";
 	}
 

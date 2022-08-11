@@ -1,5 +1,6 @@
 package com.cu.cum.product.model.vo;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -28,6 +29,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
@@ -68,21 +70,35 @@ public class Product {
 	
 	private String region; //거래지역 판매지역
 	
+
 //	@ManyToMany(cascade = CascadeType.ALL)
 //	@JoinColumn(name="products")
 //	private List<Member> members = new ArrayList(); //판매자 아이디
 	
+	@ToString.Exclude
 	@ManyToOne
 	@JoinColumn(name="userId")
 	private Member member; //판매자 아이디
 	
 
+
+
+	
+
+	@ToString.Exclude
 	@Cascade(CascadeType.REMOVE)
 	@OneToMany(mappedBy="product" , fetch = FetchType.LAZY)
 	//@OneToMany(mappedBy="product")
 	private List<Files> files;
 	
 	
-	
-
+//	@Override
+//	public String toString() {
+////		List<String> f = new ArrayList();
+////		for(int i=0; i<files.size(); i++) {
+////			f.add(files.get(i).getRenameFilename());
+////		}
+//		return proNo+" "+categoryName+" "+title+" "+proStatus+" "+price+" "+proCount+" "+enrollDate+" "+solveStatus+" "+region
+//				+"files : "+files.get(0).getRenameFilename();
+//	}
 }
