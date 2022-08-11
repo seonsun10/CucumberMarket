@@ -26,7 +26,7 @@
 	select * from prochat3 where otherid=#{id} or userid=#{id} order by unreadcount desc
 	</select>
 	<update id="updateroom" parameterType="string">
-	update chatroom set unreadcount=0 where roomid=#{id}
+	update chatroom set unreadcount=0 where roomid=#{id} 
 	</update>
 	<update id="updatemessage" parameterType="string">
 	update chatmessage set unreadcount=0 where roomid=#{id}
