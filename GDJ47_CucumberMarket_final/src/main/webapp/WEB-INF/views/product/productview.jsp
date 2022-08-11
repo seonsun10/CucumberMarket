@@ -128,14 +128,15 @@
                 
                   <div class="box">
                     <h1 class="text-center">${result.title }</h1>
+                    <h4 class="text-center">판매자 : <a href="">${name }</a></h4>
                     <p class="price"><fmt:formatNumber value="${result.price}" pattern="#,###" />원</p>
                     <p class="text-center buttons">
                     <button class="btn btn-primary" onclick="openchat();">오이채팅</button>
                <c:if test="${count==0}">
-                    <button  class="btn btn-primary" onclick="location.assign('${path }/wishlist/insertWishList.do?id=${loginMember.userId}&no=${no}'); alert('관심상품등록');">관심상품등록</button>
+                    <button  class="btn btn-primary" onclick="location.assign('${path }/wishlist/insertWishList.do?id=${loginMember.userId}&no=${no}&tag=${tag}&name=${name}'); alert('관심상품등록');">관심상품등록</button>
                     </c:if>
                     <c:if test="${count==1}">
-                    <button class="btn btn-primary" onclick="location.assign('${path }/wishlist/deleteWishList.do?id=${loginMember.userId}&no=${no}'); alert('관심상품삭제');">관심상품삭제</button>
+                    <button class="btn btn-primary" onclick="location.assign('${path }/wishlist/deleteWishList.do?id=${loginMember.userId}&no=${no}&tag=${tag}&name=${name}'); alert('관심상품삭제');">관심상품삭제</button>
                     </c:if>
                     </p>
                   </div>
