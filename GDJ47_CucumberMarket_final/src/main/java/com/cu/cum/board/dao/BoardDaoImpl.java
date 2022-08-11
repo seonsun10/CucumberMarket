@@ -8,6 +8,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.cu.cum.board.model.vo.Board;
+import com.cu.cum.board.model.vo.BoardComment;
+import com.cu.cum.board.model.vo.BoardReply;
 import com.cu.cum.board.model.vo.RecommendList;
 @Repository
 public class BoardDaoImpl implements BoardDao {
@@ -67,6 +69,86 @@ public class BoardDaoImpl implements BoardDao {
 		// TODO Auto-generated method stub
 		return session.update("board.updateboard",b);
 	}
+	
+	
+	//댓글
+	@Override
+	public int regReply(Map<String, Object> paramMap, SqlSessionTemplate session) {
+		// TODO Auto-generated method stub
+		return session.insert("board.insertBoardReply",paramMap);
+	}
+	@Override
+	public List<BoardReply> getReplyList(int id, SqlSessionTemplate session) {
+		// TODO Auto-generated method stub
+		return session.selectList("board.selectBoardReplyList",id);
+	}
+	@Override
+	public int delReply(Map<String, Object> paramMap, SqlSessionTemplate session) {
+		// TODO Auto-generated method stub
+		if(paramMap.get("r_type").equals("main")) {
+            //부모부터 하위 다 지움
+            return session.delete("board.deleteBoardReplyAll", paramMap);
+        }else {
+            //자기 자신만 지움
+            return session.delete("board.deleteBoardReply", paramMap);
+        }
+	}
+	@Override
+	public boolean checkReply(Map<String, Object> paramMap, SqlSessionTemplate session) {
+		// TODO Auto-generated method stub
+		int result=session.selectOne("board.selectReplyPassword",paramMap);
+		if(result>0) {
+			return true;
+		}else return false;
+		
+		
+	}
+	@Override
+	public boolean updateReply(Map<String, Object> paramMap, SqlSessionTemplate session) {
+		// TODO Auto-generated method stub
+		int result = session.update("board.updateReply",paramMap);
+		return false;
+	}
+	@Override
+	public int insertBoardComment(SqlSessionTemplate session, BoardComment b) {
+		// TODO Auto-generated method stub
+		return session.insert("board.insertboardcomment",b);
+	}
+	@Override
+	public List<BoardComment> selectBoardComment(SqlSessionTemplate session, int no) {
+		// TODO Auto-generated method stub
+		return session.selectList("board.selectboardcommentlist",no);
+	}
+	@Override
+	public int selectcommentcount(SqlSessionTemplate session, int boardId) {
+		// TODO Auto-generated method stub
+		return session.selectOne("board.selectcommentcount",boardId);
+	}
+	@Override
+	public int deletecomment(SqlSessionTemplate session, int id) {
+		// TODO Auto-generated method stub
+		return session.delete("board.deletecomment",id);
+	}
+	@Override
+	public int deletecomment2(SqlSessionTemplate session, int id) {
+		// TODO Auto-generated method stub
+		return session.delete("board.deletecomment2",id);
+	}
+	@Override
+	public List<BoardComment> selectBoardComment(SqlSessionTemplate session, Map page) {
+		// TODO Auto-generated method stub
+		int cPage = (int)page.get("cPage");
+		int numPerpage = (int)page.get("numPerpage");
+		int boardId = (int)page.get("boardId");
+		return session.selectList("board.selectboardcommentlist2", boardId, new RowBounds((cPage-1)*numPerpage,numPerpage));
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 

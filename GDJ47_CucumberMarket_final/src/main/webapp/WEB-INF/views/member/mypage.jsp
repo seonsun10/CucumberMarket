@@ -115,7 +115,82 @@
         </div>
       </div>
     </div>
+<<<<<<< HEAD
     
+    <%-- <div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
+		aria-labelledby="loginModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h2 class="modal-title" id="loginModalLabel">상품 등록</h2>
+						<button type="button" class="close" 
+						data-dismiss="modal" aria-label="close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form action="${path }/product/insertProduct.do" method="post" enctype="multipart/form-data">
+					<div class="modal-body">
+					
+					  	<!-- <div id='image_preview'>
+						<input type='file' id='btnAtt' name="image" required/><br><br>
+						<div id='att_zone' data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하거나 파일을 드래그앤드롭 하세요. 첫번째 이미지 파일은 대표 이미지로 설정됩니다.'></div><br>
+						<input type='file' id='btnAtt1' name="image" required/><br><br>
+						<div id='att_zone1' data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하거나 파일을 드래그앤드롭 하세요'></div><br>
+						<input type='file' id='btnAtt2' name="image" required/><br><br>
+						<div id='att_zone2' data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하거나 파일을 드래그앤드롭 하세요'></div><br> -->
+						
+						<input type="file" onchange="readURL(this);"> 
+						<img id="preview"  style="width:300px;height:300px"/><br>
+						<input type="file" onchange="readURL1(this);"> 
+						<img id="preview1"  style="width:200px;height:200px"/><br>
+						<input type="file" onchange="readURL2(this);"> 
+						<img id="preview2"  style="width:200px;height:200px"/><br>
+						
+						
+  						<label for="exampleInputEmail1">상품 제목</label>
+						<input type="text" name="proName" class="form-control"
+						placeholder="상품 제목" required><br>
+
+						<label for="exampleInputEmail1">상품 카테고리</label>
+						<select class="form-control" style="width:200px; margin-bottom:20px;" name="tag1" id="tag1" ></select>
+						
+						<select class="form-control" style="width:200px;" name="tag" id="tag2" required></select>
+						<br>
+						
+						<label for="exampleInputEmail1">거래 지역</label>
+						<select class="form-control" style="margin-bottom:20px;" name="sido1" id="sido1"></select>
+						<select class="form-control" name="gugun1" id="gugun1" required></select>
+						<br>
+						<label for="exampleInputEmail1">상품 상태</label><br>
+						<label class="radio-inline">
+						  <input type="radio" name="proStatus" id="inlineRadio1" value="y" > 중고상품
+						</label>
+						<label class="radio-inline">
+						  <input type="radio" name="proStatus" id="inlineRadio2" value="n"> 새상품
+						</label><br>
+						<label for="exampleInputEmail1">상품 가격</label>
+						<input type="number" name="price" class="form-control"
+						placeholder="상품 가격" required"><br>
+						<label for="exampleInputEmail1">상품 설명</label>
+						<textarea class="form-control" name="proContent" rows="5" placeholder="상품 설명" required></textarea><br>
+						<!-- <input type="text" name="user" value="admin" class="form-control">		 -->								
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-outline-success">등록</button>
+						<button type="button" class="btn btn-outline-success"
+						data-dismiss="modal">취소</button>
+					</div>
+					<input id="userId" name="userId"  type="hidden" value="${loginMember.userId }"/>
+					</form>
+				</div>
+			</div>
+			<input id="userIdd" type="hidden" value="${loginMember.userId }"/>
+		</div>
+ --%>
+<input id="userIdd" type="hidden" value="${loginMember.userId }"/>
+
+    
+
 
 <style>
 #myform fieldset{

@@ -43,10 +43,10 @@
 	
 	
 	<!-- 여기서부터는 문의답글 mapper  -->
-<!--  	<resultMap id="replyinquiryMap" type="replyinquiry">
+<!--  	<resultMap id="replyinquiryMap" type="replyInquiry">
 		<id column="replyinquiry_No" property="replyinquiryNo"></id>
 		<result column="replyinquiry_content" property="replyinquiryContent"/>
-		<result column="replyinquiry_title" property="replyinquirytitle"/>
+		<result column="replyinquiry_title" property="replyinquiryTitle"/>
 		<result column="replyinquiry_content" property="replyinquiryContent"/>
 		<result column="reply_date" property="replyinquiryDate"/>
 		<result column="inquiry_no" property="inquiry"/>

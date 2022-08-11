@@ -130,8 +130,8 @@
                     <h1 class="text-center">${result.title }</h1>
                     <p class="price"><fmt:formatNumber value="${result.price}" pattern="#,###" />원</p>
                     <p class="text-center buttons">
-                    <button class="btn btn-primary">오이채팅</button>
-					<c:if test="${count==0}">
+                    <button class="btn btn-primary" onclick="openchat();">오이채팅</button>
+               <c:if test="${count==0}">
                     <button  class="btn btn-primary" onclick="location.assign('${path }/wishlist/insertWishList.do?id=${loginMember.userId}&no=${no}'); alert('관심상품등록');">관심상품등록</button>
                     </c:if>
                     <c:if test="${count==1}">
@@ -165,8 +165,8 @@
               <div id="details" class="box">
               <h2>연관 상품</h2>
               <br>
-			   <c:if test="${relProduct ne null }">
-			   <div class="row same-height-row">
+            <c:if test="${relProduct ne null }">
+            <div class="row same-height-row">
                <c:forEach var="rP" items="${relProduct }" varStatus="status">
                <div class="col-md-3 col-sm-6">
                   <div class="product same-height">
@@ -188,8 +188,8 @@
                 <c:if test="${relProduct eq null }">
                 <div>없음</div>
                 </c:if>
-			</div>
-			</div>
+         </div>
+         </div>
             </div>
             </div>
 
@@ -198,27 +198,55 @@
     const id = "${id}"
     const no = ${no}
     if(count==1){
-	    function jjim_delete() {
-	    	console.log(count);
-	     	$.ajax({ 
-	    		url : "${path}/wishlist/deleteWishList.do",
-	    		method:"GET",
-	    		data : {"id":id,"no":no},
-	    		success: function (data) { 
-	        		if(data>0){
-	        			console.log("삭제됨");
-	        		}else{
-	        			console.log("삭제실패");
-	        			
-	        		}
-	    		}
-	    	});
-	    }
+       function jjim_delete() {
+          console.log(count);
+           $.ajax({ 
+             url : "${path}/wishlist/deleteWishList.do",
+             method:"GET",
+             data : {"id":id,"no":no},
+             success: function (data) { 
+                 if(data>0){
+                    console.log("삭제됨");
+                 }else{
+                    console.log("삭제실패");
+                    
+                 }
+             }
+          });
+       }
     }
     if(count==0){
-    	function jjim_insert(){
-    		console.log(count);
-    	}
+       function jjim_insert(){
+          console.log(count);
+       }
     }
+    
+    
+    const openchat=()=>{
+			$.ajax({
+				
+				data:JSON.stringify({userId:'${result.member.userId}',
+  	       			otherId:'${loginMember.userId}',
+  	       			proNo:${result.proNo}
+  	       			 }),
+				headers:{"Content-Type":"application/json"},
+      		 	url: '/chatingRoom',
+      			type: "POST",
+      			
+      			
+      		
+      		 success:data=> {
+      			 console.log(data.roomId);
+      			 if(data.roomId!=null){
+      			open("${path}/testchat.do/"+data.roomId,"_blank","width=590,height=600");
+      			 }else{
+      				 alert("본인 상품에는 채팅을 하실 수 없습니다.")
+      			 }
+      			
+      			
+      		 }
+      	 }); 
+		};
+    
     </script>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cu.cum.member.model.vo.Member;
+import com.cu.cum.product.model.service.ProductService;
 import com.cu.cum.product.model.vo.Product;
 import com.cu.cum.wishlist.model.service.WishListService;
 import com.cu.cum.wishlist.model.vo.WishList;
@@ -28,6 +29,25 @@ public class WishListController {
 	
 	@Autowired
 	private WishListService service;
+
+	@Autowired
+	private ProductService pservice;
+	
+	/*
+	 * @RequestMapping("/product/productView.do") public String
+	 * productView(HttpServletRequest request) { String id =
+	 * request.getParameter("id"); int no =
+	 * Integer.parseInt(request.getParameter("no")); System.out.println(id+" "+no);
+	 * 
+	 * Member m = Member.builder().userId(id).build(); Product p =
+	 * Product.builder().proNo(no).build(); int count = 0; WishList wl =
+	 * service.checkWishlist(m,p); if(wl!=null) { count = 1; }
+	 * 
+	 * Product p2 = pservice.selectProduct(no); request.setAttribute("pro", p2);
+	 * System.out.println(count); request.setAttribute("count",count);
+	 * request.setAttribute("id", id); request.setAttribute("no", no); return
+	 * "product/productview"; }
+	 */
 
 	
 	@RequestMapping("/wishlist/insertWishList.do")

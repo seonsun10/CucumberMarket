@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  	<link rel="icon" href="${path }/resources/img/cucumber.png"/>
+     <link rel="icon" href="${path }/resources/img/cucumber.png"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>::오이마켓::오늘도 이용하는 마켓</title>
@@ -48,9 +48,9 @@
             <div class="col-lg-6 offer mb-3 mb-lg-0"></div>
             <div class="col-lg-6 text-center text-lg-right">
               <ul class="menu list-inline mb-0">
-              	<li class="list-inline-item"><a href="#" data-toggle="modal" data-target="#login-modal">Login</a></li>
-              	<li class="list-inline-item"><a href="/logout">Logout</a></li>
-              	
+                 <li class="list-inline-item"><a href="#" data-toggle="modal" data-target="#login-modal">Login</a></li>
+                 <li class="list-inline-item"><a href="/logout">Logout</a></li>
+                 
                 <li class="list-inline-item"><a href="${pageContext.request.contextPath}/joinForm">Register</a></li>
                 <li class="list-inline-item"><a href="contact.html">Contact</a></li>
                 <li class="list-inline-item"><a href="#">Recently viewed</a></li>
@@ -300,21 +300,21 @@
             <div class="navbar-buttons d-flex justify-content-end">
               <div id="search-not-mobile" class="navbar-collapse collapse"></div><a data-toggle="collapse" href="#search" class="btn navbar-btn btn-primary d-none d-lg-inline-block"><span class="sr-only">Toggle search</span><i class="fa fa-search"></i></a>
               
-	              <div id="search-not-mobile" class="navbar-collapse collapse">
-	              		<a href="${path }/member/mypage.do?userId=${loginMember.userId}" class="btn btn-primary navbar-btn">마이페이지</a>
-	              </div>
-	
-				  
-				  <div id="search-not-mobile" class="navbar-collapse collapse">
-				  	<button onclick="fn_area();" class="btn btn-primary navbar-btn">지역설정 테스트용</button>
-				  </div>
-				  <div id="search-not-mobile" class="navbar-collapse collapse">
-				  	<a href="${path }/faqList" class="btn btn-primary navbar-btn"> FAQ</a>
+                 <div id="search-not-mobile" class="navbar-collapse collapse">
+                       <a href="${path }/member/mypage.do?userId=${loginMember.userId}" class="btn btn-primary navbar-btn">마이페이지</a>
+                 </div>
+   
+              
+              <div id="search-not-mobile" class="navbar-collapse collapse">
+                 <button onclick="fn_area();" class="btn btn-primary navbar-btn">지역설정 테스트용</button>
+              </div>
+              <div id="search-not-mobile" class="navbar-collapse collapse">
+                 <a href="${path }/faqList" class="btn btn-primary navbar-btn"> FAQ</a>
 
-				  	
+                 
 
-				  </div>
-			  
+              </div>
+           
               </div>
             </div>
           </div>
