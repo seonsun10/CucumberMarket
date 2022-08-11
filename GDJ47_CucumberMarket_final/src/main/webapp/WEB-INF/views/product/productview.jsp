@@ -223,6 +223,9 @@
     
     
     const openchat=()=>{
+    	console.log('${result.member.userId}');
+    	console.log('${loginMember.userId}');
+    	console.log('${result.proNo}');
 			$.ajax({
 				
 				data:JSON.stringify({userId:'${result.member.userId}',
