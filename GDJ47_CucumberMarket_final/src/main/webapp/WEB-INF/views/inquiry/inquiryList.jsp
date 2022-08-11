@@ -124,7 +124,7 @@
 		                          		<c:if test="${loginMember.userId  eq 'admin'}">
 		                          			<td>
 		                          				<%-- <button type="button" class="btn btn-primary" onclick="location.assign('${pageContext.request.contextPath }/deleteInquiry/${i.inquiryNo}')">삭제</button> --%>
-		                          				<a href="${pageContext.request.contextPath }/deleteInquiry/${i.inquiryNo}""><i class="fa fa-trash-o"></i></a>
+		                          				<a href=""><i class="fa fa-trash-o"></i></a>
 		                          			</td>
 		                          		</c:if>
 		                        	</tr>

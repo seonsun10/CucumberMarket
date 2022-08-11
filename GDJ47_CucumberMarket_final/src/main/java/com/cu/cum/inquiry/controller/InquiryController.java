@@ -235,14 +235,27 @@ public class InquiryController {
 	
 	// 문의 답글 수정 페이지이동
 	@RequestMapping("/updateReply/{id}")
-	public ModelAndView updateReply(@PathVariable  int id, ModelAndView mv) {
+	public ModelAndView selectReply(@PathVariable  int id, ModelAndView mv) {
 		mv.addObject("inq", service.selectInquiry(id));
 		mv.setViewName("inquiry/updateReply");
 		System.out.println(mv);
 		return mv;
 	}
-
 	
+	// 문의 답글 수정
+	@RequestMapping("/inquiry/updateReply.do")
+	public String updateReply(
+			@RequestParam("replyinquiryNo") int replyinquiryNo,
+			@RequestParam("writer") String writer,
+			@RequestParam("replyinquiryTitle") String replyinquiryTitle,
+			@RequestParam("replyinquiryContent") String replyinquiryContent) {
+		ReplyInquiry r = ReplyInquiry.builder().replyinquiryNo(replyinquiryNo).writer(writer).replyinquiryContent(replyinquiryContent).replyinquiryTitle(replyinquiryTitle).build();
+		System.out.println(r);
+		int inq = riservice.updateReply(r);
+		
+		return "redirect:/inquiryList";
+
+	}
 	// 문의 답글 삭제 로직
 	
 	

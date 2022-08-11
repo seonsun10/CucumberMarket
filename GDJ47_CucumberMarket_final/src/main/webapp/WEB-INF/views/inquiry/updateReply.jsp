@@ -37,24 +37,24 @@
                 </div>
               </div>
               <!-- *** PAGES MENU END ***-->
-              <div class="banner"><a href="#"><img src="/resources/img/cucumber.png" alt="" class="img-fluid"></a></div>
+              <div class="banner"><a href="#"><img src="img/banner.jpg" alt="sales 2014" class="img-fluid"></a></div>
             </div>
 			<div class="col-lg-9">
-				<form action="${pageContext.request.contextPath }/inquiry/updateInquiry.do" method="post">
+				<form action="${pageContext.request.contextPath }/inquiry/updateReply.do" method="post">
 					<input type="hidden" name="id" value="${loginMember.userId}"/>
 					<div class="row">
 						<div class="col-md-6">
 						<div class="form-group">
 	                        <label for="no">글 번호</label>
-	                        <input name="inquiryNo" id="inquiryNo" type="text" value="<c:out value="${inq.inquiryNo}"/>" readonly class="form-control">
+	                        <input name="replyinquiryNo" id="inquiryNo" type="text" value="<c:out value="${inq.reInquiry.replyinquiryNo}"/>" readonly class="form-control">
                       	</div>	
 						<div class="form-group">
 	                        <label for="id">작성자</label>
-	                        <input name="inquiryId" id="inquiryId" type="text" value="<c:out value="${inq.writer.userId }"/>" readonly class="form-control">
+	                        <input name="writer" id="inquiryId" type="text" value="<c:out value="${inq.reInquiry.writer }"/>" readonly class="form-control">
                       	</div>	
 						<div class="form-group">
-                        	<label for="title">제목</label>
-                        	<input name="inquiryTitle" id="inquiryTitle" type="text" value="<c:out value="${inq.inquiryTitle }"/>" class="form-control"  >
+                        	<label for="replyinquirytitle">제목</label>
+                        	<input name="replyinquiryTitle" id="inquiryTitle" type="text" value="<c:out value="${inq.reInquiry.replyinquiryTitle }"/>" class="form-control"  >
 						</div>
 						<div class="form-group">
                         	<label for="type">문의 유형</label>
@@ -73,8 +73,8 @@
                     </div>
 					<div class="col-md-12">
 						<div class="form-group">
-	                        <label for="inquiryContent">문의 내용</label>
-	                        <textarea name="inquiryContent" id="inquiryContent" class="form-control"><c:out value="${inq.inquiryContent }"/></textarea>
+	                        <label for="replyinquiryContent">문의 내용</label>
+	                        <textarea name="replyinquiryContent" id="inquiryContent" class="form-control"><c:out value="${inq.reInquiry.replyinquiryContent }"/></textarea>
 						</div>
                       <button type="submit" class="btn btn-primary">수정</button>
                       <button type="reset" class="btn btn-primary">재설정</button>

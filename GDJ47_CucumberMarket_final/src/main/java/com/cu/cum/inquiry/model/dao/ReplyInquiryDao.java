@@ -9,4 +9,8 @@ import com.cu.cum.inquiry.model.vo.ReplyInquiry;
 public interface ReplyInquiryDao extends JpaRepository<ReplyInquiry, String> {
 	
 	ReplyInquiry save(ReplyInquiry r);
+	
+	ReplyInquiry findByreplyinquiryNo(int replyinquiryNo);
+	
+	
 }
