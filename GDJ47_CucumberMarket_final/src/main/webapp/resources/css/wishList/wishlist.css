@@ -1,10 +1,13 @@
 @charset "UTF-8";
 div.dibs-box{
-	display:flex;
+	display:inline-block;
+	
 }
 div#wish-box{
+	display: inline-block;
 	box-shadow: 1px 1px 5px rgb(0 0 0 / 20%);
-	margin-right:22px;
+	margin-left:19px;
+	margin-bottom:15px;
 }
 div#wish-pro-img{
 	border-right:1px solid rgb(229,229,229);
@@ -26,6 +29,9 @@ div#pro-title{
 	margin: 15px 0 5px 0; 
 	display: flex;
 	font-size:13px;
+	text-overflow:ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 div#pro-price{
 	font-size:16px;
@@ -69,13 +75,13 @@ input[type="checkbox"] {
 }
 
 input[type="checkbox"]#checkAll+label{
-	top:57%;
+	top:209px;
 	right:28px;
 }
 
 button#deleteBtn{
 	position:absolute;
-	top:57%;
+	top:209px;
 	right:56px;
 	background-color:#3eaa94;
 	border-color: #3aa18c;
@@ -84,4 +90,8 @@ button#deleteBtn{
 	font-size:12px;
 	height:20px;
 	margin:3px 0;
+}
+
+div#wish-box:nth-child(2n){
+	margin:0;
 }
