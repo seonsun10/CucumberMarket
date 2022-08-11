@@ -26,6 +26,8 @@ public interface WishListService {
 	
 	//찜 선택 삭제
 	void deleteWishListAll(List<WishList> dibsList);
+
+	WishList checkWishlist(Member m, Product p);
 	
 	
 

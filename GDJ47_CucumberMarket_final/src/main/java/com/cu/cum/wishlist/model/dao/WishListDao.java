@@ -34,6 +34,9 @@ public interface WishListDao extends JpaRepository<WishList, Integer>{
 	WishList findByWishId(int wishNo);
 	
 	List<WishList> findAllByMember(Member m);
+
+
+	WishList findByMemberAndProduct(Member m, Product p);
 	
 //	@Transactional
 //	void deleteAll(List<WishList> dibsList);
