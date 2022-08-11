@@ -25,25 +25,6 @@ public class WishListController {
 	
 	@Autowired
 	private WishListService service;
-	
-	@RequestMapping("/product/productView.do")
-	public String productView(HttpServletRequest request) {
-		String id = request.getParameter("id");
-		int no = Integer.parseInt(request.getParameter("no"));
-		System.out.println(id+" "+no);
-		Member m = Member.builder().userId(id).build();
-		Product p = Product.builder().proNo(no).build();
-		int count = 0;
-		WishList wl = service.checkWishlist(m,p);
-		if(wl!=null) {
-			count = 1;
-		}
-		System.out.println(count);
-		request.setAttribute("count",count);
-		request.setAttribute("id", id);
-		request.setAttribute("no", no);
-		return "product/productview";
-	}
 
 	
 	@RequestMapping("/wishlist/insertWishList.do")

@@ -95,10 +95,10 @@
           </div>
           <div id="navigation" class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
-              <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
-<<<<<<< HEAD
-              <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">전체 카테고리<b class="caret"></b></a>
-=======
+              <li class="nav-item"><a href="${path}/" class="nav-link">Home</a></li>
+
+              
+
               
               <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">상품 카테고리<b class="caret"></b></a>
 
@@ -123,20 +123,16 @@
                       <div class="col-md-6 col-lg-3">
                         <h5>남성의류</h5>
                         <ul class="list-unstyled mb-3">
-<<<<<<< HEAD
+
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=남성패딩" class="nav-link">패딩</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=남성코트" class="nav-link">코트</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=남성반팔" class="nav-link">반팔</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=남성긴팔" class="nav-link">긴팔</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=남성셔츠" class="nav-link">셔츠</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=남성바지" class="nav-link">바지</a></li>
-=======
-                          <li class="nav-item"><a href="${path }/product/productTotal.do?tag=패딩" class="nav-link">패딩</a></li>
-                          <li class="nav-item"><a href="${path }/product/productTotal.do?tag=코트" class="nav-link">코트</a></li>
-                          <li class="nav-item"><a href="${path }/product/productTotal.do?tag=티셔츠" class="nav-link">티셔츠</a></li>
-                          <li class="nav-item"><a href="${path }/product/productTotal.do?tag=셔츠" class="nav-link">셔츠</a></li>
-                          <li class="nav-item"><a href="${path }/product/productTotal.do?tag=바지" class="nav-link">바지</a></li>
->>>>>>> branch 'main' of https://github.com/seonsun10/CucumberMarket.git
+
+                          
+
                         </ul>
                       </div>
                       <div class="col-md-6 col-lg-3">
@@ -166,11 +162,11 @@
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=수입차" class="nav-link">수입차</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=차량용품" class="nav-link">차량용품</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=오토바이" class="nav-link">오토바이</a></li>
-<<<<<<< HEAD
+
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=오토바이용품" class="nav-link">오토바이 용품</a></li>
-=======
+
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=오토바이 용품" class="nav-link">오토바이 용품</a></li>
->>>>>>> branch 'main' of https://github.com/seonsun10/CucumberMarket.git
+
                         </ul>
                       </div>
                       <div class="col-md-6 col-lg-3">
@@ -308,12 +304,8 @@
 	              		<a href="${path }/member/mypage.do?userId=${loginMember.userId}" class="btn btn-primary navbar-btn">마이페이지</a>
 	              </div>
 	
-	              <div id="search-not-mobile" class="navbar-collapse collapse">
-	           			<a href="${path }/product/productView.do?id=${loginMember.userId }&no=151" class="btn btn-primary navbar-btn">제품상세보기 테스트용 </a> <!-- 나중에 id는 세션값(이때 input hidden사용도 해볼것) link에서 no도 넣어서 해야함 -->
-				  </div>
 				  
 				  <div id="search-not-mobile" class="navbar-collapse collapse">
-				  	<%-- <a href="${path }/area.do" class="btn btn-primary navbar-btn">지역설정 테스트용</a> --%>
 				  	<button onclick="fn_area();" class="btn btn-primary navbar-btn">지역설정 테스트용</button>
 				  </div>
 				  <div id="search-not-mobile" class="navbar-collapse collapse">

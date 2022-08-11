@@ -93,6 +93,12 @@ public class ProductMapperDao {
 	public int selectCategoryCount(SqlSessionTemplate session, String tag) {
 		return session.selectOne("product.selectCategoryCount",tag);
 	}
+
+	public List<Product> relProduct(SqlSessionTemplate session,Map param) {
+		return session.selectList("product.relProduct",param);
+	}
+
+
 	
 	
 	

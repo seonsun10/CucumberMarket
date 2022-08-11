@@ -15,10 +15,7 @@ public class WishListServiceImpl implements WishListService {
 	@Autowired
 	private WishListDao dao;
 	
-	@Override
-	public WishList checkWishlist(Member m, Product p) {
-		return dao.findByMemberAndProduct(m,p);
-	}
+	
 
 	@Override
 	public WishList insertWishlist(WishList wl) {
