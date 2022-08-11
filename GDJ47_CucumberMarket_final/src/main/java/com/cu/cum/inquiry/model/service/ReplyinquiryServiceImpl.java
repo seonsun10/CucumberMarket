@@ -44,6 +44,15 @@ public class ReplyinquiryServiceImpl implements ReplyInquiryService {
 		// TODO Auto-generated method stub
 		return imdao.updateReply(session, r);
 	}
+
+	// 문의 답글 삭제 
+	@Override
+	public int deleteReply(int id) {
+		// TODO Auto-generated method stub
+		return imdao.deleteReply(session, id);
+	}
+	
+	
 	
 	
 	

@@ -52,11 +52,17 @@
 		<result column="inquiry_no" property="inquiry"/>
 		<result column="writer" property="writer"/>
 	</resultMap>-->
-	
+	<!--문의 답글 수정  -->
 	<update id="updateReply" parameterType="ReplyInquiry" >
 		UPDATE REPLY_INQUIRY SET REPLYINQUIRY_TITLE=#{replyinquiryTitle}, REPLYINQUIRY_CONTENT=#{replyinquiryContent}
 		WHERE REPLYINQUIRY_NO=#{replyinquiryNo}
 	</update>  
+	
+	<!-- 문의 답글 삭제 -->
+	<delete id="deleteReply" parameterType="ReplyInquiry">
+		DELETE FROM REPLY_INQUIRY WHERE REPLYINQUIRY_NO=#{replyinquiryNo}
+	</delete>
+	
 	
 	
 </mapper>
