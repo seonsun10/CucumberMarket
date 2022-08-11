@@ -152,7 +152,9 @@ public class MemberController {
 		}
 		m.addAttribute("products",products);
 		log.debug("결과 : "+list);
-		m.addAttribute("wishList",list);
+		if(list.size()!=0) {
+			m.addAttribute("wishList",list);
+		}
 		m.addAttribute("dayList",dayList);
 		return "member/wishList";
 	}

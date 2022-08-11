@@ -50,9 +50,11 @@
                 <p class="lead" style="font-size:16px;">*찜 목록은 최대 8개 까지 가능합니다.</p>
               </div>
               <div class="dibs-box">
+              	<c:if test="${wishList ne null }">
 	              	<button type="button" id="deleteBtn" onclick="fn_deleteDibs();">선택삭제</button>
 	              	<input type="checkbox" id="checkAll"/>
 	              	<label for="checkAll"></label>
+	            </c:if>
 	              	<c:forEach var="w" items="${wishList }" varStatus="status">
 		              	<div id="wish-box"> 
 		              		<a href="#">

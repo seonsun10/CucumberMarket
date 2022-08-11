@@ -100,16 +100,16 @@ public class WishListController {
 	@RequestMapping("/wishlist/deleteDibs.do")
 	public String deleteDibs(HttpServletRequest request,
 							Model m) {
+		String msg = "";
 		try {
-		String[] wishNo = request.getParameterValues("dibsList");
-		List<WishList> wishList = new ArrayList();
-		for(int i=0; i<wishNo.length; i++) {
-			wishList.add(service.findByWishId(Integer.parseInt(wishNo[i])));
-		}
-		service.deleteWishListAll(wishList);
+			String[] wishNo = request.getParameterValues("dibsList");
+			List<WishList> wishList = new ArrayList();
+			for(int i=0; i<wishNo.length; i++) {
+				wishList.add(service.findByWishId(Integer.parseInt(wishNo[i])));
+			}
+			service.deleteWishListAll(wishList);
 		}catch(NullPointerException e) {
-			
 		}
-		return "";
+		return "redirect:/";
 	}
 }

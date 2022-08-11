@@ -33,12 +33,5 @@ function fn_deleteDibs(){
 	$("input:checked[type='checkbox'].normal").each(function(i,iVal){
 		arr.push(iVal.value);
 	});
-	$.ajax({
-		url:"/wishlist/deleteDibs.do",
-		traditional : true,
-		data:{dibsList:arr},
-		success:data=>{
-			location.reload(true);
-		}
-	});
+	location.replace('/wishlist/deleteDibs.do?dibsList='+arr);
 }
