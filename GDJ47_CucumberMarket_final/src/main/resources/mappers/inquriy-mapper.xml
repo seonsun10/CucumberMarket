@@ -51,12 +51,12 @@
 		<result column="reply_date" property="replyinquiryDate"/>
 		<result column="inquiry_no" property="inquiry"/>
 		<result column="writer" property="writer"/>
-	</resultMap>
+	</resultMap>-->
 	
 	<update id="updateReply" parameterType="ReplyInquiry" >
 		UPDATE REPLY_INQUIRY SET REPLYINQUIRY_TITLE=#{replyinquiryTitle}, REPLYINQUIRY_CONTENT=#{replyinquiryContent}
 		WHERE REPLYINQUIRY_NO=#{replyinquiryNo}
-	</update>  -->
+	</update>  
 	
 	
 </mapper>
