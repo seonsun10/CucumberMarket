@@ -76,6 +76,7 @@ $(()=>{
 		$.ajax({
 			url:"/member/mypageDibs.do",
 			dataType:"html",
+			data:{"userId":$("#userIdd").val()},
 			success:data=>{
 				$("#databox").html(data);
 			}
@@ -128,7 +129,7 @@ function fn_ajaxPage2(pageNo,numPerpage){
 };
 function fn_ajaxPage5(pageNo){
 	$.ajax({
-		url:"/member/mypageDibs.do",
+		url:"/board/boardlist.do",
 		data:{"cPage":pageNo,"userId":$("#userIdd").val()},
 		dataType:"html",
 		success:data=>{
@@ -138,7 +139,7 @@ function fn_ajaxPage5(pageNo){
 };
 function fn_ajaxPage6(pageNo,numPerpage){
 	$.ajax({
-		url:"/member/mypageDibs.do",
+		url:"/board/boardlist.do",
 		data:{"cPage":pageNo,"numPerpage":numPerpage,"userId":$("#userIdd").val()},
 		dataType:"html",
 		success:data=>{
@@ -157,7 +158,11 @@ const pwcheck=()=>{
 		alert("비밀번호를 확인해주세요!");
 		pw2.focus();
 		return false;
+	}else if(pw1.trim().length<8){
+		alert("비밀번호를 8자 이상으로 입력해주세요");	
+		return false;
 	}
+	
 	//$.ajax({
 		//url: "${path}/member/pwCheck.do",
 		//method: 'POST',
@@ -168,3 +173,4 @@ const pwcheck=()=>{
 	//});
 	return true;
 }
+

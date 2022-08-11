@@ -1,6 +1,15 @@
 package com.cu.cum.member.controller;
 
 import java.security.Principal;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+
+
+
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,8 +23,6 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -35,13 +42,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cu.cum.member.model.service.MemberService;
 import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.pagebar.PageBar;
-import com.cu.cum.pagebar.PageBarBasic;
-import com.cu.cum.pagebar.TestPageBar;
-import com.cu.cum.product.model.dao.ProductDao;
 import com.cu.cum.product.model.service.ProductService;
 import com.cu.cum.product.model.vo.Files;
 import com.cu.cum.product.model.vo.Product;
 import com.cu.cum.product.model.vo.Review;
+import com.cu.cum.wishlist.model.service.WishListService;
+import com.cu.cum.wishlist.model.vo.WishList;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -54,20 +60,46 @@ public class MemberController {
 	
 	@Autowired
 	private BCryptPasswordEncoder pwEncoder; 
-	
-	@Autowired
-	private ProductDao dao;
 
 	@Autowired
 	private MemberService service;
 	
 	@Autowired
+	private WishListService wlservice;
+	
+	@Autowired
 	private ProductService proservice;
 	
+	
+	//메인 페이지 오늘의 추천 상품 리스트 출력
 	@GetMapping({"","/"})
-	public String index(Principal p,Model m) {
+	public String index(Principal p,Model m) throws ParseException {
 		log.debug("{}",p);
+		//메인 페이지 오늘의 추천 상품 리스트 출력
+		List<Product> mp = proservice.mainProductList();
+		System.out.println("mp : "+mp);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		List days = new ArrayList();
+		for(int i=0; i<mp.size(); i++) {
+			LocalDate today=LocalDate.now();
+			//LocalDate targetDay=mp.get(i).getEnrollDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			LocalDate targetDay = new java.sql.Date(mp.get(i).getEnrollDate().getTime()).toLocalDate();
+			
+			Long day= ChronoUnit.DAYS.between(today, targetDay);
+			days.add(Math.abs(day));	
+		}
+		System.out.println("날짜 처리후 mp : "+mp);	
 		
+		
+		//추천 상품 리스트에 이미지
+		List<Files> mpf = new ArrayList();
+		for(Product pp : mp) {
+			mpf.addAll(pp.getFiles());
+		}
+		System.out.println("mpf : "+mpf);
+		m.addAttribute("mp",mp);
+		m.addAttribute("mpf",mpf);
+		m.addAttribute("days",days);
 		return "index";
 	}
 	
@@ -139,7 +171,24 @@ public class MemberController {
 	}
 	//찜목록 이동
 	@RequestMapping("/member/wishList.do")
-	public String wishList() {
+	public String wishList(@RequestParam("userId") String userId,
+							Model m) {
+		List<WishList> list = wlservice.selectWishList(service.searchMember(userId));
+		List<Product> products = new ArrayList();
+		List dayList = new ArrayList();
+		for(WishList w : list) {
+			products.add(proservice.selectProduct(w.getProduct().getProNo()));
+			LocalDate today=LocalDate.now();
+			LocalDate targetDay=new java.sql.Date(w.getCreateDate().getTime()).toLocalDate();
+			Long day= ChronoUnit.DAYS.between(today, targetDay);
+			dayList.add(Math.abs(day));
+		}
+		m.addAttribute("products",products);
+		log.debug("결과 : "+list);
+		if(list.size()!=0) {
+			m.addAttribute("wishList",list);
+		}
+		m.addAttribute("dayList",dayList);
 		return "member/wishList";
 	}
 
@@ -210,44 +259,34 @@ public class MemberController {
 							Model m) {
 		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"userId",userId);
 		List<Product> products=proservice.selectProductList(page);
-
-		List<Product> userProduct = proservice.selectUserProductList(page,userId);
-		System.out.println("이건 위쪽 : "+userProduct);
-		//Member m1 = Member.builder().userId(userId).build();
-		List<Files> pp = service.selectUserFiles(userId);//db거쳐서 회원이 가진 모든 파일 가져오기;
-		System.out.println("pp : "+pp);
-//		if(products.size()!=0) {
-//			for(Product result : products) { 
-//				pp.add(result.getFiles().get(0));
-//				System.out.println("result값 맞는지 : "+result.getFiles().get(0));
-//			}
-//		}
-		//System.out.println("이건 아래쪽 : "+pp);
-		
-
-		Product p1 = (Product)products.get(3);
 		//log.debug("{}",p1.getFiles().get(0).getRenameFilename());
-		log.debug("product : "+p1);
-
 		String url=request.getRequestURI();
 		
+		
 		int totalProduct=proservice.selectProductCount(userId);
+		Member loginMember=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		System.out.println("유저가 가지고 있는 상품 목록 : "+products);
+
+		
+		List<Files> pp = service.selectUserFiles(userId);//db거쳐서 회원이 가진 모든 파일 가져오기;
+		System.out.println("유저가 가지고 잇는 상품 대표이미지 : "+pp);
+		
+
+//		List<Product> list=dao.findAllByMember(loginMember);
+		//페이징처리 jpa
+		//List<Product> list2=dao.findAll(PageRequest.of(0,5,Sort.by("enrollDate").descending())).getContent();
+		//list2=list2.stream().filter(v -> v.getMember().equals(loginMember)).collect(Collectors.toList());
+		
+		
 		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage , totalProduct, url));
 		m.addAttribute("products",products);
 		m.addAttribute("totalProduct",totalProduct);
 		m.addAttribute("pp",pp);
-		Member loginMember=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-		
-		
-
-		List<Product> list=dao.findAllByMember(loginMember);
-		//페이징처리 jpa
-		List<Product> list2=dao.findAll(PageRequest.of(0,5,Sort.by("enrollDate").descending())).getContent();
-		//list2=list2.stream().filter(v -> v.getMember().equals(loginMember)).collect(Collectors.toList());
 		
 		return "member/mypageProduct";
 	}
+	
 	//마이페이지에서 후기 목록 뿌리는 페이지
 	@RequestMapping("/member/mypageReview.do")
 	public String reviewpage(@RequestParam(defaultValue="1") int cPage,
@@ -301,10 +340,11 @@ public class MemberController {
 	//다른 사람 페이지 연결
 	@RequestMapping("/member/otherMember.do")
 	public String otherMember(@RequestParam String writer,
-								@RequestParam String customer,
+								@RequestParam(defaultValue="no") String customer,
 								HttpServletRequest request,
 								HttpServletResponse response,
 								Model m) {
+		
 		Cookie oldCookie = null;
 	    Cookie[] cookies = request.getCookies();
 	    if (cookies != null) {
@@ -314,21 +354,22 @@ public class MemberController {
 	            }
 	        }
 	    }
-
-	    if (oldCookie != null) {
-	        if (!oldCookie.getValue().contains("[" + customer.toString() + "]")) {
-	            service.viewCountUp(writer);
-	            oldCookie.setValue(oldCookie.getValue() + "_[" + customer + "]");
-	            oldCookie.setPath("/");
-	            oldCookie.setMaxAge(60 * 60 * 24);
-	            response.addCookie(oldCookie);
-	        }
-	    } else {
-	        service.viewCountUp(writer);
-	        Cookie newCookie = new Cookie("postView","[" + customer + "]");
-	        newCookie.setPath("/");
-	        newCookie.setMaxAge(60 * 60 * 24);
-	        response.addCookie(newCookie);
+	    if(!customer.equals("no")) {
+		    if (oldCookie != null) {
+		        if (!oldCookie.getValue().contains("[" + customer.toString() + "]")) {
+		            service.viewCountUp(writer);
+		            oldCookie.setValue(oldCookie.getValue() + "_[" + customer + "]");
+		            oldCookie.setPath("/");
+		            oldCookie.setMaxAge(60 * 60 * 12);
+		            response.addCookie(oldCookie);
+		        }
+		    } else {
+		        service.viewCountUp(writer);
+		        Cookie newCookie = new Cookie("postView","[" + customer + "]");
+		        newCookie.setPath("/");
+		        newCookie.setMaxAge(60 * 60 * 12);
+		        response.addCookie(newCookie);
+		    }
 	    }
 		Member member = service.selectMember(writer);
 		m.addAttribute("viewCount",service.selectViewCount(writer));
@@ -379,4 +420,6 @@ public class MemberController {
 		return "common/test";
 				
 	}
+	
+	
 }

@@ -20,9 +20,9 @@
 	</div>
 	<div id="pro-right">
 		<select id="listOption">
-			<option>1</option>
-			<option>2</option>
-			<option>3</option>
+			<option>최신순</option>
+			<option>오래된 순</option>
+			<option>조회순</option>
 		</select>
 	</div>
 </div>
@@ -37,17 +37,19 @@
 		</tr>
 			<c:if test="${products ne null}">
 				<c:forEach var="p" items="${products}">
+					
 					<tr id="tablebody">
+					
 						<c:forEach var="pp" items="${pp }">
 							<c:if test="${pp.product.proNo eq p.proNo}">
-								<td><img src="${path }/resources/upload/product/${loginMember.userId}/${pp.renameFilename}" style="width:50px;"></td>
-								</c:if>
+								<td><img src="${path }/resources/upload/product/${pp.renameFilename}" style="width:50px;"></td>
+					 		</c:if>
 						</c:forEach>
-					
+						
 						<td><c:out value="${p.title}"/></td>
 						<td><c:out value="${p.price }"/>원</td>
 						<td><fmt:formatDate value="${p.enrollDate}" pattern="yyyy-MM-dd"/></td>
-						<td><button onclick="location.assign('${path}/product/deleteProduct.do?proNo=${p.proNo }')">삭제</button></td>
+						<td><button onclick="location.assign('${path}/product/deleteProduct.do?proNo=${p.proNo }&userId=${loginMember.userId}')">삭제</button></td>
 					</tr>
 				</c:forEach>
 			</c:if>

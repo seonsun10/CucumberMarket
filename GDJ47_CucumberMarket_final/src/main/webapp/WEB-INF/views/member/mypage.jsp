@@ -28,10 +28,13 @@
                 </div>
                 <div class="card-body">
                   <ul class="nav nav-pills flex-column">
-                  <a href="${path }/member/mypage.do?${loginMember.userId}" class="nav-link active"><i class="fa fa-list"></i>내 정보 보기</a>
-                  <a href="${path }/member/wishList.do" class="nav-link"><i class="fa fa-heart"></i>찜 목록</a>
+                  <a href="${path }/member/mypage.do?userId=${loginMember.userId}" class="nav-link active"><i class="fa fa-list"></i>내 정보 보기</a>
+                  <a href="${path }/member/wishList.do?userId=${loginMember.userId}" class="nav-link"><i class="fa fa-heart"></i>찜 목록</a>
                   <a href="${path }/member/myAccount.do" class="nav-link"><i class="fa fa-user"></i>내 정보 수정</a>
-                  <a href="${path }/product/insertProductStart.do" class="nav-link"><i class="fa fa-sign-out"></i>상품 등록</a>
+
+                  <a href="${path }/product/insertProductStart.do" class="nav-link" style="margin-left:2px;"><i class="fa-solid fa-hand-holding-dollar" style="margin-right:5px;"></i>판매 하기</a>
+
+
                   <a href="/logout" class="nav-link"><i class="fa fa-sign-out"></i>로그아웃</a>
                   </ul>
                   <!-- <button class="btn btn-outline-success my-2 my-sm-0"
@@ -73,7 +76,7 @@
 					  		<div id="intro">
 						  		${loginMember.intro}
 						  		<form class="mb-3" name="myform" id="myform"
-					  				 action="${path }/product/productReview.do?proNo=251&writer=${loginMember.userId}" method="post">
+					  				 action="${path }/product/productReview.do?proNo=6301&writer=${loginMember.userId}&host=manager" method="post">
 							  		<fieldset>
 										<input type="radio" name="oi" value="5" id="rate1"><label
 											for="rate1">★</label>
@@ -98,6 +101,7 @@
 			  	<p id="dibstag">찜</p>
 			  	<p id="reporttag">신고</p>
 			  	<p id="chattag">채팅</p>
+			  	<input id="userIdd" type="hidden" value="${loginMember.userId }"/>
 			  </div>
 			  <br/>
 			  
@@ -112,153 +116,6 @@
       </div>
     </div>
     
-    
-    <!--
-    *** FOOTER ***
-    _________________________________________________________
-    -->
-    <div id="footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-3 col-md-6">
-            <h4 class="mb-3">Pages</h4>
-            <ul class="list-unstyled">
-              <li><a href="text.html">About us</a></li>
-              <li><a href="text.html">Terms and conditions</a></li>
-              <li><a href="faq.html">FAQ</a></li>
-              <li><a href="contact.html">Contact us</a></li>
-            </ul>
-            <hr>
-            <h4 class="mb-3">User section</h4>
-            <ul class="list-unstyled">
-              <li><a href="#" data-toggle="modal" data-target="#login-modal">Login</a></li>
-              <li><a href="register.html">Regiter</a></li>
-            </ul>
-          </div>
-          <!-- /.col-lg-3-->
-          <div class="col-lg-3 col-md-6">
-            <h4 class="mb-3">Top categories</h4>
-            <h5>Men</h5>
-            <ul class="list-unstyled">
-              <li><a href="category.html">T-shirts</a></li>
-              <li><a href="category.html">Shirts</a></li>
-              <li><a href="category.html">Accessories</a></li>
-            </ul>
-            <h5>Ladies</h5>
-            <ul class="list-unstyled">
-              <li><a href="category.html">T-shirts</a></li>
-              <li><a href="category.html">Skirts</a></li>
-              <li><a href="category.html">Pants</a></li>
-              <li><a href="category.html">Accessories</a></li>
-            </ul>
-          </div>
-          <!-- /.col-lg-3-->
-          <div class="col-lg-3 col-md-6">
-            <h4 class="mb-3">Where to find us</h4>
-            <p><strong>Obaju Ltd.</strong><br>13/25 New Avenue<br>New Heaven<br>45Y 73J<br>England<br><strong>Great Britain</strong></p><a href="contact.html">Go to contact page</a>
-            <hr class="d-block d-md-none">
-          </div>
-          <!-- /.col-lg-3-->
-          <div class="col-lg-3 col-md-6">
-            <h4 class="mb-3">Get the news</h4>
-            <p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-            <form>
-              <div class="input-group">
-                <input type="text" class="form-control"><span class="input-group-append">
-                  <button type="button" class="btn btn-outline-secondary">Subscribe!</button></span>
-              </div>
-              <!-- /input-group-->
-            </form>
-            <hr>
-            <h4 class="mb-3">Stay in touch</h4>
-            <p class="social"><a href="#" class="facebook external"><i class="fa fa-facebook"></i></a><a href="#" class="twitter external"><i class="fa fa-twitter"></i></a><a href="#" class="instagram external"><i class="fa fa-instagram"></i></a><a href="#" class="gplus external"><i class="fa fa-google-plus"></i></a><a href="#" class="email external"><i class="fa fa-envelope"></i></a></p>
-          </div>
-          <!-- /.col-lg-3-->
-        </div>
-        <!-- /.row-->
-      </div>
-      <!-- /.container-->
-    </div>
-
-    <!-- /#footer-->
-    <!-- *** FOOTER END ***-->
-    
-    
-    <!--
-    *** COPYRIGHT ***
-    _________________________________________________________
-    -->
-   
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
-		aria-labelledby="loginModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h2 class="modal-title" id="loginModalLabel">상품 등록</h2>
-						<button type="button" class="close" 
-						data-dismiss="modal" aria-label="close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<form action="${path }/product/insertProduct.do" method="post" enctype="multipart/form-data">
-					<div class="modal-body">
-					
-					  	<!-- <div id='image_preview'>
-						<input type='file' id='btnAtt' name="image" required/><br><br>
-						<div id='att_zone' data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하거나 파일을 드래그앤드롭 하세요. 첫번째 이미지 파일은 대표 이미지로 설정됩니다.'></div><br>
-						<input type='file' id='btnAtt1' name="image" required/><br><br>
-						<div id='att_zone1' data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하거나 파일을 드래그앤드롭 하세요'></div><br>
-						<input type='file' id='btnAtt2' name="image" required/><br><br>
-						<div id='att_zone2' data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하거나 파일을 드래그앤드롭 하세요'></div><br> -->
-						
-						<input type="file" onchange="readURL(this);"> 
-						<img id="preview"  style="width:300px;height:300px"/><br>
-						<input type="file" onchange="readURL1(this);"> 
-						<img id="preview1"  style="width:200px;height:200px"/><br>
-						<input type="file" onchange="readURL2(this);"> 
-						<img id="preview2"  style="width:200px;height:200px"/><br>
-						
-						
-  						<label for="exampleInputEmail1">상품 제목</label>
-						<input type="text" name="proName" class="form-control"
-						placeholder="상품 제목" required><br>
-
-						<label for="exampleInputEmail1">상품 카테고리</label>
-						<select class="form-control" style="width:200px; margin-bottom:20px;" name="tag1" id="tag1" ></select>
-						
-						<select class="form-control" style="width:200px;" name="tag" id="tag2" required></select>
-						<br>
-						
-						<label for="exampleInputEmail1">거래 지역</label>
-						<select class="form-control" style="margin-bottom:20px;" name="sido1" id="sido1"></select>
-						<select class="form-control" name="gugun1" id="gugun1" required></select>
-						<br>
-						<label for="exampleInputEmail1">상품 상태</label><br>
-						<label class="radio-inline">
-						  <input type="radio" name="proStatus" id="inlineRadio1" value="y" > 중고상품
-						</label>
-						<label class="radio-inline">
-						  <input type="radio" name="proStatus" id="inlineRadio2" value="n"> 새상품
-						</label><br>
-						<label for="exampleInputEmail1">상품 가격</label>
-						<input type="number" name="price" class="form-control"
-						placeholder="상품 가격" required"><br>
-						<label for="exampleInputEmail1">상품 설명</label>
-						<textarea class="form-control" name="proContent" rows="5" placeholder="상품 설명" required></textarea><br>
-						<!-- <input type="text" name="user" value="admin" class="form-control">		 -->								
-					</div>
-					<div class="modal-footer">
-						<button type="submit" class="btn btn-outline-success">등록</button>
-						<button type="button" class="btn btn-outline-success"
-						data-dismiss="modal">취소</button>
-					</div>
-					<input id="userId" name="userId"  type="hidden" value="${loginMember.userId }"/>
-					</form>
-				</div>
-			</div>
-			<input id="userIdd" type="hidden" value="${loginMember.userId }"/>
-		</div>
-
 
 <style>
 #myform fieldset{
@@ -297,10 +154,9 @@
     resize: none;
 }
 
-<<<<<<< HEAD
 </style>
 
-=======
+
 </style>
 <script>
 function getImageFiles(e) {
@@ -311,5 +167,4 @@ function getImageFiles(e) {
 }
 </script>
 <script src="${path}/resources/js/mypage.js"></script>
->>>>>>> branch 'main' of https://github.com/seonsun10/CucumberMarket.git
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

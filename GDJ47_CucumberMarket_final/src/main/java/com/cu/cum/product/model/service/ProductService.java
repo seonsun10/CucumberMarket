@@ -1,14 +1,16 @@
 package com.cu.cum.product.model.service;
 
-import java.util.List;
 
+import java.util.List;
 import java.util.Map;
 
+import org.springframework.data.domain.Pageable;
+
+import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.product.model.vo.Files;
 import com.cu.cum.product.model.vo.Product;
-
-
 import com.cu.cum.product.model.vo.Review;
+import com.cu.cum.wishlist.model.vo.WishList;
 
 
 public interface ProductService {
@@ -50,6 +52,26 @@ public interface ProductService {
 	int updateProductSolve(int no);
 	//판매완료상품개수
 	int selectSolveCount(String userId);
+
 	
+	//메인페이지에 추천상품 리스트
+	List<Product> mainProductList();
+	//추천상품 이미지
+//	List<Files> mainFilesList();
 	
+	//jpa페이징
+	List<Product> findAllByCategoryName(Pageable p, String tag);
+	
+	//카테고리 상품 개수
+	int selectCategoryCount(String tag);
+
+	WishList checkWishlist(Member m, Product p);
+
+	Product productCheck(int no);
+
+	List<Product> relProduct(Map param);
+
+
+	List<Files> selectFiles(Product p);
+
 }
