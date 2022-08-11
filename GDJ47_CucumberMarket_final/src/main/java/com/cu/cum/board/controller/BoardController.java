@@ -1,9 +1,9 @@
 package com.cu.cum.board.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,18 +12,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cu.cum.board.model.service.BoardService;
 import com.cu.cum.board.model.vo.Board;
+import com.cu.cum.board.model.vo.BoardComment;
+import com.cu.cum.board.model.vo.BoardReply;
 import com.cu.cum.board.model.vo.RecommendList;
 import com.cu.cum.member.model.vo.Member;
-import com.cu.cum.pagebar.PageBar;
-import com.cu.cum.pagebar.PageBarBasic;
 import com.cu.cum.pagebar.TestPageBar;
 
 @Controller
@@ -92,10 +92,39 @@ public class BoardController {
 		return mv;
 	}
 	@RequestMapping("/boardinfo.do/{boardId}")
-	public ModelAndView boardinfo(ModelAndView mv,@PathVariable int boardId) {
+	public ModelAndView boardinfo(ModelAndView mv,@PathVariable int boardId,@RequestParam(defaultValue = "1") int cPage,
+			@RequestParam(defaultValue = "5") int numPerpage,HttpServletRequest request) {
 		System.out.println(boardId);
 		Board b = service.selectBoard(boardId);
 		mv.addObject("board", b);
+		int commentcount;
+		Board b1 = service.selectBoard(boardId);
+		mv.addObject("board", b1);
+		String url = request.getRequestURI();
+		try {
+			
+			commentcount = service.selectcommentcount(boardId);
+			
+			mv.addObject("count", commentcount);
+			mv.addObject("pageBar", TestPageBar.getPageBar(cPage,
+					  numPerpage,commentcount,url));
+			
+			
+			
+		}catch(NullPointerException e) {
+			mv.addObject("count", 0);
+		}
+		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"boardId",boardId);
+		List<BoardComment> list = service.selectBoardComment(page);
+		
+		  
+		 
+		mv.addObject("comments",list);
+		
+		
+	
+		
+		
 		mv.setViewName("board/boardinfo");
 		return mv;
 	}
@@ -155,5 +184,36 @@ public class BoardController {
 		
 		
 	}
+	@PostMapping(value="/insertboardcomment.do")
+	public ModelAndView insertBoardComment(BoardComment b,ModelAndView mv) {
+		int result  = service.insertBoardComment(b);
+		String msg = result>0?"댓글등록":"댓글등록실패";
+		mv.addObject("msg",msg);
+		mv.addObject("loc","board/boardinfo.do/"+b.getBoardRef());
+		mv.setViewName("common/msg");
+		return mv;
+	}
+	
+	
+ 
+    @GetMapping("/deletecomment/{id}/{no}")
+    public ModelAndView deleteComment(@PathVariable int id,@PathVariable int no,ModelAndView mv) {
+    	int result = service.deletecomment(id);
+    	String msg = result>0?"댓글삭제":"댓글삭제실패";
+    	mv.addObject("msg",msg);
+		mv.addObject("loc","board/boardinfo.do/"+no);
+		mv.setViewName("common/msg");
+    	return mv;
+    }
+  
+    @GetMapping("/deletecomment2/{id}/{no}")
+    public ModelAndView deleteComment2(@PathVariable int id,@PathVariable int no,ModelAndView mv) {
+    	int result = service.deletecomment2(id);
+    	String msg = result>0?"댓글삭제":"댓글삭제실패";
+    	mv.addObject("msg",msg);
+		mv.addObject("loc","board/boardinfo.do/"+no);
+		mv.setViewName("common/msg");
+    	return mv;
+    }
 	
 }

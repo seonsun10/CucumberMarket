@@ -60,9 +60,12 @@ public class ChatController {
 	    	}else {
 	    		System.out.println("리트카운트x");
 	    		System.out.println("구매자진입");
+	    	
+	    		
 	    		List<MessageContent> message = service.selectMessage(room.getRoomId());
 	    		Product product = pservice.selectProduct(roomId);
 	    		int lastindex= message.size()-1;
+	    		
 	    		if(!message.get(lastindex).getUserid().equals(userid)) {
 	    			System.out.println("마지막메세지 보낸사람: "+message.get(lastindex).getUserid());
 	    			service.updateroomreadcount(room.getRoomId());
@@ -114,8 +117,9 @@ public class ChatController {
 			}else {
 				
 				 service.createChatRoom(chatingRoom);
-				 service.createMessage(chatingRoom.getRoomId());
-				 
+				 System.out.println("방생성");
+				 service.createMessage(chatingRoom);
+				 System.out.println("메세지삽입");
 				 return chatingRoom;
 			}
 			

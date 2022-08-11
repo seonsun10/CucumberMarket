@@ -19,7 +19,7 @@
 	
 	<select id="selectboardlist" resultMap="boardMap">
 	
-	select * from board order by createdate desc
+	select * from board left join commentcount on boardid=boardref order by createdate desc
 	</select>
 	<insert id="insertboard" parameterType="board" >
 	insert into board values(seq_boardid.nextval,#{userId},#{boardCategory},#{boardTitle},#{boardContent},null,sysdate,0)
@@ -33,7 +33,7 @@
 	
 	<select id="selectboardlist2" resultMap="boardMap">
 	
-	select * from board where boardcategory=#{category}
+	select * from board left join commentcount on boardid=boardref where board.boardcategory=#{category}order by createdate desc
 	</select>
 	<select id="selectboardcount2" resultType="_int">
 	select count(*) from board where boardcategory=#{category}
@@ -51,6 +51,104 @@
 	update board set recommendcount =#{recommendCount} where boardid=#{boardId} 
 	</update>
 	
+	
+	<!-- 댓글  -->
+	<insert id="insertBoardReply" parameterType="java.util.HashMap">
+        <selectKey keyProperty="reply_id" resultType="int" order="BEFORE">
+          select reply_seq.nextval FROM DUAL
+        </selectKey>
+        insert into board_reply(
+            reply_id,
+            board_id,
+            parent_id,
+            depth,
+            reply_content,
+            reply_writer
+            
+        )values(
+            #{reply_id},
+            #{board_id},
+            #{parent_id},
+            #{depth},
+            #{reply_content},
+            #{reply_writer}
+            
+        )
+    </insert>
+    
+     <select id="selectBoardReplyList" resultType="com.cu.cum.board.model.vo.BoardReply" parameterType="_int">
+        select * from board_reply where board_id = #{id} order by reply_id desc
+    </select>
+     <delete id="deleteBoardReply" parameterType="java.util.HashMap">
+        delete
+        from
+            board_reply
+        where
+            reply_id = #{reply_id}
+            
+    </delete>
+    <delete id="deleteBoardReplyAll" parameterType="java.util.HashMap">
+        delete
+        from
+            board_reply
+        where
+            reply_id in (
+                select
+                    reply_id
+                from
+                    board_reply
+                where
+                    reply_id = #{reply_id}
+                    
+            ) or parent_id in (
+                select
+                    reply_id
+                from
+                    board_reply
+                where
+                    reply_id = #{reply_id}
+                    
+            )
+    </delete>
+    
+    <update id="updateReply" parameterType="java.util.HashMap">
+        update
+            board_reply
+        set
+            parent_id = #{parent_id},
+            depth = #{depth},
+            reply_content = #{reply_content},
+            reply_writer = #{reply_writer}
+        where
+            reply_id = #{reply_id}
+    </update>
+     <select id="selectReplyPassword" resultType="int" parameterType="java.util.HashMap">
+        select
+            count(*)
+        from
+            board_reply
+        where
+            reply_id = #{reply_id}
+            
+    </select>
+    <insert id="insertboardcomment" parameterType="com.cu.cum.board.model.vo.BoardComment">
+    	insert into board_comment values(reply_seq.nextval,#{boardCommentLevel},#{boardCommentWriter},#{boardRef},#{boardCommentRef},#{boardCommentContent},sysdate)
+    </insert>
+    <select id="selectboardcommentlist" parameterType="_int" resultType="com.cu.cum.board.model.vo.BoardComment">
+    	select * from board_comment where boardref=#{no} start with boardcommentlevel=1 connect by prior boardcommentno=boardcommentref
+    </select>
+    <select id="selectcommentcount" parameterType="_int" resultType="_int">
+    	select count from commentcount where boardref=#{boardId}
+    </select>
+    <delete id="deletecomment" parameterType="_int">
+    	delete from board_comment where boardcommentno=#{id} or boardcommentref=#{id}
+    </delete>
+    <delete id="deletecomment2" parameterType="_int">
+    	delete from board_comment where boardcommentno=#{id}
+    </delete>
+    <select id="selectboardcommentlist2" parameterType="_int" resultType="com.cu.cum.board.model.vo.BoardComment">
+    	select * from board_comment where boardref=#{boardId} start with boardcommentlevel=1 connect by prior boardcommentno=boardcommentref
+    </select>
 	
 	
 	

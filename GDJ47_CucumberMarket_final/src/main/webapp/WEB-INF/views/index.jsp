@@ -48,8 +48,8 @@ div#pro-head2{
 	padding-bottom:7%;
 	font-size:12px;
 	text-overflow: ellipsis;
-				white-space: nowrap;
-			overflow: hidden;
+	white-space: nowrap;
+	overflow: hidden;
 }
 div#pro-foot{
 	padding:3%;
@@ -154,11 +154,11 @@ div#pro-date{
 
           </div>     
 		<div id="databox" class="col-lg-9 box" style="margin:auto;">
-		<div id="pro-body">
+		<div id="pro-body" style="margin-left:60px;">
 			<c:if test="${mp ne null }">
 				<c:forEach var="p" items="${mp }" varStatus="status">
 					<div id="pro-box">
-						<a href="${path }/product/productView.do?id=${loginMember.userId}&no=${p.proNo}&tag=${p.categoryName}">
+						<a href="${path }/product/productView.do?id=${loginMember.userId}&no=${p.proNo}&tag=${p.categoryName}&name=${p.member.userId}">
 							<c:forEach var="pf" items="${mpf }">
 							<c:if test="${pf.product.proNo eq p.proNo }">
 							<div id="pro-img">
