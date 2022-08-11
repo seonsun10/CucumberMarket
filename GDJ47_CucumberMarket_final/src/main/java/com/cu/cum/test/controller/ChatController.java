@@ -41,18 +41,26 @@ public class ChatController {
 	    	if(!userid.equals(room.getOtherId())) {
 	    		System.out.println("진입");
 	    		List<MessageContent> message = service.selectMessage(roomId);
-	    		int lastindex= message.size()-1;
-	    		if(!message.get(lastindex).getUserid().equals(userid)) {
-	    			System.out.println("마지막메세지 보낸사람: "+message.get(lastindex).getUserid());
-	    			service.updateroomreadcount(room.getRoomId());
-		    		System.out.println(message);
-			    	
-			    	mv.addObject("msg",message);
-			    	mv.addObject("room",room);
-			    	mv.setViewName("test/test3");
-			    	return mv;
+	    		if(!message.isEmpty()) {
+	    			int lastindex= message.size()-1;
+		    		if(!message.get(lastindex).getUserid().equals(userid)) {
+		    			System.out.println("마지막메세지 보낸사람: "+message.get(lastindex).getUserid());
+		    			service.updateroomreadcount(room.getRoomId());
+			    		System.out.println(message);
+				    	
+				    	mv.addObject("msg",message);
+				    	mv.addObject("room",room);
+				    	mv.setViewName("test/test3");
+				    	return mv;
+		    		}else {
+		    			
+				    	mv.addObject("room",room);
+				    	mv.setViewName("test/test3");
+				    	return mv;
+		    		}
 	    		}
-	    		mv.addObject("msg",message);
+	    		
+	    		
 		    	mv.addObject("room",room);
 		    	mv.setViewName("test/test3");
 		    	return mv;
@@ -60,24 +68,36 @@ public class ChatController {
 	    	}else {
 	    		System.out.println("리트카운트x");
 	    		System.out.println("구매자진입");
-	    		List<MessageContent> message = service.selectMessage(room.getRoomId());
+	    	
 	    		Product product = pservice.selectProduct(roomId);
-	    		int lastindex= message.size()-1;
-	    		if(!message.get(lastindex).getUserid().equals(userid)) {
-	    			System.out.println("마지막메세지 보낸사람: "+message.get(lastindex).getUserid());
-	    			service.updateroomreadcount(room.getRoomId());
-		    		System.out.println(message);
-		    		mv.addObject("product",product);
-			    	mv.addObject("msg",message);
+	    		List<MessageContent> message = service.selectMessage(room.getRoomId());
+	    		if(!message.isEmpty()) {
+	    			int lastindex= message.size()-1;
+		    		
+		    		if(!message.get(lastindex).getUserid().equals(userid)) {
+		    			System.out.println("마지막메세지 보낸사람: "+message.get(lastindex).getUserid());
+		    			service.updateroomreadcount(room.getRoomId());
+			    		System.out.println(message);
+			    		mv.addObject("product",product);
+				    	mv.addObject("msg",message);
+				    	mv.addObject("room",room);
+				    	mv.setViewName("test/test3");
+				    	return mv;
+		    		}
+	    		}else {
+	    			mv.addObject("product",product);
+			    	
 			    	mv.addObject("room",room);
 			    	mv.setViewName("test/test3");
 			    	return mv;
 	    		}
 	    		mv.addObject("product",product);
-		    	mv.addObject("msg",message);
+		    	
 		    	mv.addObject("room",room);
 		    	mv.setViewName("test/test3");
 		    	return mv;
+	    		
+	    		
 	    	}
 	    	
 	 
