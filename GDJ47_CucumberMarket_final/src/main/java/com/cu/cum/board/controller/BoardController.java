@@ -92,15 +92,39 @@ public class BoardController {
 		return mv;
 	}
 	@RequestMapping("/boardinfo.do/{boardId}")
-	public ModelAndView boardinfo(ModelAndView mv,@PathVariable int boardId) {
+	public ModelAndView boardinfo(ModelAndView mv,@PathVariable int boardId,@RequestParam(defaultValue = "1") int cPage,
+			@RequestParam(defaultValue = "5") int numPerpage,HttpServletRequest request) {
 		System.out.println(boardId);
 		Board b = service.selectBoard(boardId);
 		mv.addObject("board", b);
+		int commentcount;
+		Board b1 = service.selectBoard(boardId);
+		mv.addObject("board", b1);
+		String url = request.getRequestURI();
+		try {
+			
+			commentcount = service.selectcommentcount(boardId);
+			
+			mv.addObject("count", commentcount);
+			mv.addObject("pageBar", TestPageBar.getPageBar(cPage,
+					  numPerpage,commentcount,url));
+			
+			
+			
+		}catch(NullPointerException e) {
+			mv.addObject("count", 0);
+		}
+		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"boardId",boardId);
+		List<BoardComment> list = service.selectBoardComment(page);
 		
-		
-		List<BoardComment> list = service.selectBoardComment(boardId);
+		  
+		 
 		mv.addObject("comments",list);
-		System.out.println(list);
+		
+		
+	
+		
+		
 		mv.setViewName("board/boardinfo");
 		return mv;
 	}
@@ -170,111 +194,26 @@ public class BoardController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/board/reply/save", method=RequestMethod.POST)
-    @ResponseBody
-    public Object boardReplySave(@RequestParam Map<String, Object> paramMap) {
+	
  
-        //리턴값
-        Map<String, Object> retVal = new HashMap<String, Object>();
-        
-        System.out.println("진입");
- 
-       
- 
-        //정보입력
-        int result = service.regReply(paramMap);
- 
-        if(result>0){
-            retVal.put("code", "OK");
-            retVal.put("reply_id", paramMap.get("reply_id"));
-            retVal.put("parent_id", paramMap.get("parent_id"));
-            retVal.put("message", "등록에 성공 하였습니다.");
-        }else{
-            retVal.put("code", "FAIL");
-            retVal.put("message", "등록에 실패 하였습니다.");
-        }
- 
-        return retVal;
- 
+    @GetMapping("/deletecomment/{id}/{no}")
+    public ModelAndView deleteComment(@PathVariable int id,@PathVariable int no,ModelAndView mv) {
+    	int result = service.deletecomment(id);
+    	String msg = result>0?"댓글삭제":"댓글삭제실패";
+    	mv.addObject("msg",msg);
+		mv.addObject("loc","board/boardinfo.do/"+no);
+		mv.setViewName("common/msg");
+    	return mv;
     }
- 
-    //AJAX 호출 (댓글 삭제)
-    @RequestMapping(value="/board/reply/del", method=RequestMethod.POST)
-    @ResponseBody
-    public Object boardReplyDel(@RequestParam Map<String, Object> paramMap) {
- 
-        //리턴값
-        Map<String, Object> retVal = new HashMap<String, Object>();
- 
-        //패스워드 암호화
-       
-       
- 
-        //정보입력
-        int result = service.delReply(paramMap);
- 
-        if(result>0){
-            retVal.put("code", "OK");
-        }else{
-            retVal.put("code", "FAIL");
-            retVal.put("message", "삭제에 실패했습니다. 패스워드를 확인해주세요.");
-        }
- 
-        return retVal;
- 
-    }
-  //AJAX 호출 (댓글 패스워드 확인)
-    @RequestMapping(value="/board/reply/check", method=RequestMethod.POST)
-    @ResponseBody
-    public Object boardReplyCheck(@RequestParam Map<String, Object> paramMap) {
- 
-        //리턴값
-        Map<String, Object> retVal = new HashMap<String, Object>();
- 
-       
- 
-        //정보입력
-        boolean check = service.checkReply(paramMap);
- 
-        if(check){
-            retVal.put("code", "OK");
-            retVal.put("reply_id", paramMap.get("reply_id"));
-        }else{
-            retVal.put("code", "FAIL");
-            retVal.put("message", "패스워드를 확인해 주세요.");
-        }
- 
-        return retVal;
- 
-    }
-  //AJAX 호출 (댓글 수정)
-    @RequestMapping(value="/board/reply/update", method=RequestMethod.POST)
-    @ResponseBody
-    public Object boardReplyUpdate(@RequestParam Map<String, Object> paramMap) {
- 
-        //리턴값
-        Map<String, Object> retVal = new HashMap<String, Object>();
- 
-        //패스워드 암호화
-       
-       
-       
-        System.out.println(paramMap);
- 
-        //정보입력
-        boolean check = service.updateReply(paramMap);
- 
-        if(check){
-            retVal.put("code", "OK");
-            retVal.put("reply_id", paramMap.get("reply_id"));
-            retVal.put("message", "수정에 성공 하였습니다.");
-        }else{
-            retVal.put("code", "FAIL");
-            retVal.put("message", "수정에 실패 하였습니다.");
-        }
- 
-        return retVal;
- 
+  
+    @GetMapping("/deletecomment2/{id}/{no}")
+    public ModelAndView deleteComment2(@PathVariable int id,@PathVariable int no,ModelAndView mv) {
+    	int result = service.deletecomment2(id);
+    	String msg = result>0?"댓글삭제":"댓글삭제실패";
+    	mv.addObject("msg",msg);
+		mv.addObject("loc","board/boardinfo.do/"+no);
+		mv.setViewName("common/msg");
+    	return mv;
     }
 	
 }

@@ -11,6 +11,8 @@ import com.cu.cum.board.model.vo.RecommendList;
 public interface BoardService {
 	List<Board> selectBoardList(Map page);
 	List<Board> selectBoardList2(Map page);
+	//댓글페이징
+	List<BoardComment> selectBoardComment(Map page);
 	int insertBoard(Board b);
 	Board selectBoard(int boardId);
 	int selectboardCount();
@@ -22,7 +24,9 @@ public interface BoardService {
 	
 	int recommendIdcount(int boardId);
 	int updateBoard(Board b);
-	
+	int selectcommentcount(int boardId);
+	int deletecomment(int id);
+	int deletecomment2(int id);
 	
 	//댓글
 	 int insertBoardComment(BoardComment b);

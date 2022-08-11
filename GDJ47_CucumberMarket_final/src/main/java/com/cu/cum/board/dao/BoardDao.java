@@ -22,9 +22,16 @@ public interface BoardDao {
 	int recommendIdcount(SqlSessionTemplate session,int BoardId);
 	int updateBoard(SqlSessionTemplate session,Board b);
 	
+	int selectcommentcount(SqlSessionTemplate session,int boardId);
+	
+	int deletecomment(SqlSessionTemplate session,int id);
+	int deletecomment2(SqlSessionTemplate session,int id);
+	
 	
 	
 	//댓글
+	//
+	List<BoardComment> selectBoardComment(SqlSessionTemplate session,Map page);
 	int insertBoardComment(SqlSessionTemplate session,BoardComment b);
 	List<BoardComment> selectBoardComment(SqlSessionTemplate session,int no);
 	int regReply(Map<String, Object> paramMap,SqlSessionTemplate session);

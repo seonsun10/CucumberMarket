@@ -182,7 +182,7 @@
 			<input id="userIdd" type="hidden" value="${loginMember.userId }"/>
 		</div>
  --%>
-
+<input id="userIdd" type="hidden" value="${loginMember.userId }"/>
 <style>
 #myform fieldset{
     display: inline-block;

@@ -119,6 +119,31 @@ public class BoardDaoImpl implements BoardDao {
 		// TODO Auto-generated method stub
 		return session.selectList("board.selectboardcommentlist",no);
 	}
+	@Override
+	public int selectcommentcount(SqlSessionTemplate session, int boardId) {
+		// TODO Auto-generated method stub
+		return session.selectOne("board.selectcommentcount",boardId);
+	}
+	@Override
+	public int deletecomment(SqlSessionTemplate session, int id) {
+		// TODO Auto-generated method stub
+		return session.delete("board.deletecomment",id);
+	}
+	@Override
+	public int deletecomment2(SqlSessionTemplate session, int id) {
+		// TODO Auto-generated method stub
+		return session.delete("board.deletecomment2",id);
+	}
+	@Override
+	public List<BoardComment> selectBoardComment(SqlSessionTemplate session, Map page) {
+		// TODO Auto-generated method stub
+		int cPage = (int)page.get("cPage");
+		int numPerpage = (int)page.get("numPerpage");
+		int boardId = (int)page.get("boardId");
+		return session.selectList("board.selectboardcommentlist2", boardId, new RowBounds((cPage-1)*numPerpage,numPerpage));
+	}
+	
+	
 	
 	
 	

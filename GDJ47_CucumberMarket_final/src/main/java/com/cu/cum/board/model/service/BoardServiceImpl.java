@@ -104,6 +104,27 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return dao.selectBoardComment(session,no);
 	}
+	@Override
+	public int selectcommentcount(int boardId) {
+		// TODO Auto-generated method stub
+		return dao.selectcommentcount(session,boardId);
+	}
+	@Override
+	public int deletecomment(int id) {
+		// TODO Auto-generated method stub
+		return dao.deletecomment(session,id);
+	}
+	@Override
+	public int deletecomment2(int id) {
+		// TODO Auto-generated method stub
+		return dao.deletecomment2(session,id);
+	}
+	@Override
+	public List<BoardComment> selectBoardComment(Map page) {
+		// TODO Auto-generated method stub
+		return dao.selectBoardComment(session, page);
+	}
+	
 	
 	
 	

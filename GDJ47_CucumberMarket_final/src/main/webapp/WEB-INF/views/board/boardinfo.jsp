@@ -98,13 +98,20 @@
 			</div>
 		</div>
 		<div>
+		<div id="commentcount">
+		<c:if test="${not empty count}">
+			<p><i class="fa fa-comment-o"></i>&nbsp comment [ ${count } ]</p>
+		</c:if>
+		<c:if test="${empty count }">
+			<p><i class="fa fa-comment-o"></i>&nbsp comment </p>
+		</c:if>
+		</div>
 		<table id ="tbl-comment">
 		<c:forEach var="bc" items="${comments }">
 			<c:if test="${bc.boardCommentLevel==1 }">
 					<tr class="level1">
 				<td>
-					 <p><img src="/resources/img/cucumber.png" alt="" class="img-fluid rounded-circle" width="50" height="50"></p>
-					<sub class="comment-writer">${bc.boardCommentWriter} </sub>
+					 <sub><p><img src="/resources/img/cucumber.png" alt="" class="img-fluid rounded-circle" width="50" height="50">&nbsp ${bc.boardCommentWriter}</p></sub>
 					<sub class="comment-date">${bc.boardCommentDate }</sub>
 					<br>
 					${bc.boardCommentContent }
@@ -116,7 +123,7 @@
 						<button class="btn-reply" value="${bc.boardCommentNo }">답글</button>
 					<c:if test="${loginMember.userId=='admin' || bc.boardCommentWriter == loginMember.userId }">
 	
-						<button class="btn-delete">삭제</button>
+						<button class="btn-delete" onclick="fn_deletecomment(${bc.boardCommentNo},${board.boardId })">삭제</button>
 					</c:if>
 				</c:if>
 			
@@ -129,13 +136,20 @@
 				<tr class="level2">
 				<td>
 					 
-					<sub><p><img src="/resources/img/cucumber.png" alt="" class="img-fluid rounded-circle" width="50" height="50"></p>${bc.boardCommentWriter}</sub>
+					<sub><p><img src="/resources/img/cucumber.png" alt="" class="img-fluid rounded-circle" width="50" height="50">&nbsp ${bc.boardCommentWriter}</p></sub>
 					<sub>${bc.boardCommentDate}</sub>
 					<br>
 					${bc.boardCommentContent}
 				
 				</td>
 				<td>
+					<c:if test="${loginMember != null }">
+						
+					<c:if test="${loginMember.userId=='admin' || bc.boardCommentWriter == loginMember.userId }">
+	
+						<button class="btn-delete" onclick="fn_deletecomment2(${bc.boardCommentNo},${board.boardId })">삭제</button>
+					</c:if>
+				</c:if>
 				</td>
 			
 			</tr>
@@ -146,6 +160,7 @@
 		
 		
 		</table>
+		<div>${pageBar }</div>
 		</div>   
 		
                     <!-- <div id="disqus_thread"></div> -->
@@ -218,6 +233,14 @@
     
     </script>
      <script type="text/javascript">
+    function fn_deletecomment(id,no){
+    	console.log(id,no);
+    	location.assign('${path}/board/deletecomment/'+id+'/'+no);
+    }
+    function fn_deletecomment2(id,no){
+    	console.log(id);
+    	location.assign('${path}/board/deletecomment2/'+id+'/'+no);
+    }
      $(".comment-editor textarea[name=content]").focus(e=>{
      	if(${loginMember==null}){
      		alert("로그인 후 이용하실 수 있습니다.");

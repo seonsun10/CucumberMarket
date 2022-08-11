@@ -19,5 +19,6 @@ public class Board {
 	private String picName;
 	private Date createDate;
 	private int recommendCount;
+	private int count;
 	
 }

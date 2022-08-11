@@ -225,11 +225,9 @@
                     <h4>상품명</h4>
                     <p>1000원</p>
                     채팅하기 추가 / 신고하기추가 / 
-<<<<<<< HEAD
-                    <button  class="btn btn-primary" onclick="openchat();">채팅하기</button>
-=======
 
->>>>>>> branch 'main' of https://github.com/seonsun10/CucumberMarket.git
+                    <button  class="btn btn-primary" onclick="openchat();">채팅하기</button>
+
                     <c:if test="${count==0}">
                     <!-- <a href="basket.html" class="btn btn-outline-primary" style="background-color:lightgreen"><i class="fa fa-heart" style="color:white"></i></a></p> -->
                     
