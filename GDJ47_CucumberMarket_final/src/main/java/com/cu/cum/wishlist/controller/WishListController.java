@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.product.model.service.ProductService;
@@ -100,18 +101,21 @@ public class WishListController {
 	//찜목록 선택삭제
 	@RequestMapping("/wishlist/deleteDibs.do")
 	public String deleteDibs(HttpServletRequest request,
+							RedirectAttributes ra,
 							Model m) {
 		try {
 			String wishNo = request.getParameter("dibsList");
+			String userId = request.getParameter("userId");
 			List<WishList> wishList = new ArrayList();
 			String[] result = wishNo.split(",");
 			for(int i=0; i<result.length; i++) {
 				wishList.add(service.findByWishId(Integer.parseInt(result[i])));
 			}
 			service.deleteWishListAll(wishList);
+			ra.addAttribute("userId",userId);
 		}catch(NullPointerException e) {
 			
 		}
-		return "redirect:/";
+		return "redirect:/member/wishList.do";
 	}
 }
