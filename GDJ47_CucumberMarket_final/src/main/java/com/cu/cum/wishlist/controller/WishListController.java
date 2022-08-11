@@ -1,13 +1,16 @@
 package com.cu.cum.wishlist.controller;
 
-import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.product.model.vo.Product;
@@ -91,5 +94,22 @@ public class WishListController {
 		request.setAttribute("id", id);
 		request.setAttribute("no", no);
 		return "product/productview";
+	}
+	
+	//찜목록 선택삭제
+	@RequestMapping("/wishlist/deleteDibs.do")
+	public String deleteDibs(HttpServletRequest request,
+							Model m) {
+		try {
+		String[] wishNo = request.getParameterValues("dibsList");
+		List<WishList> wishList = new ArrayList();
+		for(int i=0; i<wishNo.length; i++) {
+			wishList.add(service.findByWishId(Integer.parseInt(wishNo[i])));
+		}
+		service.deleteWishListAll(wishList);
+		}catch(NullPointerException e) {
+			
+		}
+		return "";
 	}
 }

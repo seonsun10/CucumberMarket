@@ -49,6 +49,6 @@ function fn_ajaxPage1(pageNo){
 };
 
 $("#more-box").click(e=>{
-	$("#pro-box:nth-child(n+21)").css("display","inherit");
+	$("#pro-box:nth-child(n+41)").css("display","inherit");
 	$("#more-box").css("display","none");
 })

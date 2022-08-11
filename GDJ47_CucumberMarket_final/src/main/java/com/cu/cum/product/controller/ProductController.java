@@ -197,7 +197,7 @@ public class ProductController {
 	
 	
 	
-	//카테고리별 상품 결과 나오게하는거 일단 임시용
+	//카테고리별 상품 결과
 	@RequestMapping("/product/productTotal.do")
 	public String productTotal(@RequestParam("tag") String tag,
 								@RequestParam(defaultValue="1") int cPage,
@@ -219,7 +219,6 @@ public class ProductController {
 		m.addAttribute("daylist",daylist);
 		return "product/productTotal";
 	}
-	
 	
 	
 	

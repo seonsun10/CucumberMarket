@@ -28,6 +28,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
@@ -72,11 +73,13 @@ public class Product {
 //	@JoinColumn(name="products")
 //	private List<Member> members = new ArrayList(); //판매자 아이디
 	
+	@ToString.Exclude
 	@ManyToOne
 	@JoinColumn(name="userId")
 	private Member member; //판매자 아이디
 	
-
+	
+	@ToString.Exclude
 	@Cascade(CascadeType.REMOVE)
 	@OneToMany(mappedBy="product" , fetch = FetchType.LAZY)
 	//@OneToMany(mappedBy="product")
