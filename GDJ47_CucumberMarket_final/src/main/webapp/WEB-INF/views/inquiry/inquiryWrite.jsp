@@ -28,14 +28,16 @@
                 </div>
                 <div class="card-body">
                   <ul class="nav nav-pills flex-column">
-                    <li><a href="${pageContext.request.contextPath }/inquiryList" class="nav-link">문의하기</a></li>
-                    <li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고하기</a></li>
+                    <li><a href="${pageContext.request.contextPath }/inquiryList" class="nav-link">1:1 문의</a></li>
+                    <c:if test="${loginMember.userId eq 'admin'}">
+                    	<li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고</a></li>
+                    </c:if>
                     <li><a href="${pageContext.request.contextPath }/faqList" class="nav-link">FAQ</a></li>
                   </ul>
                 </div>
               </div>
               <!-- *** PAGES MENU END ***-->
-              <div class="banner"><a href="#"><img src="img/banner.jpg" alt="sales 2014" class="img-fluid"></a></div>
+              <div class="banner"><a href="#"><img src="/resources/img/cucumber.png" alt="" class="img-fluid"></a></div>
             </div>
 			<div class="col-lg-9">
 				<form action="${pageContext.request.contextPath }/inquiry/insertInquiry.do" method="post">
@@ -63,6 +65,7 @@
                           		<option value="거래">거래</option>
                           		<option value="채팅">채팅</option>
                           		<option value="사기">사기</option>
+                          		<option value="기타">기타</option>
                         	</select>
 						</div>
                     </div>

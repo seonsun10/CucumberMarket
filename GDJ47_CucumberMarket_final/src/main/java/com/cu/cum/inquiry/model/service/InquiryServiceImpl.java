@@ -5,13 +5,13 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.cu.cum.inquiry.model.dao.InquiryDao;
 import com.cu.cum.inquiry.model.dao.InquiryMapperDao;
+import com.cu.cum.inquiry.model.dao.ReplyInquiryDao;
 import com.cu.cum.inquiry.model.vo.Inquiry;
+import com.cu.cum.inquiry.model.vo.ReplyInquiry;
 
 @Service
 public class InquiryServiceImpl implements InquiryService {
@@ -22,8 +22,12 @@ public class InquiryServiceImpl implements InquiryService {
 	@Autowired
 	private InquiryMapperDao imdao;
 	
+	
+	
 	@Autowired
 	private SqlSessionTemplate session;
+	
+	
 
 	// 문의글 목록
 	@Override
@@ -93,10 +97,16 @@ public class InquiryServiceImpl implements InquiryService {
 	public List<Inquiry> searchListType(String keyword){
 		return dao.findByInquiryTypeContaining(keyword);
 	}
+
+	
+	
 	
 //	@Override
 //	public List<Inquiry> searchListTest(String keyword, Pageable pageable){
 //		return dao.findByInquiryTypeContaining(keyword, pageable);
 //	}
+	
+	
+	
 
 }

@@ -28,41 +28,48 @@
                 </div>
                 <div class="card-body">
                   <ul class="nav nav-pills flex-column">
-                    <li><a href="${pageContext.request.contextPath }/inquiryList" class="nav-link">문의하기</a></li>
-                    <li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고하기</a></li>
+                    <li><a href="${pageContext.request.contextPath }/inquiryList" class="nav-link">1:1 문의</a></li>
+                    <c:if test="${loginMember.userId eq 'admin'}">
+                    	<li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고</a></li>
+                    </c:if>
                     <li><a href="${pageContext.request.contextPath }/faqList" class="nav-link">FAQ</a></li>
                   </ul>
                 </div>
               </div>
               <!-- *** PAGES MENU END ***-->
-              <div class="banner"><a href="#"><img src="img/banner.jpg" alt="sales 2014" class="img-fluid"></a></div>
+              <div class="banner"><a href="#"><img src="/resources/img/cucumber.png" alt="" class="img-fluid"></a></div>
             </div>
 			<div class="col-lg-9">
-				<form action="${pageContext.request.contextPath }/inquiry/insertInquiry.do" method="post">
+				<form action="${pageContext.request.contextPath }/inquiry/replyInquiry.do" method="post">
 					<div class="row">
 						<div class="col-md-6">
 						<div class="form-group">
-                        	<label for="title">글번호</label>
-                        	<input name="inquiryTitle" id="inquiryTitle" type="text" class="form-control" value="<c:out value="${inq.inquiryNo}"/>" readonly>
+                        	<label for="no">글번호</label>
+                        	<input name="inquiryNo" id="inquiryTitle" type="text" class="form-control" value="<c:out value="${inq.inquiryNo}"/>" readonly>
 						</div>
 						<div class="form-group">
 	                        <label for="id">작성자ID</label>
-	                        <input name="inquiryId" id="inquiryId" type="text" value="<c:out value="${loginMember.userId }"/>" readonly class="form-control">
+	                        <%-- <input name="writer" id="writer" type="text" value="<c:out value="${loginMember.userId }"/>" readonly class="form-control"> --%>
+	                        <input name="writer" id="writer" type="text" value="admin" readonly class="form-control">
                       	</div>
 						<div class="form-group">
                         	<label for="title">제목</label>
-                        	<input name="inquiryTitle" id="inquiryTitle" type="text" class="form-control" value="[답변] : <c:out value="${inq.inquiryTitle}"/>" readonly>
+                        	<input name="replyTitle" id="inquiryTitle" type="text" class="form-control" >
 						</div>
                     </div>
 					<div class="col-md-12">
 						<div class="form-group">
-	                        <label for="inquiryContent">답변 내용</label>
-	                        <textarea name="inquiryContent" id="inquiryContent" class="form-control"></textarea>
+	                        <label for="content">답변 내용</label>
+	                        <textarea name="replyContent" id="inquiryContent" class="form-control"></textarea>
 						</div>
+                    </div>
+                  </div>
+                  <div class="row">
+						<div class="col-md-12 text-right">
                       <button type="submit" class="btn btn-primary">등록</button>
                       <button type="reset" class="btn btn-primary">재설정</button>
                       <button type="button" class="btn btn-primary" onclick="location.assign('${pageContext.request.contextPath }/inquiryList')">취소</button>
-                    </div>
+                  	</div>
                   </div>
                   <!-- /.row-->
                 </form>

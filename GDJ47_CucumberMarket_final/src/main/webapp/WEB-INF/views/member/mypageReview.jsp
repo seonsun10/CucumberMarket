@@ -76,6 +76,7 @@
 			</div>
 			<div id="review"><c:out value="${r.ment }"/></div>
 			<div id="review-date"><fmt:formatDate value="${r.writeDate }" pattern="yyyy-MM-dd"/></div>
+			<div id="deleteBtn"><button type="button" onclick="javascript:fn_deleteReview(${r.reviewNo});">신고하기</button></div>
 		</div>
 	</c:forEach>
 </c:if>
@@ -106,5 +107,8 @@
 	}
 	div#review-date{
 		margin-left:15px;
+	}
+	div#deleteBtn>button{
+		margin-left:10px;
 	}
 </style>

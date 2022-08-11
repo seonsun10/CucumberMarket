@@ -73,8 +73,10 @@
 					  	</div>
 				  	</div>
 				  	<div id="report">
-				  		<img src="${path }/resources/img/report.png">
-				  		신고하기
+				  		<%-- <img src="${path }/resources/img/report.png">
+				  		신고하기 --%>
+				  		<%-- <button type="button" class="btn btn-primary" id="img_btn"><img  src="${path }/resources/img/report.png" style="width : 10px; height : 10px;">신고하기</button> --%>
+				  		<a href="${pageContext.request.contextPath }/reportWrite/${writer}"><img  src="${path }/resources/img/report.png" style="width : 13px; height : 13px;">신고하기</a>
 				  	</div>
 				  </div>
 				  <div>

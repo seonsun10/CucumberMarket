@@ -2,6 +2,8 @@ package com.cu.cum.product.model.dao;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -36,9 +38,11 @@ public interface ProductDao extends JpaRepository<Product,Integer>,
 //	Review save(Review review);
 	
 	//상품 삭제
+	@Transactional
 	Product deleteById(int proNo);
 	
 	//후기 등록
+	@Transactional
 	Product save(Product p);
 	
 	//상품 조회

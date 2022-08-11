@@ -7,10 +7,6 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,10 +18,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cu.cum.inquiry.model.service.InquiryService;
+import com.cu.cum.inquiry.model.service.ReplyInquiryService;
 import com.cu.cum.inquiry.model.vo.Inquiry;
+import com.cu.cum.inquiry.model.vo.ReplyInquiry;
 import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.pagebar.PageBarBasic;
-import com.cu.cum.pagebar.PageBarInquiry;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,6 +32,9 @@ public class InquiryController {
 	
 	@Autowired
 	public InquiryService service;
+	
+	@Autowired
+	public ReplyInquiryService riservice;
 	
 	// 자주 묻는 질문 페이지
 	@RequestMapping(value="/faqList", method=RequestMethod.GET)
@@ -115,6 +115,7 @@ public class InquiryController {
 		model.addObject("totalData", totalData);
 		//System.out.println(list);
 		model.setViewName("inquiry/inquiryList");
+		System.out.println(list);
 		return model;
 	}
 
@@ -140,9 +141,11 @@ public class InquiryController {
 		log.debug(searchType);
 		List<Inquiry> list = new ArrayList();
 		if(searchType.equals("inquiryTitle")) {
+			// 제목으로 검색
 			list = service.searchList(keyword);
 			
 		}else if(searchType.equals("inquiryType")) {
+			// 유형으로 검색
 			list = service.searchListType(keyword);
 		}
 		
@@ -193,14 +196,67 @@ public class InquiryController {
 	
 	// 문의글 답변 페이지
 	
-	@RequestMapping("/requestBoard/{id}")
-	public ModelAndView requestBoard(@PathVariable int id, ModelAndView mv) {
+	@RequestMapping("/replyInquiry/{id}")
+	public ModelAndView replyInquiry(@PathVariable int id, ModelAndView mv) {
 		mv.addObject("inq", service.selectInquiry(id));
-		mv.setViewName("inquiry/requestBoard");
+		mv.setViewName("inquiry/replyInquiry");
+		return mv;
+	}
+	// 문의글 답변 상세 페이지
+	
+	@RequestMapping("/replyView/{id}")
+	public ModelAndView replyView(@PathVariable int id, ModelAndView mv) {
+		mv.addObject("inq", service.selectInquiry(id));
+		mv.setViewName("inquiry/replyView");
 		return mv;
 	}
 	
+	// 문의글 답변 작성 로직
+	@RequestMapping("/inquiry/replyInquiry.do")
+	public String insertReply(
+			
+			
+			@RequestParam("writer") String writer,
+			@RequestParam("replyTitle") String replyTitle,
+			@RequestParam("replyContent") String replyContent, 
+			@RequestParam("inquiryNo") int inquiryNo, ModelAndView mv) {
+		
+		// inquiry객체를 못받아왔으니 select로 불러와서 Inquiry객체에 집어넣는다.
+		Inquiry iq = service.selectInquiry(inquiryNo);
+		
+		ReplyInquiry r = ReplyInquiry.builder().replyinquiryTitle(replyTitle).writer(writer).inquiry(iq)
+				.replyinquiryContent(replyContent).build();
 	
+		ReplyInquiry ri = riservice.insertReply(r);
+		
+		return "redirect:/inquiryList";
+	}
+	
+	
+	// 문의 답글 수정 페이지이동
+	@RequestMapping("/updateReply/{id}")
+	public ModelAndView selectReply(@PathVariable  int id, ModelAndView mv) {
+		mv.addObject("inq", service.selectInquiry(id));
+		mv.setViewName("inquiry/updateReply");
+		System.out.println(mv);
+		return mv;
+	}
+	
+	// 문의 답글 수정
+	@RequestMapping("/inquiry/updateReply.do")
+	public String updateReply(
+			@RequestParam("replyinquiryNo") int replyinquiryNo,
+			@RequestParam("writer") String writer,
+			@RequestParam("replyinquiryTitle") String replyinquiryTitle,
+			@RequestParam("replyinquiryContent") String replyinquiryContent) {
+		ReplyInquiry r = ReplyInquiry.builder().replyinquiryNo(replyinquiryNo).writer(writer).replyinquiryContent(replyinquiryContent).replyinquiryTitle(replyinquiryTitle).build();
+		System.out.println(r);
+		int inq = riservice.updateReply(r);
+		
+		return "redirect:/inquiryList";
+
+	}
+	// 문의 답글 삭제 로직
 	
 	
 }

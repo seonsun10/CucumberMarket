@@ -70,9 +70,19 @@ public class Product {
 	
 	private String region; //거래지역 판매지역
 	
+
+//	@ManyToMany(cascade = CascadeType.ALL)
+//	@JoinColumn(name="products")
+//	private List<Member> members = new ArrayList(); //판매자 아이디
+	
+	@ToString.Exclude
 	@ManyToOne
 	@JoinColumn(name="userId")
 	private Member member; //판매자 아이디
+	
+
+
+
 	
 
 	@ToString.Exclude
