@@ -30,6 +30,7 @@ $(()=>{
 
 function fn_deleteDibs(){
 	let arr = [];
+	const userId = $("#userIdd").val();
 	$("input:checked[type='checkbox'].normal").each(function(i,iVal){
 		arr.push(iVal.value);
 	});

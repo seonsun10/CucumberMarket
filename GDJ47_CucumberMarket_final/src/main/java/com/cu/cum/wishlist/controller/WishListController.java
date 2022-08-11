@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.product.model.vo.Product;
@@ -81,15 +81,16 @@ public class WishListController {
 	@RequestMapping("/wishlist/deleteDibs.do")
 	public String deleteDibs(HttpServletRequest request,
 							Model m) {
-		String msg = "";
 		try {
-			String[] wishNo = request.getParameterValues("dibsList");
+			String wishNo = request.getParameter("dibsList");
 			List<WishList> wishList = new ArrayList();
-			for(int i=0; i<wishNo.length; i++) {
-				wishList.add(service.findByWishId(Integer.parseInt(wishNo[i])));
+			String[] result = wishNo.split(",");
+			for(int i=0; i<result.length; i++) {
+				wishList.add(service.findByWishId(Integer.parseInt(result[i])));
 			}
 			service.deleteWishListAll(wishList);
 		}catch(NullPointerException e) {
+			
 		}
 		return "redirect:/";
 	}
