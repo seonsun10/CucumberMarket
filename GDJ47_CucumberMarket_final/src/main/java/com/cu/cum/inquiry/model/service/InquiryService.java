@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.cu.cum.inquiry.model.vo.Inquiry;
+import com.cu.cum.inquiry.model.vo.ReplyInquiry;
 
 public interface InquiryService {
 	
@@ -41,6 +42,8 @@ public interface InquiryService {
 	
 	List<Inquiry> searchListType(String keyword);
 	//List<Inquiry> searchListTest(String keyword, Pageable pageable);
+	
+	
 	
 	
 	

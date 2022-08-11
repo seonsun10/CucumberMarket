@@ -28,33 +28,35 @@
                 </div>
                 <div class="card-body">
                   <ul class="nav nav-pills flex-column">
-                    <li><a href="${pageContext.request.contextPath }/inquiryList" class="nav-link">문의하기</a></li>
-                    <c:choose>
-			        	<c:when test="${loginMember.userId eq 'admin'}">
-			            	<li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고하기</a></li>
-			            </c:when>
+                    <li><a href="${pageContext.request.contextPath }/inquiryList" class="nav-link">1:1 문의</a></li>
+                    <%-- <c:choose>
+			        	<c:when test="${loginMember.userId eq 'admin'}"> --%>
+			        	<c:if test="${loginMember.userId eq 'admin'}">
+			            	<li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고</a></li>
+			            </c:if>
+			            <%-- </c:when>
 			            <c:when test="${loginMember.userId ne 'admin'}">
-			            	<li><a href="${pageContext.request.contextPath }/reportInfo" class="nav-link">신고하기</a></li>
+			            	<li><a href="${pageContext.request.contextPath }/reportInfo" class="nav-link">신고</a></li>
 			            </c:when>
-		            </c:choose>
+		            </c:choose> --%>
                     <li><a href="${pageContext.request.contextPath }/faqList" class="nav-link">FAQ</a></li>
                   </ul>
                 </div>
               </div>
               <!-- *** PAGES MENU END ***-->
-              <div class="banner"><a href="#"><img src="img/banner.jpg" alt="sales 2014" class="img-fluid"></a></div>
+              <div class="banner"><a href="#"><img src="/resources/img/cucumber.png" alt="" class="img-fluid"></a></div>
             </div>
 			<div class="col-lg-9">
 				<div class="table-responsive">
 						<form action="${pageContext.request.contextPath }/searchInquiry.do" method="post">
                   			<div class="input-group">
-              					<input name="keyword" type="text" placeholder="Search" class="form-control">
 	                      		<div class="products-sort-by mt-2 mt-lg-0">
                         			<select name="searchType" class="form-control">
                           				<option value="inquiryTitle" selected>제목</option>
                           				<option value="inquiryType">문의 유형</option>
                         			</select>
                      			 </div>
+              					<input name="keyword" type="text" placeholder="검색어를 입력하세요" class="form-control">
 				              	<div class="input-group-append">
 					                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
 									<a href="${pageContext.request.contextPath }/inquiryWrite" class="btn btn-primary navbar-btn"><span>문의글 작성</span></a>
@@ -68,9 +70,9 @@
 	                      		<thead>
 	                        		<tr>
 										<th>번호</th>
-										<th>아이디</th>
-	                          			<th colspan=2>제목</th>
 										<th>문의 유형</th>
+	                          			<th colspan=2>제목</th>
+										<th>아이디</th>
 										<th>등록일</th>
 										<c:if test="${loginMember.userId  eq 'admin'}">
 											<th>삭제</th>
@@ -80,23 +82,53 @@
 	                      		</thead>
 								<tbody>
 								<c:if test="${not empty list }">
+								<%-- ${list } --%>
 								<c:forEach items="${list }" var="i">
 		                        	<tr>
 		                          		<td><c:out value="${i.inquiryNo}"/></td>
-		                          		<td>${i.writer.userId }</td>
-		                          		<td colspan=2>
+		                          		<td><c:out value="${i.inquiryType}"/></td>
+		                          		<td colspan=1>
 		                          			<%-- <a href="${pageContext.request.contextPath }/inquiryView"> --%>
 		                          			<a href="${pageContext.request.contextPath }/inquiryView/${i.inquiryNo}">
 												<c:out value="${i.inquiryTitle}"/>
 											</a>
 		                          		</td>
-		                          		<td><c:out value="${i.inquiryType}"/></td>
+		                          		<td></td>
+		                          		<td>${i.writer.userId }</td>
 		                          		<td><fmt:formatDate value="${i.inquiryDate}" pattern="yyyy-MM-dd"/></td>
 		                          		<%-- <td><c:out value="${i.answer}"/></td> --%>
 		                          		<c:if test="${loginMember.userId  eq 'admin'}">
-		                          			<td><button type="button" class="btn btn-primary" onclick="location.assign('${pageContext.request.contextPath }/deleteInquiry/${i.inquiryNo}')">삭제</button></td>
+		                          			<td>
+		                          				<%-- <button type="button" class="btn btn-primary" onclick="location.assign('${pageContext.request.contextPath }/deleteInquiry/${i.inquiryNo}')">삭제</button> --%>
+		                          				<a href="${pageContext.request.contextPath }/deleteInquiry/${i.inquiryNo}""><i class="fa fa-trash-o"></i></a>
+		                          			</td>
+		                          			
 		                          		</c:if>
 		                        	</tr>
+		                        	<!-- 여기서부터 답글  -->
+		                        	<c:if test="${i.reInquiry.replyinquiryNo ne null }">
+		                        	<tr>
+		                          		<td><%-- <c:out value="${i.inquiryNo}"/> --%></td>
+		                          		<td><c:out value="${i.inquiryType}"/></td>
+		                          		<td colspan=1>
+		                          			<%-- <a href="${pageContext.request.contextPath }/inquiryView"> --%>
+		                          				<img src="/resources/img/replyLogo.png" style="width:50px; height:20px; margin : 0;" class="img-fluid">
+		                          			<a href="${pageContext.request.contextPath }/replyView/${i.inquiryNo}">
+												<c:out value="${i.reInquiry.replyinquiryTitle}"/>
+											</a>
+		                          		</td>
+		                          		<td></td>
+		                          		<td style="color:blue">관리자</td>
+		                          		<td><fmt:formatDate value="${i.reInquiry.replyinquiryDate}" pattern="yyyy-MM-dd"/></td>
+		                          		<%-- <td><c:out value="${i.answer}"/></td> --%>
+		                          		<c:if test="${loginMember.userId  eq 'admin'}">
+		                          			<td>
+		                          				<%-- <button type="button" class="btn btn-primary" onclick="location.assign('${pageContext.request.contextPath }/deleteInquiry/${i.inquiryNo}')">삭제</button> --%>
+		                          				<a href=""><i class="fa fa-trash-o"></i></a>
+		                          			</td>
+		                          		</c:if>
+		                        	</tr>
+		                        	</c:if>
 		                        	</c:forEach>
 		                        	</c:if>
 		                        	<c:if test="${empty list }">

@@ -54,16 +54,16 @@
 						 	</colgroup>
 						 	<tbody class="card-body" >
  						  		<tr>
-						   			<th align="center" style="text-align: center">글번호</th>
-						   			<td align="center" style="text-align: center"><c:out value="${inq.inquiryNo}"/></td>
+						   			<th align="center" style="text-align: center">답글 번호</th>
+						   			<td align="center" style="text-align: center"><c:out value="${inq.reInquiry.replyinquiryNo}"/></td>
 						  		</tr>
 						  		<tr>
 						   			<th align="center" style="text-align: center">제목</th>
-						   			<td align="center" style="text-align: center"><c:out value="${inq.inquiryTitle}"/></td>
+						   			<td align="center" style="text-align: center"><c:out value="${inq.reInquiry.replyinquiryTitle}"/></td>
 						  		</tr>
 						  		<tr>
 						   			<th align="center" style="text-align: center">작성자</th>
-						   			<td align="center" style="text-align: center"><c:out value="${inq.writer.userId}"/></td>
+						   			<td align="center" style="text-align: center"><%-- <c:out value="${inq.reInquiry.writer}"/> --%>관리자</td>
 						  		</tr>
 						  		<tr>
 						   			<th align="center" style="text-align: center">문의 유형</th>
@@ -71,18 +71,15 @@
 						  		</tr>
 								<tr>
 									<th align="center" style="text-align: center">내용</th>
-						   			<td align="center" colspan="2" height="200px"><c:out value="${inq.inquiryContent}"/> </td>
+						   			<td align="center" colspan="2" height="200px"><c:out value="${inq.reInquiry.replyinquiryContent}"/> </td>
 						  		</tr>
 						 	</tbody>
 							<tr>
 								<td colspan="2" align="center">
 						 			<input type="button" value="목록" onclick="location.assign('${pageContext.request.contextPath }/inquiryList')"/>
 						 			<c:if test="${loginMember.userId eq 'admin'}">
-							 			<input type="button" value="답변" onclick="location.assign('${pageContext.request.contextPath }/replyInquiry/${inq.inquiryNo}')"/>
-						 			</c:if>
-									<c:if test="${loginMember.userId == inq.writer.userId}">
-						 				<input type="button" value="수정" onclick="location.assign('${pageContext.request.contextPath }/updateInquiry/${inq.inquiryNo}')"/>
-							 			<input type="button" value="삭제" onclick="location.assign('${pageContext.request.contextPath }/deleteInquiry/${inq.inquiryNo}')"/>
+							 			<input type="button" value="수정" onclick="location.assign('${pageContext.request.contextPath }/updateReply/${inq.inquiryNo}')"/>
+							 			<input type="button" value="삭제" onclick="location.assign('${pageContext.request.contextPath }/inquiryList')"/>
 						 			</c:if>
 						 		</td>
 						 	</tr>
