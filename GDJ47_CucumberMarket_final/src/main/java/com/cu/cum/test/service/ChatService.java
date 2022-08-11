@@ -31,8 +31,8 @@ public class ChatService {
 	public ChatRoom selectChatRoom(ChatRoom c) {
 		return dao.selectChatRoom(session,c);
 	}
-	public int createMessage(String id) {
-		return dao.createMessage(session,id);
+	public int createMessage(ChatRoom c) {
+		return dao.createMessage(session,c);
 	}
 	public ChatRoom selectRoomId(String id) {
 		return dao.selectRoomId(session,id);
