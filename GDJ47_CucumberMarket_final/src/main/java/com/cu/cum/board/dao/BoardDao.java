@@ -26,8 +26,9 @@ public interface BoardDao {
 	
 	int deletecomment(SqlSessionTemplate session,int id);
 	int deletecomment2(SqlSessionTemplate session,int id);
-	
-	
+	List<Board> selectpopularlist(SqlSessionTemplate session);
+	int selectBaordRecommendCount(SqlSessionTemplate session,int boardId);
+	List<RecommendList> selectRecommendList(SqlSessionTemplate session,int boardId);
 	
 	//댓글
 	//

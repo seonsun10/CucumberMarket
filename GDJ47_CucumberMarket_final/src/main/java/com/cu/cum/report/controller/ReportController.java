@@ -49,14 +49,15 @@ public class ReportController {
 		return "/report/reportView";
 	}
 	
-	
-	public String insertReport(@RequestParam("reportId") String id,@RequestParam("proNo") int proNo,  @RequestParam("repTitle") String repTitle, 
+	// 신고글 작성 로직 
+	@RequestMapping("/report/insertReport.do")
+	public String insertReport(@RequestParam("repId") String id, @RequestParam("repType") String repType,  @RequestParam("repTitle") String repTitle, 
 			@RequestParam("repContent") String repContent, @RequestParam("targetId") String targetId) {
 		Member loginMember=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
-		Report r = Report.builder().repTitle(repTitle).repContent(repContent).proNo(proNo).targetId(targetId).build();
-		
-		//service.insertReport(r);
+		Report r = Report.builder().userId(loginMember).repType(repType).repTitle(repTitle).repContent(repContent).targetId(targetId).build();
+		System.out.println(r);
+		Report rpt = service.insertReport(r);
 		return "redirect:/reportList";
 	}
 

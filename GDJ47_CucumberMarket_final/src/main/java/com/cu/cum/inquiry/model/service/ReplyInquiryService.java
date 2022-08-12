@@ -13,4 +13,6 @@ public interface ReplyInquiryService {
 	
 	// 문의 답글 수정
 	int updateReply(ReplyInquiry r);
+	
+	int deleteReply(int id);
 }
