@@ -26,7 +26,7 @@ public class PageBar {
 				pageBar+="<span class='page-link'> "+pageNo+" </span>";
 				pageBar+="</li>";
 			}else {
-				pageBar+="<li class='page-item disabled'>";
+				pageBar+="<li class='page-item'>";
 				pageBar+="<span class='page-link' onclick='fn_ajaxPage1("+pageNo+")' style=\"cursor:pointer; color:lightgreen;\"> "+pageNo+" </span>";
 				pageBar+="</li>";
 			}

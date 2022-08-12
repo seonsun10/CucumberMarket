@@ -267,6 +267,7 @@ public class MemberController {
 		Member loginMember=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 		System.out.println("유저가 가지고 있는 상품 목록 : "+products);
+		System.out.println(products.size());
 
 		
 		List<Files> pp = service.selectUserFiles(userId);//db거쳐서 회원이 가진 모든 파일 가져오기;
@@ -296,13 +297,17 @@ public class MemberController {
 								Model m) {
 		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"userId",userId);
 		List<Review> reviews=proservice.selectReviewList(page);
-
+		List<Product> products = new ArrayList();
+		for(Review r : reviews) {
+			products.add(proservice.selectProduct(r.getProduct().getProNo()));
+		}
 		String url=request.getRequestURI();
 		int totalReview=proservice.selectReviewCount(userId);
 		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage, totalReview, url));
 		if(reviews.size()> 0) {
 			m.addAttribute("review",reviews);
 		}
+		m.addAttribute("products",products);
 		m.addAttribute("totalReview",totalReview);
 		return "member/mypageReview";
 	}

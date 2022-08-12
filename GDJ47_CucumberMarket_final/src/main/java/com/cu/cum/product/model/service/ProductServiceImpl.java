@@ -57,6 +57,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<Product> selectProductList(Map page) {
 		// TODO Auto-generated method stub
+		dao.flush();
 		return pmdao.selectProductList(session, page);
 	}
 	
@@ -76,7 +77,7 @@ public class ProductServiceImpl implements ProductService {
 	
 	//상품 삭제
 	@Override
-	public Product deleteProduct(int proNo) {
+	public List<Product> deleteProduct(int proNo) {
 		// TODO Auto-generated method stub
 		return dao.deleteById(proNo);
 	}
@@ -178,7 +179,12 @@ public class ProductServiceImpl implements ProductService {
 		return fDao.findByProduct(p);
 	}
 
-
+	//상품 검색
+	@Override
+	public List<Product> searchProduct(String keyword) {
+		// TODO Auto-generated method stub
+		return pmdao.searchProduct(session,keyword);
+	}
 
 }
 

@@ -30,7 +30,7 @@ public interface ProductService {
 	Product selectProduct(int proNo);
 	
 	//상품 삭제
-	Product deleteProduct(int proNo);
+	List<Product> deleteProduct(int proNo);
 	
 	//상품 리뷰 수 조회
 	int selectReviewCount(String userId);
@@ -73,5 +73,8 @@ public interface ProductService {
 
 
 	List<Files> selectFiles(Product p);
+	
+	//상품 검색
+	List<Product> searchProduct(String keyword);
 
 }

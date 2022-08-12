@@ -123,5 +123,9 @@
 	order by DBMS_RANDOM.RANDOM) a where ROWNUM&lt;9 AND category_id='패딩' AND pro_Content!='1313131231' AND Thumbnail_status='y'
 	</select>
 	
+	<select id="searchProduct" resultMap="productMap">
+		SELECT * FROM product p LEFT JOIN files f on(p.PRO_NO=f.PRO_NO) LEFT JOIN MEMBER m on(m.USERID=f.USER_ID) 
+		WHERE name LIKE '%${keyword}%' or region LIKE '%${keyword}%' OR title LIKE '%${keyword}%'
+	</select>
 
 </mapper>

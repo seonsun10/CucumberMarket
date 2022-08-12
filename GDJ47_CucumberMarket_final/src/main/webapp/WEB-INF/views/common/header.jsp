@@ -322,11 +322,11 @@
       </nav>
       <div id="search" class="collapse">
         <div class="container">
-          <form role="search" class="ml-auto">
+          <form role="search" class="ml-auto" action="${path }/product/searchProduct.do" method="post">
             <div class="input-group">
-              <input type="text" placeholder="Search" class="form-control">
+              <input type="text" placeholder="지역명, 상품명을 검색하세요!" class="form-control" name="keyword">
               <div class="input-group-append">
-                <button type="button" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
               </div>
             </div>
           </form>
