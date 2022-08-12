@@ -4,12 +4,19 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value=""/>
 </jsp:include>
+
 <style>
 #write{
 	text-align: right
+}
+#pboard{
+	margin-left: 30px;
+	margin-top: 20px;
+
 }
 </style>
  <div id="all">
@@ -29,9 +36,19 @@
                 <h1>동네 생활</h1>
                 <p>동네 생활에서 다양한 주제로 이야기를 나눠보세요.
                  </p>
+                 <div id="pboard"'>
+                
+                 	<c:if test="${not empty pboard }">
+                 	 <p id="pinfo" style='color:green;font-size:18px;font-weight: bold;'>시끌벅적 동네소식 <i class="bi bi-hand-thumbs-up-fill"></i></p>
+                 	<c:forEach items="${pboard }" var="p" varStatus="status">
+                 		<a href="${path }/board/boardinfo.do/${p.boardId}"><p><b> ⊙ ${p.boardTitle } &nbsp <i class="bi bi-hand-thumbs-up-fill"></i>${p.recommendCount}</b></p></a>
+                 	</c:forEach>
+                 	 
+                 	</c:if>
+                  </div>
                  <div style='text-align: right'>
-           		<p><button class="btn btn-primary" onclick="fn_boardWrite();">글쓰기</button></p>
-           </div>
+           			<p><button class="btn btn-primary" onclick="fn_boardWrite();">글쓰기</button></p>
+           		</div>
                  
               </div>
              
@@ -41,12 +58,12 @@
               	 <div class="post" id="databox">
               	 
                 <h2><a href="${path }/board/boardinfo.do/${b.boardId}">${b.boardTitle }</a></h2>
-                <p class="author-category">작성자 <a href="">${b.userId }</a>  &nbsp <a href="">#${b.boardCategory }</a>&nbsp&nbsp  <a> 추천 : ${b.recommendCount }&nbsp 개</a></p>
+                <p class="author-category">작성자 <a href="${path }/member/otherMember.do?writer=${b.userId }&customer=${loginMember.userId}">${b.userId }</a>  &nbsp <a href="${path }/board/boardlist.do/${b.boardCategory eq '동네 분실/실종센터'?'실종센터':b.boardCategory}">#${b.boardCategory }</a>&nbsp&nbsp  <a> <i class="bi bi-hand-thumbs-up-fill"></i> : ${b.recommendCount }&nbsp 개</a></p>
                 <hr>
                 <p class="date-comments"><a href=""><i class="fa fa-calendar-o"></i> ${b.createDate }</a><a href=""><i class="fa fa-comment-o"></i>  Comments &nbsp [ ${b.count } ]</a></p>
                 
                 <p class="intro">${b.boardContent }</p>
-                <p class="read-more"><button class="btn btn-primary" onclick="recommend(${b.boardId});">추천하기</button></p>
+                <p class="read-more"><button class="btn btn-primary" onclick="recommend(${b.boardId});"><i class="bi bi-hand-thumbs-up-fill"></i>&nbsp추천하기</button></p>
               </div>
               </c:forEach>
              

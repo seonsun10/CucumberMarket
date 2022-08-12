@@ -7,6 +7,71 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value=""/>
 </jsp:include>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+	<style>
+        #modal.modal-overlay {
+        	margin-top:150px;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(1.5px);
+            -webkit-backdrop-filter: blur(1.5px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        #modal .modal-window {
+            background: rgba(8, 147, 96, 0.715);
+            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+            backdrop-filter: blur( 13.5px );
+            -webkit-backdrop-filter: blur( 13.5px );
+            border-radius: 10px;
+            border: 1px solid rgba( 255, 255, 255, 0.18 );
+            width: 400px;
+            height: 400px;
+            position: relative;
+            top: -100px;
+            padding: 10px;
+        }
+        #modal .title {
+        	
+            padding-left: 40px;
+            display: inline;
+            text-shadow: 1px 1px 2px gray;
+            color: white;
+            
+        }
+        #modal .title h2 {
+        	
+        	padding-top:40px;
+            display: inline;
+        }
+        #modal .close-area {
+            display: inline;
+            float: right;
+            padding-right: 10px;
+            cursor: pointer;
+            text-shadow: 1px 1px 2px gray;
+            color: white;
+        }
+        
+        #modal .content {
+            margin-top: 20px;
+            padding: 0px 10px;
+            text-shadow: 1px 1px 2px gray;
+            color: white;
+        }
+      #mtitle{
+      	
+      }
+    </style> 
   <style>
         textarea{
               width:100%;
@@ -46,18 +111,24 @@
             <div id="blog-post" class="col-lg-9">
               <div class="box">
                 <h1>${board.boardTitle }</h1>
-                <p class="author-date">By <a href="#">${board.userId }</a>${board.createDate }</p>
+                <p class="author-date">By &nbsp<a href="${path }/member/otherMember.do?writer=${board.userId }&customer=${loginMember.userId}">${board.userId } &nbsp &nbsp</a>${board.createDate } <a href ="#" id="btn-modal"> &nbsp&nbsp &nbsp&nbsp <i class="bi bi-hand-thumbs-up-fill"></i> :&nbsp ${board.recommendCount }&nbsp 개</a></p>
                 <p class="lead"># ${board.boardCategory }</p>
                 <div id="post-content">
      					<p>${board.boardContent }</p>
                 </div>
                 &nbsp&nbsp&nbsp&nbsp&nbsp
                 <!-- /#post-content-->
+                <div style='text-align: center'>
+                <p class="read-more"><button class="btn btn-primary" onclick="recommend(${board.boardId});"><i class="bi bi-hand-thumbs-up-fill"></i>&nbsp추천하기</button></p>
+                
+                </div>
              
                   
                   
                   
      	<div id="comment-container">
+     	
+     	 
 			<div class="comment-editor">
 				<%-- <form action ="${path}/board/insertboardcomment.do" method="post">
 					<textarea name="boardCommentContent" cols="40"	rows="3" required class="form-control"></textarea>
@@ -220,6 +291,26 @@
         </div>
       </div>
     </div>
+    
+    
+    
+    <div id="modal" class="modal-overlay">
+	        <div class="modal-window">
+	            <div class="title" id="mtitle">
+	                <h2>추천을 누른 사람들 &nbsp<i class="bi bi-hand-thumbs-up-fill"></i> </h2>
+	            </div>
+	            <div class="close-area">X</div>
+	            <div class="content">
+	                <c:if test="${not empty Rlist }">
+	                	<c:forEach items="${Rlist }" var="r" >
+	                		<p>${r.rec_UserId }</p>
+	                	</c:forEach>
+	                
+	                </c:if>
+	                
+	            </div>
+	        </div>
+    	</div>
     <!--
     *** FOOTER ***
     _________________________________________________________
@@ -233,6 +324,22 @@
     
     </script>
      <script type="text/javascript">
+     
+     const modal = document.getElementById("modal")
+     const btnModal = document.getElementById("btn-modal")
+     btnModal.addEventListener("click", e => {
+         modal.style.display = "flex"
+     });
+     const closeBtn = modal.querySelector(".close-area")
+		closeBtn.addEventListener("click", e => {
+	    modal.style.display = "none"
+	});
+	modal.addEventListener("click", e => {
+	    const evTarget = e.target
+	    if(evTarget.classList.contains("modal-overlay")) {
+	        modal.style.display = "none"
+	    }
+	});
     function fn_deletecomment(id,no){
     	console.log(id,no);
     	location.assign('${path}/board/deletecomment/'+id+'/'+no);
@@ -264,6 +371,10 @@
      	tr.append(td);
      	$(e.target).parents("tr").after(tr);
      });
+     function recommend(id){
+    		
+    	 location.assign("${path}/board/boardRecommend.do/"+id);
+     }
         </script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

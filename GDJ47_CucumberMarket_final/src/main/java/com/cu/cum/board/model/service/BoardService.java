@@ -27,6 +27,9 @@ public interface BoardService {
 	int selectcommentcount(int boardId);
 	int deletecomment(int id);
 	int deletecomment2(int id);
+	List<Board> selectpopularlist();
+	int selectBaordRecommendCount(int boardId);
+	List<RecommendList> selectRecommendList(int boardId);
 	
 	//댓글
 	 int insertBoardComment(BoardComment b);
