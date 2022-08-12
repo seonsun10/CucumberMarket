@@ -36,9 +36,9 @@
 			<th>삭제</th>
 		</tr>
 			<c:if test="${wish ne null}">
-				<c:forEach var="d" items="${wish }">
+				<c:forEach var="d" items="${wish }" varStatus="status">
 					<tr id="tablebody">
-						<td><img src="${path }/resources/img/오이.png" style="width:50px;"></td>
+						<td><img src="${path }/resources/img/cucumber.png" style="width:50px;"></td>
 						<td><c:out value="${d.title }"/></td>
 						<td><c:out value="${d.price }"/>원</td>
 						<td><fmt:formatDate value="${d.enrollDate}" pattern="yyyy-MM-dd"/></td>

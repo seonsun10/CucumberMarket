@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +21,7 @@ import com.cu.cum.alert.model.service.CommonService;
 import com.cu.cum.alert.model.vo.Alert;
 import com.cu.cum.config.Common;
 import com.cu.cum.member.model.vo.Member;
+import com.cu.cum.test.model.vo.MessageContent;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
@@ -61,6 +63,34 @@ public class AlertControllerImpl implements AlertController{
 		}
 		return mav;
 	}
+	
+	
+	// 채팅조회 (전체)
+		@Override
+		@RequestMapping("/member/chat.do")
+		public ModelAndView chatInit(@RequestParam(defaultValue = "1") int curPage, HttpServletRequest request) throws Exception{
+			ModelAndView moav = new ModelAndView();
+			String userid= ((Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
+			// 세션에 userid가 존재할 때 
+			if(userid != null && !"".equals(userid)){
+				// 새로운 채팅 조회
+				List<MessageContent> newChatList = service.searchNewChatList(userid);
+				List<MessageContent> oldChatList = service.searchOldChatList(userid);
+			
+				
+				
+				// 이전 알람 조회
+				// 정보 전달
+
+				moav.addObject("newChatList", newChatList);
+				moav.addObject("oldChatList", oldChatList);
+				moav.setViewName("alert/chat");
+			}
+			return moav;
+		}
+		
+	
+	
 	
 	// 더보기 요청
 /*	@Override

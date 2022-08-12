@@ -12,8 +12,8 @@
 		<result column="recommendcount" property="recommendCount"/>
 	</resultMap>
 	<resultMap type="com.cu.cum.board.model.vo.RecommendList" id="recommendMap">
-		<result property="recUserId" column="rec_userid"/>
-		<result property="recBoardId" column="rec_boardid"/>
+		<result property="rec_UserId" column="rec_userid"/>
+		<result property="rec_BoardId" column="rec_boardid"/>
 	
 	</resultMap>
 	
@@ -39,10 +39,10 @@
 	select count(*) from board where boardcategory=#{category}
 	</select>
 	<select id="recommendcheck" parameterType="com.cu.cum.board.model.vo.RecommendList" resultType="_int">
-	select count(*) from recommendlist where rec_userid=#{recUserId} and rec_boardid=#{recBoardId}
+	select count(*) from recommendlist where rec_userid=#{rec_UserId} and rec_boardid=#{rec_BoardId}
 	</select>
 	<insert id="recommendboard" parameterType="recommend" >
-	insert into recommendlist values(#{recUserId},#{recBoardId})
+	insert into recommendlist values(#{rec_UserId},#{rec_BoardId})
 	</insert> 
 	<select id="recommendidcount" parameterType="_int" resultType="_int">
 	select count(*) from recommendlist where rec_boardid=#{BoardId}
@@ -148,6 +148,20 @@
     </delete>
     <select id="selectboardcommentlist2" parameterType="_int" resultType="com.cu.cum.board.model.vo.BoardComment">
     	select * from board_comment where boardref=#{boardId} start with boardcommentlevel=1 connect by prior boardcommentno=boardcommentref
+    </select>
+    <select id="selectpopularlist" resultMap="boardMap">
+	    select rec_boardid as boardid
+		from 
+		(select e.*,rownum as rank_
+		from(select s.* from popularboard s order by s.recommendcount desc)e)
+		where rank_ between 1 and 5
+    </select>
+    <select id="selectBaordRecommendCount" parameterType="_int" resultType="_int">
+    
+    select count(*) from recommendlist where rec_boardid=#{boardId}
+    </select>
+    <select id="selectRecommendList" parameterType="_int" resultType="com.cu.cum.board.model.vo.RecommendList">
+    select * from recommendlist where rec_boardid =#{boardId}
     </select>
 	
 	

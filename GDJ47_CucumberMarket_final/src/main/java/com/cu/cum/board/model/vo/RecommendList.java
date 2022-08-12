@@ -5,12 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Data
 public class RecommendList {
-	private String recUserId;
-	private int recBoardId;
+	private String rec_UserId;
+	private int rec_BoardId;
 
 }

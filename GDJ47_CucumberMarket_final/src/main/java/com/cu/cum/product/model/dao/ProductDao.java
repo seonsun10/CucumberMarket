@@ -39,7 +39,7 @@ public interface ProductDao extends JpaRepository<Product,Integer>,
 	
 	//상품 삭제
 	@Transactional
-	Product deleteById(int proNo);
+	List<Product> deleteById(int proNo);
 	
 	//후기 등록
 	@Transactional

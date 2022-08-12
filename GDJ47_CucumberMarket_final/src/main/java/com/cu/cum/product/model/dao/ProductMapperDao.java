@@ -18,7 +18,7 @@ public class ProductMapperDao {
 		int cPage = (int)page.get("cPage");
 		int numPerpage = (int)page.get("numPerpage");
 		String userId = (String)page.get("userId");
-		return session.selectList("product.selectProductList",userId,new RowBounds((cPage-1)*numPerpage,numPerpage));
+		return session.selectList("product.selectProductList",userId,new RowBounds((cPage-1)*numPerpage+1,numPerpage));
 	}
 	
 	public int selectProductCount(SqlSessionTemplate session, String userId) {
@@ -98,7 +98,10 @@ public class ProductMapperDao {
 		return session.selectList("product.relProduct",param);
 	}
 
-
+	//상품검색
+	public List<Product> searchProduct(SqlSessionTemplate session, String keyword){
+		return session.selectList("product.searchProduct",keyword);
+	}
 	
 	
 	

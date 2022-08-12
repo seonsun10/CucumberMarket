@@ -40,6 +40,9 @@ public interface MemberService {
 	
 	//조회수 가져오기
 	int selectViewCount(String writer);
+
+	//아이디 중복조회
+	boolean existsByUserId(String userId);
 	
 	
 

@@ -1,6 +1,5 @@
 package com.cu.cum.product.model.vo;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -91,6 +91,11 @@ public class Product {
 	//@OneToMany(mappedBy="product")
 	private List<Files> files;
 	
+	
+	@ToString.Exclude
+	@Cascade(CascadeType.REMOVE)
+	@OneToMany(mappedBy="product", fetch = FetchType.LAZY)
+	private List<Review> review;
 	
 //	@Override
 //	public String toString() {

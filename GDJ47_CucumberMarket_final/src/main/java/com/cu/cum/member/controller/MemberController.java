@@ -1,14 +1,9 @@
 package com.cu.cum.member.controller;
 
 import java.security.Principal;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.ZoneId;
-
-
-
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -270,6 +266,7 @@ public class MemberController {
 		Member loginMember=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 		System.out.println("유저가 가지고 있는 상품 목록 : "+products);
+		System.out.println(products.size());
 
 		
 		List<Files> pp = service.selectUserFiles(userId);//db거쳐서 회원이 가진 모든 파일 가져오기;
@@ -299,13 +296,17 @@ public class MemberController {
 								Model m) {
 		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"userId",userId);
 		List<Review> reviews=proservice.selectReviewList(page);
-
+		List<Product> products = new ArrayList();
+		for(Review r : reviews) {
+			products.add(proservice.selectProduct(r.getProduct().getProNo()));
+		}
 		String url=request.getRequestURI();
 		int totalReview=proservice.selectReviewCount(userId);
 		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage, totalReview, url));
 		if(reviews.size()> 0) {
 			m.addAttribute("review",reviews);
 		}
+		m.addAttribute("products",products);
 		m.addAttribute("totalReview",totalReview);
 		return "member/mypageReview";
 	}
@@ -432,5 +433,29 @@ public class MemberController {
 		System.out.println("이메일 인증 이메일 : " + email);
 		return mailService.joinEmail(email);
 	}
+	
+	//가입 이메일 확인
+//	@PostMapping("/idCheck")
+//	@ResponseBody
+//	public Member idCheck(@RequestParam("userId") String userId) {
+//		logger.info("userIdCheck 진입");
+//        logger.info("전달받은 userId:"+userId);
+//        Member cnt = service.idCheck(userId);
+//        logger.info("확인 결과:"+cnt);
+//        return cnt;
+//		
+//	}
+	
+	@GetMapping("/idCheck")
+	public ResponseEntity<?> checkIdDuplication(@RequestParam(value = "userId") String userId) throws BadRequestException {
+	    System.out.println(userId);
+
+	    if (service.existsByUserId(userId) == true) {
+	    	throw new BadRequestException("이미 사용중인 아이디 입니다.");
+	    } else {
+	        return ResponseEntity.ok("사용 가능한 아이디 입니다.");
+	    }
+	}
+	
 	
 }
