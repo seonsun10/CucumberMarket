@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cu.cum.alert.model.vo.Alert;
+import com.cu.cum.test.model.vo.MessageContent;
 
 @Repository
 public class AlertDaoImpl implements AlertDao{
@@ -38,6 +39,16 @@ public class AlertDaoImpl implements AlertDao{
 		return sqlSession.selectList("alert.searchOldNotifyList", userId);
 	}
 
+	@Override
+	public List<MessageContent> searchNewChatList(String userid) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("alert.searchNewChatList", userid);
+	}
+	@Override
+	public List<MessageContent> searchOldChatList(String userid) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("alert.searchOldChatList", userid);
+	}
 	@Override
 	public int updateNotifyChecked(Map<String, String> param) {
 		return sqlSession.update("alert.updateNotifyChecked", param);

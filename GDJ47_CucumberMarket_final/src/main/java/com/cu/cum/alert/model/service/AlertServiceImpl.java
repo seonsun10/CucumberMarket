@@ -3,11 +3,15 @@ package com.cu.cum.alert.model.service;
 import java.util.List;
 import java.util.Map;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cu.cum.alert.model.dao.AlertDao;
 import com.cu.cum.alert.model.vo.Alert;
+import com.cu.cum.test.dao.ChatDao;
+import com.cu.cum.test.model.vo.ChatRoom;
+import com.cu.cum.test.model.vo.MessageContent;
 
 @Service
 public class AlertServiceImpl implements AlertService {
@@ -15,6 +19,9 @@ public class AlertServiceImpl implements AlertService {
 
 	@Autowired
 	AlertDao dao;
+	
+	@Autowired
+	private SqlSessionTemplate session;
 	
 	
 
@@ -36,22 +43,33 @@ public class AlertServiceImpl implements AlertService {
 	public List<Alert> searchNewNotifyList(String userid) {
 		return dao.searchNewNotifyList(userid);
 	}
+	@Override
+	public List<MessageContent> searchNewChatList(String userid) {
+		return dao.searchNewChatList(userid);
+	}
 	
 
 	@Override
 	public List<Alert> searchOldNotifyList(String userid) {
 		return dao.searchOldNotifyList(userid);
 	}
+	
+	@Override
+	public List<MessageContent> searchOldChatList(String userid) {
+		return dao.searchOldChatList(userid);
+	}
 
 	@Override
 	public int updateNotifyChecked(Map<String, String> param) {
 		return dao.updateNotifyChecked(param);
 	}
+	
 
 	@Override
 	public int insertNotify(Alert vo) {
 		return dao.insertNotify(vo);
 	}
+
 	
 	
 }
