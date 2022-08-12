@@ -385,7 +385,7 @@ function fn_area() {
 
 	
    
-    const id='${loginMember.userId}';
+  
     //채팅 메시지 눌럿을때
      	
 			// 웹소켓 연결
