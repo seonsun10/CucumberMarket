@@ -68,9 +68,9 @@
 		                          		<td><c:out value="${r.repNo}"/></td>
 		                          		<td><c:out value="${r.userId.userId }"/></td>
 		                          		<td colspan=2>
-		                          			<a href="${pageContext.request.contextPath }/reportView"><c:out value="${r.repTitle}"/></a>
+		                          			<a href="${pageContext.request.contextPath }/reportView/${r.repNo}"><c:out value="${r.repTitle}"/></a>
 		                          		</td>
-		                          		<td><c:out value="${r.targetId}"/></td>
+		                          		<td style="color:red"><c:out value="${r.targetId}"/></td>
 		                          		<td><fmt:formatDate value="${r.repDate}" pattern="yyyy-MM-dd"/></td>
 		                          		<td><a href=""><i class="fa fa-trash-o"></i></a></td>
 		                        	</tr>

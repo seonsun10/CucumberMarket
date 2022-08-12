@@ -12,5 +12,6 @@ public interface ReportDao extends JpaRepository<Report, String>{
 	// 신고글 작성 
 	Report save(Report r);
 
+	Report findByRepNo(int repNo);
 	
 }

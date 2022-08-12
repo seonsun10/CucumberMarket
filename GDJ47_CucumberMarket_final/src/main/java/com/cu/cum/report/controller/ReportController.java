@@ -49,9 +49,11 @@ public class ReportController {
 //	}
 	
 	// 신고글 상세 페이지
-	@RequestMapping(value="/reportView", method=RequestMethod.GET)
-	public String reportView() {
-		return "/report/reportView";
+	@RequestMapping(value={"/reportView/{id}"})
+	public ModelAndView selectReport(@PathVariable int id, ModelAndView mv) {
+		mv.addObject("rep", service.selectReport(id));
+		mv.setViewName("report/reportView");
+		return mv;
 	}
 	
 	// 신고글 작성 로직 

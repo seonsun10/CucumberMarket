@@ -25,6 +25,8 @@ public interface ReportService {
 	// 신고글(작성자)로 검색
 	List<Report> searchReport(String keyword);
 	
+	// 신고글 상세정보
+	Report selectReport(int repNo);
 	
 	
 }

@@ -29,23 +29,33 @@ public class ReportServiceImpl implements ReportService {
 		// TODO Auto-generated method stub
 		return dao.save(r);
 	}
-
+	// 신고글 페이징 처리
 	@Override
 	public List<Report> selectReportList(Map param) {
 		// TODO Auto-generated method stub
 		return rmdao.selectReportList(session, param);
 	}
 
+	// 신고글 검색
 	@Override
 	public List<Report> searchReport(String keyword) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	// 신고글 갯수 
 	@Override
 	public int selectReportCount() {
 		// TODO Auto-generated method stub
 		return rmdao.selectReportCount(session);
 	}
+	
+	// 신고글 상세정보
+	@Override
+	public Report selectReport(int repNo) {
+		// TODO Auto-generated method stub
+		return dao.findByRepNo(repNo);
+	}
 
+	
 }
