@@ -1,6 +1,7 @@
 package com.cu.cum.board.controller;
 
-import java.util.HashMap;
+import java.net.http.HttpRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cu.cum.board.model.service.BoardService;
 import com.cu.cum.board.model.vo.Board;
 import com.cu.cum.board.model.vo.BoardComment;
-import com.cu.cum.board.model.vo.BoardReply;
 import com.cu.cum.board.model.vo.RecommendList;
 import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.pagebar.TestPageBar;
@@ -39,8 +38,17 @@ public class BoardController {
 			,ModelAndView mv) {
 		
 		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage);
+		List<Board> pboard = service.selectpopularlist(); 
+		System.out.println(pboard);
+		List<Board> pboardlist = new ArrayList();
+		for(Board s:pboard) {
+			pboardlist.add(service.selectBoard(s.getBoardId())); 
+		}
+		mv.addObject("pboard", pboardlist);
+		System.out.println(pboardlist);
 		
 		List<Board> boards = service.selectBoardList(page);
+		
 		mv.addObject("boards",boards);
 		System.out.println(boards.size());
 		String url = request.getRequestURI();
@@ -54,19 +62,29 @@ public class BoardController {
 	public ModelAndView boardlist2(@RequestParam(defaultValue = "1") int cPage,
 			@RequestParam(defaultValue = "5") int numPerpage,HttpServletRequest request
 			,@PathVariable String categoryname,ModelAndView mv) {
+		
+		
 		if(categoryname.equals("실종센터")) {
 			categoryname="동네 분실/실종센터";
 		}
-		System.out.println(categoryname);
+		
+		System.out.println("카테고리넴 :"+categoryname);
 		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"categoryname",categoryname);
 		
 		List<Board> boards = service.selectBoardList2(page);
 		mv.addObject("boards",boards);
-		System.out.println(boards.size());
+		
 		String url = request.getRequestURI();
 		int totalboardcount = service.selectboardCount2();
 		mv.addObject("pageBar", TestPageBar.getPageBar(cPage, numPerpage, totalboardcount, url));
-		System.out.println(boards);
+		List<Board> pboard = service.selectpopularlist(); 
+		System.out.println("피보드 "+pboard);
+		List<Board> pboardlist = new ArrayList();
+		for(Board s:pboard) {
+			pboardlist.add(service.selectBoard(s.getBoardId())); 
+		}
+		mv.addObject("pboard", pboardlist);
+		System.out.println("카테고리 : "+pboardlist);
 		mv.setViewName("board/boardList");
 		return mv;
 	}
@@ -96,15 +114,22 @@ public class BoardController {
 			@RequestParam(defaultValue = "5") int numPerpage,HttpServletRequest request) {
 		System.out.println(boardId);
 		Board b = service.selectBoard(boardId);
+		int count = service.selectBaordRecommendCount(boardId);
+		b.setRecommendCount(count);
 		mv.addObject("board", b);
 		int commentcount;
 		Board b1 = service.selectBoard(boardId);
 		mv.addObject("board", b1);
+		
+		//추천누른사람
+		List<RecommendList> Rlist= service.selectRecommendList(boardId);
+		mv.addObject("Rlist",Rlist);
+		
 		String url = request.getRequestURI();
 		try {
 			
 			commentcount = service.selectcommentcount(boardId);
-			
+			numPerpage=10;
 			mv.addObject("count", commentcount);
 			mv.addObject("pageBar", TestPageBar.getPageBar(cPage,
 					  numPerpage,commentcount,url));
@@ -132,11 +157,12 @@ public class BoardController {
 	
 	@GetMapping("/boardRecommend.do/{boardId}")
 	@ResponseBody
-	public ModelAndView boardRecommend(@PathVariable int boardId,ModelAndView mv) {
+	public ModelAndView boardRecommend(@PathVariable int boardId,ModelAndView mv,HttpServletRequest request) {
 		String userid= ((Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
-		RecommendList r = RecommendList.builder().recBoardId(boardId).recUserId(userid).build();
+		RecommendList r = RecommendList.builder().rec_BoardId(boardId).rec_UserId(userid).build();
+		System.out.println(r.getRec_UserId()+r.getRec_BoardId());
 		System.out.println(boardId);
-		System.out.println(r);
+		
 		Board b2 = service.selectBoard(boardId);
 		int recommend;
 		if(userid.equals(b2.getUserId())) {
@@ -146,9 +172,14 @@ public class BoardController {
 			//게시물 추천카운트에삽입
 			Board b = Board.builder().boardId(boardId).recommendCount(count).build();
 			service.updateBoard(b);
+			String url =request.getRequestURI();
+			System.out.println(url);
+			if(url.equals("/board/boardRecommend.do/"+boardId)) {
+				url="board/boardinfo.do/"+boardId;
+			}
 	
 			mv.addObject("msg","본인게시물엔 추천할수없습니다.");
-			mv.addObject("loc", "board/boardlist.do");
+			mv.addObject("loc", url);
 			mv.setViewName("common/msg");
 			return mv;
 			

@@ -257,6 +257,12 @@ public class InquiryController {
 
 	}
 	// 문의 답글 삭제 로직
-	
+	@RequestMapping("/deleteReply/{id}")
+	public String deleteReply(ReplyInquiry r, @PathVariable int id,HttpSession session) {
+		System.out.println(r);
+		int inq = riservice.deleteReply(id);
+		
+		return "redirect:/inquiryList";
+	}
 	
 }

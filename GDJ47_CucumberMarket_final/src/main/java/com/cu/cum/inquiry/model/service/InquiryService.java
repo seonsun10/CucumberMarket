@@ -21,7 +21,7 @@ public interface InquiryService {
 	int selectInquiryCount();
 	
 	// 문의 글 상세정보
-	Inquiry selectInquiry(int inquiryno);
+	Inquiry selectInquiry(int inquiryno); 
 	
 	// 문의 글 작성
 	Inquiry insertInquiry(Inquiry i);

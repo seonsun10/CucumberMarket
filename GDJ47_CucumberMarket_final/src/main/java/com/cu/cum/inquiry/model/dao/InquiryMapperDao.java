@@ -39,5 +39,10 @@ public class InquiryMapperDao {
 	public int updateReply(SqlSessionTemplate session, ReplyInquiry r) {
 		return session.update("inquiry.updateReply",r);
 	}
+	
+	// 문의 답글 삭제
+	public int deleteReply(SqlSessionTemplate session, int id) {
+		return session.delete("inquiry.deleteReply",id);
+	}
 
 }
