@@ -24,7 +24,7 @@ public class AreaController {
 	@RequestMapping("/testarea.do")
 	public String testArea(@RequestParam("address") String address) {
 		log.debug(address+" 입니다.");
-		String[] addrr = address.split(" ");
+		String[] addrr = address.split(" "); 
 		String addr1 = ""; //시도
 		String addr2 = ""; //시군구
 		String addr = "";
