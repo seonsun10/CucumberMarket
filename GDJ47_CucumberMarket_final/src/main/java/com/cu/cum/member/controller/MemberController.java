@@ -174,6 +174,8 @@ public class MemberController {
 							Model m) {
 		List<WishList> list = wlservice.selectWishList(service.searchMember(userId));
 		List<Product> products = new ArrayList();
+		List<Files> files = new ArrayList();
+		List<String> renames = new ArrayList();
 		List dayList = new ArrayList();
 		for(WishList w : list) {
 			products.add(proservice.selectProduct(w.getProduct().getProNo()));
@@ -182,6 +184,15 @@ public class MemberController {
 			Long day= ChronoUnit.DAYS.between(today, targetDay);
 			dayList.add(Math.abs(day));
 		}
+		for(Product p : products) {
+			files.addAll(p.getFiles());
+		}
+		for(Files f : files) {
+			if(f.getRenameFilename().contains("s_")) {
+				renames.add(f.getRenameFilename());
+			}
+		}
+		m.addAttribute("renames",renames);
 		m.addAttribute("products",products);
 		log.debug("결과 : "+list);
 		if(list.size()!=0) {
@@ -316,16 +327,32 @@ public class MemberController {
 							@RequestParam(defaultValue = "5") int numPerpage,
 							HttpServletRequest request,ModelAndView mv) {
 		String userId= ((Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
-		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"userId",userId);
-		List<Product> wishlist = proservice.selectWishList(page);
+//		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"userId",userId);
+//		List<Product> wishlist = proservice.selectWishList(page);
+		List<WishList> list = wlservice.selectWishList(service.searchMember(userId));
+		List<Product> products = new ArrayList();
+		List<Files> files = new ArrayList();
+		List<String> renames = new ArrayList();
+		for(WishList w : list) {
+			products.add(proservice.selectProduct(w.getProduct().getProNo()));
+		}
+		for(Product p : products) {
+			files.addAll(p.getFiles());
+		}
+		for(Files f : files) {
+			if(f.getRenameFilename().contains("s_")) {
+				renames.add(f.getRenameFilename());
+			}
+		}
+		mv.addObject("renames",renames);
 		String url=request.getRequestURI();
 		int totalwish=proservice.selectWishCount(userId);
 		System.out.println(url);
 		System.out.println("사이즈: "+totalwish);
-		System.out.println("ftx: "+wishlist);
+//		System.out.println("ftx: "+wishlist);
 		mv.addObject("pageBar",PageBar.getPageBar(cPage, numPerpage, totalwish, url));
-		if(wishlist.size()>0) {
-			mv.addObject("wish",wishlist);
+		if(products.size()>0) {
+			mv.addObject("wish",products);
 		}
 		mv.addObject("totalWish",totalwish);
 		mv.setViewName("member/mypageDibs");
