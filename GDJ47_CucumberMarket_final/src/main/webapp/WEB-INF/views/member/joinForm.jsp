@@ -27,7 +27,9 @@
                 <form action="/join" method="post">
                   <div class="form-group">
                     <label for="email">이메일 - ID로 사용됩니다</label>
-                    <input id="userId" type="text" name="userId" class="form-control" placeholder="example@cu.com">
+                    <input id="userId" type="text" name="userId" class="form-control" placeholder="example@cu.com" required oninput = "checkId()">
+					<d id="idAvailable" class="valid-feedback" style="display: none;"></d>
+					<d id="idNotAvailable" class="invalid-feedback" style="display: none;"></d>
                     <div class="input-group-addon">
 						<button type="button" class="btn btn-primary" id="mail-Check-Btn">본인인증</button>
 					</div>
@@ -62,6 +64,32 @@
     </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 <script>
+	//이메일 중복확인
+	function checkId(){
+	    var userId = $('#userId').val(); //id값이 "userid"인 입력란의 값을 저장
+		$.ajax({
+		    url: '/idCheck',
+		    type: 'GET',
+		    contentType: 'application/json',
+		    headers: {
+		    	// 스프링 시큐리티를 위한 헤더 설정
+		    	"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")
+		    },
+		    data: {
+		    	userId: $('#userId').val()
+		    },
+		    success: function (result) {
+		    	// 성공 시 실패 메시지 hide, 성공 메시지 show
+		        $('#idNotAvailable').hide();
+		        $('#idAvailable').show().text(result).append($('<br />'));
+		    }, error: function(error) {
+		    	// 실패 시 실패 메시지 show, 성공 메시지 hide
+		        $('#idAvailable').hide();
+		        $('#idNotAvailable').show().text('이미 사용중인 아이디 입니다.').append($('<br />'));
+		    }
+		});
+	}
+	
 	var code = "";
 	$('#mail-Check-Btn').click(function() {
 		const email = $('#userId').val(); // 이메일 주소값 얻어오기//직접 입력, @이하 선택분류 설정가능
@@ -95,5 +123,6 @@
 			$resultMsg.css('color','red');
 		}
 	});
+	
 </script>
     
