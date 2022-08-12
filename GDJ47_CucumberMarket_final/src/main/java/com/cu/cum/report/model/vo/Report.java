@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -39,12 +40,17 @@ public class Report {
 	private int proNo; // 상품 아이디 
 	private String repContent; // 신고 내용
 	private String repTitle; // 제목 
+	private String repType; // 신고 유형
 	
-	@Column(name="inquiryDate", columnDefinition = "date default sysdate not null " )
+	@Column(name="repDate", columnDefinition = "date default sysdate not null " )
 	@Temporal(TemporalType.DATE)
-	private Date writeDate; // 신고날짜 
+	private Date repDate; // 신고날짜 
 	
 	private String targetId; // 신고 당한 사람아이디 
 	
-
+	
+	@PrePersist
+	public void prepersist() {
+		this.repDate=this.repDate==null?new Date():this.repDate;
+	}
 }

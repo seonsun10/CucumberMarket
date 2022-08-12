@@ -5,6 +5,13 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <link rel="stylesheet" href="${path}/resources/css/product/productView.css">
+<style>
+.link-icon { position: relative; display: inline-block;  width:40px;  font-size: 14px; font-weight: 500; color: #333; margin-right: 20px; padding-top: 50px; }
+.link-icon.twitter { background-image: url(../resources/img/icon-twitter.png); background-repeat: no-repeat; }
+.link-icon.facebook { background-image: url(../resources/img/icon-facebook.png); background-repeat: no-repeat; } 
+.link-icon.kakao { background-image: url(../resources/img/icon-kakao.png); background-repeat: no-repeat; }
+.link-icon.band { background-image: url(../resources/img/band.png); background-repeat: no-repeat;}
+</style>
 <div id="all">
       <div id="content">
         <div class="container">
@@ -128,15 +135,27 @@
                 
                   <div class="box">
                     <h1 class="text-center">${result.title }</h1>
-                    <h4 class="text-center">판매자 : <a href="">${name }</a></h4>
+                    <c:if test="${name ne loginMember.userId }">
+                    <h4 class="text-center">판매자 : <a href="${path}/member/otherMember.do?writer=${name}&customer=${loginMember.userId}">${name }</a></h4>
+                    </c:if>
+                    <c:if test="${name eq loginMember.userId }">
+                    <h4 class="text-center">판매자 : <a href="${path }/member/mypage.do?userId=${loginMember.userId}">${name}</a></h4>
+                    </c:if>
+                    <p class="text-center">판매 지역 : ${region }</p>
+                    <c:if test="${proStatus eq 'y' }">
+                    	<p class="text-center">상품 상태 : 중고</p>
+                    </c:if>
+                    <c:if test="${proStatus eq 'n' }">
+                   		<p class="text-center">상품 상태 : 새 상품</p>
+                    </c:if>
                     <p class="price"><fmt:formatNumber value="${result.price}" pattern="#,###" />원</p>
                     <p class="text-center buttons">
                     <button class="btn btn-primary" onclick="openchat();">오이채팅</button>
                <c:if test="${count==0}">
-                    <button  class="btn btn-primary" onclick="location.assign('${path }/wishlist/insertWishList.do?id=${loginMember.userId}&no=${no}&tag=${tag}&name=${name}'); alert('관심상품등록');">관심상품등록</button>
+                    <button  class="btn btn-primary" onclick="location.assign('${path }/wishlist/insertWishList.do?id=${loginMember.userId}&no=${no}&tag=${tag}&name=${name}&region=${region}&proStatus=${proStatus }'); alert('관심상품등록');">관심상품등록</button>
                     </c:if>
                     <c:if test="${count==1}">
-                    <button class="btn btn-primary" onclick="location.assign('${path }/wishlist/deleteWishList.do?id=${loginMember.userId}&no=${no}&tag=${tag}&name=${name}'); alert('관심상품삭제');">관심상품삭제</button>
+                    <button class="btn btn-primary" onclick="location.assign('${path }/wishlist/deleteWishList.do?id=${loginMember.userId}&no=${no}&tag=${tag}&name=${name}&region=${region}&proStatus=${proStatus }'); alert('관심상품삭제');">관심상품삭제</button>
                     </c:if>
                     </p>
                   </div>
@@ -158,7 +177,10 @@
                 <hr>
                 <div class="social">
                   <h4>공유하기</h4>
-                  <p><a href="#" class="external facebook"><i class="fa fa-facebook"></i></a><a href="#" class="external gplus"><i class="fa fa-google-plus"></i></a><a href="#" class="external twitter"><i class="fa fa-twitter"></i></a><a href="#" class="email"><i class="fa fa-envelope"></i></a></p>
+				    <a id="btnTwitter" onclick="fn_sendFB('twitter');return false;" class="link-icon twitter" target="_self" title="카카오톡 새창열림">&nbsp;</a>
+					<a id="btnFacebook" onclick="fn_sendFB('facebook');return false;" class="link-icon facebook" target="_self" title="카카오톡 새창열림">&nbsp;</a>    
+					<a id="btnKakao" onclick="fn_sendFB('kakao');return false;" class="link-icon kakao" target="_self" title="카카오톡 새창열림" >&nbsp;</a>
+					<a id="btnBand" onclick="fn_sendFB('band'); return false;" class="link-icon band" target="_self" title="카카오톡 새창열림">&nbsp;</a>
                 </div>
               </div>
               
@@ -173,12 +195,13 @@
                   <div class="product same-height">
                     <div class="flip-container">
                       <div class="flipper">
-                        <div class="front"><a href="${path }/product/productView.do?id=${loginMember.userId}&no=${rP.proNo}&tag=${rP.categoryName}"><img src="${path }/resources/upload/product/${relFilename[status.index]}" style="width:166px; height:177px;" class="img-fluid"></a></div>
+                        <div class="front"><a href="${path }/product/productView.do?id=${loginMember.userId}&no=${rP.proNo}&tag=${rP.categoryName}&name=${rP.member.userId}&region=${rP.region}&proStatus=${rP.proStatus}"><img src="${path }/resources/upload/product/${relFilename[status.index]}" style="width:166px; height:177px;" class="img-fluid"></a></div>
                       </div>
                     </div><img src="${path }/resources/upload/product/${relFilename[status.index]}" style="width:166px; height:177px;" class="img-fluid">
                     <div class="text">
-                      <h3>${rP.title }</h3>
-                      <p class="price"><fmt:formatNumber value="${rP.price}" pattern="#,###" />원</p>
+                      <h4 class="text-center" style="text-overflow:ellipsis; white-space:nowrap; overflow:hidden;"><strong>${rP.title }</strong></h4>
+                      <p class="text-center">판매 지역 : ${rP.region}</p>
+                      <p class="text-center"><fmt:formatNumber value="${rP.price}" pattern="#,###" />원</p>
                     </div>
                   </div>
                 </div>
@@ -195,7 +218,7 @@
             </div>
 
     <script>
-     const count = ${count}
+      const count = ${count}
     const id = "${id}"
     const no = ${no}
     if(count==1){
@@ -221,7 +244,44 @@
           console.log(count);
        }
     }
+    function fn_sendFB(sns) {
+        var thisUrl = document.URL;
+        var snsTitle = "2021 웹진 [봄]";
+        if( sns == 'facebook' ) {
+            var url = "http://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(thisUrl);
+            window.open(url, "", "width=486, height=286");
+        }
+        else if( sns == 'twitter' ) {
+            var url = "http://twitter.com/share?url="+encodeURIComponent(thisUrl)+"&text="+encodeURIComponent(snsTitle);
+            window.open(url, "tweetPop", "width=486, height=286,scrollbars=yes");
+        }
+        else if( sns == 'band' ) {
+            var url = "http://www.band.us/plugin/share?body="+encodeURIComponent(snsTitle)+"&route="+encodeURIComponent(thisUrl);
+            window.open(url, "shareBand", "width=400, height=500, resizable=yes");
+        }
+        else if( sns == 'kakao' ) {
+            // 사용할 앱의 JavaScript 키 설정
+            Kakao.init('00357f88543d6b75340e69e7b3972b9d');
+            
+            // 카카오링크 버튼 생성
+            Kakao.Link.createDefaultButton({
+                container: '#btnKakao', // HTML에서 작성한 ID값
+                objectType: 'feed',
+                content: {
+                title: "2021 웹진 [봄]", // 보여질 제목
+                description: "2021 웹진 [봄]", // 보여질 설명
+                imageUrl: thisUrl, // 콘텐츠 URL
+                link: {
+                    mobileWebUrl: thisUrl,
+                    webUrl: thisUrl
+                }
+                }
+            });
+        }
+    }
     
+     
+     
     
     const openchat=()=>{
     	console.log('${result.member.userId}');
@@ -253,4 +313,5 @@
 		};
     
     </script>
+    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

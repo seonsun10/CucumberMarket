@@ -41,7 +41,8 @@ public class SecurityConfig {
 					// /admin 요청에 대해서는 ROLE_ADMIN 역할을 가지고 있어야 함
 //	                .antMatchers("/admin").hasRole("ADMIN")
 	                // 나머지 요청에 대해서는 로그인을 요구하지 않음
-					.antMatchers("/loginpage","/login","/resources/**").permitAll()
+					.antMatchers("/loginpage","/login","/resources/**","/joinForm","/join","/mailCheck","/idCheck","/member/selectNewChatCnt.do",
+							"/member/selectNewNoticeCnt.do").permitAll()
 					.anyRequest().authenticated()
 					                //.anyRequest().permitAll()
 					.and()

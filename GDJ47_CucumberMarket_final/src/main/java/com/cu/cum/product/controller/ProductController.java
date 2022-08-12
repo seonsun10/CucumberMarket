@@ -250,6 +250,8 @@ public class ProductController {
 		int no = Integer.parseInt(request.getParameter("no"));
 		String tag = request.getParameter("tag");
 		String name = request.getParameter("name");
+		String proStatus = request.getParameter("proStatus");
+		String region = request.getParameter("region");
 		System.out.println(id+" "+no+" "+tag);
 		Member m = Member.builder().userId(id).build();
 		Product p = Product.builder().proNo(no).build();
@@ -300,6 +302,8 @@ public class ProductController {
 		request.setAttribute("result", result);
 		request.setAttribute("filename", filename);
 		request.setAttribute("name", name);
+		request.setAttribute("region", region);
+		request.setAttribute("proStatus", proStatus);
 		request.setAttribute("relProduct",relProduct);
 		request.setAttribute("relFilename", relFilename);
 		return "product/productview";

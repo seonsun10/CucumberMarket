@@ -2,6 +2,7 @@ package com.cu.cum.member.model.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -115,9 +116,6 @@ public class MemberServiceImpl implements MemberService {
 	public List<Files> selectUserFiles(String userId) {
 		return fMapper.selectUserFiles(session,userId);
 	}
-
-
-
 	
 	//조회수 up
 	@Override
@@ -132,7 +130,16 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return memberMapper.selectViewCount(writer);
 	}
-	
 
+	//아이디 조회
+	@Override
+	@Transactional
+	public boolean existsByUserId(String userId){
+		
+	    return memberRepository.existsByUserId(userId);
+	}
+	
+	
+	
 	
 }

@@ -94,7 +94,7 @@ div#pro-date{
           <div class="row">
             <div class="col-md-12">
               <div id="main-slider" class="owl-carousel owl-theme">
-                <div class="item"><img src="resources/img/cucumber-banner.jpg" alt="" class="img-fluid" height="1050px"></div>
+                <div class="item" ><img src="resources/img/cucumber-banner.jpg" alt="" class="img-fluid" ></div>
                 <!-- <div class="item"><img src="resources/img/cucumber.png" alt="" class="img-fluid"></div>
                 <div class="item"><img src="resources/img/cucumber.png" alt="" class="img-fluid"></div>
                 <div class="item"><img src="resources/img/cucumber.png" alt="" class="img-fluid"></div> -->
@@ -158,7 +158,7 @@ div#pro-date{
 			<c:if test="${mp ne null }">
 				<c:forEach var="p" items="${mp }" varStatus="status">
 					<div id="pro-box">
-						<a href="${path }/product/productView.do?id=${loginMember.userId}&no=${p.proNo}&tag=${p.categoryName}&name=${p.member.userId}">
+						<a href="${path }/product/productView.do?id=${loginMember.userId}&no=${p.proNo}&tag=${p.categoryName}&name=${p.member.userId}&region=${p.region}&proStatus=${p.proStatus}">
 							<c:forEach var="pf" items="${mpf }">
 							<c:if test="${pf.product.proNo eq p.proNo }">
 							<div id="pro-img">

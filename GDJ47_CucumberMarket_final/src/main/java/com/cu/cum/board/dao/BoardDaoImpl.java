@@ -142,6 +142,23 @@ public class BoardDaoImpl implements BoardDao {
 		int boardId = (int)page.get("boardId");
 		return session.selectList("board.selectboardcommentlist2", boardId, new RowBounds((cPage-1)*numPerpage,numPerpage));
 	}
+	@Override
+	public List<Board> selectpopularlist(SqlSessionTemplate session) {
+		// TODO Auto-generated method stub
+		return session.selectList("board.selectpopularlist");
+	}
+	@Override
+	public int selectBaordRecommendCount(SqlSessionTemplate session, int boardId) {
+		// TODO Auto-generated method stub
+		return session.selectOne("board.selectBaordRecommendCount",boardId);
+	}
+	@Override
+	public List<RecommendList> selectRecommendList(SqlSessionTemplate session, int boardId) {
+		// TODO Auto-generated method stub
+		return session.selectList("board.selectRecommendList",boardId);
+	}
+	
+	
 	
 	
 	

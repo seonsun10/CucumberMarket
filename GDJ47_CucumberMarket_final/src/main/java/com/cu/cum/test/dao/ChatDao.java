@@ -21,8 +21,8 @@ public class ChatDao {
 	public ChatRoom selectChatRoom(SqlSessionTemplate session,ChatRoom c) {
 		return session.selectOne("chatroom.selectchatroom",c);
 	}
-	public int createMessage(SqlSessionTemplate session,String id) {
-		return session.insert("chatroom.insertmessage1",id);
+	public int createMessage(SqlSessionTemplate session,ChatRoom c) {
+		return session.insert("chatroom.insertmessage1",c);
 	}
 	public ChatRoom selectRoomId(SqlSessionTemplate session,String id) {
 		return session.selectOne("chatroom.selectroomid",id);

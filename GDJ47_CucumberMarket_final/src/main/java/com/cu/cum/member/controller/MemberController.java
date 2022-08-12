@@ -1,14 +1,9 @@
 package com.cu.cum.member.controller;
 
 import java.security.Principal;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.ZoneId;
-
-
-
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -39,6 +35,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cu.cum.member.model.service.MailSendService;
 import com.cu.cum.member.model.service.MemberService;
 import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.pagebar.PageBar;
@@ -70,13 +67,15 @@ public class MemberController {
 	@Autowired
 	private ProductService proservice;
 	
+	@Autowired
+	private MailSendService mailService;
 	
 	//메인 페이지 오늘의 추천 상품 리스트 출력
 	@GetMapping({"","/"})
 	public String index(Principal p,Model m) throws ParseException {
 		log.debug("{}",p);
 		//메인 페이지 오늘의 추천 상품 리스트 출력
-		List<Product> mp = proservice.mainProductList();
+		List<Product> mp = proservice.mainProductList(); //썸네일만 나오게 걸림
 		System.out.println("mp : "+mp);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		List days = new ArrayList();
@@ -424,6 +423,38 @@ public class MemberController {
 	public String denine() {
 		return "common/test";
 				
+	}
+	
+	//이메일 인증
+	@GetMapping("/mailCheck")
+	@ResponseBody
+	public String mailCheck(String email) {
+		System.out.println("이메일 인증 요청이 들어옴!");
+		System.out.println("이메일 인증 이메일 : " + email);
+		return mailService.joinEmail(email);
+	}
+	
+	//가입 이메일 확인
+//	@PostMapping("/idCheck")
+//	@ResponseBody
+//	public Member idCheck(@RequestParam("userId") String userId) {
+//		logger.info("userIdCheck 진입");
+//        logger.info("전달받은 userId:"+userId);
+//        Member cnt = service.idCheck(userId);
+//        logger.info("확인 결과:"+cnt);
+//        return cnt;
+//		
+//	}
+	
+	@GetMapping("/idCheck")
+	public ResponseEntity<?> checkIdDuplication(@RequestParam(value = "userId") String userId) throws BadRequestException {
+	    System.out.println(userId);
+
+	    if (service.existsByUserId(userId) == true) {
+	    	throw new BadRequestException("이미 사용중인 아이디 입니다.");
+	    } else {
+	        return ResponseEntity.ok("사용 가능한 아이디 입니다.");
+	    }
 	}
 	
 	

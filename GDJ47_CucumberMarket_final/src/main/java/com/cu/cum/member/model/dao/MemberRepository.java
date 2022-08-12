@@ -26,6 +26,10 @@ public interface MemberRepository extends JpaRepository<Member, String> {
 	
 	
 //	Member saveAndFlush(Member m);
+	
+//	public String idCheck(String userId);
+	
+	boolean existsByUserId(String userId);
 
 	
 	
