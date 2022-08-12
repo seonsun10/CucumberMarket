@@ -20,7 +20,7 @@
               	<c:if test="${product ne null }">
 					<c:forEach var="p" items="${product }" varStatus="status">
 						<div id="pro-box">
-							<a href="${path}/product/productView.do?id=${loginMember.userId}&no=${p.proNo}&tag=${p.categoryName}&name=${p.member.userId}">
+							<a href="${path}/product/productView.do?id=${loginMember.userId}&no=${p.proNo}&tag=${p.categoryName}&name=${p.member.userId}&region=${p.region}&proStatus=${p.proStatus}">
 								<div id="pro-img">
 									<img src="${path }/resources/img/cucumber.png"/>
 								</div>

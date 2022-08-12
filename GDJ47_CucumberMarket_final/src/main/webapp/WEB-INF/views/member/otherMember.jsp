@@ -24,7 +24,7 @@
             </div>
             <div id="customer-orders" class="col-lg-9">
               <div class="box">
-                <h1>내 정보보기</h1>
+                <h1>${writer}</h1>
                 <hr>
                 <div class="table-responsive">
                   <br/>

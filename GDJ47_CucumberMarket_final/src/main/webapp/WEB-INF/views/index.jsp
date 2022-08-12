@@ -158,7 +158,7 @@ div#pro-date{
 			<c:if test="${mp ne null }">
 				<c:forEach var="p" items="${mp }" varStatus="status">
 					<div id="pro-box">
-						<a href="${path }/product/productView.do?id=${loginMember.userId}&no=${p.proNo}&tag=${p.categoryName}&name=${p.member.userId}">
+						<a href="${path }/product/productView.do?id=${loginMember.userId}&no=${p.proNo}&tag=${p.categoryName}&name=${p.member.userId}&region=${p.region}&proStatus=${p.proStatus}">
 							<c:forEach var="pf" items="${mpf }">
 							<c:if test="${pf.product.proNo eq p.proNo }">
 							<div id="pro-img">

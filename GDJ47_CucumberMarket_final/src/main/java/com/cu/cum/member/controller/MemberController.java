@@ -79,7 +79,7 @@ public class MemberController {
 	public String index(Principal p,Model m) throws ParseException {
 		log.debug("{}",p);
 		//메인 페이지 오늘의 추천 상품 리스트 출력
-		List<Product> mp = proservice.mainProductList();
+		List<Product> mp = proservice.mainProductList(); //썸네일만 나오게 걸림
 		System.out.println("mp : "+mp);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		List days = new ArrayList();
