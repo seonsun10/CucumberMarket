@@ -48,6 +48,26 @@ spring:
 #    properties:
 #      hibernate:
 #        format_sql: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: shinedakth@gmail.com
+    password: ekancbdildjukhru
+    properties:
+      mail:
+        smtp:
+          transport:
+            protocol: smtp
+          starttls:
+            enable: true
+            required: true
+          auth: true
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+          ssl:
+            trust: stmp.gmail.com
+            protocols: TLSv1.2
+        debug: true
         
 
 logging:

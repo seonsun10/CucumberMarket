@@ -39,6 +39,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cu.cum.member.model.service.MailSendService;
 import com.cu.cum.member.model.service.MemberService;
 import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.pagebar.PageBar;
@@ -70,6 +71,8 @@ public class MemberController {
 	@Autowired
 	private ProductService proservice;
 	
+	@Autowired
+	private MailSendService mailService;
 	
 	//메인 페이지 오늘의 추천 상품 리스트 출력
 	@GetMapping({"","/"})
@@ -421,5 +424,13 @@ public class MemberController {
 				
 	}
 	
+	//이메일 인증
+	@GetMapping("/mailCheck")
+	@ResponseBody
+	public String mailCheck(String email) {
+		System.out.println("이메일 인증 요청이 들어옴!");
+		System.out.println("이메일 인증 이메일 : " + email);
+		return mailService.joinEmail(email);
+	}
 	
 }
