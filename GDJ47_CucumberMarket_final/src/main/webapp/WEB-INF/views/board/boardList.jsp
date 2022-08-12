@@ -18,6 +18,15 @@
 	margin-top: 20px;
 
 }
+#palert{
+	width:320px;
+	 position: absolute;
+  top:150px; 
+  right: 90px;
+  font-size: 14px;
+  
+
+}
 </style>
  <div id="all">
  	
@@ -45,6 +54,14 @@
                  	</c:forEach>
                  	 
                  	</c:if>
+                  </div>
+                  
+                  <div id="palert">
+                  		<b><i class="bi bi-info-square-fill"></i>&nbsp&nbsp오이마켓 존중문화</b> <br>
+                  		<br>
+					    &nbsp오이마켓의 모든 사용자가 우리 동네 이웃이라는 걸 기억해주세요.<br>
+					    어떠한 상황에서도 우리는 이웃의 다양성을 존중하고, 배려하기로 약속해요.<br>
+						오이마켓은 누구나 존중받는 따뜻한 지역 커뮤니티를 지향하고 있어요.   <br>       
                   </div>
                  <div style='text-align: right'>
            			<p><button class="btn btn-primary" onclick="fn_boardWrite();">글쓰기</button></p>
