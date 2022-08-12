@@ -64,7 +64,7 @@
 									<label for="myCheck${status.index }"></label>
 								</div>
 		              			<div id="wish-pro-img">
-		              				<img src="${path }/resources/img/cucumber.png" width="130px"/>
+		              				<img src="${path }/resources/upload/product/${renames[status.index]}" width="130px"/>
 		              			</div>
 		              			<div id="wish-pro-content">
 			              			<div>
