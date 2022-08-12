@@ -41,7 +41,7 @@
             -->
             <div id="blog-listing" class="col-lg-9">
               <div class="box">
-              
+               
                 <h1>동네 생활</h1>
                 <p>동네 생활에서 다양한 주제로 이야기를 나눠보세요.
                  </p>
@@ -52,17 +52,18 @@
                  	<c:forEach items="${pboard }" var="p" varStatus="status">
                  		<a href="${path }/board/boardinfo.do/${p.boardId}"><p><b> ⊙ ${p.boardTitle } &nbsp <i class="bi bi-hand-thumbs-up-fill"></i>${p.recommendCount}</b></p></a>
                  	</c:forEach>
-                 	 
-                 	</c:if>
-                  </div>
-                  
-                  <div id="palert">
+                 	  <div id="palert">
                   		<b><i class="bi bi-info-square-fill"></i>&nbsp&nbsp오이마켓 존중문화</b> <br>
                   		<br>
 					    &nbsp오이마켓의 모든 사용자가 우리 동네 이웃이라는 걸 기억해주세요.<br>
 					    어떠한 상황에서도 우리는 이웃의 다양성을 존중하고, 배려하기로 약속해요.<br>
 						오이마켓은 누구나 존중받는 따뜻한 지역 커뮤니티를 지향하고 있어요.   <br>       
                   </div>
+                 	</c:if>
+                 	
+                  </div>
+                  
+                 
                  <div style='text-align: right'>
            			<p><button class="btn btn-primary" onclick="fn_boardWrite();">글쓰기</button></p>
            		</div>
