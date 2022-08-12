@@ -19,7 +19,7 @@
 						<td><img src="${path }/resources/img/오이.png" style="width:50px;"></td>
 						<td><c:out value="${c.title }"/></td>
 						<td><c:out value="${c.otherId}"/></td>
-						<td><button onclick="open('${path}/ptestchat.do/${c.roomId }','_blank','width=570,height=640');setTimeout(function(){location.reload()}, 1000);">채팅하기</button>
+						<td><button onclick="open('${path}/ptestchat.do/${c.roomId }','_blank','width=600,height=640');setTimeout(function(){location.reload()}, 1000);">채팅하기</button>
 							<button onclick="location.href='${path}/deletechatroom/${c.roomId }' " >채팅방 삭제</button>
 						</td>
 						<c:if test="${c.unReadCount ne 0 }">
