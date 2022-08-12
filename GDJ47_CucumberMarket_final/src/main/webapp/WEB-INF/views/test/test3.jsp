@@ -242,7 +242,7 @@ $(document).ready(function(){
             	
             	 $('#chatLog').scrollTop($('#chatLog')[0].scrollHeight);
             	 stomp.send('/pub/chat/message', {}, JSON.stringify({roomId: '${room.roomId}', massage: msg.value, userid: '${loginMember.userId}'}));
-            	 event.preventDefault;
+            	 
             	 
             		
                  msg.value = '';
