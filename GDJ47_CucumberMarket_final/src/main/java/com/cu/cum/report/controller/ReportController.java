@@ -56,7 +56,7 @@ public class ReportController {
 		Member loginMember=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		Report r = Report.builder().userId(loginMember).repType(repType).repTitle(repTitle).repContent(repContent).targetId(targetId).build();
-		
+		System.out.println(r);
 		Report rpt = service.insertReport(r);
 		return "redirect:/reportList";
 	}

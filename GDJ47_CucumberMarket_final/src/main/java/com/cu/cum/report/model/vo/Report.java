@@ -42,7 +42,7 @@ public class Report {
 	private String repTitle; // 제목 
 	private String repType; // 신고 유형
 	
-	@Column(name="writeDate", columnDefinition = "date default sysdate not null " )
+	@Column(name="repDate", columnDefinition = "date default sysdate not null " )
 	@Temporal(TemporalType.DATE)
 	private Date repDate; // 신고날짜 
 	
@@ -50,9 +50,7 @@ public class Report {
 	
 	
 	@PrePersist
-	public void perpersist() {
+	public void prepersist() {
 		this.repDate=this.repDate==null?new Date():this.repDate;
 	}
-	
-
 }

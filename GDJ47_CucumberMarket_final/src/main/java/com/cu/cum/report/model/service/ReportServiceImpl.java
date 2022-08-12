@@ -5,10 +5,12 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.cu.cum.report.model.dao.ReportDao;
 import com.cu.cum.report.model.vo.Report;
 
+@Service
 public class ReportServiceImpl implements ReportService {
 
 	@Autowired

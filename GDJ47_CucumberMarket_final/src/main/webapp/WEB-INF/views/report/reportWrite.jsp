@@ -75,6 +75,7 @@
                           		<option value="도배">도배</option>
                           		<option value="음란성">음란성</option>
                           		<option value="종교및정치적발언">종교및정치적발언</option>
+                          		<option value="기타">기타</option>
                         	</select>
                         </div>
                       </div>
@@ -98,8 +99,8 @@
                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">
-                          <label for="repCotent">신고 내용</label>
-                          <textarea name="repCotent" id="repCotent" rows="4" class="form-control"></textarea>
+                          <label for="repContent">신고 내용</label>
+                          <textarea name="repContent" id="repCotent" rows="4" class="form-control"></textarea>
                         </div>
                       </div>
                     </div>
