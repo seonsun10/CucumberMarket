@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>	
 <script src="${path}/resources/vendor/jquery/jquery.min.js"></script>
+<input id="page" type="hidden" value="Product"/>
     <div id="all">
       <div id="content">
         <div class="container">
@@ -80,7 +82,7 @@
 			  	</div>
 			  <div>
 			  <div id="myList">
-			  	<p id="protag">상품</p>
+			  	<p id="protag" style="background-color:rgb(229,229,229)">상품</p>
 			  	<p id="reviewtag">후기</p>
 			  	<p id="dibstag">찜</p>
 			  	<p id="reporttag">신고</p>
@@ -88,11 +90,66 @@
 			  	<input id="userIdd" type="hidden" value="${loginMember.userId }"/>
 			  </div>
 			  <br/>
-			  
+			  	
                </div>
               
               <!-- 여기 이제 분기처리 해야함 등록한 상품이없으면 안보이게 -->
               <div id="databox" class="col-lg-9 box " style="max-width:100%;">
+              	<div id="pro-head"> 
+					<div id="pro-left">
+						상품&nbsp;
+						<c:if test="${productCount ne null }">
+							<span>
+								<c:out value="${productCount }"/>
+							</span>
+						</c:if>	
+						<c:if test="${productCount eq null }">
+							<span>
+								0
+							</span>
+						</c:if>
+					</div>
+					<div id="pro-right">
+						<select id="listOption">
+							<option>최신순</option>
+							<option>오래된 순</option>
+							<option>조회순</option>
+						</select>
+					</div>
+				</div>
+				<div id="pro-body">
+					<table>
+						<tr id="tablehead">
+							<th>사진</th>
+							<th>제목</th>
+							<th>가격</th>
+							<th>최근수정일</th>
+							<th>삭제</th>
+						</tr> 
+							<c:if test="${products ne null}">
+								<c:forEach var="p" items="${products}">
+										<tr id="tablebody">
+											<c:forEach var="pp" items="${pp }">
+												<c:if test="${pp.product.proNo eq p.proNo}">
+													<td><a href="${path }/product/productView.do?id=${loginMember.userId}&no=${p.proNo}&tag=${p.categoryName}&name=${p.member.userId}"><img src="${path }/resources/upload/product/${pp.renameFilename}" style="width:50px;"></a></td>
+										 		</c:if>
+											</c:forEach>
+											
+											<td onclick="location.assign('${path}/product/productView.do?id=${loginMember.userId}&no=${p.proNo}&tag=${p.categoryName}&name=${p.member.userId}')"><c:out value="${p.title}"/></td>
+											<td onclick="location.assign('${path}/product/productView.do?id=${loginMember.userId}&no=${p.proNo}&tag=${p.categoryName}&name=${p.member.userId}')"><c:out value="${p.price }"/>원</td>
+											<td><fmt:formatDate value="${p.enrollDate}" pattern="yyyy-MM-dd"/></td>
+											<td id="deleteBtn"><button onclick="location.assign('${path}/product/deleteProduct.do?proNo=${p.proNo }&userId=${loginMember.userId}')">삭제</button></td>
+										</tr>
+								</c:forEach>
+							</c:if>
+							<c:if test="${products eq null }">
+								<tr>
+									<td colspan="5">등록된 상품이 없습니다.</td>
+								</tr>
+							</c:if>
+					</table>
+				</div>
+				<div id="pageBar"><c:out value="${pageBar }" escapeXml="false"/></div>
               </div>
             </div>
           </div>

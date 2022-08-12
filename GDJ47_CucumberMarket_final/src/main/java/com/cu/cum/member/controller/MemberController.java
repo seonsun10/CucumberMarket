@@ -39,6 +39,7 @@ import com.cu.cum.member.model.service.MailSendService;
 import com.cu.cum.member.model.service.MemberService;
 import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.pagebar.PageBar;
+import com.cu.cum.pagebar.PageBarBasic;
 import com.cu.cum.product.model.service.ProductService;
 import com.cu.cum.product.model.vo.Files;
 import com.cu.cum.product.model.vo.Product;
@@ -154,9 +155,36 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/member/mypage.do")
-	public String myPage(@RequestParam String userId, Model m) {
+	public String myPage(@RequestParam(defaultValue="1") int cPage,
+							@RequestParam(defaultValue="5") int numPerpage,
+							HttpServletRequest request,
+							Model m) {
+		String userId= ((Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
 		m.addAttribute("userId",userId);
 		int productCount = proservice.selectProductCount(userId);
+		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"userId",userId);
+		List<Product> products=proservice.selectProductList(page);
+		//log.debug("{}",p1.getFiles().get(0).getRenameFilename());
+		String url=request.getRequestURI();
+		Member loginMember=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		System.out.println("유저가 가지고 있는 상품 목록 : "+products);
+		System.out.println(products.size());
+
+		
+		List<Files> pp = service.selectUserFiles(userId);//db거쳐서 회원이 가진 모든 파일 가져오기;
+		System.out.println("유저가 가지고 잇는 상품 대표이미지 : "+pp);
+		
+
+//		List<Product> list=dao.findAllByMember(loginMember);
+		//페이징처리 jpa
+		//List<Product> list2=dao.findAll(PageRequest.of(0,5,Sort.by("enrollDate").descending())).getContent();
+		//list2=list2.stream().filter(v -> v.getMember().equals(loginMember)).collect(Collectors.toList());
+		
+		
+		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage , productCount, url));
+		m.addAttribute("products",products);
+		m.addAttribute("pp",pp);
 		m.addAttribute("solveCount",proservice.selectSolveCount(userId));
 		m.addAttribute("productCount",productCount);
 		m.addAttribute("viewCount",service.selectViewCount(userId));

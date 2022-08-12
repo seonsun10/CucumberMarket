@@ -47,7 +47,7 @@
 					조회된 결과가 없습니다.
 				</c:if>
               </div>
-              <c:if test="${productCount > 40 }">
+              <c:if test="${productCount > 200 }">
 	              <div style="text-align:center">
 	              	<button type="button" id="more-box">더보기</button>
 	              </div>
