@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
@@ -310,10 +312,41 @@
               </div>
               <div id="search-not-mobile" class="navbar-collapse collapse">
                  <a href="${path }/faqList" class="btn btn-primary navbar-btn"> FAQ</a>
+				</div>
+             
+          			
+					<c:choose>
+					<c:when test="${ loginMember != null}">
 
-                 
-
-              </div>
+	              		<div id="search-not-mobile" class="navbar-collapse collapse">
+				  			<a class="nav-link py-0" href="${path }/member/mypageChat">
+					  			<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chat-text " fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+						  			<path fill-rule="evenodd" d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z"></path>
+						  			<path fill-rule="evenodd" d="M4 5.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8zm0 2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5z"></path>
+								</svg>
+							</a>
+							<span id="newChatCnt" class="badge badge-pill badge-primary"></span>
+						</div>
+				
+			
+					
+			
+      					<div id="search-not-mobile" class="navbar-collapse collapse">
+		       				<a class="nav-link py-0" href="${path }/member/notify.do">
+				       			<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bell" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+									<path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2z"/>
+							  		<path fill-rule="evenodd" d="M8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
+								</svg>
+							<span id="newNoticeCnt" class="badge badge-pill badge-primary"></span>
+							</a>
+	      				</div>
+	      		
+	      			</c:when>
+					<c:otherwise>
+					
+					</c:otherwise>
+					</c:choose>
+              
            
               </div>
             </div>
@@ -333,6 +366,9 @@
         </div>
       </div>
 </header>
+
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+
 <script>
 function fn_area() {
     window.open(
@@ -341,4 +377,76 @@ function fn_area() {
       "width=800, height=600, top=100, left=600"
     );
   }
+  
+	// 웹소켓 연결
+	
+   
+    const id='${loginMember.userId}';
+   
+	
+	$(document).ready(function(){
+		 sock = new SockJS("<c:url value="/ws/chat"/>");
+		 socket = sock;
+
+		// 데이터를 전달 받았을때 
+		sock.onmessage = onMessage;
+		
+		
+       	//setinterval
+       	setInterval(chatCall, 300);
+    	setInterval(alertCall, 300);
+       	// 채팅 카운트 받아오기
+       	function chatCall(){
+	   		$.ajax({
+	               type: "post",
+	               async: "true",
+	               dataType: "text",
+	               data: {
+	            	   userId: '${loginMember.userId}' //data로 넘겨주기
+	               },
+	               url: "${path }/member/selectNewChatCnt.do",
+	               success: function (data, textStatus) {
+	            	   if(data!='0'){
+			       			$("#newChatCnt").text(data);
+	            	   }
+	               }
+	   			
+			});
+		}
+		
+   		// 알림 카운트 받아오기
+   		function alertCall(){
+   	   		$.ajax({
+   	               type: "post",
+   	               async: "true",
+   	               dataType: "text",
+   	               data: {
+   	            	   userId: '${loginMember.userId}' //data로 넘겨주기
+   	               },
+   	               url: "${path }/member/selectNewNoticeCnt.do",
+   	               success: function (data, textStatus) {
+   	            	   if(data!='0'){
+   			       			$("#newNoticeCnt").text(data);
+   	            	   }
+   	               }
+   			});
+   		}
+	});
+   	
+   	// 실시간 알림 받았을 시 ing
+	function onMessage(evt){
+		var data = evt.data;
+		// toast
+		let toast = "<div class='toast' role='alert' aria-live='assertive' aria-atomic='true'>";
+		toast += "<div class='toast-header'><i class='fas fa-bell mr-2'></i><strong class='mr-auto'>알림</strong>";
+		toast += "<small class='text-muted'></small><button type='button' class='ml-2 mb-1 close' data-dismiss='toast' aria-label='Close'>";
+		toast += "<span aria-hidden='true'>&times;</span></button>";
+		toast += "</div> <div class='toast-body'>" + data + "</div></div>";
+		$("#msgStack").append(toast);
+		$(".toast").toast({"animation": true, "autohide": false});
+// 		$(".toast").toast({"animation": true, "autohide": true, "delay": 5000});
+		$('.toast').toast('show');
+		// 알림 카운트 추가
+		$("#newChatCnt").text($("#newChatCnt").text()*1+1);
+	};	
 </script>
