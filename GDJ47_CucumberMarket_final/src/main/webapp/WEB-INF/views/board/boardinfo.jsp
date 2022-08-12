@@ -111,7 +111,15 @@
             <div id="blog-post" class="col-lg-9">
               <div class="box">
                 <h1>${board.boardTitle }</h1>
-                <p class="author-date">By &nbsp<a href="${path }/member/otherMember.do?writer=${board.userId }&customer=${loginMember.userId}">${board.userId } &nbsp &nbsp</a>${board.createDate } <a href ="#" id="btn-modal"> &nbsp&nbsp &nbsp&nbsp <i class="bi bi-hand-thumbs-up-fill"></i> :&nbsp ${board.recommendCount }&nbsp 개</a></p>
+                <p class="author-date">By &nbsp
+                <c:if test="${board.userId ne loginMember.userId }">
+                    <a href="${path }/member/otherMember.do?writer=${b.userId }&customer=${loginMember.userId}">${board.userId }</a>&nbsp&nbsp
+                 </c:if>
+                 <c:if test="${board.userId eq loginMember.userId }">
+                    <a href="${path }/member/mypage.do?userId=${loginMember.userId}">${board.userId }</a>&nbsp&nbsp
+                 </c:if>
+                
+                ${board.createDate } <a href ="#" id="btn-modal"> &nbsp&nbsp &nbsp&nbsp <i class="bi bi-hand-thumbs-up-fill"></i> :&nbsp ${board.recommendCount }&nbsp 개</a></p>
                 <p class="lead"># ${board.boardCategory }</p>
                 <div id="post-content">
      					<p>${board.boardContent }</p>

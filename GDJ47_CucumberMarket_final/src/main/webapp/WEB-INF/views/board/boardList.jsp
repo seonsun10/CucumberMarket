@@ -58,7 +58,17 @@
               	 <div class="post" id="databox">
               	 
                 <h2><a href="${path }/board/boardinfo.do/${b.boardId}">${b.boardTitle }</a></h2>
-                <p class="author-category">작성자 <a href="${path }/member/otherMember.do?writer=${b.userId }&customer=${loginMember.userId}">${b.userId }</a>  &nbsp <a href="${path }/board/boardlist.do/${b.boardCategory eq '동네 분실/실종센터'?'실종센터':b.boardCategory}">#${b.boardCategory }</a>&nbsp&nbsp  <a> <i class="bi bi-hand-thumbs-up-fill"></i> : ${b.recommendCount }&nbsp 개</a></p>
+                <p class="author-category">작성자 
+                  <c:if test="${b.userId ne loginMember.userId }">
+                    <a href="${path }/member/otherMember.do?writer=${b.userId }&customer=${loginMember.userId}">${b.userId }</a>
+                  </c:if>
+                  <c:if test="${b.userId eq loginMember.userId }">
+                    <a href="${path }/member/mypage.do?userId=${loginMember.userId}">${b.userId }</a>
+                  </c:if>
+               
+                
+                
+                  &nbsp <a href="${path }/board/boardlist.do/${b.boardCategory eq '동네 분실/실종센터'?'실종센터':b.boardCategory}">#${b.boardCategory }</a>&nbsp&nbsp  <a> <i class="bi bi-hand-thumbs-up-fill"></i> : ${b.recommendCount }&nbsp 개</a></p>
                 <hr>
                 <p class="date-comments"><a href=""><i class="fa fa-calendar-o"></i> ${b.createDate }</a><a href=""><i class="fa fa-comment-o"></i>  Comments &nbsp [ ${b.count } ]</a></p>
                 
