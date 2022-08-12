@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" /> -->
@@ -55,26 +56,35 @@
 										<th>번호</th>
 										<th>신고자 아이디</th>
 	                          			<th colspan=2>제목</th>
-										<th>신고 회원</th>
+										<th>신고대상 아이디</th>
 										<th>등록일</th>
+										<th>삭제</th>
 	                        		</tr>
 	                      		</thead>
 								<tbody>
+								<c:if test="${not empty report }">
+								<c:forEach items="${report }" var="r">
 		                        	<tr>
-		                          		<td>1</td>
-		                          		<td>goodee</td>
+		                          		<td><c:out value="${r.repNo}"/></td>
+		                          		<td><c:out value="${r.userId.userId }"/></td>
 		                          		<td colspan=2>
-		                          			<a href="${pageContext.request.contextPath }/reportView">
-												사기꾼 좀 잡아라!
-											</a>
+		                          			<a href="${pageContext.request.contextPath }/reportView"><c:out value="${r.repTitle}"/></a>
 		                          		</td>
-		                          		<td>Nohongchul</td>
-		                          		<td>2022.07.29</td>
+		                          		<td><c:out value="${r.targetId}"/></td>
+		                          		<td><fmt:formatDate value="${r.repDate}" pattern="yyyy-MM-dd"/></td>
+		                          		<td><a href=""><i class="fa fa-trash-o"></i></a></td>
 		                        	</tr>
+		                        	</c:forEach>
+		                        	</c:if>
+		                        	<c:if test="${empty report }">
+						            	<tr>
+						            		<td colspan="7" align="center">조회 결과 없음</td>
+						            	</tr>
+						            </c:if>
 	                      		</tbody>
                    		 	</table>
 							</div>
-                    		<nav aria-label="Page navigation example" class="d-flex justify-content-center">
+                    		<!-- <nav aria-label="Page navigation example" class="d-flex justify-content-center">
 	                  			<ul class="pagination">
 	                    			<li class="page-item"><a href="#" aria-label="Previous" class="page-link"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>
 	                    			<li class="page-item active"><a href="#" class="page-link">1</a></li>
@@ -84,8 +94,9 @@
 	                    			<li class="page-item"><a href="#" class="page-link">5</a></li>
 	                    			<li class="page-item"><a href="#" aria-label="Next" class="page-link"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>
 								</ul>
-							</nav>
+							</nav> -->
 						</div>
+							<div id="pageBar"><c:out value="${pageBar }" escapeXml="false"/></div>
 						<!-- /.accordion-->
 					</div>
 				</div>

@@ -115,7 +115,6 @@ public class InquiryController {
 		model.addObject("totalData", totalData);
 		//System.out.println(list);
 		model.setViewName("inquiry/inquiryList");
-		System.out.println(list);
 		return model;
 	}
 

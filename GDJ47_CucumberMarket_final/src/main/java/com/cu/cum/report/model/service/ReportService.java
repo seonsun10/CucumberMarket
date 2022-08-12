@@ -19,7 +19,8 @@ public interface ReportService {
 	// 신고글 전체 조회
 	List<Report> selectReportList(Map param);  // 페이징 포함
 	
-	
+	// 신고 글 개수
+	int selectReportCount();
 	
 	// 신고글(작성자)로 검색
 	List<Report> searchReport(String keyword);

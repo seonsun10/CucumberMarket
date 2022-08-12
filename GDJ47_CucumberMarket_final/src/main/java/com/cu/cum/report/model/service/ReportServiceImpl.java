@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cu.cum.report.model.dao.ReportDao;
+import com.cu.cum.report.model.dao.ReportMapperDao;
 import com.cu.cum.report.model.vo.Report;
 
 @Service
@@ -15,6 +16,9 @@ public class ReportServiceImpl implements ReportService {
 
 	@Autowired
 	private ReportDao dao;
+	
+	@Autowired
+	private ReportMapperDao rmdao;
 	
 	@Autowired
 	private SqlSessionTemplate session;
@@ -29,13 +33,19 @@ public class ReportServiceImpl implements ReportService {
 	@Override
 	public List<Report> selectReportList(Map param) {
 		// TODO Auto-generated method stub
-		return null;
+		return rmdao.selectReportList(session, param);
 	}
 
 	@Override
 	public List<Report> searchReport(String keyword) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int selectReportCount() {
+		// TODO Auto-generated method stub
+		return rmdao.selectReportCount(session);
 	}
 
 }

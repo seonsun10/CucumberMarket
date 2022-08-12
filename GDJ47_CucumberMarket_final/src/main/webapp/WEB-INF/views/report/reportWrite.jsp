@@ -45,7 +45,7 @@
               <div class="banner"><a href="#"><img src="/resources/img/cucumber.png" alt="" class="img-fluid"></a></div>
             </div>
             <div class="col-lg-9">
-				<div id="comment-form">
+				
                   <h4>신고글 작성</h4>
                   <form action="${pageContext.request.contextPath }/report/insertReport.do" method="post">
                     <div class="row">
@@ -112,7 +112,7 @@
                       </div>
                     </div>
                   </form>
-                </div>
+                
                 <br>
             <!-- /.col-lg-9-->
           </div>
