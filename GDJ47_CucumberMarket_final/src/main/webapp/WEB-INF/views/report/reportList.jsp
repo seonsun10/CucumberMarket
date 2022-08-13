@@ -40,12 +40,21 @@
             		</div>
             		<div class="col-lg-9">
                   		<div class="table-responsive">
+                  		<form action="${pageContext.request.contextPath }/searchReport.do" method="post">
                   			<div class="input-group">
-              					<input type="text" placeholder="Search" class="form-control">
+                  				<div class="products-sort-by mt-2 mt-lg-0">
+                        			<select name="searchType" class="form-control">
+                          				<option value="reportTitle" selected>제목</option>
+                          				<option value="reportType">신고 유형</option>
+                        			</select>
+                     			 </div>
+              					<input name="keyword" type="text" placeholder="욕설/사기/도배/음란성/종교및정치적발언/기타 " class="form-control">
 				              	<div class="input-group-append">
-				                <button type="button" class="btn btn-primary"><i class="fa fa-search"></i></button>
+				                	<button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
 								<%-- <a href="${pageContext.request.contextPath }/reportWrite" class="btn btn-primary navbar-btn"><span>신고글 작성</span></a> --%>
+				              	</div>
 				              </div>
+				              </form>
 							<%-- <div class="input-group-append">
 								<a href="${pageContext.request.contextPath }/reportWrite" class="btn btn-primary navbar-btn"><span>신고글 작성</span></a>
 				        	</div> --%>
@@ -54,6 +63,7 @@
 	                      		<thead>
 	                        		<tr>
 										<th>번호</th>
+										<th>신고 유형</th>
 										<th>신고자 아이디</th>
 	                          			<th colspan=2>제목</th>
 										<th>신고대상 아이디</th>
@@ -66,13 +76,14 @@
 								<c:forEach items="${report }" var="r">
 		                        	<tr>
 		                          		<td><c:out value="${r.repNo}"/></td>
+		                          		<td><c:out value="${r.repType}"/></td>
 		                          		<td><c:out value="${r.userId.userId }"/></td>
 		                          		<td colspan=2>
 		                          			<a href="${pageContext.request.contextPath }/reportView/${r.repNo}"><c:out value="${r.repTitle}"/></a>
 		                          		</td>
 		                          		<td style="color:red"><c:out value="${r.targetId}"/></td>
 		                          		<td><fmt:formatDate value="${r.repDate}" pattern="yyyy-MM-dd"/></td>
-		                          		<td><a href=""><i class="fa fa-trash-o"></i></a></td>
+		                          		<td><a href="${pageContext.request.contextPath }/deleteReport/${r.repNo}"><i class="fa fa-trash-o"></i></a></td>
 		                        	</tr>
 		                        	</c:forEach>
 		                        	</c:if>
@@ -83,28 +94,16 @@
 						            </c:if>
 	                      		</tbody>
                    		 	</table>
-							</div>
-                    		<!-- <nav aria-label="Page navigation example" class="d-flex justify-content-center">
-	                  			<ul class="pagination">
-	                    			<li class="page-item"><a href="#" aria-label="Previous" class="page-link"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>
-	                    			<li class="page-item active"><a href="#" class="page-link">1</a></li>
-	                    			<li class="page-item"><a href="#" class="page-link">2</a></li>
-	                    			<li class="page-item"><a href="#" class="page-link">3</a></li>
-	                    			<li class="page-item"><a href="#" class="page-link">4</a></li>
-	                    			<li class="page-item"><a href="#" class="page-link">5</a></li>
-	                    			<li class="page-item"><a href="#" aria-label="Next" class="page-link"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>
-								</ul>
-							</nav> -->
-						</div>
 							<div id="pageBar"><c:out value="${pageBar }" escapeXml="false"/></div>
+							</div>
+						</div>
 						<!-- /.accordion-->
 					</div>
 				</div>
 				<!-- /.col-lg-9-->
 			</div>
 		</div>
-	</div>
-</div>
+
 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

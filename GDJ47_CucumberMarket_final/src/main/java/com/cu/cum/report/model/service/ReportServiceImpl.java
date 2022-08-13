@@ -56,6 +56,31 @@ public class ReportServiceImpl implements ReportService {
 		// TODO Auto-generated method stub
 		return dao.findByRepNo(repNo);
 	}
+	
+	// 신고글 삭제
+	@Override
+	public int deleteReport(int id) {
+		// TODO Auto-generated method stub
+		return rmdao.deleteReport(session, id);
+	}
+	
+	// 신고글 제목으로 검색
+	@Override
+	public List<Report> searchReportTitle(String keyword) {
+		// TODO Auto-generated method stub
+		return dao.findByrepTitleContaining(keyword);
+	}
+	
+	// 신고글 사유로 검색
+	@Override
+	public List<Report> searchReportType(String keyword) {
+		// TODO Auto-generated method stub
+		return dao.findByrepTypeContaining(keyword);
+	}
+	
+	
+	
+	
 
 	
 }

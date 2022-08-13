@@ -1,7 +1,10 @@
 package com.cu.cum.report.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -81,6 +84,35 @@ public class ReportController {
 		model.addObject("report", report);
 		model.addObject("pageBar", PageBarBasic.getPageBar(cPage, numPerpage, totalData, "reportList"));
 		model.addObject("totalData", totalData);
+		model.setViewName("report/reportList");
+		//System.out.println(report);
+		return model;
+	}
+	
+	// 신고글 삭제 
+	@RequestMapping("/deleteReport/{id}")
+	public String deleteReport(Report report, @PathVariable int id, HttpSession session) {
+		
+		report.setUserId((Member)session.getAttribute("loginMember"));
+		int rep = service.deleteReport(id);
+		
+		return "redirect:/reportList";
+	}
+	
+	// 신고글 검색
+	@RequestMapping("/searchReport.do")
+	public ModelAndView searchReport(@RequestParam("searchType") String searchType, String keyword, ModelAndView model) {
+		log.debug(searchType);
+		List<Report> report = new ArrayList();
+		if(searchType.equals("reportTitle")) {
+			// 제목으로 검색
+			report = service.searchReportTitle(keyword);
+		}else if(searchType.equals("reportType")) {
+			// 사유로 검색
+			report = service.searchReportType(keyword);
+		}
+		
+		model.addObject("report", report);
 		model.setViewName("report/reportList");
 		System.out.println(report);
 		return model;

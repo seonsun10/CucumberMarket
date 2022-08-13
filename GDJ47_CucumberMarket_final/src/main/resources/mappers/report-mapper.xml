@@ -22,4 +22,9 @@
 	<select id="selectReportCount" resultType="_int">
 		SELECT COUNT(*) FROM REPORT
 	</select>
+	
+	<!--신고글 삭제 -->
+	<delete id="deleteReport" parameterType="Report">
+		DELETE FROM REPORT WHERE REP_NO=#{repNo}
+	</delete>
 </mapper>

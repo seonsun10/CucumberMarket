@@ -23,5 +23,10 @@ public class ReportMapperDao {
 	public int selectReportCount(SqlSessionTemplate session) {
 		return session.selectOne("report.selectReportCount");
 	}
+	
+	// 신고글 삭제 
+	public int deleteReport(SqlSessionTemplate session, int id) {
+		return session.delete("report.deleteReport",id);
+	}
 
 }

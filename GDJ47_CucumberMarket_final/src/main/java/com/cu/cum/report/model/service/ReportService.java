@@ -28,5 +28,14 @@ public interface ReportService {
 	// 신고글 상세정보
 	Report selectReport(int repNo);
 	
+	// 신고글 삭제
+	int deleteReport(int id);
+	
+	// 신고 글 제목으로 검색
+	List<Report> searchReportTitle(String keyword);
+	
+	// 신고글 사유로 검색
+	List<Report> searchReportType(String keyword);
+	
 	
 }
