@@ -385,25 +385,18 @@ function fn_area() {
 
 	
    
-    const id='${loginMember.userId}';
+  
     //채팅 메시지 눌럿을때
      	
 			// 웹소켓 연결
 	
-	$(document).ready(function(){
-		 sock = new SockJS("<c:url value="/ws/chat"/>");
-		 socket = sock;
-
 		// 데이터를 전달 받았을때 
-		sock.onmessage = onMessage;
 		
 		//채팅 메시지 눌럿을때
 		
 		
 		
        	//setinterval
-       	setInterval(chatCall, 300);
-    	setInterval(alertCall, 300);
        	// 채팅 카운트 받아오기
        	function chatCall(){
 	   		$.ajax({
