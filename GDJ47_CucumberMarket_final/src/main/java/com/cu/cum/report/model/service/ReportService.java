@@ -37,5 +37,11 @@ public interface ReportService {
 	// 신고글 사유로 검색
 	List<Report> searchReportType(String keyword);
 	
+	// 마이페이지 신고글 목록
+	List<Report> mypageReportList(Map param, Report r);
+	
+	// 마이페이지 신고글 개수 
+	int mypageReportCount();
+	
 	
 }

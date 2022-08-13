@@ -27,4 +27,14 @@
 	<delete id="deleteReport" parameterType="Report">
 		DELETE FROM REPORT WHERE REP_NO=#{repNo}
 	</delete>
+	
+	
+	<!-- 마이페이지 신고글   -->
+	
+	<select id="mypageReportList" resultMap="reportMap">
+		SELECT * FROM REPORT WHERE USERID=#{userId} ORDER BY REP_DATE DESC
+	</select>
+	<select id="mypageReportCount" resultType="_int">
+		SELECT COUNT(*) FROM REPORT 
+	</select>
 </mapper>

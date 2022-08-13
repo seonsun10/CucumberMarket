@@ -17,30 +17,30 @@
 			</span>
 		</c:if>
 	</div>
-	<div id="pro-right">
+<!-- 	<div id="pro-right">
 		<select id="listOption">
 			<option>1</option>
 			<option>2</option>
 			<option>3</option>
 		</select>
-	</div>
+	</div> -->
 </div>
 <div id="pro-body">
 	<table>
 		<tr id="tablehead">
 			<th>번호</th>
-			<th>제목</th>
 			<th>신고 유형</th>
-			<th>신고당한 아이디</th>
+			<th>제목</th>
+			<th>신고 아이디</th>
 			<th>신고 날짜</th>
 		</tr>
 			<c:if test="${report ne null}">
 				<c:forEach var="r" items="${report }">
 					<tr id="tablebody">
 						<td><c:out value="${r.repNo }"/></td>
-						<td><c:out value="${r.repTitle }"/></td>
 						<td><c:out value="${r.repType }"/></td>
-						<td><c:out value="${r.repType }"/></td>
+						<td><a href="${pageContext.request.contextPath }/mypagereportView/${r.repNo}"><c:out value="${r.repTitle}"/></a></td>
+						<td><c:out value="${r.targetId }"/></td>
 						<td><fmt:formatDate value="${r.repDate}" pattern="yyyy-MM-dd"/></td>
 						
 					</tr>

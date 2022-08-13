@@ -114,8 +114,11 @@ public class ReportController {
 		
 		model.addObject("report", report);
 		model.setViewName("report/reportList");
-		System.out.println(report);
+		// System.out.println(report);
 		return model;
 	}
+	
+	
+
 
 }

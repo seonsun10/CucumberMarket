@@ -77,6 +77,18 @@ public class ReportServiceImpl implements ReportService {
 		// TODO Auto-generated method stub
 		return dao.findByrepTypeContaining(keyword);
 	}
+	@Override
+	public List<Report> mypageReportList(Map param, Report r) {
+		// TODO Auto-generated method stub
+		return rmdao.mypageReportList(session, param, r);
+	}
+	@Override
+	public int mypageReportCount() {
+		// TODO Auto-generated method stub
+		return rmdao.mypageReportCount(session);
+	}
+	
+	
 	
 	
 	

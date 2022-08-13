@@ -28,5 +28,15 @@ public class ReportMapperDao {
 	public int deleteReport(SqlSessionTemplate session, int id) {
 		return session.delete("report.deleteReport",id);
 	}
+	// 마이페이지 신고글 페이징 처리 및 리스트 출력
+	public List<Report> mypageReportList(SqlSessionTemplate session, Map param, Report r){
+		int offset = (int)param.get("cPage");
+		int limit = (int)param.get("numPerpage");
+		return session.selectList("report.mypageReportList",r.getUserId(), new RowBounds((offset-1)*limit, limit));
+	}
+	
+	public int mypageReportCount(SqlSessionTemplate session) {
+		return session.selectOne("report.mypageReportCount");
+	}
 
 }
