@@ -33,7 +33,7 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
         
    <script src="https://kit.fontawesome.com/e4c89f4cce.js" crossorigin="anonymous"></script>
-    
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     
   </head>
   <body>

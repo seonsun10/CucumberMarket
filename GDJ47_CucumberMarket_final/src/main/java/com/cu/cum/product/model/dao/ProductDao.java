@@ -29,6 +29,7 @@ public interface ProductDao extends JpaRepository<Product,Integer>,
 	
 	Product saveAndFlush(Product p); //주객체 
 	
+	
 
 
 	

@@ -33,6 +33,7 @@
 			<th>제목</th>
 			<th>가격</th>
 			<th>최근수정일</th>
+			<th>수정</th>
 			<th>삭제</th>
 		</tr>
 			<c:if test="${products ne null}">
@@ -49,6 +50,7 @@
 						<td><c:out value="${p.title}"/></td>
 						<td><c:out value="${p.price }"/>원</td>
 						<td><fmt:formatDate value="${p.enrollDate}" pattern="yyyy-MM-dd"/></td>
+						<td><button onclick="location.assign('${path}/product/updateProductStart.do?proNo=${p.proNo }&userId=${loginMember.userId}')">수정</button></td>
 						<td><button onclick="location.assign('${path}/product/deleteProduct.do?proNo=${p.proNo }&userId=${loginMember.userId}')">삭제</button></td>
 					</tr>
 				</c:forEach>
