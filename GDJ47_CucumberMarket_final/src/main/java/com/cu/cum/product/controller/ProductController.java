@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.product.model.service.FilesService;
@@ -58,7 +59,7 @@ public class ProductController {
 			@RequestParam("sido1") String sido, @RequestParam("gugun1") String gugun,
 			@RequestParam("proContent") String proContent,
 			@RequestParam("tag") String tag , @RequestParam(name="proStatus" , required = false) String proStatus,
-			@RequestParam(name="price") int price , @RequestParam(name="userId") String userId, HttpServletRequest rs) {
+			@RequestParam(name="price") int price , @RequestParam(name="userId") String userId, HttpServletRequest rs, Model model) {
 		//String userId = "admin@naver.com"; //나중엔 세션값으로 email 불러와야함
 		//String userId = email.substring(0, email.indexOf("@"));
 		//파일제외 나머지 insert문
@@ -135,8 +136,8 @@ public class ProductController {
 
 		List<Files> f = fService.insertFiles(files);
 		System.out.println(f);
-		
-		return "redirect:/mypage.do";
+		model.addAttribute("userId",userId);
+		return "redirect:/member/mypage.do";
 	}
 	
 	//거래 후기
@@ -188,7 +189,7 @@ public class ProductController {
 			if(f.exists()) f.delete();
 		}
 		try {
-			service.deleteProduct(proNo);
+			List<Product> result=service.deleteProduct(proNo);
 			m.addAttribute("msg","삭제 성공");
 		}catch(Exception e) {
 			m.addAttribute("msg","삭제 실패");
@@ -208,14 +209,25 @@ public class ProductController {
 								Model m) throws Exception{
 		System.out.println(tag);
 		List<Product> products = service.findAllByCategoryName(PageRequest.of((cPage-1)*numPerpage, numPerpage,Sort.by("enrollDate").descending()), tag);
-		List daylist = new ArrayList();
-		for(int i=0; i<products.size(); i++) {
+		List<Long> daylist = new ArrayList();
+		List<Files> tfn = new ArrayList();
+//		pro_no=일치 and thumbnail_status='y';
+		List<String> renames = new ArrayList();
+		for(Product p : products) {
 	       LocalDate today=LocalDate.now();
-	       LocalDate targetDay=new java.sql.Date(products.get(i).getEnrollDate().getTime()).toLocalDate();
+	       LocalDate targetDay=new java.sql.Date(p.getEnrollDate().getTime()).toLocalDate();
 	       Long day= ChronoUnit.DAYS.between(today, targetDay);
 	       log.debug("{}",Math.abs(day));
 	       daylist.add(Math.abs(day));
+	       tfn.addAll(p.getFiles());
 	    }
+		for(Files f : tfn) {
+			if(f.getRenameFilename().contains("s_")) {
+				renames.add(f.getRenameFilename());
+			}
+		}
+		System.out.println(renames);
+		m.addAttribute("renames",renames);
 		m.addAttribute("productCount",service.selectCategoryCount(tag));
 		m.addAttribute("product",products);
 		m.addAttribute("tag",tag);
@@ -297,6 +309,7 @@ public class ProductController {
 		return "product/productview";
 	}
 	
+
 	@RequestMapping("/product/updateProductStart.do")
 	public String updateProductStart(@RequestParam("userId") String userId,
 			@RequestParam("proNo") int no,Model m) {
@@ -452,4 +465,27 @@ public class ProductController {
 		return "member/mypage";
 	}
 	
+
+	//상품 검색
+	@RequestMapping("/product/searchProduct.do")
+	public String searchProduct(@RequestParam String keyword,
+								Model m){
+		System.out.println(keyword);
+		List<Product> result = service.searchProduct(keyword);
+		List<String> renames = new ArrayList();
+		List<Files> files = new ArrayList();
+		for(Product p : result) {
+			files.addAll(p.getFiles());
+		}
+		for(Files f : files) {
+			if(f.getRenameFilename().contains("s_")) {
+				renames.add(f.getRenameFilename());
+			}
+		}
+		m.addAttribute("productCount",result.size());
+		m.addAttribute("renames",renames);
+		m.addAttribute("product",result);
+		return "product/productTotal";
+	}
+
 }

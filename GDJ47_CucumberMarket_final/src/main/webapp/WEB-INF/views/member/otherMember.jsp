@@ -54,22 +54,6 @@
 
 					  	<div id="intro">
 					  		${member.intro}
-					  		<form class="mb-3" name="myform" id="myform"
-					  				 action="${path }/product/productReview.do?proNo=251&writer=${loginMember.userId}&host=${writer}" method="post">
-							  		<fieldset>
-										<input type="radio" name="oi" value="5" id="rate1"><label
-											for="rate1">★</label>
-										<input type="radio" name="oi" value="4" id="rate2"><label
-											for="rate2">★</label>
-										<input type="radio" name="oi" value="3" id="rate3"><label
-											for="rate3">★</label>
-										<input type="radio" name="oi" value="2" id="rate4"><label
-											for="rate4">★</label>
-										<input type="radio" name="oi" value="1" id="rate5"><label
-											for="rate5">★</label>
-									</fieldset>
-									<input type="submit" value="제출" />
-					  		</form>
 					  	</div>
 				  	</div>
 				  	<div id="report">

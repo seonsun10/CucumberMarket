@@ -129,12 +129,12 @@ tr#tablehead>th{
 }
 
 #tablebody:hover{
-	background-color:rgd(229,229,229);
+	background-color:rgb(229,229,229);
+	cursor: pointer;
 }
 #pageBar{
 	text-align:center;
 	padding:20px 0 0 0;
 }
-
 /* mypageReview */
 

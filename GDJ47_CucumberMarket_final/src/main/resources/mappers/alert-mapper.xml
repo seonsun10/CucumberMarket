@@ -15,6 +15,7 @@
 	   		<result property="n_editdate" column="n_editdate"/>
 	   </resultMap>
 	   
+	   
       	<!-- 새로운 알람 수 카운트 -->
    		<select id="selectNewNotifyCnt" resultType="int">
    		<![CDATA[
@@ -53,10 +54,27 @@
    		]]>
    		</select>
    		
+   		<!-- 새로운 채팅 조회 -->
+   		<select id="searchNewChatList" parameterType="com.cu.cum.test.model.vo.MessageContent" resultType="com.cu.cum.test.model.vo.MessageContent">
+   		<![CDATA[
+		select * 
+		from chatview 
+		where (userid=#{userid} or otherid=#{userid}) and  unreadcount > 0
+		]]>
+   		
+   		</select>
+   		
    		<!-- 이전 알림 목록 -->
    		<select id="searchOldNotifyList" resultMap="notify"  parameterType="java.util.HashMap">
    		<![CDATA[
    			SELECT * FROM notify WHERE n_target like #{userId} AND n_checked like '1' 
+   		]]>
+   		</select>
+   		
+   		<!-- 이전 채팅 목록 -->
+   		<select id="searchOldChatList" resultMap="notify"  parameterType="java.util.HashMap">
+   		<![CDATA[
+   			select * from chatview where (userid=#{userid} or otherid=#{userid}) and  unreadcount = 0
    		]]>
    		</select>
    		

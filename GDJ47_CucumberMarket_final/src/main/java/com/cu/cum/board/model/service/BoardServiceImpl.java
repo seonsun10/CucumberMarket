@@ -124,6 +124,23 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return dao.selectBoardComment(session, page);
 	}
+	@Override
+	public List<Board> selectpopularlist() {
+		// TODO Auto-generated method stub
+		return dao.selectpopularlist(session);
+	}
+	@Override
+	public int selectBaordRecommendCount(int boardId) {
+		// TODO Auto-generated method stub
+		return dao.selectBaordRecommendCount(session,boardId);
+	}
+	@Override
+	public List<RecommendList> selectRecommendList(int boardId) {
+		// TODO Auto-generated method stub
+		return dao.selectRecommendList(session,boardId);
+	}
+	
+	
 	
 	
 	

@@ -13,7 +13,7 @@
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li aria-current="page" class="breadcrumb-item active"><c:out value="${tag }"/></li>
+                 <%--  <li aria-current="page" class="breadcrumb-item active"><c:out value="${tag }"/></li> --%>
                 </ol>
               </nav>
               <div id="product-container">
@@ -22,7 +22,7 @@
 						<div id="pro-box">
 							<a href="${path}/product/productView.do?id=${loginMember.userId}&no=${p.proNo}&tag=${p.categoryName}&name=${p.member.userId}&region=${p.region}&proStatus=${p.proStatus}">
 								<div id="pro-img">
-									<img src="${path }/resources/img/cucumber.png"/>
+									<img src="${path }/resources/upload/product/${renames[status.index]}" width="200px" height="200px"/>
 								</div>
 								<div id="pro-title">
 									<div id="pro-head2"><c:out value="${p.title}"/></div>

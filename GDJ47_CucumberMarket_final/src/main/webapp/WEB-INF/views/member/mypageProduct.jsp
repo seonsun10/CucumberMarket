@@ -35,9 +35,10 @@
 			<th>최근수정일</th>
 			<th>수정</th>
 			<th>삭제</th>
-		</tr>
+		</tr> 
 			<c:if test="${products ne null}">
 				<c:forEach var="p" items="${products}">
+
 					
 					<tr id="tablebody">
 					
@@ -53,6 +54,7 @@
 						<td><button onclick="location.assign('${path}/product/updateProductStart.do?proNo=${p.proNo }&userId=${loginMember.userId}')">수정</button></td>
 						<td><button onclick="location.assign('${path}/product/deleteProduct.do?proNo=${p.proNo }&userId=${loginMember.userId}')">삭제</button></td>
 					</tr>
+
 				</c:forEach>
 			</c:if>
 			<c:if test="${products eq null }">

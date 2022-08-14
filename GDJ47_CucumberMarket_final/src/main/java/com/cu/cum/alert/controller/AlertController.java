@@ -14,6 +14,8 @@ public interface AlertController {
 	
 	// 알림조회 (전체)
 		ModelAndView notifyInit(int curPage, HttpServletRequest request) throws Exception;
+		//채팅 조회 (내거 전체)
+		ModelAndView chatInit(int curPage, HttpServletRequest request) throws Exception;
 		// 더보기 요청 (ajax)
 //		String searchMoreNotify(Map<String, String> param) throws Exception;
 		// 읽음상태 변경 
@@ -24,6 +26,8 @@ public interface AlertController {
 		String selectNewNoticeCnt(String userId);
 		// notify DB저장
 		void saveNotify(Map<String, String> param) throws Exception;
+		
+		
 	
 
 }

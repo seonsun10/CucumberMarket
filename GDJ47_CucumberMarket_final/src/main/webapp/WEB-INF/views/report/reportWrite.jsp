@@ -31,10 +31,10 @@
                     <li><a href="${pageContext.request.contextPath }/inquiryList" class="nav-link">문의하기</a></li>
                     <c:choose>
 			        	<c:when test="${loginMember.userId eq 'admin'}">
-			            	<li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고하기</a></li>
+			            	<li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고</a></li>
 			            </c:when>
 			            <c:when test="${loginMember.userId ne 'admin'}">
-			            	<li><a href="${pageContext.request.contextPath }/reportInfo" class="nav-link">신고하기</a></li>
+			            	<li><a href="${pageContext.request.contextPath }/reportInfo" class="nav-link">신고</a></li>
 			            </c:when>
 		            </c:choose>
                     <li><a href="${pageContext.request.contextPath }/faqList" class="nav-link">FAQ</a></li>
@@ -45,14 +45,14 @@
               <div class="banner"><a href="#"><img src="/resources/img/cucumber.png" alt="" class="img-fluid"></a></div>
             </div>
             <div class="col-lg-9">
-				<div id="comment-form">
+				
                   <h4>신고글 작성</h4>
-                  <form action="${pageContext.request.contextPath }" method="post">
+                  <form action="${pageContext.request.contextPath }/report/insertReport.do" method="post">
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label for="id">아이디</label>
-                          <input id="reportId" type="text" class="form-control" value="<c:out value="${loginMember.userId }"/>" readonly>
+                          <label for="repId">작성자 아이디</label>
+                          <input name="repId" id="repId" type="text" class="form-control" value="<c:out value="${loginMember.userId }"/>" readonly>
                         </div>
                       </div>
                     </div>
@@ -67,12 +67,15 @@
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
-                          <select name="reportType" class="form-control">
-                          		<option selected>신고 유형</option>
-                          		<option value="계정">욕설</option>
+                          <label for="repType">신고 사유</label>
+                          <select name="repType" class="form-control">
+                          		<option selected>선택</option>
+                          		<option value="욕설">욕설</option>
                           		<option value="사기">사기</option>
-                          		<option value="상품">성희롱</option>
-                          		<option value="거래">정치적발언</option>
+                          		<option value="도배">도배</option>
+                          		<option value="음란성">음란성</option>
+                          		<option value="종교및정치적발언">종교및정치적발언</option>
+                          		<option value="기타">기타</option>
                         	</select>
                         </div>
                       </div>
@@ -81,23 +84,23 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label for="repTitle">제목</label>
-                          <input id="repTitle" type="text" class="form-control">
+                          <input name="repTitle" id="repTitle" type="text" class="form-control">
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label for="targetId">신고할 유저 아이디</label>
-                          <input id="targetId" type="text" value="<c:out value="${id}"/>" class="form-control" readonly>
+                          <label for="targetId">신고자 아이디</label>
+                          <input name="targetId" id="targetId" type="text" value="<c:out value="${id}"/>" class="form-control" readonly>
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">
-                          <label for="repComment">신고 내용</label>
-                          <textarea id="repComment" rows="4" class="form-control"></textarea>
+                          <label for="repContent">신고 내용</label>
+                          <textarea name="repContent" id="repCotent" rows="4" class="form-control"></textarea>
                         </div>
                       </div>
                     </div>
@@ -109,14 +112,13 @@
                       </div>
                     </div>
                   </form>
-                </div>
+                
                 <br>
             <!-- /.col-lg-9-->
           </div>
         </div>
       </div>
     </div>
-   
 
- 
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
