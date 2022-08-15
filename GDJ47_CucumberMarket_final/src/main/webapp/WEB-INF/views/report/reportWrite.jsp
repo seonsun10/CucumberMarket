@@ -31,10 +31,10 @@
                     <li><a href="${pageContext.request.contextPath }/inquiryList" class="nav-link">문의하기</a></li>
                     <c:choose>
 			        	<c:when test="${loginMember.userId eq 'admin'}">
-			            	<li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고하기</a></li>
+			            	<li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고</a></li>
 			            </c:when>
 			            <c:when test="${loginMember.userId ne 'admin'}">
-			            	<li><a href="${pageContext.request.contextPath }/reportInfo" class="nav-link">신고하기</a></li>
+			            	<li><a href="${pageContext.request.contextPath }/reportInfo" class="nav-link">신고</a></li>
 			            </c:when>
 		            </c:choose>
                     <li><a href="${pageContext.request.contextPath }/faqList" class="nav-link">FAQ</a></li>
@@ -45,7 +45,7 @@
               <div class="banner"><a href="#"><img src="/resources/img/cucumber.png" alt="" class="img-fluid"></a></div>
             </div>
             <div class="col-lg-9">
-				<div id="comment-form">
+				
                   <h4>신고글 작성</h4>
                   <form action="${pageContext.request.contextPath }/report/insertReport.do" method="post">
                     <div class="row">
@@ -112,7 +112,7 @@
                       </div>
                     </div>
                   </form>
-                </div>
+                
                 <br>
             <!-- /.col-lg-9-->
           </div>

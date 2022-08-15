@@ -32,7 +32,7 @@
 <%-- 		                    		<c:choose>
 							        	<c:when test="${loginMember.userId eq 'admin' } "> --%>
 							        	<c:if test="${loginMember.userId eq 'admin'}">
-							            	<li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고하기</a></li>
+							            	<li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고</a></li>
 							           	</c:if>
 							            <%-- </c:when>
 							            <c:when test="${loginMember.userId ne 'admin'}">

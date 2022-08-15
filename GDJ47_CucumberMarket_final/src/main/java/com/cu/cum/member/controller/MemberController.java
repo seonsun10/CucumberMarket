@@ -44,6 +44,8 @@ import com.cu.cum.product.model.service.ProductService;
 import com.cu.cum.product.model.vo.Files;
 import com.cu.cum.product.model.vo.Product;
 import com.cu.cum.product.model.vo.Review;
+import com.cu.cum.report.model.service.ReportService;
+import com.cu.cum.report.model.vo.Report;
 import com.cu.cum.wishlist.model.service.WishListService;
 import com.cu.cum.wishlist.model.vo.WishList;
 
@@ -70,6 +72,9 @@ public class MemberController {
 	
 	@Autowired
 	private MailSendService mailService;
+	
+	@Autowired
+	private ReportService repservice;
 	
 	//메인 페이지 오늘의 추천 상품 리스트 출력
 	@GetMapping({"","/"})
@@ -388,8 +393,22 @@ public class MemberController {
 	}
 	//마이페이지에서 신고 목록 뿌리는 페이지
 	@RequestMapping("/member/mypageReport.do")
-	public String reportpage() {
-		return "member/mypageReport";
+	public ModelAndView mypageReportList(@RequestParam(defaultValue="1") int cPage,
+			@RequestParam(defaultValue="5") int numPerpage,
+			ModelAndView model) {
+		Member loginMember=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Report r = Report.builder().userId(loginMember).build();
+		
+		Map param = Map.of("cPage",cPage, "numPerpage",numPerpage);
+		List<Report> report = repservice.mypageReportList(param, r);
+		System.out.println(report);
+		int totalData = repservice.mypageReportCount();
+		
+		model.addObject("report", report);
+		model.addObject("pageBar", PageBarBasic.getPageBar(cPage, numPerpage, totalData, "reportList"));
+		model.addObject("totalData", totalData);
+		model.setViewName("member/mypageReport");
+		return model;
 	}
 	//마이페이지에서 채팅 목록 뿌리는 페이지
 	@RequestMapping("/member/mypageChat.do")
@@ -510,6 +529,14 @@ public class MemberController {
 	    } else {
 	        return ResponseEntity.ok("사용 가능한 아이디 입니다.");
 	    }
+	}
+	
+	// 마이페이지 신고글 상세정보 페이지
+	@RequestMapping(value= {"/mypagereportView/{id}"})
+	public ModelAndView mypageReportView(@PathVariable int id, ModelAndView mv) {
+		mv.addObject("rep", repservice.selectReport(id));
+		mv.setViewName("report/mypageReportView");
+		return mv;
 	}
 	
 	
