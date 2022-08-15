@@ -44,7 +44,10 @@
               <!-- /.col-lg-3-->
               <!-- *** CUSTOMER MENU END ***-->
             </div>
-<div class="col-lg-9">
+            <div class="box">
+                <h1 align="center"><c:out value="${loginMember.name }"/>님의 신고 목록</h1>
+                <hr>
+				<div class="col-lg-9">
 						<table aria-label="breadcrumb" class="box" border="1" summary="게시판 상세내용" width="650" height="350" border="1" cellpadding="5" align="center" >
 						 	<colgroup>
 						  		<col width = "130px" />
@@ -64,7 +67,7 @@
 						   			<td style="text-align: center"><c:out value="${rep.userId.userId}"/></td>
 						  		</tr>
 								<tr>
-									<th align="center" style="text-align: center">신고당한 아이디</th>
+									<th align="center" style="text-align: center">신고한 아이디</th>
 						   			<td style="text-align: center; color:red"><c:out value="${rep.targetId}"/></td>
 						  		</tr>
 								<tr>
@@ -78,6 +81,7 @@
 						 		</td>
 						 	</tr>
 						</table>
+					</div>
 					</div>
       </div>
     </div>

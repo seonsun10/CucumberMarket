@@ -86,7 +86,7 @@
 				</div>
 			</div>
 			<div id="review-date"><fmt:formatDate value="${r.writeDate }" pattern="yyyy-MM-dd"/></div>
-			<div id="deleteBtn"><button type="button" onclick="javascript:fn_deleteReview(${r.reviewNo});">신고하기</button></div>
+			<div id="deleteBtn"><button type="button" onclick="location.assign('${pageContext.request.contextPath }/reportWrite/${r.writer}')">신고하기</button></div>
 		</div>
 	</c:forEach>
 </c:if>
