@@ -25,7 +25,7 @@
   top:150px; 
   right: 90px;
   font-size: 14px;
-  
+    
 
 }
 </style>
@@ -34,7 +34,8 @@
       <div id="content">
      
         <div class="container">
-           
+         <div style="text-align: left; font-size:14px; font-weight: bold;"><i>${region }</i></div>
+          
           <div class="row">
             <!--
             *** LEFT COLUMN ***
@@ -78,7 +79,7 @@
 			
 			</script>
 			
-			&nbsp &nbsp
+			
               <div class="box">
                
                 <h1>동네 생활</h1>

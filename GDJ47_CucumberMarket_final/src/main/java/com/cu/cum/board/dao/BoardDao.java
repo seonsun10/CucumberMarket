@@ -15,8 +15,8 @@ public interface BoardDao {
 	List<Board> selectBoardList2(SqlSessionTemplate session,Map page);
 	int insertBoard(SqlSessionTemplate session,Board b);
 	Board selectBoard(SqlSessionTemplate session,int BoardId);
-	int selectboardCount(SqlSessionTemplate session);
-	int selectboardCount2(SqlSessionTemplate session);
+	int selectboardCount(SqlSessionTemplate session,String region);
+	int selectboardCount2(SqlSessionTemplate session,Map page);
 	int recommendCheck(SqlSessionTemplate session,RecommendList r);
 	int recommendboard(SqlSessionTemplate session,RecommendList r);
 	int recommendIdcount(SqlSessionTemplate session,int BoardId);
@@ -26,7 +26,7 @@ public interface BoardDao {
 	
 	int deletecomment(SqlSessionTemplate session,int id);
 	int deletecomment2(SqlSessionTemplate session,int id);
-	List<Board> selectpopularlist(SqlSessionTemplate session);
+	List<Board> selectpopularlist(SqlSessionTemplate session,String region);
 	int selectBaordRecommendCount(SqlSessionTemplate session,int boardId);
 	List<RecommendList> selectRecommendList(SqlSessionTemplate session,int boardId);
 	
@@ -45,6 +45,9 @@ public interface BoardDao {
     boolean checkReply(Map<String, Object> paramMap,SqlSessionTemplate session);
     
     boolean updateReply(Map<String, Object> paramMap,SqlSessionTemplate session);
-	
+	//지역
+    String selectregion(SqlSessionTemplate session,String userid);
+    
+    
 	
 }

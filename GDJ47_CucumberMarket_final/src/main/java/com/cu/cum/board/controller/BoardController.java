@@ -38,9 +38,13 @@ public class BoardController {
 	public ModelAndView boardlist(@RequestParam(defaultValue = "1") int cPage,
 			@RequestParam(defaultValue = "5") int numPerpage,HttpServletRequest request
 			,ModelAndView mv) {
+		String userid= ((Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
 		
-		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage);
-		List<Board> pboard = service.selectpopularlist(); 
+		String region = service.selectregion(userid);
+		System.out.println(region);
+		mv.addObject("region", region);
+		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"region",region);
+		List<Board> pboard = service.selectpopularlist(region); 
 		
 		List<Board> pboardlist = new ArrayList();
 		for(Board s:pboard) {
@@ -54,7 +58,7 @@ public class BoardController {
 		mv.addObject("boards",boards);
 		
 		String url = request.getRequestURI();
-		int totalboardcount = service.selectboardCount();
+		int totalboardcount = service.selectboardCount(region);
 		mv.addObject("pageBar", TestPageBar.getPageBar(cPage, numPerpage, totalboardcount, url));
 		
 		mv.setViewName("board/boardList");
@@ -64,22 +68,27 @@ public class BoardController {
 	public ModelAndView boardlist2(@RequestParam(defaultValue = "1") int cPage,
 			@RequestParam(defaultValue = "5") int numPerpage,HttpServletRequest request
 			,@PathVariable String categoryname,ModelAndView mv) {
+		String userid= ((Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
 		
+		String region = service.selectregion(userid);
+		System.out.println(region);
+		mv.addObject("region", region);
 		
 		if(categoryname.equals("실종센터")) {
 			categoryname="동네 분실/실종센터";
 		}
+		Board b = Board.builder().boardregion(region).boardCategory(categoryname).build();
 		
 		
-		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"categoryname",categoryname);
+		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"board",b);
 		
 		List<Board> boards = service.selectBoardList2(page);
 		mv.addObject("boards",boards);
 		
 		String url = request.getRequestURI();
-		int totalboardcount = service.selectboardCount2();
+		int totalboardcount = service.selectboardCount2(page);
 		mv.addObject("pageBar", TestPageBar.getPageBar(cPage, numPerpage, totalboardcount, url));
-		List<Board> pboard = service.selectpopularlist(); 
+		List<Board> pboard = service.selectpopularlist(region); 
 	
 		List<Board> pboardlist = new ArrayList();
 		for(Board s:pboard) {
@@ -99,6 +108,10 @@ public class BoardController {
 	@PostMapping("/saveBoard.do")
 	@ResponseBody
 	public ModelAndView insertBoard(ModelAndView mv,Board b) {
+		String userid= ((Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
+		
+		String region = service.selectregion(userid);
+		b.setBoardregion(region);
 		int result =service.insertBoard(b);
 		if(result>0) {
 			mv.addObject("msg", "게시글 작성완료");
