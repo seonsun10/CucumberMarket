@@ -65,16 +65,7 @@
 				var bkeyword = $("#bKeyword").val();
 				console.log(btype+bkeyword);
 				location.assign('${path}/board/bsearch/'+btype+'/'+bkeyword);
-				/* $.ajax({
-					data:JSON.stringify({type:btype,keyword:bkeyword}),
-					headers:{"Content-Type":"application/json"},
-					url:'/bsearch',
-					type:"POST",
-					success:data=>{
-						console.log(data);
-					}
-					
-				}); */
+				
 			});
 			
 			</script>

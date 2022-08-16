@@ -48,6 +48,9 @@ public interface BoardDao {
 	//지역
     String selectregion(SqlSessionTemplate session,String userid);
     
+    //검색
+    List<Board> searchBoardList(SqlSessionTemplate session,Map page);
     
+    int searchBoardCount(SqlSessionTemplate session,Map page);
 	
 }

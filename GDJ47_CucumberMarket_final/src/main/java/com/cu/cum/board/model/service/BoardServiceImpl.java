@@ -144,6 +144,17 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return dao.selectregion(session,userid);
 	}
+	@Override
+	public List<Board> searchBoardList(Map page) {
+		// TODO Auto-generated method stub
+		return dao.searchBoardList(session,page);
+	}
+	@Override
+	public int searchBoardCount(Map page) {
+		// TODO Auto-generated method stub
+		return dao.searchBoardCount(session,page);
+	}
+	
 	
 	
 	

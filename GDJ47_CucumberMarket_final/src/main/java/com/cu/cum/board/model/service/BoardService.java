@@ -47,5 +47,9 @@ public interface BoardService {
      boolean updateReply(Map<String, Object> paramMap);
 	//지역
      String selectregion(String userid);
+    //검색
+     List<Board> searchBoardList(Map page);
+     
+     int searchBoardCount(Map page);
 	
 }
