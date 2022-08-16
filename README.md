@@ -31,5 +31,9 @@
 최종 마무리 후 이미지 넣기
 
 ## 화면설계
-> 화면 설계 후 BootStrap Template 기반으로 수정 및 제작
+> Oven을 활용하여 화면 설계 후 BootStrap Template 기반으로 수정 및 제작
+
+### 채팅
+![chatting_view](https://user-images.githubusercontent.com/102929905/184778847-5d11dd45-4cf2-4f10-a75b-58a1faf5bbc7.png)
+
 
