@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,6 +23,7 @@ import com.cu.cum.board.model.service.BoardService;
 import com.cu.cum.board.model.vo.Board;
 import com.cu.cum.board.model.vo.BoardComment;
 import com.cu.cum.board.model.vo.RecommendList;
+import com.cu.cum.board.model.vo.Search;
 import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.pagebar.TestPageBar;
 
@@ -39,22 +41,22 @@ public class BoardController {
 		
 		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage);
 		List<Board> pboard = service.selectpopularlist(); 
-		System.out.println(pboard);
+		
 		List<Board> pboardlist = new ArrayList();
 		for(Board s:pboard) {
 			pboardlist.add(service.selectBoard(s.getBoardId())); 
 		}
 		mv.addObject("pboard", pboardlist);
-		System.out.println(pboardlist);
+		
 		
 		List<Board> boards = service.selectBoardList(page);
 		
 		mv.addObject("boards",boards);
-		System.out.println(boards.size());
+		
 		String url = request.getRequestURI();
 		int totalboardcount = service.selectboardCount();
 		mv.addObject("pageBar", TestPageBar.getPageBar(cPage, numPerpage, totalboardcount, url));
-		System.out.println(boards);
+		
 		mv.setViewName("board/boardList");
 		return mv;
 	}
@@ -68,7 +70,7 @@ public class BoardController {
 			categoryname="동네 분실/실종센터";
 		}
 		
-		System.out.println("카테고리넴 :"+categoryname);
+		
 		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"categoryname",categoryname);
 		
 		List<Board> boards = service.selectBoardList2(page);
@@ -78,13 +80,13 @@ public class BoardController {
 		int totalboardcount = service.selectboardCount2();
 		mv.addObject("pageBar", TestPageBar.getPageBar(cPage, numPerpage, totalboardcount, url));
 		List<Board> pboard = service.selectpopularlist(); 
-		System.out.println("피보드 "+pboard);
+	
 		List<Board> pboardlist = new ArrayList();
 		for(Board s:pboard) {
 			pboardlist.add(service.selectBoard(s.getBoardId())); 
 		}
 		mv.addObject("pboard", pboardlist);
-		System.out.println("카테고리 : "+pboardlist);
+		
 		mv.setViewName("board/boardList");
 		return mv;
 	}
@@ -112,7 +114,7 @@ public class BoardController {
 	@RequestMapping("/boardinfo.do/{boardId}")
 	public ModelAndView boardinfo(ModelAndView mv,@PathVariable int boardId,@RequestParam(defaultValue = "1") int cPage,
 			@RequestParam(defaultValue = "5") int numPerpage,HttpServletRequest request) {
-		System.out.println(boardId);
+		
 		Board b = service.selectBoard(boardId);
 		int count = service.selectBaordRecommendCount(boardId);
 		b.setRecommendCount(count);
@@ -246,5 +248,32 @@ public class BoardController {
 		mv.setViewName("common/msg");
     	return mv;
     }
-	
+    
+    
+    @RequestMapping("/bsearch/{type}/{keyword}")
+    public ModelAndView searchBoard(@PathVariable String type,@PathVariable String keyword,ModelAndView mv,@RequestParam(defaultValue = "1") int cPage,
+			@RequestParam(defaultValue = "5") int numPerpage) {
+    	Search s = Search.builder().type(type)
+    			.keyword(keyword).build();
+    	Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"type",type,"keyword",keyword);
+    	
+		/*
+		 * List<Board> boards =service.searchBoard(page); int tcount =
+		 * service.searchBoardCount();
+		 */
+    	return mv;
+    	
+    	
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
