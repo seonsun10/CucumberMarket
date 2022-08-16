@@ -109,13 +109,7 @@
 							</span>
 						</c:if>
 					</div>
-					<div id="pro-right">
-						<select id="listOption">
-							<option>최신순</option>
-							<option>오래된 순</option>
-							<option>조회순</option>
-						</select>
-					</div>
+					
 				</div>
 				<div id="pro-body">
 					<table>

@@ -433,7 +433,6 @@ function fn_area() {
    	               }
    			});
    		}
-	});
    	
    	// 실시간 알림 받았을 시 ing
 	function onMessage(evt){

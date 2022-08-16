@@ -48,5 +48,7 @@ public interface ProductDao extends JpaRepository<Product,Integer>,
 	//상품 조회
 	Product findById(int proNo);
 	
+	//jpa상품 페이징
+	List<Product> findAllByMember(Pageable p, Member m);
 	
 }
