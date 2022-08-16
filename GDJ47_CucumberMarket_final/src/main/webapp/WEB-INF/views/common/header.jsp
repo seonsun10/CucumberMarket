@@ -37,7 +37,7 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
         
    <script src="https://kit.fontawesome.com/e4c89f4cce.js" crossorigin="anonymous"></script>
-    
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     
   </head>
   <body>
@@ -312,7 +312,8 @@
    
               
               <div id="search-not-mobile" class="navbar-collapse collapse">
-                 <button onclick="fn_area();" class="btn btn-primary navbar-btn">지역설정 테스트용</button>
+                 <input type="button" onclick="fn_area();" class="btn btn-primary navbar-btn" value="지역설정"/>
+                 <%-- <a href="${path }/area.do">지역설정</a> --%>
               </div>
               <div id="search-not-mobile" class="navbar-collapse collapse">
                  <a href="${path }/faqList" class="btn btn-primary navbar-btn"> FAQ</a>
@@ -374,14 +375,14 @@
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 
 <script>
-function fn_area() {
-    window.open(
+function fn_area(){
+     window.open(
       "${path}/area.do",
       "현재 내 위치 설정",
       "width=800, height=600, top=100, left=600"
     );
-  }
-  
+}
+ 
 
 	
    

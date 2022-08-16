@@ -21,7 +21,6 @@ public class FilesServiceImpl implements FilesService {
 		for(Files f : files) {
 			result.add(fdao.save(f));
 		}
-		
 		return result;
 	}
 

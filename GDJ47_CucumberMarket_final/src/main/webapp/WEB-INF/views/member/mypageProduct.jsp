@@ -26,6 +26,7 @@
 			<th>제목</th>
 			<th>가격</th>
 			<th>최근수정일</th>
+			<th>수정</th>
 			<th>삭제</th>
 		</tr> 
 			<c:if test="${products ne null}">

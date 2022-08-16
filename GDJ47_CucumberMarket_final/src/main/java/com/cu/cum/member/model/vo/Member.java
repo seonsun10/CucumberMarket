@@ -64,6 +64,8 @@ public class Member implements UserDetails{
 	
 	private int viewCount; // 조회수
 	
+	private String region; //지역
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub

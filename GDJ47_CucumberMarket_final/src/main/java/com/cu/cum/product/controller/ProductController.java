@@ -57,9 +57,9 @@ public class ProductController {
 	@RequestMapping("/product/insertProduct.do")
 	public String insertProduct(Product p, MultipartHttpServletRequest mtfRequest ,@RequestParam("proName") String proName , 
 			@RequestParam("sido1") String sido, @RequestParam("gugun1") String gugun,
-			@RequestParam("proContent") String proContent, RedirectAttributes ra,
-			@RequestParam("tag") String tag , @RequestParam("proStatus") String proStatus,
-			@RequestParam(name="price") int price , @RequestParam(name="userId") String userId, HttpServletRequest rs) {
+			@RequestParam("proContent") String proContent,
+			@RequestParam("tag") String tag , @RequestParam(name="proStatus" , required = false) String proStatus,
+			@RequestParam(name="price") int price , @RequestParam(name="userId") String userId, HttpServletRequest rs, Model model) {
 		//String userId = "admin@naver.com"; //나중엔 세션값으로 email 불러와야함
 		//String userId = email.substring(0, email.indexOf("@"));
 		//파일제외 나머지 insert문
@@ -136,7 +136,7 @@ public class ProductController {
 
 		List<Files> f = fService.insertFiles(files);
 		System.out.println(f);
-		ra.addAttribute("userId",userId);
+		model.addAttribute("userId",userId);
 		return "redirect:/member/mypage.do";
 	}
 	
@@ -228,7 +228,7 @@ public class ProductController {
 				renames.add(f.getRenameFilename());
 			}
 		}
-		System.out.println(renames);
+		System.out.println("상품 전체 페이지 : "+renames);
 		m.addAttribute("renames",renames);
 		m.addAttribute("productCount",service.selectCategoryCount(tag));
 		m.addAttribute("product",products);
@@ -311,10 +311,168 @@ public class ProductController {
 		return "product/productview";
 	}
 	
+
+	@RequestMapping("/product/updateProductStart.do")
+	public String updateProductStart(@RequestParam("userId") String userId,
+			@RequestParam("proNo") int no,Model m) {
+		System.out.println(userId+" "+no);
+		
+		//먼저 no에 해당하는 상품를 찾아와야함
+		Product p = service.selectProduct(no);
+		System.out.println(p);
+		//먼저 이미지를 먼저 삭제시킨다음에 db삭제 pk업데이트
+		
+		
+		
+		//db거쳐서 update한다음에 폴더로 옮기기
+		
+		m.addAttribute("title", p.getTitle());
+		m.addAttribute("content",p.getProContent());
+		m.addAttribute("price",p.getPrice());
+		m.addAttribute("proStatus",p.getProStatus());
+		m.addAttribute("proNo",no);
+		return "product/updateProduct";
+	}
+	
+	
+	@RequestMapping("/product/updateProduct.do")
+	public String updateProduct(MultipartHttpServletRequest mtfRequest ,@RequestParam("proName") String proName ,
+			@RequestParam("sido1") String sido, @RequestParam("gugun1") String gugun,
+			@RequestParam("proContent") String proContent,
+			@RequestParam("tag") String tag , @RequestParam("proStatus") String proStatus,
+			@RequestParam(name="price") int price , @RequestParam(name="userId") String userId, HttpServletRequest rs,
+			@RequestParam(name="no") int no) {
+		
+		String region = sido+" "+gugun;
+		Product p = Product.builder().proNo(no).build();
+		List<Files> beforefiles = service.selectFiles(p); //db에서 넘어온것
+		List<String> beforefilename = new ArrayList();
+		String path = mtfRequest.getServletContext().getRealPath("/resources/upload/product/");
+		
+		System.out.println("db에 있는 수정하기 전 파일에 해당하는 이미지네임 :"+beforefilename);
+		
+		
+		Member m = Member.builder().userId(userId).build();
+		//먼저 product를 수정한 다음 
+		Product pp = Product.builder().proNo(no).title(proName).proContent(proContent).price(price).
+				region(region).categoryName(tag).proStatus(proStatus).member(m).enrollDate(new Date()).
+				build();
+				
+		Product product = service.insertProduct(pp);
+		System.out.println("변경된 후 : "+product);
+		//
+		
+		
+		//앞단에서 넘어온 수정된 이미지들 이제 이값들은 이미지 테이블에 업데이트랑 인서트 시켜야함
+		MultipartFile afterthumbnail = mtfRequest.getFile("image1"); //썸네일 이미지 1개
+		List<MultipartFile> afterfileList = mtfRequest.getFiles("image"); //나머지 이미지 3개
+		
+		//썸네일 이미지 처리
+		String originalFilename1 = afterthumbnail.getOriginalFilename();
+		List<Files> afterfiles = new ArrayList();
+		String ext = originalFilename1.substring(originalFilename1.lastIndexOf("."));
+		int rndNum=(int)(Math.random()*10000);
+		String rename = "s_"+userId+"_"+rndNum+ext;
+		try {
+			
+			afterfiles.add(Files.builder()
+					.filesNo(beforefiles.get(0).getFilesNo()) //원래 이미지 테이블에 대표이미지가 첫 인덱스이므로 0번 인덱스에 파일번호를 가져옴
+					.product(product)
+					.member(m)
+					.originalFilename(originalFilename1)
+					.renameFilename(rename)
+					.thumbnailStatus("y")
+					.build());
+			//그다음 새걸로 다시 폴더로 넣어준다.
+			afterthumbnail.transferTo(new File(path+rename));
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+		//나머지 이미지 처리
+		if(afterfileList!=null) {
+			int count=1;
+			int length = beforefiles.size(); //수정 전 db에 있는 file 사이즈 값 ex)3 0~2
+
+			for(MultipartFile f : afterfileList) { //수정하면서 받아온 file사이즈 값 5 0~4
+				if(count<length) {   // count<3   1 2 
+ 					if(f!=null) {
+						String originalFilename2 = f.getOriginalFilename();
+						if(originalFilename2!=null) {
+							System.out.println(originalFilename2);
+							System.out.println("아래꺼 : "+originalFilename2.lastIndexOf("."));
+							String extt = originalFilename2.substring(originalFilename2.lastIndexOf("."));
+							
+							rndNum=(int)(Math.random()*10000);
+							String rename1 = userId+"_"+rndNum+extt;
+							
+							try {
+								
+								
+								
+								
+								afterfiles.add(Files.builder()
+									.filesNo(beforefiles.get(count).getFilesNo())
+									.product(p)
+									.member(m)
+									.originalFilename(originalFilename2)
+									.thumbnailStatus("n")
+									.renameFilename(rename1).build());
+								f.transferTo(new File(path+rename1));
+							}catch(IOException e) {
+								e.printStackTrace();
+							}
+							count++;
+							}
+						}
+					}else if(count<=afterfileList.size()) { // <5
+						if(f!=null) {
+							String originalFilename2 = f.getOriginalFilename();
+							if(originalFilename2!=null) {
+								System.out.println(originalFilename2);
+								System.out.println("아래꺼 : "+originalFilename2.lastIndexOf("."));
+								String extt = originalFilename2.substring(originalFilename2.lastIndexOf("."));
+								
+								rndNum=(int)(Math.random()*10000);
+								String rename1 = userId+"_"+rndNum+extt;
+								
+								try {
+									
+									
+									
+									afterfiles.add(Files.builder()
+										//.filesNo(beforefiles.get(count).getFilesNo())
+										.product(p)
+										.member(m)
+										.originalFilename(originalFilename2)
+										.thumbnailStatus("n")
+										.renameFilename(rename1).build());
+									f.transferTo(new File(path+rename1));
+								}catch(IOException e) {
+									e.printStackTrace();
+								}
+								count++;
+								}
+							}
+						}
+				}
+		}	
+		List<Files> ff = fService.insertFiles(afterfiles);
+		//db에서 수정을 하고 나서 마무리로 폴더에 있는 이미지 삭제시켜야함
+		for(int i=0; i<beforefiles.size(); i++) {
+			beforefilename.add(beforefiles.get(i).getRenameFilename());
+			File f = new File(path+beforefilename.get(i));
+			if(f.exists()) f.delete();
+		}
+		System.out.println("수정 db거치고 나서 마무리 : "+ff);
+		return "member/mypage";
+	}
+	
+
 	//상품 검색
 	@RequestMapping("/product/searchProduct.do")
 	public String searchProduct(@RequestParam String keyword,
-								Model m) {
+								Model m){
 		System.out.println(keyword);
 		List<Product> result = service.searchProduct(keyword);
 		List<String> renames = new ArrayList();
@@ -332,4 +490,5 @@ public class ProductController {
 		m.addAttribute("product",result);
 		return "product/productTotal";
 	}
+
 }
