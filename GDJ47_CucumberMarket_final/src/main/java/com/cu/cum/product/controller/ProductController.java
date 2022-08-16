@@ -374,6 +374,11 @@ public class ProductController {
 		int rndNum=(int)(Math.random()*10000);
 		String rename = "s_"+userId+"_"+rndNum+ext;
 		try {
+			for(int i=0; i<beforefiles.size(); i++) {
+				beforefilename.add(beforefiles.get(i).getRenameFilename());
+				File f = new File(path+beforefilename.get(i));
+				if(f.exists()) f.delete();
+			}
 			
 			afterfiles.add(Files.builder()
 					.filesNo(beforefiles.get(0).getFilesNo()) //원래 이미지 테이블에 대표이미지가 첫 인덱스이므로 0번 인덱스에 파일번호를 가져옴
@@ -399,18 +404,13 @@ public class ProductController {
  					if(f!=null) {
 						String originalFilename2 = f.getOriginalFilename();
 						if(originalFilename2!=null) {
-							System.out.println(originalFilename2);
-							System.out.println("아래꺼 : "+originalFilename2.lastIndexOf("."));
+							
 							String extt = originalFilename2.substring(originalFilename2.lastIndexOf("."));
 							
 							rndNum=(int)(Math.random()*10000);
 							String rename1 = userId+"_"+rndNum+extt;
 							
 							try {
-								
-								
-								
-								
 								afterfiles.add(Files.builder()
 									.filesNo(beforefiles.get(count).getFilesNo())
 									.product(p)
@@ -459,11 +459,7 @@ public class ProductController {
 		}	
 		List<Files> ff = fService.insertFiles(afterfiles);
 		//db에서 수정을 하고 나서 마무리로 폴더에 있는 이미지 삭제시켜야함
-		for(int i=0; i<beforefiles.size(); i++) {
-			beforefilename.add(beforefiles.get(i).getRenameFilename());
-			File f = new File(path+beforefilename.get(i));
-			if(f.exists()) f.delete();
-		}
+
 		System.out.println("수정 db거치고 나서 마무리 : "+ff);
 		return "member/mypage";
 	}
