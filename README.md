@@ -1,23 +1,23 @@
 # **CucumberMarket 오이마켓** - 오늘도 이용하는 마켓
 
-## 구성원 및 역할
-* 김동영 : 
-* 김동훈 : 
-* 박선우 : 
-* 안경진 : 
-* 이종석 : 
-* 이주호 : 
+## 구성원 및 역할 +++++각자 편집 ㄱㄱ
+* 김동영 : 알림 관련 기능 및 페이지
+* 김동훈 : 상품 관리 기능 및 페이지
+* 박선우 : 상품 관리 기능 및 페이지
+* 안경진 : 채팅 관련 기능 및 페이지
+* 이종석 : 팀장. 회원 관련 기능 및 페이지, 협업 관련 기록 관리
+* 이주호 : 커뮤니티 게시판, FAQ
 
 ## 사용 기술
 ### 
 * Spring Boot, Maven
   - Security, SMTP
-- JPA, Spring data JPA, Querydsl
-- MyBatis
-- JSP
-- Oracle DB
+* JPA, Spring data JPA, Querydsl
+* MyBatis
+* JSP
+* Oracle DB
 * Ajax
-* 
+* WebSocket
 
 ## 사용 툴
 + STS 4
