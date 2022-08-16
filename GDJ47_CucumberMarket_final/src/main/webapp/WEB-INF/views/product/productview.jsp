@@ -252,6 +252,7 @@
         var thisUrl = document.URL;
         console.log(thisUrl);
         var snsTitle = '<c:out value="${snsTitle}"/>';
+        /* var snsContent = '<c:out value="${snsContent}"/>'; */
         console.log(snsTitle);
         if( sns == 'facebook' ) {
             var url = "http://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(thisUrl);
@@ -278,8 +279,8 @@
             Kakao.Share.sendDefault({
             	  objectType: 'feed',
             	  content: {
-            	    title: snsTitle,
-            	    /* description: '아메리카노, 빵, 케익', */
+            	    title: '오이마켓',
+            	    description: snsTitle,
             	    imageUrl:
             	    	thisUrl,
             	    link: {
@@ -294,7 +295,7 @@
                   }, */
             		  buttons: [
             			    {
-            			      title: '오이마켓으로 이동',
+            			      title: '웹으로 이동',
             			      link: {
             			        mobileWebUrl: thisUrl,
             			      }

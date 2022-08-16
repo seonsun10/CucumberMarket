@@ -377,7 +377,6 @@ public class ProductController {
 				File f = new File(path+beforefilename.get(i));
 				if(f.exists()) f.delete();
 			}
-			
 			afterfiles.add(Files.builder()
 					.filesNo(beforefiles.get(0).getFilesNo()) //원래 이미지 테이블에 대표이미지가 첫 인덱스이므로 0번 인덱스에 파일번호를 가져옴
 					.product(product)
