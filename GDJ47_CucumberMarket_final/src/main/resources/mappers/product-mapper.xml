@@ -128,4 +128,7 @@
 		WHERE name LIKE '%${keyword}%' or region LIKE '%${keyword}%' OR title LIKE '%${keyword}%'
 	</select>
 
+	<update id="updateProViewCount">
+		update product set pro_count= pro_count+1 where pro_no=#{no}
+	</update>
 </mapper>

@@ -103,7 +103,10 @@ public class ProductMapperDao {
 		return session.selectList("product.searchProduct",keyword);
 	}
 	
-	
+	//상품 조회수 업
+	public int productViewCountUp(SqlSessionTemplate session, int no) {
+		return session.update("product.updateProViewCount",no);
+	}
 	
 
 }
