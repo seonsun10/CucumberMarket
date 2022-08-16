@@ -19,16 +19,20 @@
 * Ajax
 * WebSocket
 
+
 ## 사용 툴
 + STS 4
 + VS Code
-+ ERD Cloud [ERD 설계](https://www.erdcloud.com/d/cfNQ37SWucaz6LH2a)
++ ERD Cloud 
 + Oven
 + Google spreadsheets 
 
 
-## 기능정의서 [링크](https://docs.google.com/spreadsheets/d/1jChONE-HqpAC-X8Dr4VCTSSx1rSuXCCXxlUnZ39Wnqk/edit#gid=0)
+## 기능정의서 [자세히 보기](https://docs.google.com/spreadsheets/d/1jChONE-HqpAC-X8Dr4VCTSSx1rSuXCCXxlUnZ39Wnqk/edit#gid=0)
 최종 마무리 후 이미지 넣기
+
+## ERD [자세히 보기](https://www.erdcloud.com/d/cfNQ37SWucaz6LH2a)
+수정 이후 이미지 넣기
 
 ## 화면설계
 > Oven을 활용하여 화면 설계 후 BootStrap Template 기반으로 수정 및 제작
