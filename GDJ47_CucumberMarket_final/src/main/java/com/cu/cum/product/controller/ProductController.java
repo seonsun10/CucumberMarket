@@ -188,12 +188,14 @@ public class ProductController {
 			File f = new File(path+filename.get(i));
 			if(f.exists()) f.delete();
 		}
+		m.addAttribute("loc","member/mypage.do");
 		try {
 			List<Product> result=service.deleteProduct(proNo);
 			m.addAttribute("msg","삭제 성공");
 		}catch(Exception e) {
 			m.addAttribute("msg","삭제 실패");
-			e.printStackTrace();
+			
+//			e.printStackTrace();
 		}
 		return "common/msg";
 	}
@@ -205,7 +207,7 @@ public class ProductController {
 	@RequestMapping("/product/productTotal.do")
 	public String productTotal(@RequestParam("tag") String tag,
 								@RequestParam(defaultValue="1") int cPage,
-								@RequestParam(defaultValue="40") int numPerpage,
+								@RequestParam(defaultValue="200") int numPerpage,
 								Model m) throws Exception{
 		System.out.println(tag);
 		List<Product> products = service.findAllByCategoryName(PageRequest.of((cPage-1)*numPerpage, numPerpage,Sort.by("enrollDate").descending()), tag);

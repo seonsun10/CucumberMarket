@@ -18,13 +18,6 @@
 			</span>
 		</c:if>
 	</div>
-	<div id="pro-right">
-		<select id="listOption">
-			<option>1</option>
-			<option>2</option>
-			<option>3</option>
-		</select>
-	</div>
 </div>
 <div id="pro-body">
 	<table>
@@ -36,10 +29,17 @@
 			<th>작성자</th>
 		</tr>
 		<c:if test="${review ne null}">
-			<c:forEach var="r" items="${review }">
+			<c:forEach var="r" items="${review }" varStatus="status">
 				<tr id="tablebody">
 					<td id="lione"><img src="${path }/resources/img/cucumber.png" style="width:50px;"></td>
-					<td><c:out value=""/></td>
+					<td>
+						<div id="reviewPro" onclick="location.assign('${path}/product/productView.do?id=${loginMember.userId }&no=${products[status.index].proNo }&tag=${products[status.index].categoryName }&name=${r.writer }')">
+							<div id="proTitle">
+								<c:out value="${products[status.index].title }"/>
+							</div>
+							<img src="${path }/resources/img/right-arrow.png" width="10px" height="10px"/>
+						</div>
+					</td>
 					<td id=""><c:out value="${r.ment }"/></td>
 					<td id="lifour">
 						<c:choose>
@@ -94,3 +94,25 @@
 <c:if test="${review ne null }">
 <div id="pageBar"><c:out value="${pageBar }" escapeXml="false"/></div>
 </c:if>
+<style>
+	div#reviewPro{
+		border:1px solid lightgray;
+		color:gray;
+		border-radius: 4px;
+		padding-left:5px;
+		overflow: hidden;
+		display: flex;
+		justify-content: space-between;
+		cursor: pointer;
+		width: 150px;
+    	margin-left: 80px;
+	}
+	div#proTitle{
+		overflow: hidden;
+		font-size:15px;
+		padding-top:2px;
+	}
+	div#reviewPro>img{
+		margin-top:4px;
+	}
+</style>
