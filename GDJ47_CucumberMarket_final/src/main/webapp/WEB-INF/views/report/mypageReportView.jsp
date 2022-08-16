@@ -68,7 +68,8 @@
 						  		</tr>
 								<tr>
 									<th align="center" style="text-align: center">신고한 아이디</th>
-						   			<td style="text-align: center; color:red"><c:out value="${rep.targetId}"/></td>
+						   			<%-- <td style="text-align: center; color:red"><c:out value="${rep.targetId}"/></td> --%>
+						   			<td style="text-align: center; color:red"><a href="${path}/member/otherMember.do?writer=${rep.targetId}&customer=${loginMember.userId}">${rep.targetId }</a></td>
 						  		</tr>
 								<tr>
 									<th align="center" style="text-align: center">내용</th>
