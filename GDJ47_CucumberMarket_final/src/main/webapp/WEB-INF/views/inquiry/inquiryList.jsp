@@ -94,7 +94,12 @@
 											</a>
 		                          		</td>
 		                          		<td></td>
-		                          		<td>${i.writer.userId }</td>
+		                          		<c:if test="${loginMember.userId eq i.writer.userId }">
+		                          			<td style="color:#4fbfa8">${i.writer.userId }</td>
+		                          		</c:if>
+		                          		<c:if test="${loginMember.userId ne i.writer.userId }">
+		                          			<td>${i.writer.userId }</td>
+		                          		</c:if>
 		                          		<td><fmt:formatDate value="${i.inquiryDate}" pattern="yyyy-MM-dd"/></td>
 		                          		<%-- <td><c:out value="${i.answer}"/></td> --%>
 		                          		<c:if test="${loginMember.userId  eq 'admin'}">
