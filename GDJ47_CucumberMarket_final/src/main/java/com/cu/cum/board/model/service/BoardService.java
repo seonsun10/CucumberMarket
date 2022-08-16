@@ -15,9 +15,9 @@ public interface BoardService {
 	List<BoardComment> selectBoardComment(Map page);
 	int insertBoard(Board b);
 	Board selectBoard(int boardId);
-	int selectboardCount();
+	int selectboardCount(String region);
 	
-	int selectboardCount2();
+	int selectboardCount2(Map page);
 	
 	int recommendCheck(RecommendList r);
 	int recommendboard(RecommendList r);
@@ -27,7 +27,7 @@ public interface BoardService {
 	int selectcommentcount(int boardId);
 	int deletecomment(int id);
 	int deletecomment2(int id);
-	List<Board> selectpopularlist();
+	List<Board> selectpopularlist(String region);
 	int selectBaordRecommendCount(int boardId);
 	List<RecommendList> selectRecommendList(int boardId);
 	
@@ -45,6 +45,11 @@ public interface BoardService {
      boolean checkReply(Map<String, Object> paramMap);
       
      boolean updateReply(Map<String, Object> paramMap);
-	
+	//지역
+     String selectregion(String userid);
+    //검색
+     List<Board> searchBoardList(Map page);
+     
+     int searchBoardCount(Map page);
 	
 }

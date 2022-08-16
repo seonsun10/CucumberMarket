@@ -11,6 +11,7 @@ import com.cu.cum.board.model.vo.Board;
 import com.cu.cum.board.model.vo.BoardComment;
 import com.cu.cum.board.model.vo.BoardReply;
 import com.cu.cum.board.model.vo.RecommendList;
+import com.cu.cum.board.model.vo.Search;
 @Repository
 public class BoardDaoImpl implements BoardDao {
 
@@ -18,17 +19,18 @@ public class BoardDaoImpl implements BoardDao {
 	public List<Board> selectBoardList(SqlSessionTemplate session,Map page) {
 		int cPage = (int)page.get("cPage");
 		int numPerpage = (int)page.get("numPerpage");
+		String region = (String)page.get("region");
 		
 		
-		return session.selectList("board.selectboardlist",null,new RowBounds((cPage-1)*numPerpage,numPerpage));
+		return session.selectList("board.selectboardlist",region,new RowBounds((cPage-1)*numPerpage,numPerpage));
 	}
 	@Override
 	public List<Board> selectBoardList2(SqlSessionTemplate session,Map page) {
 		int cPage = (int)page.get("cPage");
 		int numPerpage = (int)page.get("numPerpage");
-		String category = (String)page.get("categoryname");
+		Board b = (Board)page.get("board");
 		
-		return session.selectList("board.selectboardlist2",category,new RowBounds((cPage-1)*numPerpage,numPerpage));
+		return session.selectList("board.selectboardlist2",b,new RowBounds((cPage-1)*numPerpage,numPerpage));
 	}
 	@Override
 	public int insertBoard(SqlSessionTemplate session,Board b) {
@@ -39,15 +41,16 @@ public class BoardDaoImpl implements BoardDao {
 		return session.selectOne("board.selectboard",boardId);
 	}
 	@Override
-	public int selectboardCount(SqlSessionTemplate session) {
+	public int selectboardCount(SqlSessionTemplate session,String region) {
 		// TODO Auto-generated method stub
-		return session.selectOne("board.selectboardcount");
+		return session.selectOne("board.selectboardcount",region);
 	}
 	
 	@Override
-	public int selectboardCount2(SqlSessionTemplate session) {
+	public int selectboardCount2(SqlSessionTemplate session,Map page) {
 		// TODO Auto-generated method stub
-		return session.selectOne("board.selectboardcount2");
+		Board b = (Board)page.get("board");
+		return session.selectOne("board.selectboardcount2",b);
 	}
 	@Override
 	public int recommendCheck(SqlSessionTemplate session, RecommendList r) {
@@ -143,9 +146,9 @@ public class BoardDaoImpl implements BoardDao {
 		return session.selectList("board.selectboardcommentlist2", boardId, new RowBounds((cPage-1)*numPerpage,numPerpage));
 	}
 	@Override
-	public List<Board> selectpopularlist(SqlSessionTemplate session) {
+	public List<Board> selectpopularlist(SqlSessionTemplate session,String region) {
 		// TODO Auto-generated method stub
-		return session.selectList("board.selectpopularlist");
+		return session.selectList("board.selectpopularlist",region);
 	}
 	@Override
 	public int selectBaordRecommendCount(SqlSessionTemplate session, int boardId) {
@@ -157,6 +160,26 @@ public class BoardDaoImpl implements BoardDao {
 		// TODO Auto-generated method stub
 		return session.selectList("board.selectRecommendList",boardId);
 	}
+	@Override
+	public String selectregion(SqlSessionTemplate session, String userid) {
+		// TODO Auto-generated method stub
+		return session.selectOne("board.selectregion",userid);
+	}
+	@Override
+	public List<Board> searchBoardList(SqlSessionTemplate session, Map page) {
+		// TODO Auto-generated method stub
+		Search s  = (Search)page.get("search");
+		int cPage = (int)page.get("cPage");
+		int numPerpage = (int)page.get("numPerpage");
+		return session.selectList("board.searchboardlist",s,new RowBounds((cPage-1)*numPerpage, numPerpage));
+	}
+	@Override
+	public int searchBoardCount(SqlSessionTemplate session, Map page) {
+		// TODO Auto-generated method stub
+		Search s  = (Search)page.get("search");
+		return session.selectOne("board.searchboardcount",s);
+	}
+	
 	
 	
 	
