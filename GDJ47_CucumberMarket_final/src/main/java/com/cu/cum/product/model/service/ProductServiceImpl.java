@@ -193,6 +193,13 @@ public class ProductServiceImpl implements ProductService {
 		return dao.findAllByMember(p, m);
 	}
 	
+	//상품 조회수 
+	@Override
+	public int productViewCountUp(int no) {
+		// TODO Auto-generated method stub
+		return pmdao.productViewCountUp(session,no);
+	}
+	
 }
 
 	

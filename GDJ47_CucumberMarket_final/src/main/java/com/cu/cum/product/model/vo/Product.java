@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,6 +21,7 @@ import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.DynamicInsert;
 
 import com.cu.cum.member.model.vo.Member;
+import com.cu.cum.wishlist.model.vo.WishList;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -106,4 +106,8 @@ public class Product {
 //		return proNo+" "+categoryName+" "+title+" "+proStatus+" "+price+" "+proCount+" "+enrollDate+" "+solveStatus+" "+region
 //				+"files : "+files.get(0).getRenameFilename();
 //	}
+	@ToString.Exclude
+	@Cascade(CascadeType.REMOVE)
+	@OneToMany(mappedBy="product", fetch = FetchType.LAZY)
+	private List<WishList> WishList;
 }

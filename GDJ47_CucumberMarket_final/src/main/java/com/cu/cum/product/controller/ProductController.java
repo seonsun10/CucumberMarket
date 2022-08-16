@@ -11,7 +11,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -23,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.product.model.service.FilesService;
@@ -194,7 +195,6 @@ public class ProductController {
 			m.addAttribute("msg","삭제 성공");
 		}catch(Exception e) {
 			m.addAttribute("msg","삭제 실패");
-			
 //			e.printStackTrace();
 		}
 		return "common/msg";
@@ -247,7 +247,8 @@ public class ProductController {
 	
 	//상품 상세페이지
 	@RequestMapping("/product/productView.do")
-	public String productView(HttpServletRequest request) {
+	public String productView(HttpServletRequest request,
+								HttpServletResponse response) {
 		String id = request.getParameter("id");
 		int no = Integer.parseInt(request.getParameter("no"));
 		String tag = request.getParameter("tag");
@@ -257,7 +258,32 @@ public class ProductController {
 		System.out.println(id+" "+no+" "+tag);
 		Member m = Member.builder().userId(id).build();
 		Product p = Product.builder().proNo(no).build();
-		
+		Cookie oldCookie = null;
+	    Cookie[] cookies = request.getCookies();
+	    if (cookies != null) {
+	        for (Cookie cookie : cookies) {
+	            if (cookie.getName().equals("proView")) {
+	                oldCookie = cookie;
+	            }
+	        }
+	    }
+	    if(!id.equals("no")&&!name.equals("no")) {
+		    if (oldCookie != null) {
+		        if (!oldCookie.getValue().contains("[" + id.toString() + no + "]")) {
+		            service.productViewCountUp(no);
+		            oldCookie.setValue(oldCookie.getValue() + "_[" + id + no + "]");
+		            oldCookie.setPath("/");
+		            oldCookie.setMaxAge(60 * 60 * 12);
+		            response.addCookie(oldCookie);
+		        }
+		    } else {
+		        service.productViewCountUp(no);
+		        Cookie newCookie = new Cookie("proView","[" + id + no + "]");
+		        newCookie.setPath("/");
+		        newCookie.setMaxAge(60 * 60 * 12);
+		        response.addCookie(newCookie);
+		    }
+	    }
 		//상품상세페이지에 가져갈 상품 가져오기
 		Product result = service.productCheck(no);
 		System.out.println("상품정보 가져온거 : "+result);

@@ -80,4 +80,6 @@ public interface ProductService {
 	//userId로 상품 출력 jpa페이징
 	List<Product> findAllByMember(Pageable p, Member m);
 	
+	//상품 조회수
+	int productViewCountUp(int no);
 }

@@ -17,26 +17,26 @@
 	
 	</resultMap>
 	
-	<select id="selectboardlist" resultMap="boardMap">
+	<select id="selectboardlist" parameterType="string"  resultMap="boardMap">
 	
-	select * from board left join commentcount on boardid=boardref order by createdate desc
+	select * from board left join commentcount on boardid=boardref where board.boardregion=#{region} order by createdate desc
 	</select>
 	<insert id="insertboard" parameterType="board" >
-	insert into board values(seq_boardid.nextval,#{userId},#{boardCategory},#{boardTitle},#{boardContent},null,sysdate,0)
+	insert into board values(seq_boardid.nextval,#{userId},#{boardCategory},#{boardTitle},#{boardContent},null,sysdate,0,#{boardregion})
 	</insert>
 	<select id="selectboard" parameterType="_int" resultMap="boardMap">
 	select * from board where boardid=#{boardId}
 	</select>
-	<select id="selectboardcount" resultType="_int">
-	select count(*) from board
+	<select id="selectboardcount" parameterType="string" resultType="_int">
+	select count(*) from board where boardregion=#{region}
 	</select>
 	
 	<select id="selectboardlist2" resultMap="boardMap">
 	
-	select * from board left join commentcount on boardid=boardref where board.boardcategory=#{category}order by createdate desc
+	select * from board left join commentcount on boardid=boardref where board.boardcategory=#{boardCategory} and board.boardregion=#{boardregion} order by createdate desc
 	</select>
-	<select id="selectboardcount2" resultType="_int">
-	select count(*) from board where boardcategory=#{category}
+	<select id="selectboardcount2" parameterType="board" resultType="_int">
+	select count(*) from board where boardcategory=#{boardCategory} and boardregion=#{boardregion}
 	</select>
 	<select id="recommendcheck" parameterType="com.cu.cum.board.model.vo.RecommendList" resultType="_int">
 	select count(*) from recommendlist where rec_userid=#{rec_UserId} and rec_boardid=#{rec_BoardId}
@@ -149,11 +149,11 @@
     <select id="selectboardcommentlist2" parameterType="_int" resultType="com.cu.cum.board.model.vo.BoardComment">
     	select * from board_comment where boardref=#{boardId} start with boardcommentlevel=1 connect by prior boardcommentno=boardcommentref
     </select>
-    <select id="selectpopularlist" resultMap="boardMap">
-	    select rec_boardid as boardid
+    <select id="selectpopularlist" parameterType="string" resultMap="boardMap">
+	   select boardid
 		from 
 		(select e.*,rownum as rank_
-		from(select s.* from popularboard s order by s.recommendcount desc)e)
+		from(select s.* from (select boardid,recommendcount from board where boardregion=#{region}) s order by s.recommendcount desc)e)
 		where rank_ between 1 and 5
     </select>
     <select id="selectBaordRecommendCount" parameterType="_int" resultType="_int">
@@ -163,6 +163,33 @@
     <select id="selectRecommendList" parameterType="_int" resultType="com.cu.cum.board.model.vo.RecommendList">
     select * from recommendlist where rec_boardid =#{boardId}
     </select>
+	
+	
+	<select id="selectregion" parameterType="string" resultType="string">
+	
+	select region from member where userid=#{userid}
+	</select>
+	
+	<select id="searchboardlist" parameterType="com.cu.cum.board.model.vo.Search" resultType="com.cu.cum.board.model.vo.Board">
+	<if test='type.equals("boardTitle")'>
+	select * from board where boardregion=#{region} and boardTitle like '%'||#{keyword}||'%'
+	</if>
+	<if test='type.equals("userId")'>
+	select * from board where boardregion=#{region} and userid like '%'||#{keyword}||'%'
+	</if>
+	</select>
+	
+	<select id="searchboardcount" parameterType="com.cu.cum.board.model.vo.Search" resultType="_int">
+	<if test='type.equals("boardTitle")'>
+	select count(*) from board where boardregion=#{region} and boardTitle like '%'||#{keyword}||'%'
+	</if>
+	<if test='type.equals("userId")'>
+	select count(*) from board where boardregion=#{region} and userid like '%'||#{keyword}||'%'
+	</if>
+	</select>
+	
+	
+	
 	
 	
 	
