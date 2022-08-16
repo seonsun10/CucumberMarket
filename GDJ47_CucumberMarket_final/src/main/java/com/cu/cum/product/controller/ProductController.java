@@ -226,7 +226,7 @@ public class ProductController {
 				renames.add(f.getRenameFilename());
 			}
 		}
-		System.out.println(renames);
+		System.out.println("상품 전체 페이지 : "+renames);
 		m.addAttribute("renames",renames);
 		m.addAttribute("productCount",service.selectCategoryCount(tag));
 		m.addAttribute("product",products);
@@ -372,12 +372,7 @@ public class ProductController {
 		int rndNum=(int)(Math.random()*10000);
 		String rename = "s_"+userId+"_"+rndNum+ext;
 		try {
-			//먼저 원래 db에 있던 이미지 파일을 폴더에서 삭제한다음 
-			for(int i=0; i<beforefiles.size(); i++) {
-				beforefilename.add(beforefiles.get(i).getRenameFilename());
-				File f = new File(path+beforefilename.get(i));
-				if(f.exists()) f.delete();
-			}
+			
 			afterfiles.add(Files.builder()
 					.filesNo(beforefiles.get(0).getFilesNo()) //원래 이미지 테이블에 대표이미지가 첫 인덱스이므로 0번 인덱스에 파일번호를 가져옴
 					.product(product)
@@ -460,8 +455,14 @@ public class ProductController {
 						}
 				}
 		}	
-		List<Files> f = fService.insertFiles(afterfiles);
-		System.out.println(f);
+		List<Files> ff = fService.insertFiles(afterfiles);
+		//db에서 수정을 하고 나서 마무리로 폴더에 있는 이미지 삭제시켜야함
+		for(int i=0; i<beforefiles.size(); i++) {
+			beforefilename.add(beforefiles.get(i).getRenameFilename());
+			File f = new File(path+beforefilename.get(i));
+			if(f.exists()) f.delete();
+		}
+		System.out.println("수정 db거치고 나서 마무리 : "+ff);
 		return "member/mypage";
 	}
 	

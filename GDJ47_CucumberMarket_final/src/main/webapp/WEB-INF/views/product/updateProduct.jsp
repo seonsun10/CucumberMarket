@@ -41,7 +41,7 @@
               <div class="box">
                 <h1>상품 수정</h1>
                 <p>이미지는 하나이상 꼭 첨부해야합니다.</p>
-                <form action="${path }/product/updateProduct.do" method="post" enctype="multipart/form-data">	
+                <form action="${path }/product/updateProduct.do" method="post" enctype="multipart/form-data" onsubmit="return fn_insertProduct()">	
 						<input type="button" value="상품 이미지 추가" onclick="attachFile.add()" style="margin-bottom:5px">
 						<div class="row" id="row22">
 						<div class="col-md-6">
@@ -89,8 +89,8 @@
 						</label>
 						<label class="radio-inline">
 						  <c:if test="${proStatus eq 'n' }">
-						  <input type="radio" name="proStatus" id="inlineRadio1" value="y" > 중고상품
-						  <input type="radio" name="proStatus" id="inlineRadio2" value="n" checked> 새상품
+						  <input type="radio" name="proStatus" id="proStatus1" value="y" > 중고상품
+						  <input type="radio" name="proStatus" id="proStatus2" value="n" checked> 새상품
 						  </c:if>
 						</label><br>
 						<input id="userId" name="userId"  type="hidden" value="${loginMember.userId }"/>
@@ -132,7 +132,7 @@
     	  } else {
     	    document.getElementById('preview1').src = "";
     	  }
-    	}
+    }
     	
     	
     	attachFile = {
@@ -183,5 +183,19 @@
     				console.log(idx);
     	        }
     	    }
+    	
+    	
+    	
+    	function fn_insertProduct(){
+    		var status = $("input[name='proStatus']:checked").val();
+    		if(status==null){
+    			alert('상품 상태를 체크해주세요');
+    			return false;
+    		}
+    		return true;
+    	}
+    		
+    		
+    	
       </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

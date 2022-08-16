@@ -41,7 +41,7 @@
               <div class="box">
                 <h1>상품 등록</h1>
                 
-                <form action="${path }/product/insertProduct.do" method="post" enctype="multipart/form-data">	
+                <form action="${path }/product/insertProduct.do" method="post" enctype="multipart/form-data" onsubmit="return fn_insertProduct()">	
 						<input type="button" value="상품 이미지 추가" onclick="fn_attachFile.add()" style="margin-bottom:5px">
 						<div class="row" id="row22">
 						<div class="col-md-6">
@@ -177,6 +177,16 @@ fn_attachFile = {
 				console.log(idx);
 	        }
 	    }
+	    
+	    
+	function fn_insertProduct(){
+	var status = $("input[name='proStatus']:checked").val();
+	if(status==null){
+		alert('상품 상태를 체크해주세요');
+		return false;
+	}
+	return true;
+}
 </script>	
 			
 
