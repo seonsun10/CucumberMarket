@@ -188,12 +188,14 @@ public class ProductController {
 			File f = new File(path+filename.get(i));
 			if(f.exists()) f.delete();
 		}
+		m.addAttribute("loc","member/mypage.do");
 		try {
 			List<Product> result=service.deleteProduct(proNo);
 			m.addAttribute("msg","삭제 성공");
 		}catch(Exception e) {
 			m.addAttribute("msg","삭제 실패");
-			e.printStackTrace();
+			
+//			e.printStackTrace();
 		}
 		return "common/msg";
 	}
@@ -205,7 +207,7 @@ public class ProductController {
 	@RequestMapping("/product/productTotal.do")
 	public String productTotal(@RequestParam("tag") String tag,
 								@RequestParam(defaultValue="1") int cPage,
-								@RequestParam(defaultValue="40") int numPerpage,
+								@RequestParam(defaultValue="200") int numPerpage,
 								Model m) throws Exception{
 		System.out.println(tag);
 		List<Product> products = service.findAllByCategoryName(PageRequest.of((cPage-1)*numPerpage, numPerpage,Sort.by("enrollDate").descending()), tag);
@@ -372,6 +374,11 @@ public class ProductController {
 		int rndNum=(int)(Math.random()*10000);
 		String rename = "s_"+userId+"_"+rndNum+ext;
 		try {
+			for(int i=0; i<beforefiles.size(); i++) {
+				beforefilename.add(beforefiles.get(i).getRenameFilename());
+				File f = new File(path+beforefilename.get(i));
+				if(f.exists()) f.delete();
+			}
 			
 			afterfiles.add(Files.builder()
 					.filesNo(beforefiles.get(0).getFilesNo()) //원래 이미지 테이블에 대표이미지가 첫 인덱스이므로 0번 인덱스에 파일번호를 가져옴
@@ -397,18 +404,13 @@ public class ProductController {
  					if(f!=null) {
 						String originalFilename2 = f.getOriginalFilename();
 						if(originalFilename2!=null) {
-							System.out.println(originalFilename2);
-							System.out.println("아래꺼 : "+originalFilename2.lastIndexOf("."));
+							
 							String extt = originalFilename2.substring(originalFilename2.lastIndexOf("."));
 							
 							rndNum=(int)(Math.random()*10000);
 							String rename1 = userId+"_"+rndNum+extt;
 							
 							try {
-								
-								
-								
-								
 								afterfiles.add(Files.builder()
 									.filesNo(beforefiles.get(count).getFilesNo())
 									.product(p)
@@ -457,11 +459,7 @@ public class ProductController {
 		}	
 		List<Files> ff = fService.insertFiles(afterfiles);
 		//db에서 수정을 하고 나서 마무리로 폴더에 있는 이미지 삭제시켜야함
-		for(int i=0; i<beforefiles.size(); i++) {
-			beforefilename.add(beforefiles.get(i).getRenameFilename());
-			File f = new File(path+beforefilename.get(i));
-			if(f.exists()) f.delete();
-		}
+
 		System.out.println("수정 db거치고 나서 마무리 : "+ff);
 		return "member/mypage";
 	}

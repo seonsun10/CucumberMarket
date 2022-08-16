@@ -58,7 +58,7 @@ div#mp-h{
 	display:flex;
 }
 #mp-ba>div{
-	padding-right:65px;
+	padding-right:55px;
 }
 
 div#myList{
@@ -117,6 +117,7 @@ tr#tablebody>td{
 	padding: 20px 0px;
 	border-bottom:1px solid rgb(229,229,229);
 	text-align:center;
+	width:200px;
 }
 tr#tablehead>th{
 	width:550px;
@@ -136,5 +137,4 @@ tr#tablehead>th{
 	text-align:center;
 	padding:20px 0 0 0;
 }
-/* mypageReview */
 

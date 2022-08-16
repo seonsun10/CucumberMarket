@@ -18,33 +18,26 @@
 			</span>
 		</c:if>
 	</div>
-	<div id="pro-right">
-		<select id="listOption">
-			<option>1</option>
-			<option>2</option>
-			<option>3</option>
-		</select>
-	</div>
 </div>
 <div id="pro-body">
 	<c:if test="${product ne null }">
-		<c:forEach var="p" items="${product }">
+		<c:forEach var="p" items="${product }" varStatus="status">
 			<div id="pro-box">
-				<a href="#">
+				<a href="${path }/product/productView.do?id=${loginMember.userId}&no=${p.proNo}&tag=${p.categoryName}&name=${p.member.userId}">
 					<div id="pro-img">
-						<img src="${path }/resources/img/cucumber.png"/>
+						<img src="${path }/resources/upload/product/${renames[status.index]}"/>
 					</div>
 					<div id="pro-title">
-						<div id="pro-head2">제목</div>
+						<div id="pro-head2"><c:out value="${p.title }"/></div>
 						<div id="pro-body2">
-							<div style="color:black;">1000원</div>
-							<div id="pro-date">3일 전</div>
+							<div style="color:black;"><c:out value="${p.price }"/>원</div>
+							<div id="pro-date"><c:out value="${dayList[status.index] }"/>일 전</div>
 						</div>
 					</div>
 					<div id="pro-foot">
 						<img id="add-img" src="${path }/resources/img/위치.png">
 						<div id="pro-add">									
-							서울특별시 은평구 불광제3동
+							<c:out value="${p.region }"/>
 						</div>
 					</div>
 				</a>

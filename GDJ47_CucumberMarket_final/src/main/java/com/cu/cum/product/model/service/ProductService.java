@@ -76,6 +76,8 @@ public interface ProductService {
 	
 	//상품 검색
 	List<Product> searchProduct(String keyword);
-
+	
+	//userId로 상품 출력 jpa페이징
+	List<Product> findAllByMember(Pageable p, Member m);
 	
 }

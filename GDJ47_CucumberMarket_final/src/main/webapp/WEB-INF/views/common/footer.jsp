@@ -89,7 +89,7 @@
 
     
 
-    <script src="${path}/resources/js/mypage.js"></script>
+    
 	<%-- <script src="${path}/resources/file/js/fileupload.js"></script> --%>
 
     

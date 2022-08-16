@@ -24,6 +24,7 @@ div#pro-box{
 div#pro-img>img{
 	width:157px;
 	border-bottom:1px solid rgb(229,229,229);
+	height:157px;
 }
 div#pro-title{
 	padding:3%;
@@ -40,6 +41,9 @@ div#pro-body2{
 div#pro-head2{
 	padding-bottom:7%;
 	font-size:12px;
+	text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 div#pro-foot{
 	padding:3%;
