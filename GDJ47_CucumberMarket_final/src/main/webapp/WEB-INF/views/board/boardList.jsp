@@ -25,7 +25,7 @@
   top:150px; 
   right: 90px;
   font-size: 14px;
-  
+    
 
 }
 </style>
@@ -34,13 +34,52 @@
       <div id="content">
      
         <div class="container">
-           
+         <div style="text-align: left; font-size:14px; font-weight: bold;"><i>${region }</i></div>
+          
           <div class="row">
             <!--
             *** LEFT COLUMN ***
             _________________________________________________________
             -->
             <div id="blog-listing" class="col-lg-9">
+            <div class="input-group">
+            				
+	                      		<div class="products-sort-by mt-2 mt-lg-0">
+                        			<select name="searchType" class="form-control" id="bType" >
+                          				<option value="boardTitle" selected >제목</option>
+                          				<option value="userId">닉네임</option>
+                          				
+                        			</select>
+                     			 </div>
+              					<input name="keyword" type="text" placeholder="오이마켓 동네생활" class="form-control" id="bKeyword">
+				              	<div class="input-group-append">
+					                <button type="submit" class="btn btn-primary" id="bSearch"><i class="fa fa-search"></i></button>
+				              	</div>
+				            
+				            <!-- </div>
+							<div class="input-group-append"> -->
+			</div>
+			<script>
+			$("#bSearch").click(function(){
+				var btype = $("#bType").val();
+				var bkeyword = $("#bKeyword").val();
+				console.log(btype+bkeyword);
+				location.assign('${path}/board/bsearch/'+btype+'/'+bkeyword);
+				/* $.ajax({
+					data:JSON.stringify({type:btype,keyword:bkeyword}),
+					headers:{"Content-Type":"application/json"},
+					url:'/bsearch',
+					type:"POST",
+					success:data=>{
+						console.log(data);
+					}
+					
+				}); */
+			});
+			
+			</script>
+			
+			
               <div class="box">
                
                 <h1>동네 생활</h1>

@@ -18,13 +18,6 @@
 			</span>
 		</c:if>
 	</div>
-	<div id="pro-right">
-		<select id="listOption">
-			<option>1</option>
-			<option>2</option>
-			<option>3</option>
-		</select>
-	</div>
 </div>
 <div id="pro-body">
 	<table>
@@ -38,10 +31,10 @@
 			<c:if test="${wish ne null}">
 				<c:forEach var="d" items="${wish }" varStatus="status">
 					<tr id="tablebody">
-						<td><img src="${path }/resources/upload/product/${renames[status.index]}" style="width:50px;"></td>
-						<td><c:out value="${d.title }"/></td>
-						<td><c:out value="${d.price }"/>원</td>
-						<td><fmt:formatDate value="${d.enrollDate}" pattern="yyyy-MM-dd"/></td>
+						<td onclick="location.assign('${path}/product/productView.do?id=${loginMember.userId}&no=${d.proNo}&tag=${d.categoryName}&name=${d.member.userId}')"><img src="${path }/resources/upload/product/${renames[status.index]}" style="width:50px;"></td>
+						<td onclick="location.assign('${path}/product/productView.do?id=${loginMember.userId}&no=${d.proNo}&tag=${d.categoryName}&name=${d.member.userId}')"><c:out value="${d.title }"/></td>
+						<td onclick="location.assign('${path}/product/productView.do?id=${loginMember.userId}&no=${d.proNo}&tag=${d.categoryName}&name=${d.member.userId}')"><c:out value="${d.price }"/>원</td>
+						<td onclick="location.assign('${path}/product/productView.do?id=${loginMember.userId}&no=${d.proNo}&tag=${d.categoryName}&name=${d.member.userId}')"><fmt:formatDate value="${d.enrollDate}" pattern="yyyy-MM-dd"/></td>
 						<td><button>삭제</button></td>
 					</tr>
 				</c:forEach>

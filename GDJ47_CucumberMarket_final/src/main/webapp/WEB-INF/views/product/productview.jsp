@@ -3,8 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
+<c:set var="snsTitle" value="${result.title }"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <link rel="stylesheet" href="${path}/resources/css/product/productView.css">
+<link rel="stylesheet" href="${path}/resources/css/category.css">
 <style>
 .link-icon { position: relative; display: inline-block;  width:40px;  font-size: 14px; font-weight: 500; color: #333; margin-right: 20px; padding-top: 50px; }
 .link-icon.twitter { background-image: url(../resources/img/icon-twitter.png); background-repeat: no-repeat; }
@@ -12,6 +14,7 @@
 .link-icon.kakao { background-image: url(../resources/img/icon-kakao.png); background-repeat: no-repeat; }
 .link-icon.band { background-image: url(../resources/img/band.png); background-repeat: no-repeat;}
 </style>
+
 <div id="all">
       <div id="content">
         <div class="container">
@@ -37,19 +40,20 @@
                   <h3 class="h4 card-title">카테고리</h3>
                 </div>
                 <div class="card-body">
-                  <ul class="nav nav-pills flex-column category-menu">
-                    <li><a href="category.html" class="nav-link active">여성의류<span class="badge badge-secondary"></span></a>
-                      <ul class="list-unstyled">
+                  <div class="menu1" >
+                  <span class="">여성의류</span>
+                  	<ul class="sub1 up">
                         <li><a href="${path }/product/productTotal.do?tag=패딩" class="nav-link">패딩</a></li>
                         <li><a href="${path }/product/productTotal.do?tag=코트" class="nav-link">코트</a></li>
                         <li><a href="${path }/product/productTotal.do?tag=반팔" class="nav-link">반팔</a></li>
                         <li><a href="${path }/product/productTotal.do?tag=긴팔" class="nav-link">긴팔</a></li>
                         <li><a href="${path }/product/productTotal.do?tag=셔츠" class="nav-link">셔츠</a></li>
                         <li><a href="${path }/product/productTotal.do?tag=바지" class="nav-link">바지</a></li>
-                      </ul>
-                    </li>
-                    <li><a href="category.html" class="nav-link active">남성의류<span class="badge badge-light"></span></a>
-                      <ul class="list-unstyled">
+                   </ul>
+                   </div>
+                   <div class="menu2">
+                   <span class="">남성의류</span>
+                      <ul class="sub2 up">
                         <li><a href="${path }/product/productTotal.do?tag=남성패딩" class="nav-link">패딩</a></li>
                         <li><a href="${path }/product/productTotal.do?tag=남성코트" class="nav-link">코트</a></li>
                         <li><a href="${path }/product/productTotal.do?tag=남성반팔" class="nav-link">반팔</a></li>
@@ -57,63 +61,64 @@
                         <li><a href="${path }/product/productTotal.do?tag=남성셔츠" class="nav-link">셔츠</a></li>
                         <li><a href="${path }/product/productTotal.do?tag=남성바지" class="nav-link">바지</a></li>
                       </ul>
-                    </li>
-                    <li><a href="category.html" class="nav-link active">신발<span class="badge badge-secondary">11</span></a>
-                      <ul class="list-unstyled">
+                    </div>
+                    
+                    <div class="menu3">
+                    <span class="">신발</span>
+                      <ul class="sub3">
                         <li><a href="${path }/product/productTotal.do?tag=스니커즈" class="nav-link">스니커즈</a></li>
                         <li><a href="${path }/product/productTotal.do?tag=구두" class="nav-link">구두</a></li>
                         <li><a href="${path }/product/productTotal.do?tag=슬리퍼" class="nav-link">슬리퍼</a></li>
                         <li><a href="${path }/product/productTotal.do?tag=샌들" class="nav-link">샌들</a></li>
                         <li><a href="${path }/product/productTotal.do?tag=운동화" class="nav-link">운동화</a></li>
-                        
                       </ul>
-                    </li>
-                    <li><a href="category.html" class="nav-link active">디지털/가전<span class="badge badge-secondary"></span></a>
-                      <ul class="list-unstyled">
+                    </div>
+                    <div class="menu4">
+                    <span class="">디지털/가전</span>
+                      <ul class="sub4">
                         <li><a href="${path }/product/productTotal.do?tag=모바일" class="nav-link">모바일</a></li>
                         <li><a href="${path }/product/productTotal.do?tag=가전제품" class="nav-link">가전제품</a></li>
                         <li><a href="${path }/product/productTotal.do?tag=컴퓨터" class="nav-link">컴퓨터</a></li>
                         <li><a href="${path }/product/productTotal.do?tag=게임" class="nav-link">게임</a></li>
                         <li><a href="${path }/product/productTotal.do?tag=카메라" class="nav-link">카메라</a></li>
-                        
                       </ul>
-                    </li>
-                    <li><a href="category.html" class="nav-link active">차량/오토바이<span class="badge badge-secondary"></span></a>
-                      <ul class="list-unstyled">
+                    </div>
+                    <div class="menu5">
+                    <span class="">차량/오토바이</span>
+                      <ul class="sub5"> 
                         <li><a href="${path }/product/productTotal.do?tag=국산차" class="nav-link">국산차</a></li>
                         <li><a href="${path }/product/productTotal.do?tag=수입차" class="nav-link">수입차</a></li>
                         <li><a href="${path }/product/productTotal.do?tag=차량용품" class="nav-link">차량용품</a></li>
                         <li><a href="${path }/product/productTotal.do?tag=오토바이" class="nav-link">오토바이</a></li>
                         <li><a href="${path }/product/productTotal.do?tag=오토바이용품" class="nav-link">오토바이 용품</a></li>
-                        
                       </ul>
-                    </li>
-                    <li><a href="category.html" class="nav-link active">도서/티켓/문구<span class="badge badge-secondary"></span></a>
-                      <ul class="list-unstyled">
+                    </div>
+                    <div class="menu6">
+                    <span class="">도서/티켓/문구</span>
+                      <ul class="sub6">
                         <li><a href="${path }/product/productTotal.do?tag=도서" class="nav-link">도서</a></li>
                         <li><a href="${path }/product/productTotal.do?tag=티켓" class="nav-link">티켓</a></li>
                         <li><a href="${path }/product/productTotal.do?tag=문구" class="nav-link">문구</a></li>
-                        
                       </ul>
-                    </li>
-                    <li><a href="category.html" class="nav-link active">가구/인테리어<span class="badge badge-secondary"></span></a>
-                      <ul class="list-unstyled">
+                      </div>
+                    <div class="menu7">
+                    <span class="">가구/인테리어</span>
+                      <ul class="sub7">
                         <li><a href="${path }/product/productTotal.do?tag=가구" class="nav-link">가구</a></li>
                         <li><a href="${path }/product/productTotal.do?tag=인테리어" class="nav-link">인테리어</a></li>
-                       
+
                       </ul>
-                    </li>
-                    <li><a href="category.html" class="nav-link active">스포츠<span class="badge badge-secondary"></span></a>
-                      <ul class="list-unstyled">
+                   </div>
+                   <div class="menu8">
+                   <span class="">스포츠</span>
+                      <ul class="sub8">
                         <li><a href="${path }/product/productTotal.do?tag=골프" class="nav-link">골프</a></li>
                         <li><a href="${path }/product/productTotal.do?tag=캠핑" class="nav-link">캠핑</a></li>
                         <li><a href="${path }/product/productTotal.do?tag=낚시" class="nav-link">낚시</a></li>
                         <li><a href="${path }/product/productTotal.do?tag=축구" class="nav-link">축구</a></li>
                         <li><a href="${path }/product/productTotal.do?tag=헬스" class="nav-link">헬스</a></li>
-                        
                       </ul>
-                    </li>                                        
-                  </ul>
+                  </div>
                 </div>
               </div>
             </div>
@@ -160,11 +165,7 @@
                     </p>
                   </div>
                   
-                  <div data-slider-id="1" class="owl-thumbs">
-                    <button class="owl-thumb-item"><img src="img/detailsquare.jpg" alt="" class="img-fluid"></button>
-                    <button class="owl-thumb-item"><img src="img/detailsquare2.jpg" alt="" class="img-fluid"></button>
-                    <button class="owl-thumb-item"><img src="img/detailsquare3.jpg" alt="" class="img-fluid"></button>
-                  </div>
+                  
                   
                 </div>
               </div>
@@ -176,11 +177,12 @@
                 <h4>${result.proContent }</h4>
                 <hr>
                 <div class="social">
+                  <c:set var="title" value="${result.title }"/>
                   <h4>공유하기</h4>
-				    <a id="btnTwitter" onclick="fn_sendFB('twitter');return false;" class="link-icon twitter" target="_self" title="카카오톡 새창열림">&nbsp;</a>
-					<a id="btnFacebook" onclick="fn_sendFB('facebook');return false;" class="link-icon facebook" target="_self" title="카카오톡 새창열림">&nbsp;</a>    
-					<a id="btnKakao" onclick="fn_sendFB('kakao');return false;" class="link-icon kakao" target="_self" title="카카오톡 새창열림" >&nbsp;</a>
-					<a id="btnBand" onclick="fn_sendFB('band'); return false;" class="link-icon band" target="_self" title="카카오톡 새창열림">&nbsp;</a>
+                    <a id="btnKakao" onclick="fn_sendFB('kakao');return false;" class="link-icon kakao" target="_self" title="카카오톡 새창열림" >&nbsp;</a>
+                    <a id="btnBand" onclick="fn_sendFB('band'); return false;" class="link-icon band" target="_self" title="밴드 새창열림">&nbsp;</a>
+                    <a id="btnFacebook" onclick="fn_sendFB('facebook');return false;" class="link-icon facebook" target="_self" title="페이스북 새창열림">&nbsp;</a>
+				    <a id="btnTwitter" onclick="fn_sendFB('twitter');return false;" class="link-icon twitter" target="_self" title="트위터 새창열림">&nbsp;</a>
                 </div>
               </div>
               
@@ -214,9 +216,11 @@
                 </c:if>
          </div>
          </div>
-            </div>
-            </div>
-
+         </div>
+         </div>
+        
+	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+	
     <script>
       const count = ${count}
     const id = "${id}"
@@ -246,40 +250,67 @@
     }
     function fn_sendFB(sns) {
         var thisUrl = document.URL;
-        var snsTitle = "2021 웹진 [봄]";
+        console.log(thisUrl);
+        var snsTitle = '<c:out value="${snsTitle}"/>';
+        console.log(snsTitle);
         if( sns == 'facebook' ) {
             var url = "http://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(thisUrl);
-            window.open(url, "", "width=486, height=286");
+            window.open(url, "", "width=500, height=500");
         }
         else if( sns == 'twitter' ) {
             var url = "http://twitter.com/share?url="+encodeURIComponent(thisUrl)+"&text="+encodeURIComponent(snsTitle);
-            window.open(url, "tweetPop", "width=486, height=286,scrollbars=yes");
+            window.open(url, "tweetPop", "width=500, height=500,scrollbars=yes");
         }
         else if( sns == 'band' ) {
             var url = "http://www.band.us/plugin/share?body="+encodeURIComponent(snsTitle)+"&route="+encodeURIComponent(thisUrl);
-            window.open(url, "shareBand", "width=400, height=500, resizable=yes");
+            window.open(url, "shareBand", "width=500, height=500, resizable=yes");
         }
         else if( sns == 'kakao' ) {
             // 사용할 앱의 JavaScript 키 설정
-            Kakao.init('00357f88543d6b75340e69e7b3972b9d');
-            
+            //Kakao.init('00357f88543d6b75340e69e7b3972b9d');
+            try {
+		        if (Kakao) {
+		            Kakao.init('00357f88543d6b75340e69e7b3972b9d');
+		        };
+		    } catch(e) {};
             // 카카오링크 버튼 생성
-            Kakao.Link.createDefaultButton({
-                container: '#btnKakao', // HTML에서 작성한 ID값
-                objectType: 'feed',
-                content: {
-                title: "2021 웹진 [봄]", // 보여질 제목
-                description: "2021 웹진 [봄]", // 보여질 설명
-                imageUrl: thisUrl, // 콘텐츠 URL
-                link: {
-                    mobileWebUrl: thisUrl,
-                    webUrl: thisUrl
-                }
-                }
-            });
+
+            Kakao.Share.sendDefault({
+            	  objectType: 'feed',
+            	  content: {
+            	    title: snsTitle,
+            	    /* description: '아메리카노, 빵, 케익', */
+            	    imageUrl:
+            	    	thisUrl,
+            	    link: {
+            	      mobileWebUrl: thisUrl,
+            	      androidExecutionParams: 'test',
+            	    },
+            	  },
+/*             	  social: {
+            		    likeCount: 10,
+            		    commentCount: 20,
+            		    sharedCount: 30,
+                  }, */
+            		  buttons: [
+            			    {
+            			      title: '오이마켓으로 이동',
+            			      link: {
+            			        mobileWebUrl: thisUrl,
+            			      }
+            			    }
+/*             			    {
+            			      title: '앱으로 이동',
+            			      link: {
+            			        mobileWebUrl: 'https://developers.kakao.com',
+            			      },
+            			    }, */
+            			  ]
+            })
         }
     }
     
+
     $("#chat-Btn").on("click",function(){
     	console.log('${result.member.userId}');
     	console.log('${loginMember.userId}');
@@ -311,6 +342,7 @@
  	});
      
     
+
     const openchat=()=>{
     	console.log('${result.member.userId}');
     	console.log('${loginMember.userId}');
@@ -339,7 +371,6 @@
       		 }
       	 }); 
 		};
-    
     </script>
-    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script src="${path }/resources/js/category.js"></script>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

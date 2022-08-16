@@ -119,7 +119,7 @@ function fn_ajaxPage1(pageNo){
 };
 function fn_ajaxPage2(pageNo,numPerpage){
 	$.ajax({
-		url:"/member/mypageProduct.do",
+		url:"/member/mypage"+$("#page").val()+".do",
 		data:{"cPage":pageNo,"numPerpage":numPerpage,"userId":$("#userIdd").val()},
 		dataType:"html",
 		success:data=>{
@@ -152,8 +152,6 @@ function fn_ajaxPage6(pageNo,numPerpage){
 const pwcheck=()=>{
 	const pw1 = $("#newPw");
 	const pw2 = $("#password_2");
-	const oldPw = $("#oldPw");
-	const userId = $("#email").val();
 	if(pw1.val()!=pw2.val()){
 		alert("비밀번호를 확인해주세요!");
 		pw2.focus();

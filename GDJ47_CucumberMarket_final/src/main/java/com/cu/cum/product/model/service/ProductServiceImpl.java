@@ -185,7 +185,14 @@ public class ProductServiceImpl implements ProductService {
 		// TODO Auto-generated method stub
 		return pmdao.searchProduct(session,keyword);
 	}
-
+	
+	//jpa 상품 페이징
+	@Override
+	public List<Product> findAllByMember(Pageable p, Member m) {
+		// TODO Auto-generated method stub
+		return dao.findAllByMember(p, m);
+	}
+	
 }
 
 	

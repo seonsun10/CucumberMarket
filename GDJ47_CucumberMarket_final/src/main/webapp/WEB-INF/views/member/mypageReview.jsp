@@ -18,13 +18,6 @@
 			</span>
 		</c:if>
 	</div>
-	<div id="pro-right">
-		<select id="listOption">
-			<option>1</option>
-			<option>2</option>
-			<option>3</option>
-		</select>
-	</div>
 </div>
 <c:if test="${review ne null }">
 	<c:forEach var="r" items="${review }" varStatus="status">

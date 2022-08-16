@@ -16,14 +16,17 @@
     <div id="map" style="width:700px;height:100%; position:relative;overflow:hidden;"></div>
 	    <div class="hAddr">
 	        <span class="title">지도중심기준 행정동 주소정보</span>
-	        <form action="${path }/testarea.do" method="post">
+	        <%-- <form action="${path }/testarea.do" method="post"> --%>
 	        <input type="text" id="centerAddr" name="address" readonly>
-	        <input type="submit" value="적용">
-	        </form>
+	        <button type="button"  id="getMyPositionBtn" onclick="getCurrentPosBtn()">내 위치 가져오기</button>
+	       <!--  </form> -->
 	    </div>
 	</div>
 	<br>
-	<button type="button" class="btn btn-lg btn-primary" id="getMyPositionBtn" onclick="getCurrentPosBtn()">내 위치 가져오기</button>
+	
+	<input type="button" onclick="setParentText()" value="적용">
+	<input type="button" value="창 닫기" onclick="window.close();">
+	
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=00357f88543d6b75340e69e7b3972b9d&libraries=services"></script>
 	<br>
 	<br>
@@ -89,7 +92,7 @@ function displayCenterInfo(result, status) {
 if (status === kakao.maps.services.Status.OK) {
     var infoDiv = document.getElementById('centerAddr');
 
-    for(var i = 0; i < 3; i++) {
+    for(var i = 0; i <= 2; i++) {
         // 행정동의 region_type 값은 'H' 이므로
         if (result[i].region_type === 'H') {
             infoDiv.value = result[i].address_name;
@@ -125,4 +128,17 @@ function getCurrentPosBtn(){
 navigator.geolocation.getCurrentPosition(locationLoadSuccess,locationLoadError);
 console.log()
 };
+
+
+function setParentText(){        
+	var region = document.getElementById("centerAddr").value;
+	region.split(" ");
+	var result = region.split(" ");
+	var first = result[0];
+	var second = result[1];
+	var rr = first+' '+second;
+	console.log(rr);
+	opener.document.getElementById("region").value = rr;
+	window.close();      
+}
 </script>

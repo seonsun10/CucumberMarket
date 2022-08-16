@@ -39,15 +39,15 @@ public class BoardServiceImpl implements BoardService {
 		return dao.selectBoard(session,boardId);
 	}
 	@Override
-	public int selectboardCount() {
+	public int selectboardCount(String region) {
 		// TODO Auto-generated method stub
-		return dao.selectboardCount(session);
+		return dao.selectboardCount(session,region);
 	}
 	
 	@Override
-	public int selectboardCount2() {
+	public int selectboardCount2(Map page) {
 		// TODO Auto-generated method stub
-		return dao.selectboardCount2(session);
+		return dao.selectboardCount2(session,page);
 	}
 	@Override
 	public int recommendCheck(RecommendList r) {
@@ -125,9 +125,9 @@ public class BoardServiceImpl implements BoardService {
 		return dao.selectBoardComment(session, page);
 	}
 	@Override
-	public List<Board> selectpopularlist() {
+	public List<Board> selectpopularlist(String region) {
 		// TODO Auto-generated method stub
-		return dao.selectpopularlist(session);
+		return dao.selectpopularlist(session,region);
 	}
 	@Override
 	public int selectBaordRecommendCount(int boardId) {
@@ -139,6 +139,12 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return dao.selectRecommendList(session,boardId);
 	}
+	@Override
+	public String selectregion(String userid) {
+		// TODO Auto-generated method stub
+		return dao.selectregion(session,userid);
+	}
+	
 	
 	
 	

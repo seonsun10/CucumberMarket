@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,6 +23,7 @@ import com.cu.cum.board.model.service.BoardService;
 import com.cu.cum.board.model.vo.Board;
 import com.cu.cum.board.model.vo.BoardComment;
 import com.cu.cum.board.model.vo.RecommendList;
+import com.cu.cum.board.model.vo.Search;
 import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.pagebar.TestPageBar;
 
@@ -36,25 +38,29 @@ public class BoardController {
 	public ModelAndView boardlist(@RequestParam(defaultValue = "1") int cPage,
 			@RequestParam(defaultValue = "5") int numPerpage,HttpServletRequest request
 			,ModelAndView mv) {
+		String userid= ((Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
 		
-		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage);
-		List<Board> pboard = service.selectpopularlist(); 
-		System.out.println(pboard);
+		String region = service.selectregion(userid);
+		System.out.println(region);
+		mv.addObject("region", region);
+		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"region",region);
+		List<Board> pboard = service.selectpopularlist(region); 
+		
 		List<Board> pboardlist = new ArrayList();
 		for(Board s:pboard) {
 			pboardlist.add(service.selectBoard(s.getBoardId())); 
 		}
 		mv.addObject("pboard", pboardlist);
-		System.out.println(pboardlist);
+		
 		
 		List<Board> boards = service.selectBoardList(page);
 		
 		mv.addObject("boards",boards);
-		System.out.println(boards.size());
+		
 		String url = request.getRequestURI();
-		int totalboardcount = service.selectboardCount();
+		int totalboardcount = service.selectboardCount(region);
 		mv.addObject("pageBar", TestPageBar.getPageBar(cPage, numPerpage, totalboardcount, url));
-		System.out.println(boards);
+		
 		mv.setViewName("board/boardList");
 		return mv;
 	}
@@ -62,29 +68,34 @@ public class BoardController {
 	public ModelAndView boardlist2(@RequestParam(defaultValue = "1") int cPage,
 			@RequestParam(defaultValue = "5") int numPerpage,HttpServletRequest request
 			,@PathVariable String categoryname,ModelAndView mv) {
+		String userid= ((Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
 		
+		String region = service.selectregion(userid);
+		System.out.println(region);
+		mv.addObject("region", region);
 		
 		if(categoryname.equals("실종센터")) {
 			categoryname="동네 분실/실종센터";
 		}
+		Board b = Board.builder().boardregion(region).boardCategory(categoryname).build();
 		
-		System.out.println("카테고리넴 :"+categoryname);
-		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"categoryname",categoryname);
+		
+		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"board",b);
 		
 		List<Board> boards = service.selectBoardList2(page);
 		mv.addObject("boards",boards);
 		
 		String url = request.getRequestURI();
-		int totalboardcount = service.selectboardCount2();
+		int totalboardcount = service.selectboardCount2(page);
 		mv.addObject("pageBar", TestPageBar.getPageBar(cPage, numPerpage, totalboardcount, url));
-		List<Board> pboard = service.selectpopularlist(); 
-		System.out.println("피보드 "+pboard);
+		List<Board> pboard = service.selectpopularlist(region); 
+	
 		List<Board> pboardlist = new ArrayList();
 		for(Board s:pboard) {
 			pboardlist.add(service.selectBoard(s.getBoardId())); 
 		}
 		mv.addObject("pboard", pboardlist);
-		System.out.println("카테고리 : "+pboardlist);
+		
 		mv.setViewName("board/boardList");
 		return mv;
 	}
@@ -97,6 +108,10 @@ public class BoardController {
 	@PostMapping("/saveBoard.do")
 	@ResponseBody
 	public ModelAndView insertBoard(ModelAndView mv,Board b) {
+		String userid= ((Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
+		
+		String region = service.selectregion(userid);
+		b.setBoardregion(region);
 		int result =service.insertBoard(b);
 		if(result>0) {
 			mv.addObject("msg", "게시글 작성완료");
@@ -112,7 +127,7 @@ public class BoardController {
 	@RequestMapping("/boardinfo.do/{boardId}")
 	public ModelAndView boardinfo(ModelAndView mv,@PathVariable int boardId,@RequestParam(defaultValue = "1") int cPage,
 			@RequestParam(defaultValue = "5") int numPerpage,HttpServletRequest request) {
-		System.out.println(boardId);
+		
 		Board b = service.selectBoard(boardId);
 		int count = service.selectBaordRecommendCount(boardId);
 		b.setRecommendCount(count);
@@ -246,5 +261,32 @@ public class BoardController {
 		mv.setViewName("common/msg");
     	return mv;
     }
-	
+    
+    
+    @RequestMapping("/bsearch/{type}/{keyword}")
+    public ModelAndView searchBoard(@PathVariable String type,@PathVariable String keyword,ModelAndView mv,@RequestParam(defaultValue = "1") int cPage,
+			@RequestParam(defaultValue = "5") int numPerpage) {
+    	Search s = Search.builder().type(type)
+    			.keyword(keyword).build();
+    	Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"type",type,"keyword",keyword);
+    	
+		/*
+		 * List<Board> boards =service.searchBoard(page); int tcount =
+		 * service.searchBoardCount();
+		 */
+    	return mv;
+    	
+    	
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
