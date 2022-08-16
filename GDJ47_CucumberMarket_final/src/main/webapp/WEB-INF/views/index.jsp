@@ -106,12 +106,12 @@ div#pro-date{
 
 		<div><h1></h1>
 
-        <div id="banner-container" style="text-align: center;">
+        <div id="banner-container" style="text-align: center; margin-bottom:30px;">
         	<img src="${path }/resources/img/오이배너.jpg" width="73%"/>
         </div>
  
 
-        <div id="advantages">
+        <!-- <div id="advantages">
           <div class="container">
             <div class="row mb-4">
               <div class="col-md-4">
@@ -136,23 +136,23 @@ div#pro-date{
                 </div>
               </div>
             </div>
-            <!-- /.row-->
+            /.row
           </div>
-          <!-- /.container-->
-        </div>
+          /.container
+        </div> -->
  
         </div>
-        <div id="hot" >
-          <div class="box py-4">
-            <div class="container">
+        <div id="hot" style=" justify-content:center;">
+          <div class="box py-4" style="width:700px;" >
               <div class="row">
                 <div class="col-md-12">
                   <h2 class="mb-0">오늘의 추천 상품</h2>
                 </div>
               </div>
             </div>
-
-          </div>     
+		   </div>
+        </div>
+             
 		<div id="databox" class="col-lg-9 box" style="margin:auto;">
 		<div id="pro-body" style="margin-left:60px;">
 			<c:if test="${mp ne null }">

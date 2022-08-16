@@ -128,7 +128,7 @@ public class MemberController {
 	//회원가입
 	@PostMapping("/join")
 	public ModelAndView join(@ModelAttribute Member member) {
-		
+		System.out.println("지역 나오나? "+member.getRegion());
 		member.setEnrollDate(new Date());
 		member.setIntro("안녕하세요 :D");
 //		member.setRole("ROLE_USER");

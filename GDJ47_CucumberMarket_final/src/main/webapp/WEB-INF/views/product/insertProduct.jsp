@@ -40,13 +40,13 @@
             <div class="col-lg-9">
               <div class="box">
                 <h1>상품 등록</h1>
-                <h3>상품 이미지는 최대 4개까지 등록 가능합니다.</h3>
-                <form action="${path }/product/insertProduct.do" method="post" enctype="multipart/form-data">	
-						<input type="button" value="상품 이미지 추가" onclick="attachFile.add()" style="margin-bottom:5px">
+                
+                <form action="${path }/product/insertProduct.do" method="post" enctype="multipart/form-data" onsubmit="return fn_insertProduct()">	
+						<input type="button" value="상품 이미지 추가" onclick="fn_attachFile.add()" style="margin-bottom:5px">
 						<div class="row" id="row22">
 						<div class="col-md-6">
 						<!-- <div id="attachFileDiv"> -->
-							<input type="file" name="image1" value="" size="30" onchange="readURL(this);">
+							<input type="file" name="image1" value="" size="30" onchange="readURL(this);" required>
 							<img id="preview" style="width:200px; height:200px;"/>
 						
 						<!-- </div> -->
@@ -56,6 +56,7 @@
 						<label for="exampleInputEmail1">상품 제목</label>
 						<input type="text" name="proName" class="form-control"
 						placeholder="상품 제목" required><br>
+						
 						<label for="exampleInputEmail1">상품 설명</label>
 						<textarea class="form-control" name="proContent" rows="6" placeholder="상품 설명" required></textarea><br>
 						<div class="row">
@@ -88,7 +89,7 @@
 						  <input type="radio" name="proStatus" id="inlineRadio2" value="n"> 새상품
 						</label><br>
 						<input id="userId" name="userId"  type="hidden" value="${loginMember.userId }"/>
-                    <button type="submit" onclick="fn_aaa();" class="btn btn-primary"></i>상품 등록 하기</button>
+                    <button type="submit"  class="btn btn-primary"></i>상품 등록 하기</button>
                   </div>
                 </form>
                 
@@ -97,8 +98,11 @@
           </div>
         </div>
       </div>
-      
+
+  
 <script>
+
+
 function readURL(input,idx) {
 	  if (input.files && input.files[0]) {
 	    var reader = new FileReader();
@@ -110,7 +114,7 @@ function readURL(input,idx) {
 	  } else {
 	    document.getElementById('preview').src = "";
 	  }
-	}
+}
  
 function readURL1(input,idx) {
 	  if (input.files && input.files[0]) {
@@ -123,10 +127,9 @@ function readURL1(input,idx) {
 	  } else {
 	    document.getElementById('preview1').src = "";
 	  }
-	}
+}
 	
-	
-	attachFile = {
+fn_attachFile = {
 	        idx:0,
 	        add:function(){ // 파일필드 추가
 	            var o = this;
@@ -174,11 +177,15 @@ function readURL1(input,idx) {
 				console.log(idx);
 	        }
 	    }
-	
-
-	
-function fn_aaa(){
-	alert('상품 등록이 완료되었습니다.');
+	    
+	    
+	function fn_insertProduct(){
+	var status = $("input[name='proStatus']:checked").val();
+	if(status==null){
+		alert('상품 상태를 체크해주세요');
+		return false;
+	}
+	return true;
 }
 </script>	
 			
