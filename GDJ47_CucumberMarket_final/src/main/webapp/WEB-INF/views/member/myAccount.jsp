@@ -64,35 +64,15 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="company">전화번호</label> 
-                        <input id="company" type="text" name="phone" class="form-control" value="<c:out value="${loginMember.phone }"/>">
+                        <label for="company" style="margin-top:8px;">전화번호</label> 
+                        <input id="company" type="text" name="phone" class="form-control" value="<c:out value="${loginMember.phone }"/>" style="margin-top:3px;">
                       </div>
                     </div>
-<!--                     <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="street">Street</label>
-                        <input id="street" type="text" class="form-control">
-                      </div>
-                    </div>
-                  </div>
-                  /.row
-                  <div class="row">
+
                     <div class="col-md-6 col-lg-3">
                       <div class="form-group">
-                        <label for="city">Company</label>
-                        <input id="city" type="text" class="form-control">
-                      </div>
-                    </div> -->
- <!--                    <div class="col-md-6 col-lg-3">
-                      <div class="form-group">
-                        <label for="zip">우편번호</label>
-                        <input id="zip" type="text" class="form-control">
-                      </div>
-                    </div> -->
-                    <div class="col-md-6 col-lg-3">
-                      <div class="form-group">
-                        <label for="state">활동지역</label>
-                        <select id="state" class="form-control"></select>
+                        <input type="button" onclick="fn_area();" class="btn btn-primary navbar-btn" value="지역설정"/>
+                    	<input id="region" type="text" name="region" class="form-control" value="${loginMember.region }" style="margin-top:5px;">
                       </div>
                     </div>
  <!--                    <div class="col-md-6 col-lg-3">
@@ -156,5 +136,13 @@
         </div>
       </div>
     </div>
-  
+<script>
+function fn_area(){
+    window.open(
+     "${path}/area.do",
+     "현재 내 위치 설정",
+     "width=800, height=600, top=100, left=600"
+   );
+}
+</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

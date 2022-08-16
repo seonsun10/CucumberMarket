@@ -131,7 +131,14 @@
                   <!-- <div data-slider-id="1" class="owl-carousel shop-detail-carousel"> -->
                   <div id="main-slider" class="owl-carousel owl-theme">
                   <c:forEach var="name" items="${filename }" varStatus="status">
-                    <div class="item"><img src="${path }/resources/upload/product/${name}" class="img-fluid" style="height:350px;"></div>
+                    <div class="item">
+                    <img src="${path }/resources/upload/product/${name}" class="img-fluid" style="height:350px;">
+                    </div>
+                    <c:forEach var="names" items="${filesname}">
+                    <div class="item">
+                    <img src="${path }/resources/upload/product/${names}" class="img-fluid" style="height:350px;">
+                    </div>
+                     </c:forEach>
                   </c:forEach>
                   </div>
                 </div>
