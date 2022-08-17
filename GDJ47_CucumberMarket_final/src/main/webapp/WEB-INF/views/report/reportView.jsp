@@ -57,7 +57,7 @@
 						   			<td style="text-align: center"><c:out value="${rep.userId.userId}"/></td>
 						  		</tr>
 								<tr>
-									<th align="center" style="text-align: center">신고당한 아이디</th>
+									<th align="center" style="text-align: center">신고한 아이디</th>
 						   			<td style="text-align: center; color:red"><c:out value="${rep.targetId}"/></td>
 						  		</tr>
 								<tr>

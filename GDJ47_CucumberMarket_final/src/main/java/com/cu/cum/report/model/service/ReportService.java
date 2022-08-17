@@ -41,7 +41,7 @@ public interface ReportService {
 	List<Report> mypageReportList(Map param, Report r);
 	
 	// 마이페이지 신고글 개수 
-	int mypageReportCount();
+	int mypageReportCount(Report r);
 	
 	
 }
