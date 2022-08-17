@@ -46,12 +46,14 @@ public class ChatController {
 	    			System.out.println("마지막메세지 보낸사람: "+message.get(lastindex).getUserid());
 	    			service.updateroomreadcount(room.getRoomId());
 		    		System.out.println(message);
-			    	
 			    	mv.addObject("msg",message);
 			    	mv.addObject("room",room);
 			    	mv.setViewName("test/test3");
 			    	return mv;
 	    		}
+	    		Product product = pservice.selectProduct(roomId);
+	    		System.out.println("상품번호 : "+product.getProNo());
+	    		mv.addObject("proNo",product.getProNo());
 	    		mv.addObject("msg",message);
 		    	mv.addObject("room",room);
 		    	mv.setViewName("test/test3");

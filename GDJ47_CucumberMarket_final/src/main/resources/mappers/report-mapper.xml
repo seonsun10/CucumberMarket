@@ -35,6 +35,6 @@
 		SELECT * FROM REPORT WHERE USERID=#{userId} ORDER BY REP_DATE DESC
 	</select>
 	<select id="mypageReportCount" resultType="_int">
-		SELECT COUNT(*) FROM REPORT 
+		SELECT COUNT(*) FROM REPORT WHERE USERID=#{userId}
 	</select>
 </mapper>

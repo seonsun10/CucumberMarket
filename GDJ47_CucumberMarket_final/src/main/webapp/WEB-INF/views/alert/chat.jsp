@@ -14,7 +14,7 @@
 		</tr>
 			<c:if test="${not empty newChatList}">
 				<c:forEach var="c" items="${newChatList }">
-					<c:if test="${c.userid ne loginMember.userId }">
+					<c:if test="${c.userid eq loginMember.userId }">
 					<tr id="tablebody">
 						<td><img src="${path }/resources/img/오이.png" style="width:50px;"></td>
 						<td><c:out value="${prono.title }"/></td>

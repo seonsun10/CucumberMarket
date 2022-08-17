@@ -240,13 +240,15 @@ public class MemberController {
 //	회원정보 수정 myAccount에서 넘어옴
 	@RequestMapping("/member/update.do")
 	public String memberUpdate(@RequestParam("phone") String phone,
-			@RequestParam("intro") String intro , @RequestParam("id") String userId) {
+			@RequestParam("intro") String intro , @RequestParam("id") String userId, @RequestParam("region") String region, Model model) {
 		Member m = service.selectMember(userId);
 		m.setPhone(phone);
 		m.setIntro(intro);
-		service.updateMember(m);
+		m.setRegion(region);
+		m = service.updateMember(m);
 //		member.setPhone(null);
 //		member.setIntro(null);
+		model.addAttribute("loginMember",m);
 		return "redirect:/member/myAccount.do";
 	}
 	
@@ -392,19 +394,21 @@ public class MemberController {
 	@RequestMapping("/member/mypageReport.do")
 	public ModelAndView mypageReportList(@RequestParam(defaultValue="1") int cPage,
 			@RequestParam(defaultValue="5") int numPerpage,
+			HttpServletRequest request,
 			ModelAndView model) {
 		Member loginMember=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Report r = Report.builder().userId(loginMember).build();
-		
+		//String url = request.getRequestURI();
 		Map param = Map.of("cPage",cPage, "numPerpage",numPerpage);
 		List<Report> report = repservice.mypageReportList(param, r);
 		System.out.println(report);
-		int totalData = repservice.mypageReportCount();
+		int totalReport = repservice.mypageReportCount(r);
 		
 		model.addObject("report", report);
-		model.addObject("pageBar", PageBarBasic.getPageBar(cPage, numPerpage, totalData, "reportList"));
-		model.addObject("totalData", totalData);
+		model.addObject("pageBar", PageBar.getPageBar(cPage, numPerpage, totalReport, "mypageReport"));
+		model.addObject("totalReport", totalReport);
 		model.setViewName("member/mypageReport");
+		//System.out.println(url);
 		return model;
 	}
 	//마이페이지에서 채팅 목록 뿌리는 페이지
@@ -456,8 +460,10 @@ public class MemberController {
 			files.addAll(p.getFiles());
 		}
 		for(Files f : files) {
-			if(f.getRenameFilename().contains("s_")) {
-				renames.add(f.getRenameFilename());
+			if(f.getRenameFilename()!=null) {
+				if(f.getRenameFilename().contains("s_")) {
+					renames.add(f.getRenameFilename());
+				}
 			}
 		}
 		List<Long> daylist = new ArrayList();

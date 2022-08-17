@@ -55,6 +55,12 @@ public class ProductController {
 	@Autowired
 	private ReviewService rvservice;
 	
+	
+	@RequestMapping("/product/insertProductStart.do")
+	public String insertProductStart() {
+		return "product/insertProduct";
+	}
+	
 	@RequestMapping("/product/insertProduct.do")
 	public String insertProduct(Product p, MultipartHttpServletRequest mtfRequest ,@RequestParam("proName") String proName , 
 			@RequestParam("sido1") String sido, @RequestParam("gugun1") String gugun,
@@ -101,8 +107,13 @@ public class ProductController {
 					.renameFilename(rename)
 					.thumbnailStatus("y")
 					.build());
+			
 		}catch(IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			model.addAttribute("msg","상품 등록에 실패하였습니다.");
+			model.addAttribute("loc","product/insertProductStart.do");
+			//model.addAttribute("id",userId);
+			return "common/exception";
 		}
 		
 		//나머지 이미지 처리
@@ -113,8 +124,16 @@ public class ProductController {
 						if(originalFilename2!=null) {
 							System.out.println(originalFilename2);
 							System.out.println("아래꺼 : "+originalFilename2.lastIndexOf("."));
-							String extt = originalFilename2.substring(originalFilename2.lastIndexOf("."));
-							
+							String extt = null;
+							try {
+								extt = originalFilename2.substring(originalFilename2.lastIndexOf("."));
+							}
+							catch(Exception e) {
+								model.addAttribute("msg","상품 등록에 실패하였습니다.");
+								model.addAttribute("loc","product/insertProductStart.do");
+								//model.addAttribute("id",userId);
+								return "common/exception";
+							}
 							rndNum=(int)(Math.random()*10000);
 							String rename1 = userId+"_"+rndNum+extt;
 							try {
@@ -125,8 +144,14 @@ public class ProductController {
 									.originalFilename(originalFilename2)
 									.thumbnailStatus("n")
 									.renameFilename(rename1).build());
+								model.addAttribute("msg","상품 등록이 완료되었습니다.");
+								model.addAttribute("loc", "member/mypage.do");
 							}catch(IOException e) {
-								e.printStackTrace();
+								//e.printStackTrace();
+								model.addAttribute("msg","상품 등록에 실패하였습니다.");
+								model.addAttribute("loc","product/insertProductStart.do");
+								//model.addAttribute("id",userId);
+								return "common/exception";
 							}
 						}
 					}
@@ -134,11 +159,10 @@ public class ProductController {
 		}		
 					
 
-
 		List<Files> f = fService.insertFiles(files);
 		System.out.println(f);
 		model.addAttribute("userId",userId);
-		return "redirect:/member/mypage.do";
+		return "common/exception";
 	}
 	
 	//거래 후기
@@ -238,11 +262,7 @@ public class ProductController {
 	}
 	
 	
-	
-	@RequestMapping("/product/insertProductStart.do")
-	public String insertProductStart() {
-		return "product/insertProduct";
-	}
+
 	
 	
 	//상품 상세페이지
@@ -359,12 +379,7 @@ public class ProductController {
 		//먼저 no에 해당하는 상품를 찾아와야함
 		Product p = service.selectProduct(no);
 		System.out.println(p);
-		//먼저 이미지를 먼저 삭제시킨다음에 db삭제 pk업데이트
-		
-		
-		
-		//db거쳐서 update한다음에 폴더로 옮기기
-		
+
 		m.addAttribute("title", p.getTitle());
 		m.addAttribute("content",p.getProContent());
 		m.addAttribute("price",p.getPrice());
@@ -419,7 +434,6 @@ public class ProductController {
 				File f = new File(path+beforefilename.get(i));
 				if(f.exists()) f.delete();
 			}
-			
 			//db 상품번호에 해당하는 데이터 다 삭제 하기
 			afterfiles.add(Files.builder()
 					.filesNo(beforefiles.get(0).getFilesNo()) //원래 이미지 테이블에 대표이미지가 첫 인덱스이므로 0번 인덱스에 파일번호를 가져옴
@@ -431,8 +445,13 @@ public class ProductController {
 					.build());
 			//그다음 새걸로 다시 폴더로 넣어준다.
 			afterthumbnail.transferTo(new File(path+rename));
+			rs.setAttribute("msg", "상품수정이 완료되었습니다.");
+			rs.setAttribute("loc", "member/mypage");
 		}catch(IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			rs.setAttribute("msg", "상품수정이 실패하였습니다.");
+			rs.setAttribute("loc", "product/updateProductStart.do?proNo="+no+"&userId="+userId);
+			return "common/exception";
 		}
 		
 		//나머지 이미지 처리
@@ -445,8 +464,15 @@ public class ProductController {
  					if(f!=null) {
 						String originalFilename2 = f.getOriginalFilename();
 						if(originalFilename2!=null) {
-							
-							String extt = originalFilename2.substring(originalFilename2.lastIndexOf("."));
+							String extt = null;
+							try {
+								extt = originalFilename2.substring(originalFilename2.lastIndexOf("."));
+							}
+							catch(Exception e){
+								rs.setAttribute("msg", "상품수정이 실패하였습니다.");
+								rs.setAttribute("loc", "product/updateProductStart.do?proNo="+no+"&userId="+userId);
+								return "common/exception";
+							}
 							
 							rndNum=(int)(Math.random()*10000);
 							String rename1 = userId+"_"+rndNum+extt;
@@ -460,8 +486,13 @@ public class ProductController {
 									.thumbnailStatus("n")
 									.renameFilename(rename1).build());
 								f.transferTo(new File(path+rename1));
+								rs.setAttribute("msg", "상품수정이 완료되었습니다.");
+								rs.setAttribute("loc", "member/mypage");
 							}catch(IOException e) {
-								e.printStackTrace();
+								//e.printStackTrace();
+								rs.setAttribute("msg", "상품수정이 실패하였습니다.");
+								rs.setAttribute("loc", "product/updateProductStart.do?proNo="+no+"&userId="+userId);
+								return "common/exception";
 							}
 							count++;
 							}
@@ -508,7 +539,7 @@ public class ProductController {
 		//db에서 수정을 하고 나서 마무리로 폴더에 있는 이미지 삭제시켜야함
 
 		//System.out.println("수정 db거치고 나서 마무리 : "+ff);
-		return "member/mypage";
+		return "common/exception";
 	}
 	
 
@@ -532,6 +563,17 @@ public class ProductController {
 		m.addAttribute("renames",renames);
 		m.addAttribute("product",result);
 		return "product/productTotal";
+	}
+	
+	//상품 판매 완료
+	@RequestMapping("/product/endDeal.do")
+	public String endProductDeal(@RequestParam("proNo") int proNo, Model m) {
+		int result = service.updateProductSolve(proNo);
+		if(result>0) {
+			m.addAttribute("msg","거래가 완료되었습니다");
+			m.addAttribute("loc","member/mypage.do");
+		}
+		return "common/msg";
 	}
 
 }

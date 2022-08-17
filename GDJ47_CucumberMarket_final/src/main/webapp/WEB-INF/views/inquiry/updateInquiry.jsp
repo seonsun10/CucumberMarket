@@ -28,11 +28,9 @@
                 </div>
                 <div class="card-body">
                   <ul class="nav nav-pills flex-column">
-                    <li><a href="${pageContext.request.contextPath }/inquiryList" class="nav-link">1:1 문의</a></li>
-                    <c:if test="${loginMember.userId eq 'admin'}">
-                    	<li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고</a></li>
-                    </c:if>
                     <li><a href="${pageContext.request.contextPath }/faqList" class="nav-link">FAQ</a></li>
+                    <li><a href="${pageContext.request.contextPath }/inquiryList" class="nav-link">1:1 문의</a></li>
+                    <li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고</a></li>
                   </ul>
                 </div>
               </div>

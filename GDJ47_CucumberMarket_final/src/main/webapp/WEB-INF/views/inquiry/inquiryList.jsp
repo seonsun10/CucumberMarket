@@ -28,18 +28,9 @@
                 </div>
                 <div class="card-body">
                   <ul class="nav nav-pills flex-column">
-                    <li><a href="${pageContext.request.contextPath }/inquiryList" class="nav-link">1:1 문의</a></li>
-                    <%-- <c:choose>
-			        	<c:when test="${loginMember.userId eq 'admin'}"> --%>
-			        	<c:if test="${loginMember.userId eq 'admin'}">
-			            	<li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고</a></li>
-			            </c:if>
-			            <%-- </c:when>
-			            <c:when test="${loginMember.userId ne 'admin'}">
-			            	<li><a href="${pageContext.request.contextPath }/reportInfo" class="nav-link">신고</a></li>
-			            </c:when>
-		            </c:choose> --%>
                     <li><a href="${pageContext.request.contextPath }/faqList" class="nav-link">FAQ</a></li>
+                    <li><a href="${pageContext.request.contextPath }/inquiryList" class="nav-link">1:1 문의</a></li>
+                    <li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고</a></li>
                   </ul>
                 </div>
               </div>
@@ -94,7 +85,12 @@
 											</a>
 		                          		</td>
 		                          		<td></td>
-		                          		<td>${i.writer.userId }</td>
+		                          		<c:if test="${loginMember.userId eq i.writer.userId }">
+		                          			<td style="color:#4fbfa8">${i.writer.userId }</td>
+		                          		</c:if>
+		                          		<c:if test="${loginMember.userId ne i.writer.userId }">
+		                          			<td>${i.writer.userId }</td>
+		                          		</c:if>
 		                          		<td><fmt:formatDate value="${i.inquiryDate}" pattern="yyyy-MM-dd"/></td>
 		                          		<%-- <td><c:out value="${i.answer}"/></td> --%>
 		                          		<c:if test="${loginMember.userId  eq 'admin'}">

@@ -25,7 +25,12 @@
 			<div id="pro-box">
 				<a href="${path }/product/productView.do?id=${loginMember.userId}&no=${p.proNo}&tag=${p.categoryName}&name=${p.member.userId}">
 					<div id="pro-img">
-						<img src="${path }/resources/upload/product/${renames[status.index]}"/>
+						<c:if test="${renames[status.index] ne null}">
+							<img src="${path }/resources/upload/product/${renames[status.index]}"/>
+						</c:if>
+						<c:if test="${renames[status.index] eq null}">
+							<img src="${path }/resources/img/cucumber.png"/>
+						</c:if>
 					</div>
 					<div id="pro-title">
 						<div id="pro-head2"><c:out value="${p.title }"/></div>

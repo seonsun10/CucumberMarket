@@ -61,15 +61,23 @@ public class ReportController {
 	
 	// 신고글 작성 로직 
 	@RequestMapping("/report/insertReport.do")
-	public String insertReport(@RequestParam("repId") String id, @RequestParam("repType") String repType,  @RequestParam("repTitle") String repTitle, 
-			@RequestParam("repContent") String repContent, @RequestParam("targetId") String targetId) {
+	public ModelAndView insertReport(@RequestParam("repId") String id, @RequestParam("repType") String repType,  @RequestParam("repTitle") String repTitle, 
+			@RequestParam("repContent") String repContent, @RequestParam("targetId") String targetId, ModelAndView mv) {
 		Member loginMember=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		Report r = Report.builder().userId(loginMember).repType(repType).repTitle(repTitle).repContent(repContent).targetId(targetId).build();
 		System.out.println(r);
 		Report rpt = service.insertReport(r);
-	
-		return "member/mypage";
+		if(!(rpt.equals(null))) {
+			mv.addObject("msg", "신고글 작성완료");
+			mv.addObject("loc","/member/mypage");
+			
+		}else {
+			mv.addObject("msg", "신고글 작성실패");
+			mv.addObject("loc","report/insertReport.do");
+		}
+		mv.setViewName("common/msgBasic");
+		return mv;
 	}
 	
 	// 신고글 리스트(페이징처리)
@@ -91,12 +99,20 @@ public class ReportController {
 	
 	// 신고글 삭제 
 	@RequestMapping("/deleteReport/{id}")
-	public String deleteReport(Report report, @PathVariable int id, HttpSession session) {
+	public ModelAndView deleteReport(Report report, @PathVariable int id, HttpSession session, ModelAndView mv) {
 		
 		report.setUserId((Member)session.getAttribute("loginMember"));
 		int rep = service.deleteReport(id);
-		
-		return "redirect:/reportList";
+		if(rep>0) {
+			mv.addObject("msg", "신고글 삭제완료");
+			mv.addObject("loc","/reportList");
+			
+		}else {
+			mv.addObject("msg", "신고글 삭제실패");
+			mv.addObject("loc","reportList");
+		}
+		mv.setViewName("common/msgBasic");
+		return mv;
 	}
 	
 	// 신고글 검색

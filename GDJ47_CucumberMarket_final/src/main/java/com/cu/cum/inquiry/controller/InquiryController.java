@@ -120,18 +120,26 @@ public class InquiryController {
 
 	// 문의글 작성 로직 
 	@RequestMapping("/inquiry/insertInquiry.do")
-	public String insertInquiry(@RequestParam("inquiryId") String id,@RequestParam("inquiryTitle") String inquiryTitle,
+	public ModelAndView insertInquiry(@RequestParam("inquiryId") String id,@RequestParam("inquiryTitle") String inquiryTitle,
 			@RequestParam("inquiryPhone") String phone,
 			@RequestParam("inquiryType") String type,
-			@RequestParam("inquiryContent") String content, Model model) {
+			@RequestParam("inquiryContent") String content, ModelAndView mv) {
 		Member loginMember=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		Inquiry i = Inquiry.builder().inquiryTitle(inquiryTitle).inquiryPhone(phone).writer(loginMember)
 				.inquiryType(type).inquiryContent(content).build();
 	
 		Inquiry inq = service.insertInquiry(i);
-		
-		return "redirect:/inquiryList";
+		if(!(inq.equals(null))) {
+			mv.addObject("msg", "문의글 작성완료");
+			mv.addObject("loc","/inquiryList");
+			
+		}else {
+			mv.addObject("msg", "문의글 작성실패");
+			mv.addObject("loc","inquiry/insertInquiry.do");
+		}
+		mv.setViewName("common/msgBasic");
+		return mv;
 	}
 	
 	// 문의글 검색 jpa 
@@ -171,26 +179,42 @@ public class InquiryController {
 	
 	// 문의글 수정
 	@RequestMapping("inquiry/updateInquiry.do")
-	public String updateInquiry(Inquiry inquiry, String inquiryId,HttpSession session) {
+	public ModelAndView updateInquiry(Inquiry inquiry, String inquiryId,HttpSession session, ModelAndView mv) {
 		//Inquiry inquiry = Inquiry.builder().inquiryTitle(inquiryTitle).inquiryType(inquiryTitle).inquiryContent(content).inquiryNo(inquiryNo).build();
 		//System.out.println(inquiry);
 		inquiry.setWriter((Member)session.getAttribute("loginMember"));
 		int inq = service.updateInquiry(inquiry);
-		
-		return "redirect:/inquiryList";
+		if(inq>0) {
+			mv.addObject("msg", "문의글 수정완료");
+			mv.addObject("loc","/inquiryList");
+			
+		}else {
+			mv.addObject("msg", "문의글 수정실패");
+			mv.addObject("loc","inquiry/updateInquiry.do");
+		}
+		mv.setViewName("common/msgBasic");
+		return mv;
 	}
 	
 	// 문의글 삭제 
 	
 	@RequestMapping("/deleteInquiry/{id}")
-	public String deleteInquiry(Inquiry inquiry, @PathVariable int id,HttpSession session) {
+	public ModelAndView deleteInquiry(Inquiry inquiry, @PathVariable int id,HttpSession session, ModelAndView mv) {
 		//public String deleteInquiry(@RequestParam int inquiryNo, Model m) {
 		
 		inquiry.setWriter((Member)session.getAttribute("loginMember"));
 		System.out.println(inquiry);
 		int inq = service.deleteInquiry(id);
-		
-		return "redirect:/inquiryList";
+		if(inq>0) {
+			mv.addObject("msg", "문의글 삭제완료");
+			mv.addObject("loc","/inquiryList");
+			
+		}else {
+			mv.addObject("msg", "문의글 삭제실패");
+			mv.addObject("loc","inquiry/updateInquiry.do");
+		}
+		mv.setViewName("common/msgBasic");
+		return mv;
 	}
 	
 	// 문의글 답변 페이지
@@ -212,7 +236,7 @@ public class InquiryController {
 	
 	// 문의글 답변 작성 로직
 	@RequestMapping("/inquiry/replyInquiry.do")
-	public String insertReply(
+	public ModelAndView insertReply(
 			
 			
 			@RequestParam("writer") String writer,
@@ -227,8 +251,16 @@ public class InquiryController {
 				.replyinquiryContent(replyContent).build();
 	
 		ReplyInquiry ri = riservice.insertReply(r);
-		
-		return "redirect:/inquiryList";
+		if(!(ri.equals(null))) {
+			mv.addObject("msg", "문의글 답변완료");
+			mv.addObject("loc","/inquiryList");
+			
+		}else {
+			mv.addObject("msg", "문의글 답변실패");
+			mv.addObject("loc","inquiry/replyInquiry.do");
+		}
+		mv.setViewName("common/msgBasic");
+		return mv;
 	}
 	
 	
@@ -243,25 +275,41 @@ public class InquiryController {
 	
 	// 문의 답글 수정
 	@RequestMapping("/inquiry/updateReply.do")
-	public String updateReply(
+	public ModelAndView updateReply(
 			@RequestParam("replyinquiryNo") int replyinquiryNo,
 			@RequestParam("writer") String writer,
 			@RequestParam("replyinquiryTitle") String replyinquiryTitle,
-			@RequestParam("replyinquiryContent") String replyinquiryContent) {
+			@RequestParam("replyinquiryContent") String replyinquiryContent, ModelAndView mv) {
 		ReplyInquiry r = ReplyInquiry.builder().replyinquiryNo(replyinquiryNo).writer(writer).replyinquiryContent(replyinquiryContent).replyinquiryTitle(replyinquiryTitle).build();
 		System.out.println(r);
 		int inq = riservice.updateReply(r);
-		
-		return "redirect:/inquiryList";
+		if(inq>0) {
+			mv.addObject("msg", "답글 수정완료");
+			mv.addObject("loc","/inquiryList");
+			
+		}else {
+			mv.addObject("msg", "답글 수정실패");
+			mv.addObject("loc","inquiry/updateReply.do");
+		}
+		mv.setViewName("common/msgBasic");
+		return mv;
 
 	}
 	// 문의 답글 삭제 로직
 	@RequestMapping("/deleteReply/{id}")
-	public String deleteReply(ReplyInquiry r, @PathVariable int id,HttpSession session) {
+	public ModelAndView deleteReply(ReplyInquiry r, @PathVariable int id,HttpSession session, ModelAndView mv) {
 		System.out.println(r);
 		int inq = riservice.deleteReply(id);
-		
-		return "redirect:/inquiryList";
+		if(inq>0) {
+			mv.addObject("msg", "답글 삭제완료");
+			mv.addObject("loc","/inquiryList");
+			
+		}else {
+			mv.addObject("msg", "답글 삭제실패");
+			mv.addObject("loc","inquiry/updateReply.do");
+		}
+		mv.setViewName("common/msgBasic");
+		return mv;
 	}
 	
 }
