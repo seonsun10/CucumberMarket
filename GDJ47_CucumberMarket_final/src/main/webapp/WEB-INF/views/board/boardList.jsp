@@ -5,30 +5,33 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+<style>
+
+
+
+  #write{
+	text-align:right;
+ }
+ 
+ #pboard{
+	margin-left:30px;
+	margin-top:20px;
+	width:400px; 
+
+ } 
+#palert{
+  width:320px;
+  position: absolute;
+  top:150px; 
+  right: 90px;
+  font-size: 14px;
+}
+</style>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value=""/>
 </jsp:include>
 
-<style>
-#write{
-	text-align: right
-}
-#pboard{
-	margin-left: 30px;
-	margin-top: 20px;
-	width:400px;
 
-}
-#palert{
-	width:320px;
-	 position: absolute;
-  top:150px; 
-  right: 90px;
-  font-size: 14px;
-    
-
-}
-</style>
  <div id="all">
  	
       <div id="content">
@@ -51,7 +54,7 @@
                           				
                         			</select>
                      			 </div>
-              					<input name="keyword" type="text" placeholder="오이마켓 동네생활" class="form-control" id="bKeyword">
+              					<input name="keyword" type="text" placeholder="오이마켓 동네생활" class="form-control" id="bKeyword" onKeyPress="if( event.keyCode==13 ){addFunc();}">
 				              	<div class="input-group-append">
 					                <button type="submit" class="btn btn-primary" id="bSearch"><i class="fa fa-search"></i></button>
 				              	</div>
@@ -60,6 +63,17 @@
 							<div class="input-group-append"> -->
 			</div>
 			<script>
+			const addFunc=()=>{
+				var btype = $("#bType").val();
+				var bkeyword = $("#bKeyword").val();
+				if(bkeyword.length==0){
+					alert('검색할 내용을 입력하세요');
+				}else{
+					location.assign('${path}/board/bsearch/'+btype+'/'+bkeyword);
+				}
+				
+			}
+			
 			$("#bSearch").click(function(){
 				var btype = $("#bType").val();
 				var bkeyword = $("#bKeyword").val();
@@ -67,6 +81,7 @@
 				location.assign('${path}/board/bsearch/'+btype+'/'+bkeyword);
 				
 			});
+			
 			
 			</script>
 			

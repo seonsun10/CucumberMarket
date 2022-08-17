@@ -70,13 +70,13 @@ public class ReportController {
 		Report rpt = service.insertReport(r);
 		if(!(rpt.equals(null))) {
 			mv.addObject("msg", "신고글 작성완료");
-			mv.addObject("loc","member/mypage");
+			mv.addObject("loc","/member/mypage");
 			
 		}else {
 			mv.addObject("msg", "신고글 작성실패");
 			mv.addObject("loc","report/insertReport.do");
 		}
-		mv.setViewName("common/msg");
+		mv.setViewName("common/msgBasic");
 		return mv;
 	}
 	
@@ -105,13 +105,13 @@ public class ReportController {
 		int rep = service.deleteReport(id);
 		if(rep>0) {
 			mv.addObject("msg", "신고글 삭제완료");
-			mv.addObject("loc","reportList");
+			mv.addObject("loc","/reportList");
 			
 		}else {
 			mv.addObject("msg", "신고글 삭제실패");
 			mv.addObject("loc","reportList");
 		}
-		mv.setViewName("common/msg");
+		mv.setViewName("common/msgBasic");
 		return mv;
 	}
 	

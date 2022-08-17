@@ -132,13 +132,13 @@ public class InquiryController {
 		Inquiry inq = service.insertInquiry(i);
 		if(!(inq.equals(null))) {
 			mv.addObject("msg", "문의글 작성완료");
-			mv.addObject("loc","inquiryList");
+			mv.addObject("loc","/inquiryList");
 			
 		}else {
 			mv.addObject("msg", "문의글 작성실패");
 			mv.addObject("loc","inquiry/insertInquiry.do");
 		}
-		mv.setViewName("common/msg");
+		mv.setViewName("common/msgBasic");
 		return mv;
 	}
 	
@@ -186,13 +186,13 @@ public class InquiryController {
 		int inq = service.updateInquiry(inquiry);
 		if(inq>0) {
 			mv.addObject("msg", "문의글 수정완료");
-			mv.addObject("loc","inquiryList");
+			mv.addObject("loc","/inquiryList");
 			
 		}else {
 			mv.addObject("msg", "문의글 수정실패");
 			mv.addObject("loc","inquiry/updateInquiry.do");
 		}
-		mv.setViewName("common/msg");
+		mv.setViewName("common/msgBasic");
 		return mv;
 	}
 	
@@ -207,13 +207,13 @@ public class InquiryController {
 		int inq = service.deleteInquiry(id);
 		if(inq>0) {
 			mv.addObject("msg", "문의글 삭제완료");
-			mv.addObject("loc","inquiryList");
+			mv.addObject("loc","/inquiryList");
 			
 		}else {
 			mv.addObject("msg", "문의글 삭제실패");
 			mv.addObject("loc","inquiry/updateInquiry.do");
 		}
-		mv.setViewName("common/msg");
+		mv.setViewName("common/msgBasic");
 		return mv;
 	}
 	
@@ -253,13 +253,13 @@ public class InquiryController {
 		ReplyInquiry ri = riservice.insertReply(r);
 		if(!(ri.equals(null))) {
 			mv.addObject("msg", "문의글 답변완료");
-			mv.addObject("loc","inquiryList");
+			mv.addObject("loc","/inquiryList");
 			
 		}else {
 			mv.addObject("msg", "문의글 답변실패");
 			mv.addObject("loc","inquiry/replyInquiry.do");
 		}
-		mv.setViewName("common/msg");
+		mv.setViewName("common/msgBasic");
 		return mv;
 	}
 	
@@ -285,13 +285,13 @@ public class InquiryController {
 		int inq = riservice.updateReply(r);
 		if(inq>0) {
 			mv.addObject("msg", "답글 수정완료");
-			mv.addObject("loc","inquiryList");
+			mv.addObject("loc","/inquiryList");
 			
 		}else {
 			mv.addObject("msg", "답글 수정실패");
 			mv.addObject("loc","inquiry/updateReply.do");
 		}
-		mv.setViewName("common/msg");
+		mv.setViewName("common/msgBasic");
 		return mv;
 
 	}
@@ -302,13 +302,13 @@ public class InquiryController {
 		int inq = riservice.deleteReply(id);
 		if(inq>0) {
 			mv.addObject("msg", "답글 삭제완료");
-			mv.addObject("loc","inquiryList");
+			mv.addObject("loc","/inquiryList");
 			
 		}else {
 			mv.addObject("msg", "답글 삭제실패");
 			mv.addObject("loc","inquiry/updateReply.do");
 		}
-		mv.setViewName("common/msg");
+		mv.setViewName("common/msgBasic");
 		return mv;
 	}
 	

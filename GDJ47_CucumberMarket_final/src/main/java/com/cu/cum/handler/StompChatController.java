@@ -27,6 +27,7 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequiredArgsConstructor
 public class StompChatController {
+	
 
 	private final SimpMessagingTemplate template;
 	
