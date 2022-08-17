@@ -18,7 +18,8 @@
 * JSP
 * Oracle DB
 * Ajax
-* WebSocket
+* STOMP, SockJS
+
 
 
 ## 사용 툴
