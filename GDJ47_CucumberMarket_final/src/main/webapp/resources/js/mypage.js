@@ -50,7 +50,6 @@ $(()=>{
 	
 	//마이페이지 상품목록 출력 연결
 	$("#protag").click(e=>{
-		$("#page").val('Product');
 		$.ajax({
 			url:"/member/mypageProduct.do",
 			data:{"userId":$("#userIdd").val()},
@@ -59,6 +58,7 @@ $(()=>{
 				$("#databox").html(data);
 			}
 		});
+		$("#page").val('Product');
 	});
 	
 	//마이페이지 후기 목록 출력 연결
@@ -85,7 +85,6 @@ $(()=>{
 	});
 	//마이페이지 신고 목록 출력 연결
 	$("#reporttag").click(e=>{
-		$("#page").val('Report');
 		$.ajax({
 			url:"/member/mypageReport.do",
 			dataType:"html",
@@ -93,6 +92,7 @@ $(()=>{
 				$("#databox").html(data);
 			}
 		});
+		$("#page").val('Report');
 	});
 	//마이페이지 채팅 목록 출력 연결
 	$("#chattag").click(e=>{
