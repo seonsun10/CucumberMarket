@@ -240,13 +240,15 @@ public class MemberController {
 //	회원정보 수정 myAccount에서 넘어옴
 	@RequestMapping("/member/update.do")
 	public String memberUpdate(@RequestParam("phone") String phone,
-			@RequestParam("intro") String intro , @RequestParam("id") String userId) {
+			@RequestParam("intro") String intro , @RequestParam("id") String userId, @RequestParam("region") String region, Model model) {
 		Member m = service.selectMember(userId);
 		m.setPhone(phone);
 		m.setIntro(intro);
-		service.updateMember(m);
+		m.setRegion(region);
+		m = service.updateMember(m);
 //		member.setPhone(null);
 //		member.setIntro(null);
+		model.addAttribute("loginMember",m);
 		return "redirect:/member/myAccount.do";
 	}
 	
@@ -458,8 +460,10 @@ public class MemberController {
 			files.addAll(p.getFiles());
 		}
 		for(Files f : files) {
-			if(f.getRenameFilename().contains("s_")) {
-				renames.add(f.getRenameFilename());
+			if(f.getRenameFilename()!=null) {
+				if(f.getRenameFilename().contains("s_")) {
+					renames.add(f.getRenameFilename());
+				}
 			}
 		}
 		List<Long> daylist = new ArrayList();

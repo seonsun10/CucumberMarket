@@ -5,6 +5,9 @@ package com.cu.cum.product.model.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -37,6 +40,10 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private SqlSessionTemplate session;
 
+	
+	@PersistenceContext
+	private EntityManager em;
+	
 	
 	@Autowired
 	private FilesDao fDao;
@@ -145,7 +152,8 @@ public class ProductServiceImpl implements ProductService {
 //	}
 
 	public List<Product> findAllByCategoryName(Pageable p,String tag){
-		return dao.findAllByCategoryName(p,tag).getContent();
+		em.clear();
+		return dao.findAllByCategoryNameAndSolveStatus(p,tag,"y").getContent();
 	}
 	
 	//카테고리 상품 개수
