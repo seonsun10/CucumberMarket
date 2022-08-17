@@ -533,5 +533,16 @@ public class ProductController {
 		m.addAttribute("product",result);
 		return "product/productTotal";
 	}
+	
+	//상품 판매 완료
+	@RequestMapping("/product/endDeal.do")
+	public String endProductDeal(@RequestParam("proNo") int proNo, Model m) {
+		int result = service.updateProductSolve(proNo);
+		if(result>0) {
+			m.addAttribute("msg","거래가 완료되었습니다");
+			m.addAttribute("loc","member/mypage.do");
+		}
+		return "common/msg";
+	}
 
 }

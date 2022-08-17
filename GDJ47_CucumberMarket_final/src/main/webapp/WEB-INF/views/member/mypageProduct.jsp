@@ -34,7 +34,12 @@
 						<tr id="tablebody">
 							<c:forEach var="pp" items="${pp }">
 								<c:if test="${pp.product.proNo eq p.proNo}">
-									<td><a href="${path }/product/productView.do?id=${loginMember.userId}&no=${p.proNo}&tag=${p.categoryName}&name=${p.member.userId}"><img src="${path }/resources/upload/product/${pp.renameFilename}" style="width:50px;"></a></td>
+									<c:if test="${pp.renameFilename ne null}">
+										<td><a href="${path }/product/productView.do?id=${loginMember.userId}&no=${p.proNo}&tag=${p.categoryName}&name=${p.member.userId}"><img src="${path }/resources/upload/product/${pp.renameFilename}" style="width:50px;"></a></td>
+									</c:if>
+									<c:if test="${pp.renameFilename eq null}">
+										<td><a href="${path }/product/productView.do?id=${loginMember.userId}&no=${p.proNo}&tag=${p.categoryName}&name=${p.member.userId}"><img src="${path }/resources/img/cucumber.png}" style="width:50px;"></a></td>
+									</c:if>
 						 		</c:if>
 							</c:forEach>
 							
