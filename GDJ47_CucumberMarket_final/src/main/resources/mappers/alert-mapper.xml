@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -30,7 +30,8 @@
    		<![CDATA[
    			SELECT COUNT(*)
 			FROM chatview
-			WHERE (userid=#{userId} or otherid=#{userId}) and id!=#{userId} and unread='1'
+			where (userid=#{userid} or otherid=#{userid}) and id!=#{userid} and  unread > 0
+			
    		]]>
    		</select>
    		
@@ -57,9 +58,9 @@
    		<!-- 새로운 채팅 조회 -->
    		<select id="searchNewChatList" parameterType="com.cu.cum.test.model.vo.MessageContent" resultType="com.cu.cum.test.model.vo.MessageContent">
    		<![CDATA[
-		select * 
-		from chatview 
-		where (userid=#{userid} or otherid=#{userid}) and  unreadcount > 0
+		select *
+		FROM chatview
+			where (userid=#{userid} or otherid=#{userid}) and id!=#{userid} and  unread > 0
 		]]>
    		
    		</select>

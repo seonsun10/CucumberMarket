@@ -29,9 +29,9 @@
 		                	</div>
 		                	<div class="card-body">
 		                  		<ul class="nav nav-pills flex-column">
+		                    		<li><a href="${pageContext.request.contextPath }/faqList" class="nav-link">FAQ</a></li>
 		                    		<li><a href="${pageContext.request.contextPath }/inquiryList" class="nav-link">1:1 문의</a></li>
 			                    	<li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고</a></li>
-		                    		<li><a href="${pageContext.request.contextPath }/faqList" class="nav-link">FAQ</a></li>
 		                  		</ul>
 		                	</div>
 	              		</div>
@@ -68,7 +68,9 @@
 	                          			<th colspan=2>제목</th>
 										<th>신고대상 아이디</th>
 										<th>등록일</th>
-										<th>삭제</th>
+										<c:if test="${loginMember.userId eq 'admin'}">
+											<th>삭제</th>
+										</c:if>
 	                        		</tr>
 	                      		</thead>
 								<tbody>
@@ -77,13 +79,20 @@
 		                        	<tr>
 		                          		<td><c:out value="${r.repNo}"/></td>
 		                          		<td><c:out value="${r.repType}"/></td>
-		                          		<td><c:out value="${r.userId.userId }"/></td>
+		                          		<c:if test="${loginMember.userId eq 'admin' or loginMember.userId == r.userId.userId}">
+		                          			<td><c:out value="${r.userId.userId }"/></td>
+		                          		</c:if>
+		                          		<c:if test="${loginMember.userId ne 'admin' and !(loginMember.userId == r.userId.userId)}">
+		                          			<td>*****</td>		                          			
+		                          		</c:if>
 		                          		<td colspan=2>
 		                          			<a href="${pageContext.request.contextPath }/reportView/${r.repNo}"><c:out value="${r.repTitle}"/></a>
 		                          		</td>
 		                          		<td style="color:red"><c:out value="${r.targetId}"/></td>
 		                          		<td><fmt:formatDate value="${r.repDate}" pattern="yyyy-MM-dd"/></td>
-		                          		<td><a href="${pageContext.request.contextPath }/deleteReport/${r.repNo}"><i class="fa fa-trash-o"></i></a></td>
+		                          		<c:if test="${loginMember.userId eq 'admin'}">
+		                          			<td><a href="${pageContext.request.contextPath }/deleteReport/${r.repNo}"><i class="fa fa-trash-o"></i></a></td>
+		                          		</c:if>
 		                        	</tr>
 		                        	</c:forEach>
 		                        	</c:if>

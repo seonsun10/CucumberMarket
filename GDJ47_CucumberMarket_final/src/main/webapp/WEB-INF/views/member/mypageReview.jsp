@@ -66,7 +66,7 @@
 						</c:choose>
 					</div>
 				</div>
-				<div id="reviewPro" onclick="location.assign('${path}/product/productView.do?id=${loginMember.userId }&no=${products[status.index].proNo }&tag=${products[status.index].categoryName }&name=${r.writer }')">
+				<div id="reviewPro" onclick="location.assign('${path}/product/productView.do?id=${r.writer }&no=${products[status.index].proNo }&tag=${products[status.index].categoryName }&name=${loginMember.userId }&region=${products[status.index].region }&proStatus=${products[status.index].proStatus }')">
 					<div id="proTitle">
 						<c:out value="${products[status.index].title }"/>
 					</div>

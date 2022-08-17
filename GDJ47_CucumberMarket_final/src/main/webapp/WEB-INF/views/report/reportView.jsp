@@ -28,9 +28,9 @@
 		                	</div>
 		                	<div class="card-body">
 		                  		<ul class="nav nav-pills flex-column">
+		                    		<li><a href="${pageContext.request.contextPath }/faqList" class="nav-link">FAQ</a></li>
 		                    		<li><a href="${pageContext.request.contextPath }/inquiryList" class="nav-link">1:1 문의</a></li>
 		                    		<li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고</a></li>
-		                    		<li><a href="${pageContext.request.contextPath }/faqList" class="nav-link">FAQ</a></li>
 		                  		</ul>
 		                	</div>
 	              		</div>
@@ -54,11 +54,16 @@
 						  		</tr>
 						  		<tr>
 						   			<th align="center" style="text-align: center">작성자 아이디</th>
+						   			<c:if test="${loginMember.userId ne 'admin' and !(loginMember.userId == rep.userId.userId)}">
+		                          		<td style="text-align: center">*****</td>		                          			
+		                          	</c:if>
+		                          	<c:if test="${loginMember.userId eq 'admin' or loginMember.userId == rep.userId.userId}">	
 						   			<td style="text-align: center"><c:out value="${rep.userId.userId}"/></td>
+						   			</c:if>
 						  		</tr>
 								<tr>
 									<th align="center" style="text-align: center">신고한 아이디</th>
-						   			<td style="text-align: center; color:red"><c:out value="${rep.targetId}"/></td>
+						   			<td style="text-align: center; color:red"><a href="${path}/member/otherMember.do?writer=${rep.targetId}&customer=${loginMember.userId}">${rep.targetId }</a></td>
 						  		</tr>
 								<tr>
 									<th align="center" style="text-align: center">내용</th>
@@ -68,7 +73,9 @@
 							<tr>
 								<td colspan="2" align="center">
 						 			<input type="button" value="목록" onclick="location.assign('${pageContext.request.contextPath }/reportList')"/>
-						 			<input type="button" value="삭제" onclick="location.assign('${pageContext.request.contextPath }/reportList')"/>
+						 			<c:if test="${loginMember.userId eq 'admin'}">
+						 				<input type="button" value="삭제" onclick="location.assign('${pageContext.request.contextPath }/reportList')"/>
+						 			</c:if>
 						 		</td>
 						 	</tr>
 						</table>
