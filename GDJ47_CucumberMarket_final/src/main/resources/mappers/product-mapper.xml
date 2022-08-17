@@ -102,7 +102,8 @@
 	
 	<select id="mainProductList" resultMap="productMap">
 		<!-- SELECT a.* FROM (SELECT * FROM product ORDER BY enroll_date DESC) a WHERE ROWNUM<=30 -->
-		SELECT a.* FROM (SELECT * FROM product p INNER JOIN FILES F ON p.pro_NO=F.PRO_NO ORDER BY DBMS_RANDOM.RANDOM) a WHERE ROWNUM&lt;=20 AND THUMBNAIL_STATUS='y' AND SOLVE_STATUS='y'
+		<!-- SELECT a.* FROM (SELECT * FROM product p INNER JOIN FILES F ON p.pro_NO=F.PRO_NO ORDER BY DBMS_RANDOM.RANDOM) a WHERE ROWNUM&lt;=20 AND THUMBNAIL_STATUS='y' AND SOLVE_STATUS='y' -->
+		SELECT a.* FROM (SELECT * FROM product p INNER JOIN FILES F ON p.pro_NO=F.PRO_NO ORDER BY p.pro_count desc) a WHERE ROWNUM&lt;=20 AND THUMBNAIL_STATUS='y' AND SOLVE_STATUS='y' and TO_DATE(SUBSTR(enroll_Date,1,10),'yyyy-MM-dd')=TO_DATE(SYSDATE,'yyyy-MM-dd')
 	</select>
 <!-- 	<select id="mainFilesList" resultType="filesMap">
 	
