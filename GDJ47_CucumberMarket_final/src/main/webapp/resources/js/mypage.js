@@ -58,6 +58,7 @@ $(()=>{
 				$("#databox").html(data);
 			}
 		});
+		$("#page").val('Product');
 	});
 	
 	//마이페이지 후기 목록 출력 연결
@@ -91,6 +92,7 @@ $(()=>{
 				$("#databox").html(data);
 			}
 		});
+		$("#page").val('Report');
 	});
 	//마이페이지 채팅 목록 출력 연결
 	$("#chattag").click(e=>{

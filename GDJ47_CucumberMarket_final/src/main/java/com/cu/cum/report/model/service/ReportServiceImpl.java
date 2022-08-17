@@ -83,9 +83,9 @@ public class ReportServiceImpl implements ReportService {
 		return rmdao.mypageReportList(session, param, r);
 	}
 	@Override
-	public int mypageReportCount() {
+	public int mypageReportCount(Report r) {
 		// TODO Auto-generated method stub
-		return rmdao.mypageReportCount(session);
+		return rmdao.mypageReportCount(session, r);
 	}
 	
 	

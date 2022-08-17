@@ -45,7 +45,7 @@
               <!-- *** CUSTOMER MENU END ***-->
             </div>
             <div class="box">
-                <h1 align="center"><c:out value="${loginMember.name }"/>님의 신고 목록</h1>
+                <h1 align="center"><c:out value="${loginMember.name }"/>님의 신고 내용</h1>
                 <hr>
 				<div class="col-lg-9">
 						<table aria-label="breadcrumb" class="box" border="1" summary="게시판 상세내용" width="650" height="350" border="1" cellpadding="5" align="center" >
@@ -57,6 +57,10 @@
 						  		<tr>
 						   			<th align="center" style="text-align: center">글번호</th>
 						   			<td style="text-align: center"><c:out value="${rep.repNo}"/></td>
+						  		</tr>
+						  		<tr>
+						   			<th align="center" style="text-align: center">신고 사유</th>
+						   			<td style="text-align: center"><c:out value="${rep.repType}"/></td>
 						  		</tr>
 						  		<tr>
 						   			<th align="center" style="text-align: center">제목</th>

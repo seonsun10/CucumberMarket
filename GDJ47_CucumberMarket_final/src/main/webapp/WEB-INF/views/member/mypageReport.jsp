@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
+<input id="page" type="hidden" value="Report"/>
 <div id="pro-head"> 
 	<div id="pro-left">
 		신고&nbsp;
@@ -29,7 +30,7 @@
 	<table>
 		<tr id="tablehead">
 			<th>번호</th>
-			<th>신고 유형</th>
+			<th>신고 사유</th>
 			<th>제목</th>
 			<th>신고 아이디</th>
 			<th>신고 날짜</th>
