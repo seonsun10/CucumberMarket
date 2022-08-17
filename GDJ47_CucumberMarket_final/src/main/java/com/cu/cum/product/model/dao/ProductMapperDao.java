@@ -18,7 +18,7 @@ public class ProductMapperDao {
 		int cPage = (int)page.get("cPage");
 		int numPerpage = (int)page.get("numPerpage");
 		String userId = (String)page.get("userId");
-		return session.selectList("product.selectProductList",userId,new RowBounds((cPage-1)*numPerpage+1,numPerpage));
+		return session.selectList("product.selectProductList",userId,new RowBounds((cPage-1)*numPerpage,numPerpage));
 	}
 	
 	public int selectProductCount(SqlSessionTemplate session, String userId) {

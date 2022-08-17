@@ -19,6 +19,7 @@ public interface ProductService {
 	
 	//상품리스트 페이징처리 1-5
 	List<Product> selectProductList(Map page);
+	List<Product> selectProductList(Pageable p, Member m);
 	
 	//상품 전체 수 조회
 	int selectProductCount(String userId);

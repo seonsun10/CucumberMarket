@@ -55,6 +55,11 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
+	public List<Product> selectProductList(Pageable p, Member m) {
+		// TODO Auto-generated method stub
+		return dao.findAllByMember(p,m);
+	}
+	@Override
 	public List<Product> selectProductList(Map page) {
 		// TODO Auto-generated method stub
 		dao.flush();

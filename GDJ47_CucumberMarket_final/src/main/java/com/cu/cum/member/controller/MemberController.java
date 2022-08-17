@@ -18,6 +18,8 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -165,10 +167,13 @@ public class MemberController {
 							HttpServletRequest request,
 							Model m) {
 		String userId= ((Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
+		log.debug(userId);
 		m.addAttribute("userId",userId);
 		int productCount = proservice.selectProductCount(userId);
 		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"userId",userId);
 		List<Product> products=proservice.selectProductList(page);
+//		Member member = service.selectMember(userId);
+//		List<Product> products=proservice.selectProductList(PageRequest.of((cPage-1)*numPerpage, numPerpage,Sort.by("enrollDate").descending()),member);
 		//log.debug("{}",p1.getFiles().get(0).getRenameFilename());
 		String url=request.getRequestURI();
 		Member loginMember=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -180,12 +185,15 @@ public class MemberController {
 		List<Files> pp = service.selectUserFiles(userId);//db거쳐서 회원이 가진 모든 파일 가져오기;
 		System.out.println("유저가 가지고 잇는 상품 대표이미지 : "+pp);
 		
-		
+		if(products.size()>0) {
+			m.addAttribute("products",products);
+		}
+		if(productCount>0) {
+			m.addAttribute("productCount",productCount);			
+		}
 		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage , productCount, url));
-		m.addAttribute("products",products);
 		m.addAttribute("pp",pp);
 		m.addAttribute("solveCount",proservice.selectSolveCount(userId));
-		m.addAttribute("productCount",productCount);
 		m.addAttribute("viewCount",service.selectViewCount(userId));
 		return "member/mypage";
 	}
