@@ -4,7 +4,7 @@
 * 김동영 : 알림 관련 기능 및 페이지
 * 김동훈 : 상품 관리 기능 및 페이지
 * 박선우 : 상품 관리 기능 및 페이지
-* 안경진 : 채팅 관련 기능 및 페이지
+* 안경진 : 지역별 커뮤니티 게시판, 1:1 채팅 기능 및 페이지 
 * 이종석 : 팀장. 회원 관련 기능 및 페이지, 협업 관련 기록 관리
 * 이주호 : 커뮤니티 게시판, FAQ
 
@@ -18,7 +18,8 @@
 * JSP
 * Oracle DB
 * Ajax
-* WebSocket
+* STOMP, SockJS
+
 
 
 ## 사용 툴
@@ -48,6 +49,8 @@
 ![chatting_view](https://user-images.githubusercontent.com/102929905/184778847-5d11dd45-4cf2-4f10-a75b-58a1faf5bbc7.png)
 
 ### 상품
+![카테고리별 상품](https://user-images.githubusercontent.com/107177104/185075463-34070b72-9ad1-4104-9274-11f2672c4028.png)
+
 
 ### 기타
 

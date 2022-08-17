@@ -30,6 +30,7 @@
 		                	<div class="card-body">
 		                  		<ul class="nav nav-pills flex-column">
 		                    		<li><a href="${pageContext.request.contextPath }/faqList" class="nav-link">FAQ</a></li>
+		                    		<li><a href="${pageContext.request.contextPath }/admin/searchNotice.do" class="nav-link">공지사항</a></li>
 		                    		<li><a href="${pageContext.request.contextPath }/inquiryList" class="nav-link">1:1 문의</a></li>
 			                    	<li><a href="${pageContext.request.contextPath }/reportList" class="nav-link">신고</a></li>
 		                  		</ul>
