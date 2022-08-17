@@ -23,7 +23,7 @@
               -->
               <div class="card sidebar-menu mb-4">
                 <div class="card-header">
-                  <h3 class="h4 card-title">Pages</h3>
+                  <h3 class="h4 card-title">FAQ</h3>
                 </div>
                 <div class="card-body">
                   <ul class="nav nav-pills flex-column">

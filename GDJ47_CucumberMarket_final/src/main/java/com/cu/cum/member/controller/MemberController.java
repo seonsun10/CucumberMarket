@@ -476,6 +476,7 @@ public class MemberController {
 		Member member = service.selectMember(writer);
 		String url=request.getRequestURI();
 		int totalProduct=proservice.selectProductCount(writer);
+		int repCount = repservice.reportCount(writer);
 		m.addAttribute("dayList",daylist);
 		m.addAttribute("solveCount",proservice.selectSolveCount(writer));
 		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage, totalProduct, url));
@@ -485,6 +486,7 @@ public class MemberController {
 		m.addAttribute("member",member);
 		m.addAttribute("writer",writer);
 		m.addAttribute("renames",renames);
+		m.addAttribute("repCount",repCount);
 		return "/member/otherMember";
 	}
 	//다른 사람 물품 정보

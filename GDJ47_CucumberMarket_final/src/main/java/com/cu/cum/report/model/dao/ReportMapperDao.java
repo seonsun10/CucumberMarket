@@ -38,5 +38,9 @@ public class ReportMapperDao {
 	public int mypageReportCount(SqlSessionTemplate session, Report r) {
 		return session.selectOne("report.mypageReportCount", r.getUserId());
 	}
+	
+	public int reportCount(SqlSessionTemplate session, String writer) {
+		return session.selectOne("report.reportCount", writer);
+	}
 
 }

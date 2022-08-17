@@ -26,6 +26,19 @@
             <div id="customer-orders" class="col-lg-9">
               <div class="box">
                 <h1>${writer}</h1>
+                <div id="pro-left" style="color:red">
+					신고당한 횟수&nbsp;
+					<c:if test="${repCount ne null }">
+						<span>
+							<c:out value="${repCount }"/>
+						</span>
+					</c:if>	
+					<%-- <c:if test="${repCount eq null }">
+						<span>
+							0fdsafa
+						</span>
+					</c:if> --%>
+				</div>
                 <hr>
                 <div class="table-responsive">
                   <br/>
