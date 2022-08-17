@@ -56,7 +56,7 @@
    		</select>
    		
    		<!-- 새로운 채팅 조회 -->
-   		<select id="searchNewChatList" parameterType="com.cu.cum.test.model.vo.MessageContent" resultType="com.cu.cum.test.model.vo.MessageContent">
+   		<select id="searchNewChatList" parameterType="com.cu.cum.test.model.vo.ChatRoom" resultType="com.cu.cum.test.model.vo.ChatRoom">
    		<![CDATA[
 		select *
 		FROM chatview

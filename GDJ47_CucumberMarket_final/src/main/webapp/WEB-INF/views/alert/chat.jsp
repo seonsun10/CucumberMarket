@@ -14,11 +14,11 @@
 		</tr>
 			<c:if test="${not empty newChatList}">
 				<c:forEach var="c" items="${newChatList }">
-					<c:if test="${c.userid eq loginMember.userId }">
+					
 					<tr id="tablebody">
-						<td><img src="${path }/resources/img/오이.png" style="width:50px;"></td>
-						<td><c:out value="${prono.title }"/></td>
-						<td><c:out value="${c.userid}"/></td>
+						<td><img src="${path }/resources/upload/product/${chatFilename[status.index]}" style="width:50px;"></td>
+						<td><c:out value="${c.title }"/></td>
+						<td><c:out value="${c.otherId}"/></td>
 						<td><button onclick="open('${path}/ptestchat.do/${c.roomId }','_blank','width=600,height=640');setTimeout(function(){location.reload()}, 1000);">채팅하기</button>
 							
 						</td>
@@ -35,7 +35,6 @@
 						
 					</tr>
 					
-					</c:if>
 				</c:forEach>
 			</c:if>
 			<c:if test="${empty newChatList}">
