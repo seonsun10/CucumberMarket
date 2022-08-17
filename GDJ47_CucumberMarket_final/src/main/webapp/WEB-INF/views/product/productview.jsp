@@ -25,8 +25,7 @@
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="#">Home</a></li>
                   <li class="breadcrumb-item">카테고리</li>
-                  <li class="breadcrumb-item"></li>
-                  <li aria-current="page" class="breadcrumb-item active"></li>
+                  <li class="breadcrumb-item">${tag }</li>
                 </ol>
               </nav>
             </div>
@@ -146,7 +145,7 @@
                 <div class="col-md-6">
                 
                   <div class="box">
-                    <h1 class="text-center">${result.title }</h1>
+                    <h3 class="text-center">${result.title }</h3>
                     <c:if test="${name ne loginMember.userId }">
                     <h4 class="text-center">판매자 : <a href="${path}/member/otherMember.do?writer=${name}&customer=${loginMember.userId}">${name }</a></h4>
                     </c:if>
@@ -163,11 +162,18 @@
                     <p class="price"><fmt:formatNumber value="${result.price}" pattern="#,###" />원</p>
                     <p class="text-center buttons">
                     <button class="btn btn-primary" id="chat-Btn">오이채팅</button>
-               <c:if test="${count==0}">
-                    <button  class="btn btn-primary" onclick="location.assign('${path }/wishlist/insertWishList.do?id=${loginMember.userId}&no=${no}&tag=${tag}&name=${name}&region=${region}&proStatus=${proStatus }'); alert('관심상품등록');">관심상품등록</button>
+               		
+               		<c:if test="${count==0}">
+               			<c:if test="${loginMember.userId ne name }">
+                    	<button  class="btn btn-primary" onclick="location.assign('${path }/wishlist/insertWishList.do?id=${loginMember.userId}&no=${no}&tag=${tag}&name=${name}&region=${region}&proStatus=${proStatus }'); alert('관심상품등록');">관심상품등록</button>
+   		            	</c:if>
+   		            	<%-- <c:if test="${loginMember.userId eq name }">
+                    	<button  class="btn btn-primary" onclick="alert('본인상품은 관심상품으로 등록할 수 없습니다.');">관심상품등록</button>
+   		            	</c:if> --%>
                     </c:if>
+                    
                     <c:if test="${count==1}">
-                    <button class="btn btn-primary" onclick="location.assign('${path }/wishlist/deleteWishList.do?id=${loginMember.userId}&no=${no}&tag=${tag}&name=${name}&region=${region}&proStatus=${proStatus }'); alert('관심상품삭제');">관심상품삭제</button>
+                    	<button class="btn btn-primary" onclick="location.assign('${path }/wishlist/deleteWishList.do?id=${loginMember.userId}&no=${no}&tag=${tag}&name=${name}&region=${region}&proStatus=${proStatus }'); alert('관심상품삭제');">관심상품삭제</button>
                     </c:if>
                     </p>
                   </div>

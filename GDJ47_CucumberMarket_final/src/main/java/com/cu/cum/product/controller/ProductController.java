@@ -107,7 +107,8 @@ public class ProductController {
 					.renameFilename(rename)
 					.thumbnailStatus("y")
 					.build());
-			
+			model.addAttribute("msg","상품 등록이 완료되었습니다.");
+			model.addAttribute("loc", "member/mypage.do");
 		}catch(IOException e) {
 			//e.printStackTrace();
 			model.addAttribute("msg","상품 등록에 실패하였습니다.");
