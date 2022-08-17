@@ -12,5 +12,6 @@ import lombok.NoArgsConstructor;
 public class Search {
 	private String type;
 	private String keyword;
+	private String region;
 
 }

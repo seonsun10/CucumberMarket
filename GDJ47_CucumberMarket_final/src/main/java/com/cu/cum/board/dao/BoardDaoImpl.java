@@ -11,6 +11,7 @@ import com.cu.cum.board.model.vo.Board;
 import com.cu.cum.board.model.vo.BoardComment;
 import com.cu.cum.board.model.vo.BoardReply;
 import com.cu.cum.board.model.vo.RecommendList;
+import com.cu.cum.board.model.vo.Search;
 @Repository
 public class BoardDaoImpl implements BoardDao {
 
@@ -163,6 +164,20 @@ public class BoardDaoImpl implements BoardDao {
 	public String selectregion(SqlSessionTemplate session, String userid) {
 		// TODO Auto-generated method stub
 		return session.selectOne("board.selectregion",userid);
+	}
+	@Override
+	public List<Board> searchBoardList(SqlSessionTemplate session, Map page) {
+		// TODO Auto-generated method stub
+		Search s  = (Search)page.get("search");
+		int cPage = (int)page.get("cPage");
+		int numPerpage = (int)page.get("numPerpage");
+		return session.selectList("board.searchboardlist",s,new RowBounds((cPage-1)*numPerpage, numPerpage));
+	}
+	@Override
+	public int searchBoardCount(SqlSessionTemplate session, Map page) {
+		// TODO Auto-generated method stub
+		Search s  = (Search)page.get("search");
+		return session.selectOne("board.searchboardcount",s);
 	}
 	
 	

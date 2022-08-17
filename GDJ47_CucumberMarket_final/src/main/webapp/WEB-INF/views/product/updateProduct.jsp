@@ -192,7 +192,7 @@
     			alert('상품 상태를 체크해주세요');
     			return false;
     		}
-    		alert('상품 등록이 완료되었습니다.');
+    		alert('상품 수정이 완료되었습니다.');
     		return true;
     	}
     		

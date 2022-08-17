@@ -25,6 +25,7 @@ import com.cu.cum.board.model.vo.BoardComment;
 import com.cu.cum.board.model.vo.RecommendList;
 import com.cu.cum.board.model.vo.Search;
 import com.cu.cum.member.model.vo.Member;
+import com.cu.cum.pagebar.PageBar;
 import com.cu.cum.pagebar.TestPageBar;
 
 @Controller
@@ -265,15 +266,30 @@ public class BoardController {
     
     @RequestMapping("/bsearch/{type}/{keyword}")
     public ModelAndView searchBoard(@PathVariable String type,@PathVariable String keyword,ModelAndView mv,@RequestParam(defaultValue = "1") int cPage,
-			@RequestParam(defaultValue = "5") int numPerpage) {
-    	Search s = Search.builder().type(type)
-    			.keyword(keyword).build();
-    	Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"type",type,"keyword",keyword);
+			@RequestParam(defaultValue = "5") int numPerpage,HttpServletRequest request) {
+    	String userid= ((Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
     	
-		/*
-		 * List<Board> boards =service.searchBoard(page); int tcount =
-		 * service.searchBoardCount();
-		 */
+    	String region = service.selectregion(userid);
+    	Search s = Search.builder().type(type)
+    			.keyword(keyword).region(region).build();
+    	Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"search",s);
+    	String url =request.getRequestURI();
+		List<Board> boards = service.searchBoardList(page);
+		System.out.println("테스트"+boards);
+		int totalcount = service.searchBoardCount(page);
+		System.out.println(totalcount);
+		mv.addObject("pageBar", TestPageBar.getPageBar(cPage, numPerpage, totalcount, url));
+				
+				
+		List<Board> pboard = service.selectpopularlist(region); 
+		
+		List<Board> pboardlist = new ArrayList();
+		for(Board s2:pboard) {
+			pboardlist.add(service.selectBoard(s2.getBoardId())); 
+		}
+		mv.addObject("pboard", pboardlist);
+		mv.addObject("boards",boards);
+		mv.setViewName("board/boardList");
     	return mv;
     	
     	

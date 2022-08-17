@@ -11,7 +11,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -23,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.product.model.service.FilesService;
@@ -194,7 +195,6 @@ public class ProductController {
 			m.addAttribute("msg","삭제 성공");
 		}catch(Exception e) {
 			m.addAttribute("msg","삭제 실패");
-			
 //			e.printStackTrace();
 		}
 		return "common/msg";
@@ -247,7 +247,8 @@ public class ProductController {
 	
 	//상품 상세페이지
 	@RequestMapping("/product/productView.do")
-	public String productView(HttpServletRequest request) {
+	public String productView(HttpServletRequest request,
+								HttpServletResponse response) {
 		String id = request.getParameter("id");
 		int no = Integer.parseInt(request.getParameter("no"));
 		String tag = request.getParameter("tag");
@@ -257,15 +258,52 @@ public class ProductController {
 		System.out.println(id+" "+no+" "+tag);
 		Member m = Member.builder().userId(id).build();
 		Product p = Product.builder().proNo(no).build();
-		
+		Cookie oldCookie = null;
+	    Cookie[] cookies = request.getCookies();
+	    if (cookies != null) {
+	        for (Cookie cookie : cookies) {
+	            if (cookie.getName().equals("proView")) {
+	                oldCookie = cookie;
+	            }
+	        }
+	    }
+	    if(!id.equals("no")&&!name.equals("no")) {
+		    if (oldCookie != null) {
+		        if (!oldCookie.getValue().contains("[" + id.toString() + no + "]")) {
+		            service.productViewCountUp(no);
+		            oldCookie.setValue(oldCookie.getValue() + "_[" + id + no + "]");
+		            oldCookie.setPath("/");
+		            oldCookie.setMaxAge(60 * 60 * 12);
+		            response.addCookie(oldCookie);
+		        }
+		    } else {
+		        service.productViewCountUp(no);
+		        Cookie newCookie = new Cookie("proView","[" + id + no + "]");
+		        newCookie.setPath("/");
+		        newCookie.setMaxAge(60 * 60 * 12);
+		        response.addCookie(newCookie);
+		    }
+	    }
 		//상품상세페이지에 가져갈 상품 가져오기
 		Product result = service.productCheck(no);
 		System.out.println("상품정보 가져온거 : "+result);
 		List<String> filename = new ArrayList();
+		List<String> filesname = new ArrayList();
 		for(int i=0; i<result.getFiles().size(); i++) {
-			filename.add(result.getFiles().get(i).getRenameFilename());
+			if(result.getFiles().get(i).getRenameFilename().contains("s_")) {
+				
+				filename.add(0,result.getFiles().get(i).getRenameFilename());
+			}
 		}
-		//System.out.println("상품이 가지고 있는 이미지 파일 이름들 : "+filename);
+		
+		for(int i=0; i<result.getFiles().size(); i++) {
+			if(!result.getFiles().get(i).getRenameFilename().contains("s_")) {
+				filesname.add(result.getFiles().get(i).getRenameFilename());
+			}
+			
+		}
+		System.out.println("썸네일 이미지 : "+filename);
+		System.out.println("나머지 이미지 : "+filesname);
 		
 		//상품상세페이지에서 관심상품인지 아닌지 체크하기
 		int count = 0;
@@ -303,6 +341,7 @@ public class ProductController {
 		request.setAttribute("tag",tag);
 		request.setAttribute("result", result);
 		request.setAttribute("filename", filename);
+		request.setAttribute("filesname", filesname);
 		request.setAttribute("name", name);
 		request.setAttribute("region", region);
 		request.setAttribute("proStatus", proStatus);
@@ -373,6 +412,7 @@ public class ProductController {
 		String ext = originalFilename1.substring(originalFilename1.lastIndexOf("."));
 		int rndNum=(int)(Math.random()*10000);
 		String rename = "s_"+userId+"_"+rndNum+ext;
+		
 		try {
 			for(int i=0; i<beforefiles.size(); i++) {
 				beforefilename.add(beforefiles.get(i).getRenameFilename());
@@ -380,6 +420,7 @@ public class ProductController {
 				if(f.exists()) f.delete();
 			}
 			
+			//db 상품번호에 해당하는 데이터 다 삭제 하기
 			afterfiles.add(Files.builder()
 					.filesNo(beforefiles.get(0).getFilesNo()) //원래 이미지 테이블에 대표이미지가 첫 인덱스이므로 0번 인덱스에 파일번호를 가져옴
 					.product(product)
@@ -400,7 +441,7 @@ public class ProductController {
 			int length = beforefiles.size(); //수정 전 db에 있는 file 사이즈 값 ex)3 0~2
 
 			for(MultipartFile f : afterfileList) { //수정하면서 받아온 file사이즈 값 5 0~4
-				if(count<length) {   // count<3   1 2 
+//				if(count<length) {   // count<3   1 2 
  					if(f!=null) {
 						String originalFilename2 = f.getOriginalFilename();
 						if(originalFilename2!=null) {
@@ -412,7 +453,7 @@ public class ProductController {
 							
 							try {
 								afterfiles.add(Files.builder()
-									.filesNo(beforefiles.get(count).getFilesNo())
+									//.filesNo(beforefiles.get(count).getFilesNo())
 									.product(p)
 									.member(m)
 									.originalFilename(originalFilename2)
@@ -425,42 +466,48 @@ public class ProductController {
 							count++;
 							}
 						}
-					}else if(count<=afterfileList.size()) { // <5
-						if(f!=null) {
-							String originalFilename2 = f.getOriginalFilename();
-							if(originalFilename2!=null) {
-								System.out.println(originalFilename2);
-								System.out.println("아래꺼 : "+originalFilename2.lastIndexOf("."));
-								String extt = originalFilename2.substring(originalFilename2.lastIndexOf("."));
-								
-								rndNum=(int)(Math.random()*10000);
-								String rename1 = userId+"_"+rndNum+extt;
-								
-								try {
-									
-									
-									
-									afterfiles.add(Files.builder()
-										//.filesNo(beforefiles.get(count).getFilesNo())
-										.product(p)
-										.member(m)
-										.originalFilename(originalFilename2)
-										.thumbnailStatus("n")
-										.renameFilename(rename1).build());
-									f.transferTo(new File(path+rename1));
-								}catch(IOException e) {
-									e.printStackTrace();
-								}
-								count++;
-								}
-							}
-						}
+ 					
+//					}else if(count<=afterfileList.size()) { // <5
+//						if(f!=null) {
+//							String originalFilename2 = f.getOriginalFilename();
+//							if(originalFilename2!=null) {
+//								System.out.println(originalFilename2);
+//								System.out.println("아래꺼 : "+originalFilename2.lastIndexOf("."));
+//								String extt = originalFilename2.substring(originalFilename2.lastIndexOf("."));
+//								
+//								rndNum=(int)(Math.random()*10000);
+//								String rename1 = userId+"_"+rndNum+extt;
+//								
+//								try {
+//									
+//									
+//									
+//									afterfiles.add(Files.builder()
+//										.filesNo(beforefiles.get(count).getFilesNo())
+//										.product(p)
+//										.member(m)
+//										.originalFilename(originalFilename2)
+//										.thumbnailStatus("n")
+//										.renameFilename(rename1).build());
+//									f.transferTo(new File(path+rename1));
+//								}catch(IOException e) {
+//									e.printStackTrace();
+//								}
+//								count++;
+//								}
+//							}
+//						}
 				}
-		}	
+		}
+		
+		fService.deleteFile(no);
 		List<Files> ff = fService.insertFiles(afterfiles);
+		
+		
+		
 		//db에서 수정을 하고 나서 마무리로 폴더에 있는 이미지 삭제시켜야함
 
-		System.out.println("수정 db거치고 나서 마무리 : "+ff);
+		//System.out.println("수정 db거치고 나서 마무리 : "+ff);
 		return "member/mypage";
 	}
 	

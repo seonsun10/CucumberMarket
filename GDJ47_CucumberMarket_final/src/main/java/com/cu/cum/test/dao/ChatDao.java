@@ -55,4 +55,8 @@ public class ChatDao {
 	public int deleteChatRoom(SqlSessionTemplate session,String id) {
 		return session.delete("chatroom.deletechatroom",id);
 	}
+	public List<ChatRoom> selectChatList2(SqlSessionTemplate session, String id) {
+		
+		return session.selectList("chatroom.selectchatlist2",id);
+	}
 }

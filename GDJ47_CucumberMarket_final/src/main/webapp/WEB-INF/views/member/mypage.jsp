@@ -109,19 +109,18 @@
 							</span>
 						</c:if>
 					</div>
-					
 				</div>
-				<div id="pro-body">
-					<table>
-						<tr id="tablehead">
-							<th>사진</th>
-							<th>제목</th>
-							<th>가격</th>
-							<th>최근수정일</th>
-							<th>수정</th>
-							<th>삭제</th>
-						</tr> 
-							<c:if test="${products ne null}">
+				<c:if test="${products ne null}">
+					<div id="pro-body">
+						<table>
+							<tr id="tablehead">
+								<th>사진</th>
+								<th>제목</th>
+								<th>가격</th>
+								<th>최근수정일</th>
+								<th>수정</th>
+								<th>삭제</th>
+							</tr> 
 								<c:forEach var="p" items="${products}">
 										<tr id="tablebody">
 											<c:forEach var="pp" items="${pp }">
@@ -129,7 +128,6 @@
 													<td><a href="${path }/product/productView.do?id=${loginMember.userId}&no=${p.proNo}&tag=${p.categoryName}&name=${p.member.userId}"><img src="${path }/resources/upload/product/${pp.renameFilename}" style="width:50px;"></a></td>
 										 		</c:if>
 											</c:forEach>
-											
 											<td onclick="location.assign('${path}/product/productView.do?id=${loginMember.userId}&no=${p.proNo}&tag=${p.categoryName}&name=${p.member.userId}')"><c:out value="${p.title}"/></td>
 											<td onclick="location.assign('${path}/product/productView.do?id=${loginMember.userId}&no=${p.proNo}&tag=${p.categoryName}&name=${p.member.userId}')"><c:out value="${p.price }"/>원</td>
 											<td><fmt:formatDate value="${p.enrollDate}" pattern="yyyy-MM-dd"/></td>
@@ -137,14 +135,14 @@
 											<td id="deleteBtn"><button onclick="location.assign('${path}/product/deleteProduct.do?proNo=${p.proNo }&userId=${loginMember.userId}')">삭제</button></td>
 										</tr>
 								</c:forEach>
+								</table>
+							</div>
 							</c:if>
-							<c:if test="${products eq null }">
-								<tr>
-									<td colspan="5">등록된 상품이 없습니다.</td>
-								</tr>
-							</c:if>
-					</table>
-				</div>
+					<c:if test="${products eq null }">
+						<tr>
+							<td colspan="5">등록된 상품이 없습니다.</td>
+						</tr>
+					</c:if>
 				<div id="pageBar"><c:out value="${pageBar }" escapeXml="false"/></div>
               </div>
             </div>

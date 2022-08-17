@@ -55,6 +55,11 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
+	public List<Product> selectProductList(Pageable p, Member m) {
+		// TODO Auto-generated method stub
+		return dao.findAllByMember(p,m);
+	}
+	@Override
 	public List<Product> selectProductList(Map page) {
 		// TODO Auto-generated method stub
 		dao.flush();
@@ -191,6 +196,13 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> findAllByMember(Pageable p, Member m) {
 		// TODO Auto-generated method stub
 		return dao.findAllByMember(p, m);
+	}
+	
+	//상품 조회수 
+	@Override
+	public int productViewCountUp(int no) {
+		// TODO Auto-generated method stub
+		return pmdao.productViewCountUp(session,no);
 	}
 	
 }

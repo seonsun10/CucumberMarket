@@ -44,7 +44,7 @@ public class WishList {
 	private Member member;
 	
 	@ToString.Exclude
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="proNo")
 	private Product product;
 	

@@ -170,6 +170,28 @@
 	select region from member where userid=#{userid}
 	</select>
 	
+	<select id="searchboardlist" parameterType="com.cu.cum.board.model.vo.Search" resultType="com.cu.cum.board.model.vo.Board">
+	<if test='type.equals("boardTitle")'>
+	select * from board where boardregion=#{region} and boardTitle like '%'||#{keyword}||'%'
+	</if>
+	<if test='type.equals("userId")'>
+	select * from board where boardregion=#{region} and userid like '%'||#{keyword}||'%'
+	</if>
+	</select>
+	
+	<select id="searchboardcount" parameterType="com.cu.cum.board.model.vo.Search" resultType="_int">
+	<if test='type.equals("boardTitle")'>
+	select count(*) from board where boardregion=#{region} and boardTitle like '%'||#{keyword}||'%'
+	</if>
+	<if test='type.equals("userId")'>
+	select count(*) from board where boardregion=#{region} and userid like '%'||#{keyword}||'%'
+	</if>
+	</select>
+	
+	
+	
+	
+	
 	
 
 </mapper>
