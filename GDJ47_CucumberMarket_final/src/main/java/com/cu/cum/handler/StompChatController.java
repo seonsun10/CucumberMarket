@@ -33,8 +33,6 @@ public class StompChatController {
 	@Autowired
 	private ChatService service;
 	
-	@Autowired
-	private ProductService pservice;
 	
 	@Autowired
 	private FilesService fservice;
@@ -125,9 +123,6 @@ public class StompChatController {
 		System.out.println("진짜 마지막으로 판매자가 가지고 있는 상품 리네임파일이름 : "+chatFilename);
 
 		for(ChatRoom c:chatList) {
-			if(pservice.selectProduct(c.getProNo()).getSolveStatus().equals("n")) {
-				service.deleteChatRoom(c.getRoomId());
-			}
 			if(c.getUserId().equals(userid)) {
 			c.setUnReadCount(service.unreadmessage(c));
 			}else {

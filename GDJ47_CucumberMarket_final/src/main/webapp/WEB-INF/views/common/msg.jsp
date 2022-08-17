@@ -18,7 +18,6 @@
 		if(script!=null){
 			window.close();
 		}
-		opener.location.reload();
 		location.replace('${path}/${loc}?userId=${loginMember.userId}');
 	</script>
 	
