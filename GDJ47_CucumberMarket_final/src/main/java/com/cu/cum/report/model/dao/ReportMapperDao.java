@@ -35,8 +35,8 @@ public class ReportMapperDao {
 		return session.selectList("report.mypageReportList",r.getUserId(), new RowBounds((offset-1)*limit, limit));
 	}
 	
-	public int mypageReportCount(SqlSessionTemplate session) {
-		return session.selectOne("report.mypageReportCount");
+	public int mypageReportCount(SqlSessionTemplate session, Report r) {
+		return session.selectOne("report.mypageReportCount", r.getUserId());
 	}
 
 }

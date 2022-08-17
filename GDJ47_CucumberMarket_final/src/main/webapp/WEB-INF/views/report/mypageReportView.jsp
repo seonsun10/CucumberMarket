@@ -44,7 +44,10 @@
               <!-- /.col-lg-3-->
               <!-- *** CUSTOMER MENU END ***-->
             </div>
-<div class="col-lg-9">
+            <div class="box">
+                <h1 align="center"><c:out value="${loginMember.name }"/>님의 신고 내용</h1>
+                <hr>
+				<div class="col-lg-9">
 						<table aria-label="breadcrumb" class="box" border="1" summary="게시판 상세내용" width="650" height="350" border="1" cellpadding="5" align="center" >
 						 	<colgroup>
 						  		<col width = "130px" />
@@ -56,6 +59,10 @@
 						   			<td style="text-align: center"><c:out value="${rep.repNo}"/></td>
 						  		</tr>
 						  		<tr>
+						   			<th align="center" style="text-align: center">신고 사유</th>
+						   			<td style="text-align: center"><c:out value="${rep.repType}"/></td>
+						  		</tr>
+						  		<tr>
 						   			<th align="center" style="text-align: center">제목</th>
 						   			<td style="text-align: center"><c:out value="${rep.repTitle}"/></td>
 						  		</tr>
@@ -64,8 +71,9 @@
 						   			<td style="text-align: center"><c:out value="${rep.userId.userId}"/></td>
 						  		</tr>
 								<tr>
-									<th align="center" style="text-align: center">신고당한 아이디</th>
-						   			<td style="text-align: center; color:red"><c:out value="${rep.targetId}"/></td>
+									<th align="center" style="text-align: center">신고한 아이디</th>
+						   			<%-- <td style="text-align: center; color:red"><c:out value="${rep.targetId}"/></td> --%>
+						   			<td style="text-align: center; color:red"><a href="${path}/member/otherMember.do?writer=${rep.targetId}&customer=${loginMember.userId}">${rep.targetId }</a></td>
 						  		</tr>
 								<tr>
 									<th align="center" style="text-align: center">내용</th>
@@ -78,6 +86,7 @@
 						 		</td>
 						 	</tr>
 						</table>
+					</div>
 					</div>
       </div>
     </div>
