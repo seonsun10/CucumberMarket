@@ -35,7 +35,7 @@
 						<td onclick="location.assign('${path}/product/productView.do?id=${loginMember.userId}&no=${d.proNo}&tag=${d.categoryName}&name=${d.member.userId}')"><c:out value="${d.title }"/></td>
 						<td onclick="location.assign('${path}/product/productView.do?id=${loginMember.userId}&no=${d.proNo}&tag=${d.categoryName}&name=${d.member.userId}')"><c:out value="${d.price }"/>원</td>
 						<td onclick="location.assign('${path}/product/productView.do?id=${loginMember.userId}&no=${d.proNo}&tag=${d.categoryName}&name=${d.member.userId}')"><fmt:formatDate value="${d.enrollDate}" pattern="yyyy-MM-dd"/></td>
-						<td><button>삭제</button></td>
+						<td><button onclick="location.assign('${path }/wishlist/deleteWish.do?id=${loginMember.userId}&no=${d.proNo}');">삭제</button></td>
 					</tr>
 				</c:forEach>
 			</c:if>

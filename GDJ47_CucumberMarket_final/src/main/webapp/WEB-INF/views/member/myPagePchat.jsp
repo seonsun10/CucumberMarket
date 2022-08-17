@@ -7,7 +7,7 @@
 	<table>
 		<tr id="tablehead">
 			<th>사진</th>
-			<th>제목</th>
+			<th>제목</th> 
 			<th>대화상대</th>
 			<th>입장</th>
 			<th>알림</th>

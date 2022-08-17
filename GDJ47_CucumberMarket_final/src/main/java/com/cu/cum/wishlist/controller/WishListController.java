@@ -207,4 +207,22 @@ public class WishListController {
 		}
 		return "redirect:/member/wishList.do";
 	}
+	
+	
+	//마이페이지에서 찜선택 삭제
+	@RequestMapping("/wishlist/deleteWish.do")
+	public String deleteWish(@RequestParam("id") String id, @RequestParam("no") int no ,Model model) {
+		Product p = Product.builder().proNo(no).build();
+		Member m = Member.builder().userId(id).build();
+		int result = service.deleteWishlist(id, no);
+		System.out.println("어떻게 찍히나 : "+result);
+		if(result>0) {
+			model.addAttribute("msg","관심 상품 해제가 완료되었습니다.");
+			model.addAttribute("loc", "member/mypage.do");
+		}else {
+			model.addAttribute("msg","관심 상품 해제에 실패하였습니다 다시시도해주세요.");
+			model.addAttribute("loc","member/mypage.do");
+		}
+		return "common/exception";
+	}
 }
