@@ -107,7 +107,8 @@ public class ProductController {
 					.renameFilename(rename)
 					.thumbnailStatus("y")
 					.build());
-			
+			model.addAttribute("msg","상품 등록이 완료되었습니다.");
+			model.addAttribute("loc", "member/mypage.do");
 		}catch(IOException e) {
 			//e.printStackTrace();
 			model.addAttribute("msg","상품 등록에 실패하였습니다.");
@@ -565,15 +566,5 @@ public class ProductController {
 		return "product/productTotal";
 	}
 	
-	//상품 판매 완료
-	@RequestMapping("/product/endDeal.do")
-	public String endProductDeal(@RequestParam("proNo") int proNo, Model m) {
-		int result = service.updateProductSolve(proNo);
-		if(result>0) {
-			m.addAttribute("msg","거래가 완료되었습니다");
-			m.addAttribute("loc","member/mypage.do");
-		}
-		return "common/msg";
-	}
 
 }

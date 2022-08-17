@@ -369,7 +369,9 @@ public class MemberController {
 			products.add(proservice.selectProduct(w.getProduct().getProNo()));
 		}
 		for(Product p : products) {
+			if(p!=null) {
 			files.addAll(p.getFiles());
+			}
 		}
 		for(Files f : files) {
 			if(f.getRenameFilename().contains("s_")) {

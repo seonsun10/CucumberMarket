@@ -10,7 +10,8 @@
 
 ## 사용 기술
 ### 
-* Spring Boot, Maven
+* Java 11
+* Spring Boot 2.7.2, Maven
   - Security, SMTP
 * JPA, Spring data JPA, Querydsl
 * MyBatis
@@ -25,7 +26,10 @@
 + VS Code
 + ERD Cloud 
 + Oven
-+ Google spreadsheets 
++ Google spreadsheets
+
+## 구현
+[오이 마켓]
 
 
 ## 기능정의서 [자세히 보기](https://docs.google.com/spreadsheets/d/1jChONE-HqpAC-X8Dr4VCTSSx1rSuXCCXxlUnZ39Wnqk/edit#gid=0)
@@ -37,7 +41,14 @@
 ## 화면설계
 > Oven을 활용하여 화면 설계 후 BootStrap Template 기반으로 수정 및 제작
 
+### 메인
+![index_view](https://user-images.githubusercontent.com/102929905/185046661-af957f89-b895-497a-8f37-6b207c9230ac.png)
+
 ### 채팅
 ![chatting_view](https://user-images.githubusercontent.com/102929905/184778847-5d11dd45-4cf2-4f10-a75b-58a1faf5bbc7.png)
+
+### 상품
+
+### 기타
 
 

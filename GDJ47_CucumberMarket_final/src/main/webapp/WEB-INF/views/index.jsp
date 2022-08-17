@@ -13,7 +13,6 @@ a:hover{
 }
 div.col-lg-9{
 	width:1500px;
-	max-width:65%;
 }
 p#protag{
 	background-color: rgb(229,229,229);
@@ -23,9 +22,9 @@ div#pro-box{
 	border: 1px solid rgb(229,229,229);
 	width:200px;
 	height:300px;
-	margin-right:40px;
-	margin-bottom:20px;
-	margin-left:20px;					
+	margin-right:20px;
+	margin-bottom:30px;
+	margin-left:30px;					
 }
 
 div#pro-img>img{
@@ -107,25 +106,25 @@ div#pro-date{
 	
 
         <div id="banner-container" style="text-align: center; margin-bottom:30px;">
-        	<img src="${path }/resources/img/오이배너.jpg" width="59%"/>
+        	<img src="${path }/resources/img/오이배너.jpg" width="1500px" style="max-width:80%;"/>
         </div>
  
-         <div id="hot" style="justify-content:center;">
-          <div class="box py-4" >
-              <div class="row">
-                <div class="col-md-12">
-                  <h2 class="mb-0">오늘의 추천 상품</h2>
-                </div>
-              </div>
-          </div>
-         </div>
+
        
         
              
-		<div id="databox" class="col-lg-9 box" style="margin:auto;">
+		<div id="databox" class="col-lg-9 box" style="margin:auto; margin-bottom:20px; max-width:80%; ">
+         <div id="hot" style="justify-content:center;">
+          
+              <div class="row">
+                <div class="col-md-12">
+                  <h2 class="mb-0" >오늘의 인기 상품</h2>
+                </div>
+              </div>
+        
+         </div>
 
-
-		<div id="pro-body" style="margin-left:60px;">
+		<div id="pro-body" style="margin-left:70px; margin-right:70px; ">
 			<c:if test="${mp ne null }">
 				<c:forEach var="p" items="${mp }" varStatus="status">
 					<div id="pro-box">

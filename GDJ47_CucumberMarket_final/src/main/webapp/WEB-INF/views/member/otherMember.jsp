@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <link rel="stylesheet" href="${path}/resources/css/mypage/otherPage.css">
@@ -120,7 +121,12 @@
 						<div id="pro-head2"><c:out value="${p.title }"/></div>
 						<div id="pro-body2">
 							<div style="color:black;"><c:out value="${p.price}"/>원</div>
-							<div id="pro-date"><c:out value="${dayList[status.index] }"/>일 전</div>
+							<c:if test="${dayList[status.index] ne 0 }">
+								<div id="pro-date"><c:out value="${dayList[status.index] }"/>일 전</div>
+							</c:if>
+							<c:if test="${dayList[status.index] eq 0 }">
+								<div id="pro-date">오늘</div>
+							</c:if>
 						</div>
 					</div>
 					<div id="pro-foot">
