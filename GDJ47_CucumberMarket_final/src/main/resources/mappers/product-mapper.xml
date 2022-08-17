@@ -102,7 +102,7 @@
 	
 	<select id="mainProductList" resultMap="productMap">
 		<!-- SELECT a.* FROM (SELECT * FROM product ORDER BY enroll_date DESC) a WHERE ROWNUM<=30 -->
-		SELECT a.* FROM (SELECT * FROM product p INNER JOIN FILES F ON p.pro_NO=F.PRO_NO ORDER BY enroll_date DESC) a WHERE ROWNUM&lt;=20 AND THUMBNAIL_STATUS='y'
+		SELECT a.* FROM (SELECT * FROM product p INNER JOIN FILES F ON p.pro_NO=F.PRO_NO ORDER BY DBMS_RANDOM.RANDOM) a WHERE ROWNUM&lt;=20 AND THUMBNAIL_STATUS='y'
 	</select>
 <!-- 	<select id="mainFilesList" resultType="filesMap">
 	

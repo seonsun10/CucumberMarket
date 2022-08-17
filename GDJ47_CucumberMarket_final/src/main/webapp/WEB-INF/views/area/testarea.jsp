@@ -18,7 +18,7 @@
 	        <span class="title">지도중심기준 행정동 주소정보</span>
 	        <%-- <form action="${path }/testarea.do" method="post"> --%>
 	        <input type="text" id="centerAddr" name="address" readonly>
-	        <button type="button"  id="getMyPositionBtn" onclick="getCurrentPosBtn()">내 위치 가져오기</button>
+	        <button type="button"  id="getMyPositionBtn" onclick="getCurrentPosBtn()" style="margin-top:3px;">내 위치 가져오기</button>
 	       <!--  </form> -->
 	    </div>
 	</div>

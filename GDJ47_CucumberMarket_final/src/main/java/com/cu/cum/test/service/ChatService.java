@@ -77,4 +77,10 @@ public class ChatService {
 	}
 	
 	
+	public List<ChatRoom> selectChatList2(String id) {
+		return dao.selectChatList2(session,id);
+		
+	}
+	
+	
 }

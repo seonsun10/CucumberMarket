@@ -131,7 +131,14 @@
                   <!-- <div data-slider-id="1" class="owl-carousel shop-detail-carousel"> -->
                   <div id="main-slider" class="owl-carousel owl-theme">
                   <c:forEach var="name" items="${filename }" varStatus="status">
-                    <div class="item"><img src="${path }/resources/upload/product/${name}" class="img-fluid" style="height:350px;"></div>
+                    <div class="item">
+                    <img src="${path }/resources/upload/product/${name}" class="img-fluid" style="height:350px;">
+                    </div>
+                    <c:forEach var="names" items="${filesname}">
+                    <div class="item">
+                    <img src="${path }/resources/upload/product/${names}" class="img-fluid" style="height:350px;">
+                    </div>
+                     </c:forEach>
                   </c:forEach>
                   </div>
                 </div>
@@ -252,6 +259,7 @@
         var thisUrl = document.URL;
         console.log(thisUrl);
         var snsTitle = '<c:out value="${snsTitle}"/>';
+        /* var snsContent = '<c:out value="${snsContent}"/>'; */
         console.log(snsTitle);
         if( sns == 'facebook' ) {
             var url = "http://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(thisUrl);
@@ -278,8 +286,8 @@
             Kakao.Share.sendDefault({
             	  objectType: 'feed',
             	  content: {
-            	    title: snsTitle,
-            	    /* description: '아메리카노, 빵, 케익', */
+            	    title: '오이마켓',
+            	    description: snsTitle,
             	    imageUrl:
             	    	thisUrl,
             	    link: {
@@ -294,7 +302,7 @@
                   }, */
             		  buttons: [
             			    {
-            			      title: '오이마켓으로 이동',
+            			      title: '웹으로 이동',
             			      link: {
             			        mobileWebUrl: thisUrl,
             			      }

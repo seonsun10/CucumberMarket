@@ -311,10 +311,10 @@
                  </div>
    
               
-              <div id="search-not-mobile" class="navbar-collapse collapse">
+             <%--  <div id="search-not-mobile" class="navbar-collapse collapse">
                  <input type="button" onclick="fn_area();" class="btn btn-primary navbar-btn" value="지역설정"/>
-                 <%-- <a href="${path }/area.do">지역설정</a> --%>
-              </div>
+                 <a href="${path }/area.do">지역설정</a>
+              </div> --%>
               <div id="search-not-mobile" class="navbar-collapse collapse">
                  <a href="${path }/faqList" class="btn btn-primary navbar-btn"> FAQ</a>
 				</div>
@@ -375,13 +375,13 @@
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 
 <script>
-function fn_area(){
+/* function fn_area(){
      window.open(
       "${path}/area.do",
       "현재 내 위치 설정",
       "width=800, height=600, top=100, left=600"
     );
-}
+} */
  
 
 	

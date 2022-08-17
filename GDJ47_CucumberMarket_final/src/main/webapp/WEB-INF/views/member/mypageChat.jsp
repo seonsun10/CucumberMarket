@@ -29,11 +29,6 @@ if($("#pchat").click(e=>{
 }));
 
 		$(function(){
-			
-			
-			
-			
-			
 			$("#gchat").click(e=>{
 				
 				$.ajax({

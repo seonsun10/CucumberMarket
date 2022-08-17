@@ -77,7 +77,8 @@ public class ProductMapperDao {
 	public int selectSolveCount(SqlSessionTemplate session,String userId) {
 		return session.selectOne("product.selectsolvecount",userId);
 	}
-
+	
+	//메인화면에 추천 상품 뿌려주는 상품리스트
 	public List<Product> mainProductList(SqlSessionTemplate session) {
 		// TODO Auto-generated method stub
 		return session.selectList("product.mainProductList");
