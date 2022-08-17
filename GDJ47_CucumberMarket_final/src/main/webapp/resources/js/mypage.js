@@ -58,6 +58,7 @@ $(()=>{
 				$("#databox").html(data);
 			}
 		});
+		$("#page").val('Product');
 	});
 	
 	//마이페이지 후기 목록 출력 연결
@@ -91,6 +92,7 @@ $(()=>{
 				$("#databox").html(data);
 			}
 		});
+		$("#page").val('Report');
 	});
 	//마이페이지 채팅 목록 출력 연결
 	$("#chattag").click(e=>{
@@ -119,7 +121,7 @@ function fn_ajaxPage1(pageNo){
 };
 function fn_ajaxPage2(pageNo,numPerpage){
 	$.ajax({
-		url:"/member/mypageProduct.do",
+		url:"/member/mypage"+$("#page").val()+".do",
 		data:{"cPage":pageNo,"numPerpage":numPerpage,"userId":$("#userIdd").val()},
 		dataType:"html",
 		success:data=>{
@@ -152,8 +154,6 @@ function fn_ajaxPage6(pageNo,numPerpage){
 const pwcheck=()=>{
 	const pw1 = $("#newPw");
 	const pw2 = $("#password_2");
-	const oldPw = $("#oldPw");
-	const userId = $("#email").val();
 	if(pw1.val()!=pw2.val()){
 		alert("비밀번호를 확인해주세요!");
 		pw2.focus();

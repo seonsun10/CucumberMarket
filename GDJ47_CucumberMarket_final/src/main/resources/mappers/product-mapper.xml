@@ -48,12 +48,12 @@
 	</resultMap>
 	
 	<select id="selectProductCount" resultType="_int">
-		SELECT COUNT(*) FROM PRODUCT WHERE USER_ID=#{userId}
+		SELECT COUNT(*) FROM PRODUCT WHERE USER_ID=#{userId} AND SOLVE_STATUS='y'
 	</select>
 	
 	<select id="selectProductList" resultMap="productMap">
 		SELECT * FROM PRODUCT P LEFT JOIN FILES  F ON F.PRO_NO=P.PRO_NO 
-			LEFT JOIN MEMBER M ON M.USERID=P.USER_ID WHERE P.USER_ID=#{userId}
+			LEFT JOIN MEMBER M ON M.USERID=P.USER_ID WHERE P.USER_ID=#{userId} AND SOLVE_STATUS='y' ORDER BY ENROLLDATE DESC
 	</select>
 	
 	<insert id="insertReview" parameterType="review">
@@ -68,16 +68,16 @@
 		SELECT * FROM REVIEW WHERE HOST=#{userId} order by write_date DESC
 	</select>
  	<select id="selectall" resultMap="productMap">
- 	select * from product
+ 	select * from product AND SOLVE_STATUS='y'
 	</select>
 	<select id="selectproduct" resultMap="productMap" parameterType="_int">
-	select * from product where pro_no=#{id}
+	select * from product where pro_no=#{id} AND SOLVE_STATUS='y'
 	</select>
 
 	
 	<select id="selectUserProductList" resultMap="productMap">
 		SELECT * FROM PRODUCT P LEFT JOIN FILES  F ON F.PRO_NO=P.PRO_NO 
-			WHERE P.USER_ID=#{userId} 
+			WHERE P.USER_ID=#{userId} AND SOLVE_STATUS='y'
 	</select>
 	
 	<select id="selectUserFiles" resultMap="filesMap">
@@ -102,7 +102,7 @@
 	
 	<select id="mainProductList" resultMap="productMap">
 		<!-- SELECT a.* FROM (SELECT * FROM product ORDER BY enroll_date DESC) a WHERE ROWNUM<=30 -->
-		SELECT a.* FROM (SELECT * FROM product p INNER JOIN FILES F ON p.pro_NO=F.PRO_NO ORDER BY enroll_date DESC) a WHERE ROWNUM&lt;=20 AND THUMBNAIL_STATUS='y'
+		SELECT a.* FROM (SELECT * FROM product p INNER JOIN FILES F ON p.pro_NO=F.PRO_NO ORDER BY DBMS_RANDOM.RANDOM) a WHERE ROWNUM&lt;=20 AND THUMBNAIL_STATUS='y' AND SOLVE_STATUS='y'
 	</select>
 <!-- 	<select id="mainFilesList" resultType="filesMap">
 	
@@ -120,12 +120,15 @@
 	
 	<select id="relProduct" resultMap="productMap" parameterType="hashMap">
 	select a.* from(select * from product p INNER JOIN files f ON p.pro_no=f.PRO_NO 
-	order by DBMS_RANDOM.RANDOM) a where ROWNUM&lt;9 AND category_id='패딩' AND pro_Content!='1313131231' AND Thumbnail_status='y'
+	order by DBMS_RANDOM.RANDOM) a where ROWNUM&lt;9 AND category_id='패딩' AND pro_Content!='1313131231' AND Thumbnail_status='y' AND SOLVE_STATUS='y'
 	</select>
 	
 	<select id="searchProduct" resultMap="productMap">
 		SELECT * FROM product p LEFT JOIN files f on(p.PRO_NO=f.PRO_NO) LEFT JOIN MEMBER m on(m.USERID=f.USER_ID) 
-		WHERE name LIKE '%${keyword}%' or region LIKE '%${keyword}%' OR title LIKE '%${keyword}%'
+		WHERE SOLVE_STATUS='y' AND name LIKE '%${keyword}%' or region LIKE '%${keyword}%' OR title LIKE '%${keyword}%' 
 	</select>
 
+	<update id="updateProViewCount">
+		update product set pro_count= pro_count+1 where pro_no=#{no}
+	</update>
 </mapper>

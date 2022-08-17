@@ -56,7 +56,7 @@
                           				<option value="inquiryType">문의 유형</option>
                         			</select>
                      			 </div>
-              					<input name="keyword" type="text" placeholder="검색어를 입력하세요" class="form-control">
+              					<input name="keyword" type="text" placeholder="계정/상품/거래/채팅/사기/기타" class="form-control">
 				              	<div class="input-group-append">
 					                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
 									<a href="${pageContext.request.contextPath }/inquiryWrite" class="btn btn-primary navbar-btn"><span>문의글 작성</span></a>
@@ -94,7 +94,12 @@
 											</a>
 		                          		</td>
 		                          		<td></td>
-		                          		<td>${i.writer.userId }</td>
+		                          		<c:if test="${loginMember.userId eq i.writer.userId }">
+		                          			<td style="color:#4fbfa8">${i.writer.userId }</td>
+		                          		</c:if>
+		                          		<c:if test="${loginMember.userId ne i.writer.userId }">
+		                          			<td>${i.writer.userId }</td>
+		                          		</c:if>
 		                          		<td><fmt:formatDate value="${i.inquiryDate}" pattern="yyyy-MM-dd"/></td>
 		                          		<%-- <td><c:out value="${i.answer}"/></td> --%>
 		                          		<c:if test="${loginMember.userId  eq 'admin'}">

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="report">
+
+	<resultMap id="reportMap" type="report">
+		<id column="rep_no" property="repNo"/>
+		<result column="pro_no" property="proNo"/>
+		<result column="rep_date" property="repDate"/>
+		<result column="rep_content" property="repContent"/>
+		<result column="rep_title" property="repTitle"/>
+		<result column="rep_type" property="repType"/>
+		<result column="target_id" property="targetId"/>
+		<association property="userId" javaType="Member">
+			<result column="userid" property="userId"/>
+		</association>
+	</resultMap>
+	
+	<!-- 신고 글 페이징   -->
+	<select id="selectReportList" resultMap="reportMap">
+		SELECT * FROM REPORT ORDER BY REP_NO DESC
+	</select>
+	<select id="selectReportCount" resultType="_int">
+		SELECT COUNT(*) FROM REPORT
+	</select>
+	
+	<!--신고글 삭제 -->
+	<delete id="deleteReport" parameterType="Report">
+		DELETE FROM REPORT WHERE REP_NO=#{repNo}
+	</delete>
+	
+	
+	<!-- 마이페이지 신고글   -->
+	
+	<select id="mypageReportList" resultMap="reportMap">
+		SELECT * FROM REPORT WHERE USERID=#{userId} ORDER BY REP_DATE DESC
+	</select>
+	<select id="mypageReportCount" resultType="_int">
+		SELECT COUNT(*) FROM REPORT WHERE USERID=#{userId}
+	</select>
+</mapper>

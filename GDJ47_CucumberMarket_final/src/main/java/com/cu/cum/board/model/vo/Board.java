@@ -20,5 +20,6 @@ public class Board {
 	private Date createDate;
 	private int recommendCount;
 	private int count;
+	private String boardregion;
 	
 }

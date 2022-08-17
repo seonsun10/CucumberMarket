@@ -37,7 +37,7 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
         
    <script src="https://kit.fontawesome.com/e4c89f4cce.js" crossorigin="anonymous"></script>
-    
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     
   </head>
   <body>
@@ -94,7 +94,7 @@
         
       </div>
       <nav class="navbar navbar-expand-lg">
-        <div class="container"><a href="${path}/" class="navbar-brand home"><img src="/resources/img/cucumber.png" style="width:90px;height:70px"alt="Obaju logo" class="d-none d-md-inline-block"><img src="/resources/img/cucumber.png" alt="Obaju logo" class="d-inline-block d-md-none"><span class="sr-only">Obaju - go to homepage</span></a>
+        <div class="container"><a href="${path}/" class="navbar-brand home"><img src="/resources/img/cucumber.png" style="width:85px;height:75px"alt="Obaju logo" class="d-none d-md-inline-block"><img src="/resources/img/cucumber.png" alt="Obaju logo" class="d-inline-block d-md-none"><span class="sr-only">Obaju - go to homepage</span></a>
           <div class="navbar-buttons">
             <button type="button" data-toggle="collapse" data-target="#navigation" class="btn btn-outline-secondary navbar-toggler"><span class="sr-only">Toggle navigation</span><i class="fa fa-align-justify"></i></button>
             <button type="button" data-toggle="collapse" data-target="#search" class="btn btn-outline-secondary navbar-toggler"><span class="sr-only">Toggle search</span><i class="fa fa-search"></i></button><a href="basket.html" class="btn btn-outline-secondary navbar-toggler"><i class="fa fa-shopping-cart"></i></a>
@@ -311,9 +311,10 @@
                  </div>
    
               
-              <div id="search-not-mobile" class="navbar-collapse collapse">
-                 <button onclick="fn_area();" class="btn btn-primary navbar-btn">지역설정 테스트용</button>
-              </div>
+             <%--  <div id="search-not-mobile" class="navbar-collapse collapse">
+                 <input type="button" onclick="fn_area();" class="btn btn-primary navbar-btn" value="지역설정"/>
+                 <a href="${path }/area.do">지역설정</a>
+              </div> --%>
               <div id="search-not-mobile" class="navbar-collapse collapse">
                  <a href="${path }/faqList" class="btn btn-primary navbar-btn"> FAQ</a>
 				</div>
@@ -374,14 +375,14 @@
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 
 <script>
-function fn_area() {
-    window.open(
+/* function fn_area(){
+     window.open(
       "${path}/area.do",
       "현재 내 위치 설정",
       "width=800, height=600, top=100, left=600"
     );
-  }
-  
+} */
+ 
 
 	
    
@@ -390,20 +391,13 @@ function fn_area() {
      	
 			// 웹소켓 연결
 	
-	$(document).ready(function(){
-		 sock = new SockJS("<c:url value="/ws/chat"/>");
-		 socket = sock;
-
 		// 데이터를 전달 받았을때 
-		sock.onmessage = onMessage;
 		
 		//채팅 메시지 눌럿을때
 		
 		
 		
        	//setinterval
-       	setInterval(chatCall, 300);
-    	setInterval(alertCall, 300);
        	// 채팅 카운트 받아오기
        	function chatCall(){
 	   		$.ajax({
@@ -440,7 +434,6 @@ function fn_area() {
    	               }
    			});
    		}
-	});
    	
    	// 실시간 알림 받았을 시 ing
 	function onMessage(evt){

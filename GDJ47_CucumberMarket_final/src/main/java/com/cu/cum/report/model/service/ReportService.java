@@ -19,11 +19,29 @@ public interface ReportService {
 	// 신고글 전체 조회
 	List<Report> selectReportList(Map param);  // 페이징 포함
 	
-	
+	// 신고 글 개수
+	int selectReportCount();
 	
 	// 신고글(작성자)로 검색
 	List<Report> searchReport(String keyword);
 	
+	// 신고글 상세정보
+	Report selectReport(int repNo);
+	
+	// 신고글 삭제
+	int deleteReport(int id);
+	
+	// 신고 글 제목으로 검색
+	List<Report> searchReportTitle(String keyword);
+	
+	// 신고글 사유로 검색
+	List<Report> searchReportType(String keyword);
+	
+	// 마이페이지 신고글 목록
+	List<Report> mypageReportList(Map param, Report r);
+	
+	// 마이페이지 신고글 개수 
+	int mypageReportCount(Report r);
 	
 	
 }

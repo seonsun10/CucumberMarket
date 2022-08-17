@@ -46,18 +46,23 @@
 						 	<tbody class="card-body" >
 						  		<tr>
 						   			<th align="center" style="text-align: center">글번호</th>
-						   			<td style="text-align: center">1</td>
+						   			<td style="text-align: center"><c:out value="${rep.repNo}"/></td>
 						  		</tr>
 						  		<tr>
 						   			<th align="center" style="text-align: center">제목</th>
-						   			<td style="text-align: center">사기꾼 좀 잡아라!</td>
+						   			<td style="text-align: center"><c:out value="${rep.repTitle}"/></td>
 						  		</tr>
 						  		<tr>
-						   			<th align="center" style="text-align: center">작성자</th>
-						   			<td style="text-align: center">goodee</td>
+						   			<th align="center" style="text-align: center">작성자 아이디</th>
+						   			<td style="text-align: center"><c:out value="${rep.userId.userId}"/></td>
 						  		</tr>
 								<tr>
-						   			<td colspan="2" height="200px" style="text-align: center">아 사기 당했다고! 잡아달라고 처리해달라고 </td>
+									<th align="center" style="text-align: center">신고한 아이디</th>
+						   			<td style="text-align: center; color:red"><c:out value="${rep.targetId}"/></td>
+						  		</tr>
+								<tr>
+									<th align="center" style="text-align: center">내용</th>
+						   			<td colspan="2" height="200px" style="text-align: center"><c:out value="${rep.repContent}"/></td>
 						  		</tr>
 						 	</tbody>
 							<tr>

@@ -18,7 +18,7 @@ public class ProductMapperDao {
 		int cPage = (int)page.get("cPage");
 		int numPerpage = (int)page.get("numPerpage");
 		String userId = (String)page.get("userId");
-		return session.selectList("product.selectProductList",userId,new RowBounds((cPage-1)*numPerpage+1,numPerpage));
+		return session.selectList("product.selectProductList",userId,new RowBounds((cPage-1)*numPerpage,numPerpage));
 	}
 	
 	public int selectProductCount(SqlSessionTemplate session, String userId) {
@@ -77,7 +77,8 @@ public class ProductMapperDao {
 	public int selectSolveCount(SqlSessionTemplate session,String userId) {
 		return session.selectOne("product.selectsolvecount",userId);
 	}
-
+	
+	//메인화면에 추천 상품 뿌려주는 상품리스트
 	public List<Product> mainProductList(SqlSessionTemplate session) {
 		// TODO Auto-generated method stub
 		return session.selectList("product.mainProductList");
@@ -103,7 +104,10 @@ public class ProductMapperDao {
 		return session.selectList("product.searchProduct",keyword);
 	}
 	
-	
+	//상품 조회수 업
+	public int productViewCountUp(SqlSessionTemplate session, int no) {
+		return session.update("product.updateProViewCount",no);
+	}
 	
 
 }

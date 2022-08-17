@@ -50,7 +50,10 @@
                     <label for="phone">핸드폰 번호</label>
                     <input id="phone" type="text" name="phone" class="form-control">
                   </div>
-                  
+                  <div class="form-group">
+                    <input type="button" onclick="fn_area();" class="btn btn-primary navbar-btn" value="지역설정"/>
+                    <input id="region" type="text" name="region" class="form-control" style="margin-top:5px;">
+                  </div>
                   <div class="text-center">
                     <button type="submit" class="btn btn-primary"><i class="fa fa-user-md"></i> Register</button>
                   </div>
@@ -123,6 +126,17 @@
 			$resultMsg.css('color','red');
 		}
 	});
+	
+	
+	
+	function fn_area(){
+	     window.open(
+	      "${path}/area.do",
+	      "현재 내 위치 설정",
+	      "width=800, height=600, top=100, left=600"
+	    );
+	}
+
 	
 </script>
     

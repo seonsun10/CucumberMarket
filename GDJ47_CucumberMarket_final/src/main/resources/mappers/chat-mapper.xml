@@ -23,8 +23,12 @@
 	select * from chatmessage where roomid=#{roomId} and massage is not null order by senddate asc
 	</select>
 	<select id="selectchatlist" parameterType="string" resultType="com.cu.cum.test.model.vo.ChatRoom">
-	select * from prochat3 where otherid=#{id} or userid=#{id} order by unreadcount desc
+	select * from prochat3 where otherid=#{id} order by unreadcount desc
 	</select>
+	<select id="selectchatlist2" parameterType="string" resultType="com.cu.cum.test.model.vo.ChatRoom">
+	select * from prochat3 where userid=#{id} order by unreadcount desc
+	</select>
+	
 	<update id="updateroom" parameterType="string">
 	update chatroom set unreadcount=0 where roomid=#{id} 
 	</update>

@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 
 import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.product.model.vo.Product;
@@ -21,13 +22,14 @@ public interface ProductDao extends JpaRepository<Product,Integer>,
 //	@Query(value="select p from Product p left join p.files where p.member=:m")
 //	List<Product> findAllByMember(@Param("m") Member m);
 	
-	@Query(value="select p from Product p left join p.files")
+	@Query(value="select p from Product p left join p.files where p.solveStatus='y'")
 	Page<Product> findAll(Pageable p);
 	
-//	@Query(value="select p from Product p left join p.files where p.categoryName=$:1")
-	Page<Product> findAllByCategoryName(Pageable p, String name);
+	//@Query(value="select p from Product p where p.categoryName=:name and p.solveStatus='y'")
+	Page<Product> findAllByCategoryNameAndSolveStatus(Pageable p, String categoryName, String solveStatus);
 	
 	Product saveAndFlush(Product p); //주객체 
+	
 	
 
 
@@ -46,7 +48,10 @@ public interface ProductDao extends JpaRepository<Product,Integer>,
 	Product save(Product p);
 	
 	//상품 조회
+	@Query(value="select p from Product p left join p.files where p.proNo=:proNo and p.solveStatus='y'")
 	Product findById(int proNo);
 	
+	//jpa상품 페이징
+	List<Product> findAllByMember(Pageable p, Member m);
 	
 }

@@ -13,10 +13,11 @@
 			<th>알림</th>
 		</tr>
 			<c:if test="${not empty chatList}">
-				<c:forEach var="c" items="${chatList }">
+				<c:forEach var="c" items="${chatList}" varStatus="status">
 					<c:if test="${c.userId ne loginMember.userId }">
 					<tr id="tablebody">
-						<td><img src="${path }/resources/img/오이.png" style="width:50px;"></td>
+						
+						<td><img src="${path }/resources/upload/product/${chatFilename[status.index]}" style="width:50px;"></td>
 						<td><c:out value="${c.title }"/></td>
 						<td><c:out value="${c.userId}"/></td>
 						<td><button onclick="open('${path}/ptestchat.do/${c.roomId }','_blank','width=600,height=640');setTimeout(function(){location.reload()}, 1000);">채팅하기</button>

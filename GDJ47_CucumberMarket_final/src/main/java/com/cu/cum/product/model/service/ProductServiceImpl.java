@@ -5,6 +5,9 @@ package com.cu.cum.product.model.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -38,6 +41,10 @@ public class ProductServiceImpl implements ProductService {
 	private SqlSessionTemplate session;
 
 	
+	@PersistenceContext
+	private EntityManager em;
+	
+	
 	@Autowired
 	private FilesDao fDao;
 	
@@ -54,6 +61,11 @@ public class ProductServiceImpl implements ProductService {
 		return pmdao.selectProductCount(session, userId);
 	}
 	
+	@Override
+	public List<Product> selectProductList(Pageable p, Member m) {
+		// TODO Auto-generated method stub
+		return dao.findAllByMember(p,m);
+	}
 	@Override
 	public List<Product> selectProductList(Map page) {
 		// TODO Auto-generated method stub
@@ -140,7 +152,8 @@ public class ProductServiceImpl implements ProductService {
 //	}
 
 	public List<Product> findAllByCategoryName(Pageable p,String tag){
-		return dao.findAllByCategoryName(p,tag).getContent();
+		em.clear();
+		return dao.findAllByCategoryNameAndSolveStatus(p,tag,"y").getContent();
 	}
 	
 	//카테고리 상품 개수
@@ -185,7 +198,21 @@ public class ProductServiceImpl implements ProductService {
 		// TODO Auto-generated method stub
 		return pmdao.searchProduct(session,keyword);
 	}
-
+	
+	//jpa 상품 페이징
+	@Override
+	public List<Product> findAllByMember(Pageable p, Member m) {
+		// TODO Auto-generated method stub
+		return dao.findAllByMember(p, m);
+	}
+	
+	//상품 조회수 
+	@Override
+	public int productViewCountUp(int no) {
+		// TODO Auto-generated method stub
+		return pmdao.productViewCountUp(session,no);
+	}
+	
 }
 
 	

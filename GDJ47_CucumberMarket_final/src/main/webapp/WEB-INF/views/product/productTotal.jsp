@@ -27,7 +27,7 @@
 								<div id="pro-title">
 									<div id="pro-head2"><c:out value="${p.title}"/></div>
 									<div id="pro-body2">
-										<div style="color:black;"><c:out value="${p.price }"/></div>
+										<div style="color:black;"><c:out value="${p.price }"/>원</div>
 										<div id="pro-date">
 											<c:out value="${daylist[status.index]}"/>일전
 										</div>
@@ -47,7 +47,7 @@
 					조회된 결과가 없습니다.
 				</c:if>
               </div>
-              <c:if test="${productCount > 40 }">
+              <c:if test="${productCount > 200 }">
 	              <div style="text-align:center">
 	              	<button type="button" id="more-box">더보기</button>
 	              </div>
@@ -123,6 +123,9 @@
 		div#pro-head2{
 			padding-bottom:7%;
 			font-size:12px;
+			text-overflow: ellipsis;
+		    white-space: nowrap;
+		    overflow: hidden;
 		}
 		div#pro-foot{
 			padding:3%;

@@ -18,13 +18,6 @@
 			</span>
 		</c:if>
 	</div>
-	<div id="pro-right">
-		<select id="listOption">
-			<option>1</option>
-			<option>2</option>
-			<option>3</option>
-		</select>
-	</div>
 </div>
 <c:if test="${review ne null }">
 	<c:forEach var="r" items="${review }" varStatus="status">
@@ -86,7 +79,7 @@
 				</div>
 			</div>
 			<div id="review-date"><fmt:formatDate value="${r.writeDate }" pattern="yyyy-MM-dd"/></div>
-			<div id="deleteBtn"><button type="button" onclick="javascript:fn_deleteReview(${r.reviewNo});">신고하기</button></div>
+			<div id="deleteBtn"><button type="button" onclick="location.assign('${pageContext.request.contextPath }/reportWrite/${r.writer}')">신고하기</button></div>
 		</div>
 	</c:forEach>
 </c:if>

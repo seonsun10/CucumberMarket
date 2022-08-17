@@ -18,6 +18,8 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -39,10 +41,13 @@ import com.cu.cum.member.model.service.MailSendService;
 import com.cu.cum.member.model.service.MemberService;
 import com.cu.cum.member.model.vo.Member;
 import com.cu.cum.pagebar.PageBar;
+import com.cu.cum.pagebar.PageBarBasic;
 import com.cu.cum.product.model.service.ProductService;
 import com.cu.cum.product.model.vo.Files;
 import com.cu.cum.product.model.vo.Product;
 import com.cu.cum.product.model.vo.Review;
+import com.cu.cum.report.model.service.ReportService;
+import com.cu.cum.report.model.vo.Report;
 import com.cu.cum.wishlist.model.service.WishListService;
 import com.cu.cum.wishlist.model.vo.WishList;
 
@@ -69,6 +74,9 @@ public class MemberController {
 	
 	@Autowired
 	private MailSendService mailService;
+	
+	@Autowired
+	private ReportService repservice;
 	
 	//메인 페이지 오늘의 추천 상품 리스트 출력
 	@GetMapping({"","/"})
@@ -122,7 +130,7 @@ public class MemberController {
 	//회원가입
 	@PostMapping("/join")
 	public ModelAndView join(@ModelAttribute Member member) {
-		
+		System.out.println("지역 나오나? "+member.getRegion());
 		member.setEnrollDate(new Date());
 		member.setIntro("안녕하세요 :D");
 //		member.setRole("ROLE_USER");
@@ -154,11 +162,38 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/member/mypage.do")
-	public String myPage(@RequestParam String userId, Model m) {
+	public String myPage(@RequestParam(defaultValue="1") int cPage,
+							@RequestParam(defaultValue="5") int numPerpage,
+							HttpServletRequest request,
+							Model m) {
+		String userId= ((Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
+		log.debug(userId);
 		m.addAttribute("userId",userId);
 		int productCount = proservice.selectProductCount(userId);
+		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"userId",userId);
+		List<Product> products=proservice.selectProductList(page);
+//		Member member = service.selectMember(userId);
+//		List<Product> products=proservice.selectProductList(PageRequest.of((cPage-1)*numPerpage, numPerpage,Sort.by("enrollDate").descending()),member);
+		//log.debug("{}",p1.getFiles().get(0).getRenameFilename());
+		String url=request.getRequestURI();
+		Member loginMember=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		System.out.println("유저가 가지고 있는 상품 목록 : "+products);
+		System.out.println(products.size());
+
+		
+		List<Files> pp = service.selectUserFiles(userId);//db거쳐서 회원이 가진 모든 파일 가져오기;
+		System.out.println("유저가 가지고 잇는 상품 대표이미지 : "+pp);
+		
+		if(products.size()>0) {
+			m.addAttribute("products",products);
+		}
+		if(productCount>0) {
+			m.addAttribute("productCount",productCount);			
+		}
+		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage , productCount, url));
+		m.addAttribute("pp",pp);
 		m.addAttribute("solveCount",proservice.selectSolveCount(userId));
-		m.addAttribute("productCount",productCount);
 		m.addAttribute("viewCount",service.selectViewCount(userId));
 		return "member/mypage";
 	}
@@ -205,13 +240,15 @@ public class MemberController {
 //	회원정보 수정 myAccount에서 넘어옴
 	@RequestMapping("/member/update.do")
 	public String memberUpdate(@RequestParam("phone") String phone,
-			@RequestParam("intro") String intro , @RequestParam("id") String userId) {
+			@RequestParam("intro") String intro , @RequestParam("id") String userId, @RequestParam("region") String region, Model model) {
 		Member m = service.selectMember(userId);
 		m.setPhone(phone);
 		m.setIntro(intro);
-		service.updateMember(m);
+		m.setRegion(region);
+		m = service.updateMember(m);
 //		member.setPhone(null);
 //		member.setIntro(null);
+		model.addAttribute("loginMember",m);
 		return "redirect:/member/myAccount.do";
 	}
 	
@@ -283,11 +320,6 @@ public class MemberController {
 		List<Files> pp = service.selectUserFiles(userId);//db거쳐서 회원이 가진 모든 파일 가져오기;
 		System.out.println("유저가 가지고 잇는 상품 대표이미지 : "+pp);
 		
-
-//		List<Product> list=dao.findAllByMember(loginMember);
-		//페이징처리 jpa
-		//List<Product> list2=dao.findAll(PageRequest.of(0,5,Sort.by("enrollDate").descending())).getContent();
-		//list2=list2.stream().filter(v -> v.getMember().equals(loginMember)).collect(Collectors.toList());
 		
 		
 		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage , totalProduct, url));
@@ -360,8 +392,24 @@ public class MemberController {
 	}
 	//마이페이지에서 신고 목록 뿌리는 페이지
 	@RequestMapping("/member/mypageReport.do")
-	public String reportpage() {
-		return "member/mypageReport";
+	public ModelAndView mypageReportList(@RequestParam(defaultValue="1") int cPage,
+			@RequestParam(defaultValue="5") int numPerpage,
+			HttpServletRequest request,
+			ModelAndView model) {
+		Member loginMember=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Report r = Report.builder().userId(loginMember).build();
+		//String url = request.getRequestURI();
+		Map param = Map.of("cPage",cPage, "numPerpage",numPerpage);
+		List<Report> report = repservice.mypageReportList(param, r);
+		System.out.println(report);
+		int totalReport = repservice.mypageReportCount(r);
+		
+		model.addObject("report", report);
+		model.addObject("pageBar", PageBar.getPageBar(cPage, numPerpage, totalReport, "mypageReport"));
+		model.addObject("totalReport", totalReport);
+		model.setViewName("member/mypageReport");
+		//System.out.println(url);
+		return model;
 	}
 	//마이페이지에서 채팅 목록 뿌리는 페이지
 	@RequestMapping("/member/mypageChat.do")
@@ -370,12 +418,13 @@ public class MemberController {
 	}
 	//다른 사람 페이지 연결
 	@RequestMapping("/member/otherMember.do")
-	public String otherMember(@RequestParam String writer,
+	public String otherMember(@RequestParam(defaultValue="1") int cPage,
+								@RequestParam(defaultValue="20") int numPerpage,
+								@RequestParam(defaultValue="no") String writer,
 								@RequestParam(defaultValue="no") String customer,
 								HttpServletRequest request,
 								HttpServletResponse response,
 								Model m) {
-		
 		Cookie oldCookie = null;
 	    Cookie[] cookies = request.getCookies();
 	    if (cookies != null) {
@@ -385,7 +434,7 @@ public class MemberController {
 	            }
 	        }
 	    }
-	    if(!customer.equals("no")) {
+	    if(!customer.equals("no")&&!writer.equals("no")) {
 		    if (oldCookie != null) {
 		        if (!oldCookie.getValue().contains("[" + customer.toString() + "]")) {
 		            service.viewCountUp(writer);
@@ -402,11 +451,40 @@ public class MemberController {
 		        response.addCookie(newCookie);
 		    }
 	    }
+	    
+	    Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"userId",writer);
+		List<Product> products=proservice.selectProductList(page);
+		List<Files> files = new ArrayList<Files>();
+		List<String> renames = new ArrayList<String>();
+		for(Product p : products) {
+			files.addAll(p.getFiles());
+		}
+		for(Files f : files) {
+			if(f.getRenameFilename()!=null) {
+				if(f.getRenameFilename().contains("s_")) {
+					renames.add(f.getRenameFilename());
+				}
+			}
+		}
+		List<Long> daylist = new ArrayList();
+		for(Product p : products) {
+		       LocalDate today=LocalDate.now();
+		       LocalDate targetDay=new java.sql.Date(p.getEnrollDate().getTime()).toLocalDate();
+		       Long day= ChronoUnit.DAYS.between(today, targetDay);
+		       daylist.add(Math.abs(day));
+		    }
 		Member member = service.selectMember(writer);
+		String url=request.getRequestURI();
+		int totalProduct=proservice.selectProductCount(writer);
+		m.addAttribute("dayList",daylist);
+		m.addAttribute("solveCount",proservice.selectSolveCount(writer));
+		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage, totalProduct, url));
 		m.addAttribute("viewCount",service.selectViewCount(writer));
-		m.addAttribute("productCount",proservice.selectProductCount(writer));
+		m.addAttribute("product",products);
+		m.addAttribute("totalProduct",proservice.selectProductCount(writer));
 		m.addAttribute("member",member);
 		m.addAttribute("writer",writer);
+		m.addAttribute("renames",renames);
 		return "/member/otherMember";
 	}
 	//다른 사람 물품 정보
@@ -418,12 +496,32 @@ public class MemberController {
 							Model m) {
 		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"userId",userId);
 		List<Product> products=proservice.selectProductList(page);
+		List<Files> files = new ArrayList<Files>();
+		List<String> renames = new ArrayList<String>();
+		for(Product p : products) {
+			files.addAll(p.getFiles());
+		}
+		for(Files f : files) {
+			if(f.getRenameFilename().contains("s_")) {
+				renames.add(f.getRenameFilename());
+			}
+		}
+		List<Long> daylist = new ArrayList();
+		for(Product p : products) {
+		       LocalDate today=LocalDate.now();
+		       LocalDate targetDay=new java.sql.Date(p.getEnrollDate().getTime()).toLocalDate();
+		       Long day= ChronoUnit.DAYS.between(today, targetDay);
+		       daylist.add(Math.abs(day));
+		    }
+		System.out.println("페이징 넘어온");
 		String url=request.getRequestURI();
 		int totalProduct=proservice.selectProductCount(userId);
 		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage, totalProduct, url));
 		m.addAttribute("product",products);
 		m.addAttribute("totalProduct",totalProduct);
 		m.addAttribute("writer",userId);
+		m.addAttribute("renames",renames);
+		m.addAttribute("dayList",daylist);
 		return "member/otherpageProduct";
 	}
 	//다른 사람 페이지 후기
@@ -435,12 +533,17 @@ public class MemberController {
 									Model m) {
 		Map page = Map.of("cPage",cPage,"numPerpage",numPerpage,"userId",userId);
 		List<Review> reviews=proservice.selectReviewList(page);
+		List<Product> products = new ArrayList();
+		for(Review r : reviews) {
+			products.add(proservice.selectProduct(r.getProduct().getProNo()));
+		}
 		String url=request.getRequestURI();
 		int totalReview=proservice.selectReviewCount(userId);
 		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage, totalReview, url));
 		if(reviews.size()!=0) {
 			m.addAttribute("review",reviews);
 		}
+		m.addAttribute("products",products);
 		m.addAttribute("totalReview",totalReview);
 		m.addAttribute("writer",userId);
 		return "member/otherpageReview";
@@ -482,6 +585,14 @@ public class MemberController {
 	    } else {
 	        return ResponseEntity.ok("사용 가능한 아이디 입니다.");
 	    }
+	}
+	
+	// 마이페이지 신고글 상세정보 페이지
+	@RequestMapping(value= {"/mypagereportView/{id}"})
+	public ModelAndView mypageReportView(@PathVariable int id, ModelAndView mv) {
+		mv.addObject("rep", repservice.selectReport(id));
+		mv.setViewName("report/mypageReportView");
+		return mv;
 	}
 	
 	

@@ -5,6 +5,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <link rel="stylesheet" href="${path}/resources/css/mypage/otherPage.css">
 <script src="${path}/resources/vendor/jquery/jquery.min.js"></script>
+<input id="page" type="hidden" value="Product"/>
     <div id="all">
       <div id="content">
         <div class="container">
@@ -43,12 +44,12 @@
 					  		<div id="dibs">
 					  		<img src="https://cdn-icons-png.flaticon.com/512/6696/6696548.png" width="14px"/>
 					  			등록상품&nbsp;
-					  			<span id="count"><c:out value="${productCount }"/>개</span>
+					  			<span id="count"><c:out value="${totalProduct }"/>개</span>
 					  		</div>
 					  		<div id="sale">
 					  		<img src="https://cdn-icons-png.flaticon.com/512/5132/5132236.png" width="14px"/>
 					  			상품판매&nbsp;
-					  			<span id="count">0개</span>
+					  			<span id="count"><c:out value="${solveCount }"/>개</span>
 					  		</div>
 				  		</div>
 
@@ -65,7 +66,7 @@
 				  </div>
 				  <div>
 				  <div id="myList">
-				  	<p id="protag1">상품</p>
+				  	<p id="protag1" style="background-color: rgb(229,229,229)">상품</p>
 				  	<p id="reviewtag1">후기</p>
 				  </div>
 				  </div>
@@ -74,6 +75,56 @@
               
               <!-- 여기 이제 분기처리 해야함 등록한 상품이없으면 안보이게 -->
               <div id="databox" class="col-lg-9 box ">
+              	<div id="pro-head"> 
+	<div id="pro-left">
+		상품&nbsp;
+		<c:if test="${totalProduct ne null }">
+			<span>
+				<c:out value="${totalProduct }"/>
+			</span>
+		</c:if>	
+		<c:if test="${totalProduct eq null }">
+			<span>
+				0
+			</span>
+		</c:if>
+	</div>
+</div>
+<div id="pro-body">
+	<c:if test="${product ne null }">
+		<c:forEach var="p" items="${product }" varStatus="status">
+			<div id="pro-box">
+				<a href="${path }/product/productView.do?id=${loginMember.userId}&no=${p.proNo}&tag=${p.categoryName}&name=${p.member.userId}">
+					<div id="pro-img">
+						<c:if test="${renames[status.index] ne null}">
+							<img src="${path }/resources/upload/product/${renames[status.index]}"/>
+						</c:if>
+						<c:if test="${renames[status.index] eq null}">
+							<img src="${path }/resources/img/cucumber.png"/>
+						</c:if>
+					</div>
+					<div id="pro-title">
+						<div id="pro-head2"><c:out value="${p.title }"/></div>
+						<div id="pro-body2">
+							<div style="color:black;"><c:out value="${p.price}"/>원</div>
+							<div id="pro-date"><c:out value="${dayList[status.index] }"/>일 전</div>
+						</div>
+					</div>
+					<div id="pro-foot">
+						<img id="add-img" src="${path }/resources/img/위치.png">
+						<div id="pro-add">									
+							<c:out value="${p.region }"/>
+						</div>
+					</div>
+				</a>
+			</div>
+		</c:forEach>
+	</c:if>
+	<c:if test="${product eq null }">
+		조회된 결과가 없습니다.
+	</c:if>
+</div>
+<div id="pageBar"><c:out value="${pageBar }" escapeXml="false"/></div>
               </div>
             </div>
           </div>
@@ -86,71 +137,6 @@
     *** FOOTER ***
     _________________________________________________________
     -->
-    <div id="footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-3 col-md-6">
-            <h4 class="mb-3">Pages</h4>
-            <ul class="list-unstyled">
-              <li><a href="text.html">About us</a></li>
-              <li><a href="text.html">Terms and conditions</a></li>
-              <li><a href="faq.html">FAQ</a></li>
-              <li><a href="contact.html">Contact us</a></li>
-            </ul>
-            <hr>
-            <h4 class="mb-3">User section</h4>
-            <ul class="list-unstyled">
-              <li><a href="#" data-toggle="modal" data-target="#login-modal">Login</a></li>
-              <li><a href="register.html">Regiter</a></li>
-            </ul>
-          </div>
-          <!-- /.col-lg-3-->
-          <div class="col-lg-3 col-md-6">
-            <h4 class="mb-3">Top categories</h4>
-            <h5>Men</h5>
-            <ul class="list-unstyled">
-              <li><a href="category.html">T-shirts</a></li>
-              <li><a href="category.html">Shirts</a></li>
-              <li><a href="category.html">Accessories</a></li>
-            </ul>
-            <h5>Ladies</h5>
-            <ul class="list-unstyled">
-              <li><a href="category.html">T-shirts</a></li>
-              <li><a href="category.html">Skirts</a></li>
-              <li><a href="category.html">Pants</a></li>
-              <li><a href="category.html">Accessories</a></li>
-            </ul>
-          </div>
-          <!-- /.col-lg-3-->
-          <div class="col-lg-3 col-md-6">
-            <h4 class="mb-3">Where to find us</h4>
-            <p><strong>Obaju Ltd.</strong><br>13/25 New Avenue<br>New Heaven<br>45Y 73J<br>England<br><strong>Great Britain</strong></p><a href="contact.html">Go to contact page</a>
-            <hr class="d-block d-md-none">
-          </div>
-          <!-- /.col-lg-3-->
-          <div class="col-lg-3 col-md-6">
-            <h4 class="mb-3">Get the news</h4>
-            <p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-            <form>
-              <div class="input-group">
-                <input type="text" class="form-control"><span class="input-group-append">
-                  <button type="button" class="btn btn-outline-secondary">Subscribe!</button></span>
-              </div>
-              <!-- /input-group-->
-            </form>
-            <hr>
-            <h4 class="mb-3">Stay in touch</h4>
-            <p class="social"><a href="#" class="facebook external"><i class="fa fa-facebook"></i></a><a href="#" class="twitter external"><i class="fa fa-twitter"></i></a><a href="#" class="instagram external"><i class="fa fa-instagram"></i></a><a href="#" class="gplus external"><i class="fa fa-google-plus"></i></a><a href="#" class="email external"><i class="fa fa-envelope"></i></a></p>
-          </div>
-          <!-- /.col-lg-3-->
-        </div>
-        <!-- /.row-->
-      </div>
-      <!-- /.container-->
-    </div>
-
-    <!-- /#footer-->
-    <!-- *** FOOTER END ***-->
     
     
     <!--
