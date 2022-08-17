@@ -99,17 +99,6 @@
     color: #0084FF;
     font-size: 17px;
 }
-#endDeal{
-	border-radius: 5px;
-	background-color: #0084FF;
-	color:white;
-	font-size:15px;
-	width:80px;
-	height:40px;
-	line-height:10px;
-	align-items:center;
-}
-
     
 </style>
 </head>
@@ -124,11 +113,7 @@
 			            </c:if>
 			            
 			            <c:if test="${product eq null }">
-			            	<c:if test="${proNo ne null }">
-				            	<p>
-				            		<button id="endDeal" onclick="fn_endDeal();">거래완료</button>
-				            	</p>
-			            	</c:if>
+			            	
 			            </c:if>	
 	            	
 	                 </div>
@@ -177,12 +162,6 @@
 
 <script>
 
-function fn_endDeal(){
-	var check = confirm("거래를 완료하시겠습니까?");
-	if(check){
-		location.replace("/product/endDeal.do?proNo=${proNo}");
-	}
-}
 
 const fn_review=()=>{
 	 var proNo = '${product.proNo}';

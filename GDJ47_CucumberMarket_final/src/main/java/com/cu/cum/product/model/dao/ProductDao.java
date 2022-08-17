@@ -48,7 +48,7 @@ public interface ProductDao extends JpaRepository<Product,Integer>,
 	Product save(Product p);
 	
 	//상품 조회
-	@Query(value="select p from Product p left join p.files where p.proNo=:proNo and p.solveStatus='y'")
+//	@Query(value="select p from Product p left join p.files where p.proNo=:proNo and p.solveStatus='y'")
 	Product findById(int proNo);
 	
 	//jpa상품 페이징
