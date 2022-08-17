@@ -96,7 +96,29 @@ public class StompChatController {
 		
 		
 		List<ChatRoom> chatList = service.selectChatList2(id);
-		
+		System.out.println("chatList : "+chatList);
+		List<Integer> chatPro = new ArrayList();
+		for(int i=0; i<chatList.size(); i++) {
+			if(chatList.get(i).getUserId().equals(id)) {
+			System.out.println("상품 번호 : "+chatList.get(i).getProNo());
+			chatPro.add(chatList.get(i).getProNo());
+			}
+		}
+		System.out.println("판매자가 가지고 있는 상품번호 : "+chatPro);
+		List<Files> chatFile = new ArrayList();
+		Product p = null;
+		for(int i=0; i<chatPro.size(); i++) {
+			p = Product.builder().proNo(chatPro.get(i)).build();
+			chatFile.addAll(fservice.findByProduct(p));
+		}
+		System.out.println("chatFile : "+chatFile);
+		List<String> chatFilename = new ArrayList();
+		for(int i=0; i<chatFile.size(); i++) {
+			if(chatFile.get(i).getRenameFilename().contains("s_")) {
+				chatFilename.add(chatFile.get(i).getRenameFilename());
+			}
+		}
+		System.out.println("진짜 마지막으로 판매자가 가지고 있는 상품 리네임파일이름 : "+chatFilename);
 
 		for(ChatRoom c:chatList) {
 			if(c.getUserId().equals(userid)) {
@@ -109,6 +131,7 @@ public class StompChatController {
 		
 		System.out.println(chatList);
 		mv.addObject("chatList", chatList);
+		mv.addObject("chatFilename",chatFilename);
 		mv.setViewName("member/myPagePchat");
 		
 		return mv;
