@@ -69,24 +69,16 @@
                       </div>
                     </div>
 
-                    <div class="col-md-6 col-lg-3">
+                    <div class="col-md-6 col-lg-3" style="display:inline;">
                       <div class="form-group">
-                        <input type="button" onclick="fn_area();" class="btn btn-primary navbar-btn" value="지역설정"/>
-                    	<input id="region" type="text" name="region" class="form-control" value="${loginMember.region }" style="margin-top:5px;">
+                        <label for="company" style="margin-top:8px;">지역</label> 
+                        <div >
+                    	<input id="region" type="text" name="region" class="form-control" value="${loginMember.region }" style="margin-top:5px; width:365px">
+                    	<input type="button" onclick="fn_area();" class="btn btn-primary" value="지역설정" style="margin-top:5px;">
+                        </div>
                       </div>
                     </div>
- <!--                    <div class="col-md-6 col-lg-3">
-                      <div class="form-group">
-                        <label for="country">Country</label>
-                        <select id="country" class="form-control"></select>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="phone">Telephone</label>
-                        <input id="phone" type="text" class="form-control">
-                      </div>
-                    </div> -->
+
                     <div class="col-md-12">
                       <div class="form-group">
                         <label for="intro">자기소개 한마디!</label>
