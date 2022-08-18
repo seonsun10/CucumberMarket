@@ -161,7 +161,14 @@
                     </c:if>
                     <p class="price"><fmt:formatNumber value="${result.price}" pattern="#,###" />원</p>
                     <p class="text-center buttons">
-                    <button class="btn btn-primary" id="chat-Btn">오이채팅</button>
+                    <c:if test="${loginMember.userId eq null }">
+                    	
+                    </c:if>
+                     <c:if test="${loginMember.userId ne null }">
+                    	<button class="btn btn-primary" id="chat-Btn">오이채팅</button>
+                    </c:if>
+                    
+                    
                		
                		<c:if test="${count==0}">
                			<c:if test="${loginMember.userId ne name }">
