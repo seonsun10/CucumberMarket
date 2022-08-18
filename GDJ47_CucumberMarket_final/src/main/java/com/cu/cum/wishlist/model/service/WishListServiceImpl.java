@@ -17,7 +17,7 @@ public class WishListServiceImpl implements WishListService {
 
 	@Autowired
 	private WishListDao dao;
-	
+
 
 	@Autowired WishMapper mdao;
 	
@@ -61,6 +61,13 @@ public class WishListServiceImpl implements WishListService {
 	public void deleteWishListAll(List<WishList> dibsList) {
 		// TODO Auto-generated method stub
 		dao.deleteAll(dibsList);
+	}
+	
+	//찜 개수 확인
+	@Override
+	public int selectWishListNum(String id) {
+		// TODO Auto-generated method stub
+		return mdao.selectWishListNum(id);
 	}
 
 }

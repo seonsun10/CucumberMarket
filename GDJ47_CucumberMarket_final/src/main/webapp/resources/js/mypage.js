@@ -71,6 +71,7 @@ $(()=>{
 				$("#databox").html(data);
 			}
 		});
+		$("#page").val('Review');
 	});
 	//마이페이지 찜 목록 출력 연결
 	$("#dibstag").click(e=>{
@@ -82,6 +83,7 @@ $(()=>{
 				$("#databox").html(data);
 			}
 		});
+		$("#page").val('Dibs');
 	});
 	//마이페이지 신고 목록 출력 연결
 	$("#reporttag").click(e=>{

@@ -29,6 +29,7 @@ public interface WishListService {
 
 	WishList checkWishlist(Member m, Product p);
 	
-	
+	//찜 개수 확인
+	int selectWishListNum(String id);
 
 }
