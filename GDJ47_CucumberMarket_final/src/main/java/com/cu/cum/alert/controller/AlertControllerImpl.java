@@ -41,7 +41,7 @@ public class AlertControllerImpl implements AlertController{
 	@Override
 	@RequestMapping("/member/notify.do")
 	public ModelAndView notifyInit(@RequestParam(defaultValue = "1") int curPage, HttpServletRequest request) throws Exception{
-		ModelAndView mav = new ModelAndView(Common.checkLoginDestinationView("alert", request));
+		ModelAndView mav = new ModelAndView();
 		String userid= ((Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
 		// 세션에 userid가 존재할 때 
 		if(userid != null && !"".equals(userid)){
@@ -60,6 +60,7 @@ public class AlertControllerImpl implements AlertController{
 			mav.addObject("newList", newList);
 			mav.addObject("oldList", oldList);
 			mav.addObject("oldListCnt", service.selectOldNotifyCnt(userid));
+			mav.setViewName("alert/alert");
 		}
 		return mav;
 	}
