@@ -22,7 +22,7 @@
                 <h1>회원가입</h1>
                 <p class="lead">아직 가입하지 않으셨나요?</p>
                 <p>중고 거래를 통해 돈도 벌고, 차지하던 공간의 확보를 통해 쾌적할 삶을 즐기세요!</p>
-                <p class="text-muted">문의사항은 <a href="contact.html">contact us</a> 로 부탁드려요, 가능한 빠르게 답변드리도록 하겠습니다!</p>
+                <p class="text-muted">문의사항은 <a href="${pageContext.request.contextPath}/contactPage">contact us</a> 로 부탁드려요, 가능한 빠르게 답변드리도록 하겠습니다!</p>
                 <hr>
                 <form action="/join" method="post" onsubmit="return join()">
                   <div class="form-group">
