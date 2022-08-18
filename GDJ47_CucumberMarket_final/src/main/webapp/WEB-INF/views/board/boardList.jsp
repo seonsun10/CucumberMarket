@@ -123,6 +123,7 @@
               	 
                 <h2><a href="${path }/board/boardinfo.do/${b.boardId}">${b.boardTitle }</a></h2>
                 <p class="author-category">작성자 
+                
                   <c:if test="${b.userId ne loginMember.userId }">
                     <a href="${path }/member/otherMember.do?writer=${b.userId }&customer=${loginMember.userId}">${b.userId }</a>
                   </c:if>

@@ -37,6 +37,7 @@ public class SecurityConfig {
 					.and() //http부터 또 설정 가능
 				.authorizeRequests() //인증 권한
 					.antMatchers("/member/*").hasAnyRole("USER","ADMIN")
+					.antMatchers("/board/*").hasAnyRole("USER","ADMIN")
 					.antMatchers("/**","/resources/**","/member/selectNewChatCnt.do",
 						"/member/selectNewNoticeCnt.do").permitAll() //"/loginpage","/login","/joinForm","/join","/mailCheck","/idCheck", ,"/area.do"
 					.antMatchers("/admin").hasRole("ADMIN")
