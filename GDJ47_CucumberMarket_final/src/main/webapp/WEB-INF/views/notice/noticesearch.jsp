@@ -137,7 +137,7 @@
 			// 동적 form 생성
 			let frm = document.createElement('form');
 			frm.name = "frmQnA";				
-			frm.action = "${path}/admin/"+dest+".do";
+			frm.action = "${path }/admin/"+dest+".do";
 			// form에 연결
 			let input = document.createElement('input');
 			input.setAttribute("type","hidden");
