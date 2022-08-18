@@ -39,7 +39,6 @@ public class SecurityConfig {
 				.authorizeRequests() //인증 권한
 					.antMatchers("/member/*","/inquiryList","/reportList","/testchat.do/**").hasAnyRole("USER","ADMIN")
 					.antMatchers("/board/*").hasAnyRole("USER","ADMIN")
-
 					.antMatchers("/**","/resources/**","/member/selectNewChatCnt.do",
 						"/member/selectNewNoticeCnt.do").permitAll() //"/loginpage","/login","/joinForm","/join","/mailCheck","/idCheck", ,"/area.do"
 					.antMatchers("/admin").hasRole("ADMIN")
