@@ -40,7 +40,7 @@
             <div class="col-lg-9">
               <div class="box">
                 <h1>상품 등록</h1>
-                
+                <p>상품에 대한 이미지는 하나 이상 첨부해야합니다.</p>
                 <form action="${path }/product/insertProduct.do" method="post" enctype="multipart/form-data" onsubmit="return fn_insertProduct()">	
 						<input type="button" value="상품 이미지 추가" onclick="fn_attachFile.add()" style="margin-bottom:5px">
 						<div class="row" id="row22">
@@ -53,12 +53,12 @@
 						</div>
 						</div>
 						<br>
-						<label for="exampleInputEmail1">상품 제목(최대 글자 수 30글자)</label>
+						<label for="exampleInputEmail1">상품 제목</label>
 						<input type="text" name="proName" class="form-control"
-						placeholder="상품 제목" required maxlength='40'><br>
+						placeholder="최대 글자수 40글자" id="proName" required maxlength='40'><br>
 						
 						<label for="exampleInputEmail1">상품 설명</label>
-						<textarea class="form-control" name="proContent" rows="6" placeholder="상품 설명" required></textarea><br>
+						<textarea class="form-control" id="proContent" name="proContent" maxlength="300" rows="6" placeholder="최대 글자 수 400글자" required></textarea><br>
 						<div class="row">
 		                    <div class="col-md-4">
 		                      <div class="form-group">
@@ -79,7 +79,7 @@
 						
 						<label for="exampleInputEmail1">상품 가격 (최소금액 1,000원)</label>
 						<input type="number" name="price" class="form-control"
-						placeholder="상품 가격" required" min="1000" max="999999999"><br>
+						placeholder="상품 가격" required" min="1000" max="999999999" oninvalid="this.setCustomValidity('상품 가격은 1000원 이상으로 설정되어야 합니다.')"><br>
 						
 						<label for="exampleInputEmail1">상품 상태</label><br>
 						<label class="radio-inline">
@@ -181,9 +181,19 @@ fn_attachFile = {
 	    
 	function fn_insertProduct(){
 	var status = $("input[name='proStatus']:checked").val();
+	var name = $('#proName').val();
+	var content = $('#proContent').val();
+	var price = $('#price').val();
 	if(status==null){
-		alert('상품 상태를 체크해주세요');
+		alert('상품 상태를 체크해주세요.');
 		return false;
+	}
+	if(name.length>40){
+		alert('등록할 상품 제목의 최대 글자수가 40글자를 벗어났습니다. 다시 작성해주세요.');
+		return false;
+	}
+	if(content.length>400){
+		alert('등록할 상품 설명의 최대 글자수가 400을 벗어났습니다. 다시 작성해주세요.');
 	}
 	return true;
 }

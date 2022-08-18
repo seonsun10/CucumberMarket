@@ -18,7 +18,7 @@
 						<nav aria-label="breadcrumb">
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="/">Home</a></li>
-								<li aria-current="page" class="breadcrumb-item active">문의하기</li>
+								<li aria-current="page" class="breadcrumb-item active">공지사항</li>
 							</ol>
 						</nav>
 					</div>

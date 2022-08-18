@@ -84,7 +84,7 @@ public class MemberController {
 		log.debug("{}",p);
 		//메인 페이지 오늘의 추천 상품 리스트 출력
 		List<Product> mp = proservice.mainProductList(); //썸네일만 나오게 걸림
-		System.out.println("mp : "+mp);
+		//System.out.println("mp : "+mp);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		List days = new ArrayList();
 		for(int i=0; i<mp.size(); i++) {
@@ -95,7 +95,7 @@ public class MemberController {
 			Long day= ChronoUnit.DAYS.between(today, targetDay);
 			days.add(Math.abs(day));	
 		}
-		System.out.println("날짜 처리후 mp : "+mp);	
+		//System.out.println("날짜 처리후 mp : "+mp);	
 		
 		
 		//추천 상품 리스트에 이미지
@@ -103,7 +103,7 @@ public class MemberController {
 		for(Product pp : mp) {
 			mpf.addAll(pp.getFiles());
 		}
-		System.out.println("mpf : "+mpf);
+		//System.out.println("mpf : "+mpf);
 		m.addAttribute("mp",mp);
 		m.addAttribute("mpf",mpf);
 		m.addAttribute("days",days);
@@ -130,7 +130,7 @@ public class MemberController {
 	//회원가입
 	@PostMapping("/join")
 	public ModelAndView join(@ModelAttribute Member member) {
-		System.out.println("지역 나오나? "+member.getRegion());
+		//System.out.println("지역 나오나? "+member.getRegion());
 		member.setEnrollDate(new Date());
 		member.setIntro("안녕하세요 :D");
 //		member.setRole("ROLE_USER");
@@ -177,12 +177,12 @@ public class MemberController {
 		String url=request.getRequestURI();
 		Member loginMember=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-		System.out.println("유저가 가지고 있는 상품 목록 : "+products);
-		System.out.println(products.size());
+		//System.out.println("유저가 가지고 있는 상품 목록 : "+products);
+		//System.out.println(products.size());
 
 		
 		List<Files> pp = service.selectUserFiles(userId);//db거쳐서 회원이 가진 모든 파일 가져오기;
-		System.out.println("유저가 가지고 잇는 상품 대표이미지 : "+pp);
+		//System.out.println("유저가 가지고 잇는 상품 대표이미지 : "+pp);
 		
 		if(products.size()>0) {
 			m.addAttribute("products",products);
@@ -312,12 +312,12 @@ public class MemberController {
 		int totalProduct=proservice.selectProductCount(userId);
 		Member loginMember=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-		System.out.println("유저가 가지고 있는 상품 목록 : "+products);
-		System.out.println(products.size());
+		//System.out.println("유저가 가지고 있는 상품 목록 : "+products);
+		//System.out.println(products.size());
 
 		
 		List<Files> pp = service.selectUserFiles(userId);//db거쳐서 회원이 가진 모든 파일 가져오기;
-		System.out.println("유저가 가지고 잇는 상품 대표이미지 : "+pp);
+		//System.out.println("유저가 가지고 잇는 상품 대표이미지 : "+pp);
 		
 		
 		
@@ -380,8 +380,8 @@ public class MemberController {
 		mv.addObject("renames",renames);
 		String url=request.getRequestURI();
 		int totalwish=proservice.selectWishCount(userId);
-		System.out.println(url);
-		System.out.println("사이즈: "+totalwish);
+		//System.out.println(url);
+		//System.out.println("사이즈: "+totalwish);
 //		System.out.println("ftx: "+wishlist);
 		mv.addObject("pageBar",PageBar.getPageBar(cPage, numPerpage, totalwish, url));
 		if(products.size()>0) {
@@ -402,7 +402,7 @@ public class MemberController {
 		//String url = request.getRequestURI();
 		Map param = Map.of("cPage",cPage, "numPerpage",numPerpage);
 		List<Report> report = repservice.mypageReportList(param, r);
-		System.out.println(report);
+		//System.out.println(report);
 		int totalReport = repservice.mypageReportCount(r);
 		
 		model.addObject("report", report);
@@ -516,7 +516,7 @@ public class MemberController {
 		       Long day= ChronoUnit.DAYS.between(today, targetDay);
 		       daylist.add(Math.abs(day));
 		    }
-		System.out.println("페이징 넘어온");
+		//System.out.println("페이징 넘어온");
 		String url=request.getRequestURI();
 		int totalProduct=proservice.selectProductCount(userId);
 		m.addAttribute("pageBar",PageBar.getPageBar(cPage, numPerpage, totalProduct, url));
@@ -562,8 +562,8 @@ public class MemberController {
 	@GetMapping("/mailCheck")
 	@ResponseBody
 	public String mailCheck(String email) {
-		System.out.println("이메일 인증 요청이 들어옴!");
-		System.out.println("이메일 인증 이메일 : " + email);
+		//System.out.println("이메일 인증 요청이 들어옴!");
+		//System.out.println("이메일 인증 이메일 : " + email);
 		return mailService.joinEmail(email);
 	}
 	
@@ -581,7 +581,7 @@ public class MemberController {
 	
 	@GetMapping("/idCheck")
 	public ResponseEntity<?> checkIdDuplication(@RequestParam(value = "userId") String userId) throws BadRequestException {
-	    System.out.println(userId);
+	   // System.out.println(userId);
 
 	    if (service.existsByUserId(userId) == true) {
 	    	throw new BadRequestException("이미 사용중인 아이디 입니다.");

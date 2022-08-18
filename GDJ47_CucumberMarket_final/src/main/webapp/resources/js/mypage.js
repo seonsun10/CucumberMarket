@@ -1,4 +1,7 @@
 $(()=>{
+	var hostIndex = location.href.indexOf(location.host) + location.host.length;
+    	 	var contextPath =location.href.substring(hostIndex,location.href.indexOf('/',hostIndex+1));
+	
 	$("#password_2").keyup(e=>{
   		const pw = $("#newPw").val();
   		const pw2 = $(e.target).val();
