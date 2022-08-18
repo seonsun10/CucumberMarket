@@ -53,9 +53,9 @@
 						</div>
 						</div>
 						<br>
-						<label for="exampleInputEmail1">상품 제목</label>
+						<label for="exampleInputEmail1">상품 제목(최대 글자 수 30글자)</label>
 						<input type="text" name="proName" class="form-control"
-						placeholder="상품 제목" required><br>
+						placeholder="상품 제목" required maxlength='40'><br>
 						
 						<label for="exampleInputEmail1">상품 설명</label>
 						<textarea class="form-control" name="proContent" rows="6" placeholder="상품 설명" required></textarea><br>
@@ -77,9 +77,9 @@
 		                </div>
 						
 						
-						<label for="exampleInputEmail1">상품 가격</label>
+						<label for="exampleInputEmail1">상품 가격 (최소금액 1,000원)</label>
 						<input type="number" name="price" class="form-control"
-						placeholder="상품 가격" required"><br>
+						placeholder="상품 가격" required" min="1000" max="999999999"><br>
 						
 						<label for="exampleInputEmail1">상품 상태</label><br>
 						<label class="radio-inline">
