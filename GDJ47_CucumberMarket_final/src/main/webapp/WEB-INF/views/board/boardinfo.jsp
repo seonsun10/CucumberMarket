@@ -190,7 +190,7 @@
 			<c:if test="${bc.boardCommentLevel==1 }">
 					<tr class="level1">
 				<td>
-					 <sub><p><img src="/resources/img/cucumber.png" alt="" class="img-fluid rounded-circle" width="50" height="50">&nbsp ${bc.boardCommentWriter}</p></sub>
+					 <sub><p><img src="${path }/resources/img/cucumber.png" alt="" class="img-fluid rounded-circle" width="50" height="50">&nbsp ${bc.boardCommentWriter}</p></sub>
 					<sub class="comment-date"> <fmt:formatDate value="${bc.boardCommentDate }" pattern="yyyy년 MM월 dd일"/> </sub>
 					<br>
 					${bc.boardCommentContent }
@@ -215,7 +215,7 @@
 				<tr class="level2">
 				<td>
 					 
-					<sub><p><img src="/resources/img/cucumber.png" alt="" class="img-fluid rounded-circle" width="50" height="50">&nbsp ${bc.boardCommentWriter}</p></sub>
+					<sub><p><img src="${path }/resources/img/cucumber.png" alt="" class="img-fluid rounded-circle" width="50" height="50">&nbsp ${bc.boardCommentWriter}</p></sub>
 					<sub> <fmt:formatDate value="${bc.boardCommentDate}" pattern="yyyy년 MM월 dd일"/>  </sub>
 					<br>
 					${bc.boardCommentContent}
