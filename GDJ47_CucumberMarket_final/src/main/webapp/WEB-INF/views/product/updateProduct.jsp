@@ -79,7 +79,7 @@
 						
 						<label for="exampleInputEmail1">상품 가격 (최소금액 1,000원)</label>
 						<input type="number" name="price" class="form-control"
-						placeholder="상품 가격" required" min="1000" max="999999999" oninvalid="this.setCustomValidity('상품 가격은 1000원 이상으로 설정되어야 합니다.')"><br>
+						placeholder="상품 가격" required min="1000" max="999999999" oninvalid="this.setCustomValidity('상품 가격은 1000원 이상으로 설정되어야 합니다.')"><br>
 						
 						<label for="exampleInputEmail1">상품 상태</label><br>
 						<label class="radio-inline">
