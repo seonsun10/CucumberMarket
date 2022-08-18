@@ -41,7 +41,7 @@
                 <div class="card-body">
                   <div class="menu1" >
                   <span class="">여성의류</span>
-                  	<ul class="sub1 up">
+                     <ul class="sub1 up">
                         <li><a href="${path }/product/productTotal.do?tag=패딩" class="nav-link">패딩</a></li>
                         <li><a href="${path }/product/productTotal.do?tag=코트" class="nav-link">코트</a></li>
                         <li><a href="${path }/product/productTotal.do?tag=반팔" class="nav-link">반팔</a></li>
@@ -154,35 +154,35 @@
                     </c:if>
                     <p class="text-center">판매 지역 : ${region }</p>
                     <c:if test="${proStatus eq 'y' }">
-                    	<p class="text-center">상품 상태 : 중고</p>
+                       <p class="text-center">상품 상태 : 중고</p>
                     </c:if>
                     <c:if test="${proStatus eq 'n' }">
-                   		<p class="text-center">상품 상태 : 새 상품</p>
+                         <p class="text-center">상품 상태 : 새 상품</p>
                     </c:if>
                     <p class="price"><fmt:formatNumber value="${result.price}" pattern="#,###" />원</p>
                     <p class="text-center buttons">
                     <c:if test="${loginMember.userId eq null }">
-                    	
+                       
                     </c:if>
                      <c:if test="${loginMember.userId ne null }">
-                    	<button class="btn btn-primary" id="chat-Btn">오이채팅</button>
+                       <button class="btn btn-primary" id="chat-Btn">오이채팅</button>
                     </c:if>
                     
                     
-               		
-               		<c:if test="${count==0}">
-               			<c:if test="${id ne '' }">
-	               			<c:if test="${loginMember.userId ne name }">
-	                    	<button  class="btn btn-primary" onclick="location.assign('${path }/wishlist/insertWishList.do?id=${loginMember.userId}&no=${no}&tag=${tag}&name=${name}&region=${region}&proStatus=${proStatus }'); alert('찜 등록');">찜 등록</button>
-	   		            	</c:if>
-   		            	</c:if>
-   		            	<c:if test="${id eq '' }">
-                    	<button  class="btn btn-primary" onclick="alert('로그인 후 이용해주세요.'); location.assign('${path }/loginpage')">찜 등록</button>
-   		            	</c:if>
+                     
+                     <c:if test="${count==0}">
+                        <c:if test="${id ne '' }">
+                           <c:if test="${loginMember.userId ne name }">
+                          <button  class="btn btn-primary" onclick="location.assign('${path }/wishlist/insertWishList.do?id=${loginMember.userId}&no=${no}&tag=${tag}&name=${name}&region=${region}&proStatus=${proStatus }'); alert('찜 등록');">찜 등록</button>
+                           </c:if>
+                        </c:if>
+                        <c:if test="${id eq '' }">
+                       <button  class="btn btn-primary" onclick="alert('로그인 후 이용해주세요.'); location.assign('${path }/loginpage')">찜 등록</button>
+                        </c:if>
                     </c:if>
                     
                     <c:if test="${count==1}">
-                    	<button class="btn btn-primary" onclick="location.assign('${path }/wishlist/deleteWishList.do?id=${loginMember.userId}&no=${no}&tag=${tag}&name=${name}&region=${region}&proStatus=${proStatus }'); alert('찜 삭제');">찜 삭제</button>
+                       <button class="btn btn-primary" onclick="location.assign('${path }/wishlist/deleteWishList.do?id=${loginMember.userId}&no=${no}&tag=${tag}&name=${name}&region=${region}&proStatus=${proStatus }'); alert('찜 삭제');">찜 삭제</button>
                     </c:if>
                     </p>
                   </div>
@@ -204,7 +204,7 @@
                     <a id="btnKakao" onclick="fn_sendFB('kakao');return false;" class="link-icon kakao" target="_self" title="카카오톡 새창열림" >&nbsp;</a>
                     <a id="btnBand" onclick="fn_sendFB('band'); return false;" class="link-icon band" target="_self" title="밴드 새창열림">&nbsp;</a>
                     <a id="btnFacebook" onclick="fn_sendFB('facebook');return false;" class="link-icon facebook" target="_self" title="페이스북 새창열림">&nbsp;</a>
-				    <a id="btnTwitter" onclick="fn_sendFB('twitter');return false;" class="link-icon twitter" target="_self" title="트위터 새창열림">&nbsp;</a>
+                <a id="btnTwitter" onclick="fn_sendFB('twitter');return false;" class="link-icon twitter" target="_self" title="트위터 새창열림">&nbsp;</a>
                 </div>
               </div>
               
@@ -241,8 +241,8 @@
          </div>
          </div>
         
-	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-	
+   <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+   
     <script>
       const count = ${count}
     const id = "${id}"
@@ -271,78 +271,108 @@
             // 사용할 앱의 JavaScript 키 설정
             //Kakao.init('00357f88543d6b75340e69e7b3972b9d');
             try {
-		        if (Kakao) {
-		            Kakao.init('00357f88543d6b75340e69e7b3972b9d');
-		        };
-		    } catch(e) {};
+              if (Kakao) {
+                  Kakao.init('00357f88543d6b75340e69e7b3972b9d');
+              };
+          } catch(e) {};
             // 카카오링크 버튼 생성
 
             Kakao.Share.sendDefault({
-            	  objectType: 'feed',
-            	  content: {
-            	    title: '오이마켓',
-            	    description: snsTitle,
-            	    imageUrl:
-            	    	thisUrl,
-            	    link: {
-            	      mobileWebUrl: thisUrl,
-            	      androidExecutionParams: 'test',
-            	    },
-            	  },
-/*             	  social: {
-            		    likeCount: 10,
-            		    commentCount: 20,
-            		    sharedCount: 30,
+                 objectType: 'feed',
+                 content: {
+                   title: '오이마켓',
+                   description: snsTitle,
+                   imageUrl:
+                      thisUrl,
+                   link: {
+                     mobileWebUrl: thisUrl,
+                     androidExecutionParams: 'test',
+                   },
+                 },
+/*                  social: {
+                      likeCount: 10,
+                      commentCount: 20,
+                      sharedCount: 30,
                   }, */
-            		  buttons: [
-            			    {
-            			      title: '웹으로 이동',
-            			      link: {
-            			        mobileWebUrl: thisUrl,
-            			      }
-            			    }
-/*             			    {
-            			      title: '앱으로 이동',
-            			      link: {
-            			        mobileWebUrl: 'https://developers.kakao.com',
-            			      },
-            			    }, */
-            			  ]
+                    buttons: [
+                         {
+                           title: '웹으로 이동',
+                           link: {
+                             mobileWebUrl: thisUrl,
+                           }
+                         }
+/*                          {
+                           title: '앱으로 이동',
+                           link: {
+                             mobileWebUrl: 'https://developers.kakao.com',
+                           },
+                         }, */
+                       ]
             })
         }
     }
     
 
     $("#chat-Btn").on("click",function(){
-    	console.log('${result.member.userId}');
-    	console.log('${loginMember.userId}');
-    	console.log('${result.proNo}');
-			$.ajax({
-				
-				data:JSON.stringify({userId:'${result.member.userId}',
-  	       			otherId:'${loginMember.userId}',
-  	       			proNo:${result.proNo}
-  	       			 }),
-				headers:{"Content-Type":"application/json"},
-      		 	url: '${path}/chatingRoom',
-      			type: "POST",
-      			
-      			
-      		
-      		 success:data=> {
-      			 console.log(data.roomId);
-      			 if(data.roomId!=null){
-      			open("${path}/testchat.do/"+data.roomId,"_blank","width=590,height=600");
-      			 }else{
-      				 alert("본인 상품에는 채팅을 하실 수 없습니다.")
-      			 }
-      			
-      			
-      		 }
-      	 }); 
+       console.log('${result.member.userId}');
+       console.log('${loginMember.userId}');
+       console.log('${result.proNo}');
+         $.ajax({
+            
+            data:JSON.stringify({userId:'${result.member.userId}',
+                     otherId:'${loginMember.userId}',
+                     proNo:${result.proNo}
+                      }),
+            headers:{"Content-Type":"application/json"},
+                url: '${path}/chatingRoom',
+               type: "POST",
+               
+               
+            
+             success:data=> {
+                console.log(data.roomId);
+                if(data.roomId!=null){
+               open("${path}/testchat.do/"+data.roomId,"_blank","width=590,height=600");
+                }else{
+                   alert("본인 상품에는 채팅을 하실 수 없습니다.")
+                }
+               
+               
+             }
+          }); 
 
- 	});
+    });
      
+    
+
+    const openchat=()=>{
+       console.log('${result.member.userId}');
+       console.log('${loginMember.userId}');
+       console.log('${result.proNo}');
+         $.ajax({
+            
+            data:JSON.stringify({userId:'${result.member.userId}',
+                     otherId:'${loginMember.userId}',
+                     proNo:${result.proNo}
+                      }),
+            headers:{"Content-Type":"application/json"},
+                url: '${path}/chatingRoom',
+               type: "POST",
+               
+               
+            
+             success:data=> {
+                console.log(data.roomId);
+                if(data.roomId!=null){
+               open("${path}/testchat.do/"+data.roomId,"_blank","width=590,height=600");
+                }else{
+                   alert("본인 상품에는 채팅을 하실 수 없습니다.")
+                }
+               
+               
+             }
+          }); 
+      };
     </script>
     <script src="${path }/resources/js/category.js"></script>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
