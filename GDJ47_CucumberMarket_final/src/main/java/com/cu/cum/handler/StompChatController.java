@@ -48,7 +48,7 @@ public class StompChatController {
 	
 	@GetMapping(value="/chatlist/{id}")
 	public ModelAndView chatlist(@PathVariable String id,ModelAndView mv, Model model){
-		System.out.println(id);
+		//System.out.println(id);
 		String userid= ((Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
 		
 		
@@ -56,25 +56,25 @@ public class StompChatController {
 		List<Integer> chatPro = new ArrayList();
 		for(int i=0; i<chatList.size(); i++) {
 			if(chatList.get(i).getOtherId().equals(id)) {
-			System.out.println("상품 번호 : "+chatList.get(i).getProNo());
+			//System.out.println("상품 번호 : "+chatList.get(i).getProNo());
 			chatPro.add(chatList.get(i).getProNo());
 			}
 		}
-		System.out.println("구매자가 가지고 있는 상품번호 : "+chatPro);
+		//System.out.println("구매자가 가지고 있는 상품번호 : "+chatPro);
 		List<Files> chatFile = new ArrayList();
 		Product p = null;
 		for(int i=0; i<chatPro.size(); i++) {
 			p = Product.builder().proNo(chatPro.get(i)).build();
 			chatFile.addAll(fservice.findByProduct(p));
 		}
-		System.out.println("chatFile : "+chatFile);
+		//System.out.println("chatFile : "+chatFile);
 		List<String> chatFilename = new ArrayList();
 		for(int i=0; i<chatFile.size(); i++) {
 			if(chatFile.get(i).getRenameFilename().contains("s_")) {
 				chatFilename.add(chatFile.get(i).getRenameFilename());
 			}
 		}
-		System.out.println("진짜 마지막으로 구매자가 가지고 있는 상품 리네임파일이름 : "+chatFilename);
+		//System.out.println("진짜 마지막으로 구매자가 가지고 있는 상품 리네임파일이름 : "+chatFilename);
 		for(ChatRoom c:chatList) {
 			if(c.getUserId().equals(userid)) {
 			c.setUnReadCount(service.unreadmessage(c));
@@ -84,7 +84,7 @@ public class StompChatController {
 			
 		}
 		
-		System.out.println(chatList);
+		//System.out.println(chatList);
 		mv.addObject("chatList", chatList);
 		mv.addObject("chatFilename",chatFilename);
 		mv.setViewName("member/mypageGchat");
@@ -93,13 +93,13 @@ public class StompChatController {
 	}
 	@GetMapping(value="/chatlist2/{id}")
 	public ModelAndView chatlist2(@PathVariable String id,ModelAndView mv){
-		System.out.println("판매채팅창");
-		System.out.println(id);
+		//System.out.println("판매채팅창");
+		//System.out.println(id);
 		String userid= ((Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
 		
 		
 		List<ChatRoom> chatList = service.selectChatList2(id);
-		System.out.println("chatList : "+chatList);
+		//System.out.println("chatList : "+chatList);
 		List<Integer> chatPro = new ArrayList();
 		for(int i=0; i<chatList.size(); i++) {
 			if(chatList.get(i).getUserId().equals(id)) {
@@ -107,21 +107,21 @@ public class StompChatController {
 			chatPro.add(chatList.get(i).getProNo());
 			}
 		}
-		System.out.println("판매자가 가지고 있는 상품번호 : "+chatPro);
+		//System.out.println("판매자가 가지고 있는 상품번호 : "+chatPro);
 		List<Files> chatFile = new ArrayList();
 		Product p = null;
 		for(int i=0; i<chatPro.size(); i++) {
 			p = Product.builder().proNo(chatPro.get(i)).build();
 			chatFile.addAll(fservice.findByProduct(p));
 		}
-		System.out.println("chatFile : "+chatFile);
+		//System.out.println("chatFile : "+chatFile);
 		List<String> chatFilename = new ArrayList();
 		for(int i=0; i<chatFile.size(); i++) {
 			if(chatFile.get(i).getRenameFilename().contains("s_")) {
 				chatFilename.add(chatFile.get(i).getRenameFilename());
 			}
 		}
-		System.out.println("진짜 마지막으로 판매자가 가지고 있는 상품 리네임파일이름 : "+chatFilename);
+		//System.out.println("진짜 마지막으로 판매자가 가지고 있는 상품 리네임파일이름 : "+chatFilename);
 
 		for(ChatRoom c:chatList) {
 			if(c.getUserId().equals(userid)) {
@@ -132,7 +132,7 @@ public class StompChatController {
 			
 		}
 		
-		System.out.println(chatList);
+		//System.out.println(chatList);
 		mv.addObject("chatList", chatList);
 		mv.addObject("chatFilename",chatFilename);
 		mv.setViewName("member/myPagePchat");

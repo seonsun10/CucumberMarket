@@ -105,7 +105,7 @@
 <body>
   <div id="chatWrap">
             <div id="chatHeader">
-            	<img src="/resources/img/cucumber.png" alt="Obaju logo" class="d-inline-block d-md-none" style="width:50px;height:40px">&nbsp오이마켓 채팅방
+            	<img src="${path }/resources/img/cucumber.png" alt="Obaju logo" class="d-inline-block d-md-none" style="width:50px;height:40px">&nbsp오이마켓 채팅방
 	            	<div id="dealcheck">
 			            <c:if test="${product ne null}">
 			            	<div id="pinfo" style='color:blue;font-size:15px'>거래를 완료하셨으면 후기를 작성해보세요!</div>
@@ -204,14 +204,14 @@ $(document).ready(function(){
 	
 	 
 
-    var sockJs = new SockJS("/ws/chat");
+    var sockJs = new SockJS("${path}/ws/chat");
     //1. SockJS를 내부에 들고있는 stomp를 내어줌
     var stomp = Stomp.over(sockJs);
 
     //2. connection이 맺어지면 실행
     stomp.connect({}, function (){
        console.log("STOMP Connection");
-       stomp.subscribe("/sub/chat/room/"+roomid, function (chat) {
+       stomp.subscribe("${path}/sub/chat/room/"+roomid, function (chat) {
            var content = JSON.parse(chat.body);
 		   var message = content.massage;
            var writer = content.userid;
@@ -233,7 +233,7 @@ $(document).ready(function(){
        
         $("#button-send").on("click", function(e){
             var msg = document.getElementById("message");
-            
+            console.log('${path}');
 
             console.log('${room.otherId}' + ":" + msg.value);
             console.log(msg.value.length);
@@ -241,7 +241,7 @@ $(document).ready(function(){
             if(msg.value.length!=0){
             	
             	 $('#chatLog').scrollTop($('#chatLog')[0].scrollHeight);
-            	 stomp.send('/pub/chat/message', {}, JSON.stringify({roomId: '${room.roomId}', massage: msg.value, userid: '${loginMember.userId}'}));
+            	 stomp.send('${path}/pub/chat/message', {}, JSON.stringify({roomId: '${room.roomId}', massage: msg.value, userid: '${loginMember.userId}'}));
             	 
             	 
             		
@@ -263,7 +263,7 @@ $(document).ready(function(){
             
             if(msg.value.length!=0){
             	
-            	 stomp.send('/pub/chat/message', {}, JSON.stringify({roomId: '${room.roomId}', massage: msg.value, userid: '${loginMember.userId}'}));
+            	 stomp.send('${path}/pub/chat/message', {}, JSON.stringify({roomId: '${room.roomId}', massage: msg.value, userid: '${loginMember.userId}'}));
             	 
                  msg.value = '';
             	
@@ -291,7 +291,7 @@ $(document).ready(function(){
                 massage: messageContent,
                 roodId: '${room.roomId}'
             };
-            stomp.send("/pub/chat/message", {}, JSON.stringify(MessageContent));
+            stomp.send("${path}/pub/chat/message", {}, JSON.stringify(MessageContent));
             
            
             msg = '';
