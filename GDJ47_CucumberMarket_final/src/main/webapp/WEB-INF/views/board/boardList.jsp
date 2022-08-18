@@ -54,33 +54,15 @@
                           				
                         			</select>
                      			 </div>
-              					<input name="keyword" type="text" placeholder="오이마켓 동네생활" class="form-control" id="bKeyword" onKeyPress="if( event.keyCode==13 ){addFunc();}">
+              					<input name="keyword" type="text" placeholder="오이마켓 동네생활" class="form-control" id="bKeyword" onKeyPress="if( event.keyCode==13 ){addFunc();}" >
 				              	<div class="input-group-append">
-					                <button type="submit" class="btn btn-primary" id="bSearch"><i class="fa fa-search"></i></button>
+					                <button type="submit" class="btn btn-primary" id="bSearch"><i class="fa fa-search" ></i></button>
 				              	</div>
 				            
 				            <!-- </div>
 							<div class="input-group-append"> -->
 			</div>
 			<script>
-			const addFunc=()=>{
-				var btype = $("#bType").val();
-				var bkeyword = $("#bKeyword").val();
-				if(bkeyword.length==0){
-					alert('검색할 내용을 입력하세요');
-				}else{
-					location.assign('${path}/board/bsearch/'+btype+'/'+bkeyword);
-				}
-				
-			}
-			
-			$("#bSearch").click(function(){
-				var btype = $("#bType").val();
-				var bkeyword = $("#bKeyword").val();
-				console.log(btype+bkeyword);
-				location.assign('${path}/board/bsearch/'+btype+'/'+bkeyword);
-				
-			});
 			
 			
 			</script>
@@ -188,6 +170,29 @@
 	
 	 location.assign("${path}/board/boardRecommend.do/"+id);
  }
+ 
+ 
+ const addFunc=()=>{
+		var btype = $("#bType").val();
+		var bkeyword = $("#bKeyword").val();
+		if(bkeyword.length==0){
+			alert('검색할 내용을 입력하세요');
+		}else{
+			location.assign('${path}/board/bsearch/'+btype+'/'+bkeyword);
+		}
+		
+	}
+	
+	$("#bSearch").click(function(){
+		var btype = $("#bType").val();
+		var bkeyword = $("#bKeyword").val();
+		if(bkeyword.length==0){
+			alert('검색할 내용을 입력하세요');
+		}else{
+			location.assign('${path}/board/bsearch/'+btype+'/'+bkeyword);
+		}
+	});
+	
 </script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
