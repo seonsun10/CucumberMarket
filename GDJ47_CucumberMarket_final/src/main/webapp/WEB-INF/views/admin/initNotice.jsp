@@ -92,7 +92,7 @@
 			
 			
 			let frmQnA = document.frmQnA;
-			frmQnA.action = "${path}/admin/updateNotice.do";
+			frmQnA.action = "/admin/updateNotice.do";
 			frmQnA.submit();
 		});
 	
@@ -102,7 +102,7 @@
 	$("#insertNotice").click(function(){
 			
 			let frmQnA = document.frmQnA;
-			frmQnA.action = "${path}/admin/insertNotice.do";
+			frmQnA.action = "/admin/insertNotice.do";
 			frmQnA.submit();
 			
 			  
@@ -115,7 +115,7 @@
 			  $.ajax({
 				  
 				  	type: 'post',
-			        url: '${path}/member/saveNotify.do',
+			        url: '/member/saveNotify.do',
 			        dataType: 'text',
 			        data: {
 			            target: target,

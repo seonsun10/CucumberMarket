@@ -34,5 +34,5 @@ function fn_deleteDibs(){
 	$("input:checked[type='checkbox'].normal").each(function(i,iVal){
 		arr.push(iVal.value);
 	});
-	location.replace('/wishlist/deleteDibs.do?userId='+userId+'&dibsList='+arr);
+	location.replace('/GDJ47_CucumberMarket_final/wishlist/deleteDibs.do?userId='+userId+'&dibsList='+arr);
 }

@@ -250,8 +250,18 @@
 
     
     function fn_sendFB(sns) {
-        var thisUrl = document.URL;
-        console.log(thisUrl);
+        /* var thisUrl = document.URL; */
+        var id = '${id}';
+        var name = '${name}';
+        var no = '${no}';
+        var tag = '${tag}';
+        var region = '${region}';
+        var proStatus = '${proStatus}';
+        /* /product/productView.do?id='+id+'&no='+no+'&tag='+tag+'&name='+name+'&region='+region+'&proStatus='+proStatus */
+        var thisUrl = 'https://61.78.121.242:8844/GDJ47_CucumberMarket_final/product/productView.do?id='+id+'&no='+no+'&tag='+tag+'&name='+name+'&region='+region+'&proStatus='+proStatus; */
+        /* var thisUrl = 'http://localhost:9090/product/productView.do?id='+id+'&no='+no+'&tag='+tag+'&name='+name+'&region='+region+'&proStatus='+proStatus; */
+        /* /product/productView.do?id='+id+'&no='+no+'&tag='+tag+'&name='+name+'&region='+region+'&proStatus='+proStatus; */
+        		console.log(thisUrl);
         var snsTitle = '<c:out value="${snsTitle}"/>';
         /* var snsContent = '<c:out value="${snsContent}"/>'; */
         console.log(snsTitle);
@@ -287,26 +297,17 @@
                    link: {
                      mobileWebUrl: thisUrl,
                      androidExecutionParams: 'test',
+                     webUrl: thisUrl
                    },
                  },
-/*                  social: {
-                      likeCount: 10,
-                      commentCount: 20,
-                      sharedCount: 30,
-                  }, */
                     buttons: [
                          {
                            title: '웹으로 이동',
                            link: {
                              mobileWebUrl: thisUrl,
+                             webUrl: thisUrl
                            }
                          }
-/*                          {
-                           title: '앱으로 이동',
-                           link: {
-                             mobileWebUrl: 'https://developers.kakao.com',
-                           },
-                         }, */
                        ]
             })
         }
