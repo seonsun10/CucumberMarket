@@ -171,16 +171,18 @@
                     
                		
                		<c:if test="${count==0}">
-               			<c:if test="${loginMember.userId ne name }">
-                    	<button  class="btn btn-primary" onclick="location.assign('${path }/wishlist/insertWishList.do?id=${loginMember.userId}&no=${no}&tag=${tag}&name=${name}&region=${region}&proStatus=${proStatus }'); alert('관심상품등록');">관심상품등록</button>
+               			<c:if test="${id ne '' }">
+	               			<c:if test="${loginMember.userId ne name }">
+	                    	<button  class="btn btn-primary" onclick="location.assign('${path }/wishlist/insertWishList.do?id=${loginMember.userId}&no=${no}&tag=${tag}&name=${name}&region=${region}&proStatus=${proStatus }'); alert('찜 등록');">찜 등록</button>
+	   		            	</c:if>
    		            	</c:if>
-   		            	<%-- <c:if test="${loginMember.userId eq name }">
-                    	<button  class="btn btn-primary" onclick="alert('본인상품은 관심상품으로 등록할 수 없습니다.');">관심상품등록</button>
-   		            	</c:if> --%>
+   		            	<c:if test="${id eq '' }">
+                    	<button  class="btn btn-primary" onclick="alert('로그인 후 이용해주세요.'); location.assign('${path }/loginpage')">찜 등록</button>
+   		            	</c:if>
                     </c:if>
                     
                     <c:if test="${count==1}">
-                    	<button class="btn btn-primary" onclick="location.assign('${path }/wishlist/deleteWishList.do?id=${loginMember.userId}&no=${no}&tag=${tag}&name=${name}&region=${region}&proStatus=${proStatus }'); alert('관심상품삭제');">관심상품삭제</button>
+                    	<button class="btn btn-primary" onclick="location.assign('${path }/wishlist/deleteWishList.do?id=${loginMember.userId}&no=${no}&tag=${tag}&name=${name}&region=${region}&proStatus=${proStatus }'); alert('찜 삭제');">찜 삭제</button>
                     </c:if>
                     </p>
                   </div>
@@ -245,29 +247,8 @@
       const count = ${count}
     const id = "${id}"
     const no = ${no}
-    if(count==1){
-       function jjim_delete() {
-          console.log(count);
-           $.ajax({ 
-             url : "${path}/wishlist/deleteWishList.do",
-             method:"GET",
-             data : {"id":id,"no":no},
-             success: function (data) { 
-                 if(data>0){
-                    console.log("삭제됨");
-                 }else{
-                    console.log("삭제실패");
-                    
-                 }
-             }
-          });
-       }
-    }
-    if(count==0){
-       function jjim_insert(){
-          console.log(count);
-       }
-    }
+
+    
     function fn_sendFB(sns) {
         var thisUrl = document.URL;
         console.log(thisUrl);

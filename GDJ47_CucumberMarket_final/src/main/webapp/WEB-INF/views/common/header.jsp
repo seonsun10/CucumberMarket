@@ -52,14 +52,17 @@
             <div class="col-lg-6 text-center text-lg-right">
               <ul class="menu list-inline mb-0">
               	<c:if test="${loginMember.userId eq null}">
-                 <li class="list-inline-item"><a href="${path}/" data-toggle="modal" data-target="#login-modal">Login</a></li>
+                 <li class="list-inline-item"><a href="#" data-toggle="modal" data-target="#login-modal">로그인</a></li>
+                 <li class="list-inline-item"><a href="${pageContext.request.contextPath}/joinForm">회원가입</a></li>
+                 <li class="list-inline-item"><a href="${pageContext.request.contextPath}/contactPage">Contact</a></li>
                 </c:if>
                 <c:if test="${loginMember.userId ne null}">
-                 <li class="list-inline-item"><a href="${path}/logout">Logout</a></li>
+                 <li class="list-inline-item"><a href="${path}/logout">로그아웃</a></li>
+                 <li class="list-inline-item"><a href="${pageContext.request.contextPath}/contactPage">Contact</a></li>
                 </c:if>
-                <li class="list-inline-item"><a href="${pageContext.request.contextPath}/joinForm">Register</a></li>
-                <li class="list-inline-item"><a href="${pageContext.request.contextPath}/contactPage">Contact</a></li>
-                <li class="list-inline-item"><a href="#">Recently viewed</a></li>
+                
+                <!-- <li class="list-inline-item"><a href="#">Recently viewed</a></li> -->
+
               </ul>
             </div>
           </div>

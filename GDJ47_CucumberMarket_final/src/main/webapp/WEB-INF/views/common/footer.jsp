@@ -68,10 +68,10 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-6 mb-2 mb-lg-0">
-            <p class="text-center text-lg-left">©2019 Your name goes here.</p>
+            <p class="text-center text-lg-left">©2022 CucumberMarket</p>
           </div>
           <div class="col-lg-6">
-            <p class="text-center text-lg-right">Template design by <a href="https://bootstrapious.com/">Bootstrapious</a>
+            <p class="text-center text-lg-right">상점의 모든 상품들에 대해 오이마켓㈜는 통신판매중개자로서 중고거래마켓 오이마켓의 거래당사자가 아니며, 입점판매자가 등록한 상품정보 및 거래에 대해 책임을 지지 않습니다.
               <!-- If you want to remove this backlink, pls purchase an Attribution-free License @ https://bootstrapious.com/p/obaju-e-commerce-template. Big thanks!-->
             </p>
           </div>
