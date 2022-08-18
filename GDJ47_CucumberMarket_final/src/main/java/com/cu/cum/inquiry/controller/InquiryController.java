@@ -65,7 +65,7 @@ public class InquiryController {
 	public ModelAndView updateInquiry(@PathVariable  int id, ModelAndView mv) {
 		mv.addObject("inq", service.selectInquiry(id));
 		mv.setViewName("inquiry/updateInquiry");
-		System.out.println(mv);
+		//System.out.println(mv);
 		return mv;
 	}
 	
@@ -83,7 +83,7 @@ public class InquiryController {
 		mv.addObject("inq", service.selectInquiry(id));
 		mv.setViewName("inquiry/inquiryView");
 		if(mv!=null) {
-		System.out.println(mv);
+		//System.out.println(mv);
 	}
 		return mv;
 	}
@@ -158,7 +158,7 @@ public class InquiryController {
 		
 		model.addObject("list", list);
 		model.setViewName("inquiry/inquiryList");
-		System.out.println(list);
+		//System.out.println(list);
 		return model;
 	}
 	
@@ -203,7 +203,7 @@ public class InquiryController {
 		//public String deleteInquiry(@RequestParam int inquiryNo, Model m) {
 		
 		inquiry.setWriter((Member)session.getAttribute("loginMember"));
-		System.out.println(inquiry);
+		//System.out.println(inquiry);
 		int inq = service.deleteInquiry(id);
 		if(inq>0) {
 			mv.addObject("msg", "문의글 삭제완료");
@@ -269,7 +269,7 @@ public class InquiryController {
 	public ModelAndView selectReply(@PathVariable  int id, ModelAndView mv) {
 		mv.addObject("inq", service.selectInquiry(id));
 		mv.setViewName("inquiry/updateReply");
-		System.out.println(mv);
+		//System.out.println(mv);
 		return mv;
 	}
 	

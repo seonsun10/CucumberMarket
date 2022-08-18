@@ -46,4 +46,3 @@
 			</c:if>
 	</table>
 </div>
-<div id="pageBar"><c:out value="${pageBar }" escapeXml="false"/></div>
