@@ -113,7 +113,7 @@
                 <h1>${board.boardTitle }</h1>
                 <p class="author-date">By &nbsp
                 <c:if test="${board.userId ne loginMember.userId }">
-                    <a href="${path }/member/otherMember.do?writer=${b.userId }&customer=${loginMember.userId}">${board.userId }</a>&nbsp&nbsp
+                    <a href="${path }/member/otherMember.do?writer=${board.userId }&customer=${loginMember.userId}">${board.userId }</a>&nbsp&nbsp
                  </c:if>
                  <c:if test="${board.userId eq loginMember.userId }">
                     <a href="${path }/member/mypage.do?userId=${loginMember.userId}">${board.userId }</a>&nbsp&nbsp

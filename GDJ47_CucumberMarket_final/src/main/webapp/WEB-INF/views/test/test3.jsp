@@ -175,7 +175,7 @@ const fn_review=()=>{
    	       			proNo:proNo
    	       			 }),
 				headers:{"Content-Type":"application/json"},
-       		 	url: '/testreview',
+       		 	url: '${path}/testreview',
        			type: "POST",
        			
        			
