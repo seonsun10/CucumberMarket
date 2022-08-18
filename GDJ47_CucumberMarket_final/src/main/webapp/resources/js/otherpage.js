@@ -16,7 +16,7 @@ if($("#reviewtag1").click(e=>{
 //다른 사람 상점페이지 상품목록 출력 연결
 $("#protag1").click(e=>{
 	$.ajax({
-		url:"/member/otherpageProduct.do",
+		url:"/GDJ47_CucumberMarket_final/member/otherpageProduct.do",
 		data:{"userId":$("#userIdd").val()},
 		dataType:"html",
 		success:data=>{
@@ -28,7 +28,7 @@ $("#protag1").click(e=>{
 //다른 사람 페이지 후기 목록 출력 연결
 $("#reviewtag1").click(e=>{
 	$.ajax({
-		url:"/member/otherpageReview.do",
+		url:"/GDJ47_CucumberMarket_final/member/otherpageReview.do",
 		data:{"userId":$("#userIdd").val()},
 		dataType:"html",
 		success:data=>{
@@ -39,7 +39,7 @@ $("#reviewtag1").click(e=>{
 
 function fn_ajaxPage1(pageNo){
 	$.ajax({
-		url:"/member/otherpage"+$("#page").val()+".do",
+		url:"/GDJ47_CucumberMarket_final/member/otherpage"+$("#page").val()+".do",
 		data:{"cPage":pageNo,"userId":$("#userIdd").val()},
 		dataType:"html",
 		success:data=>{

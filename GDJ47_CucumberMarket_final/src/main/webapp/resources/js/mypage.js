@@ -51,7 +51,7 @@ $(()=>{
 	//마이페이지 상품목록 출력 연결
 	$("#protag").click(e=>{
 		$.ajax({
-			url:"/member/mypageProduct.do",
+			url:"/GDJ47_CucumberMarket_final/member/mypageProduct.do",
 			data:{"userId":$("#userIdd").val()},
 			dataType:"html",
 			success:data=>{
@@ -64,7 +64,7 @@ $(()=>{
 	//마이페이지 후기 목록 출력 연결
 	$("#reviewtag").click(e=>{
 		$.ajax({
-			url:"/member/mypageReview.do",
+			url:"/GDJ47_CucumberMarket_final/member/mypageReview.do",
 			data:{"userId":$("#userIdd").val()},
 			dataType:"html",
 			success:data=>{
@@ -75,7 +75,7 @@ $(()=>{
 	//마이페이지 찜 목록 출력 연결
 	$("#dibstag").click(e=>{
 		$.ajax({
-			url:"/member/mypageDibs.do",
+			url:"/GDJ47_CucumberMarket_final/member/mypageDibs.do",
 			dataType:"html",
 			data:{"userId":$("#userIdd").val()},
 			success:data=>{
@@ -86,7 +86,7 @@ $(()=>{
 	//마이페이지 신고 목록 출력 연결
 	$("#reporttag").click(e=>{
 		$.ajax({
-			url:"/member/mypageReport.do",
+			url:"/GDJ47_CucumberMarket_final/member/mypageReport.do",
 			dataType:"html",
 			success:data=>{
 				$("#databox").html(data);
@@ -98,7 +98,7 @@ $(()=>{
 	$("#chattag").click(e=>{
 		
 		$.ajax({
-			url: "/member/mypageChat.do",
+			url: "/GDJ47_CucumberMarket_final/member/mypageChat.do",
 			dataType:"html",
 			success:data=>{
 				$("#databox").html(data);
@@ -111,7 +111,7 @@ $(()=>{
 function fn_ajaxPage1(pageNo){
 	const page = $("#page").val();
 	$.ajax({
-		url:"/member/mypage"+$("#page").val()+".do",
+		url:"/GDJ47_CucumberMarket_final/member/mypage"+$("#page").val()+".do",
 		data:{"cPage":pageNo,"userId":$("#userIdd").val()},
 		dataType:"html",
 		success:data=>{
@@ -121,7 +121,7 @@ function fn_ajaxPage1(pageNo){
 };
 function fn_ajaxPage2(pageNo,numPerpage){
 	$.ajax({
-		url:"/member/mypage"+$("#page").val()+".do",
+		url:"/GDJ47_CucumberMarket_final/member/mypage"+$("#page").val()+".do",
 		data:{"cPage":pageNo,"numPerpage":numPerpage,"userId":$("#userIdd").val()},
 		dataType:"html",
 		success:data=>{
@@ -131,7 +131,7 @@ function fn_ajaxPage2(pageNo,numPerpage){
 };
 function fn_ajaxPage5(pageNo){
 	$.ajax({
-		url:"/board/boardlist.do",
+		url:"/GDJ47_CucumberMarket_final/board/boardlist.do",
 		data:{"cPage":pageNo,"userId":$("#userIdd").val()},
 		dataType:"html",
 		success:data=>{
@@ -141,7 +141,7 @@ function fn_ajaxPage5(pageNo){
 };
 function fn_ajaxPage6(pageNo,numPerpage){
 	$.ajax({
-		url:"/board/boardlist.do",
+		url:"/GDJ47_CucumberMarket_final/board/boardlist.do",
 		data:{"cPage":pageNo,"numPerpage":numPerpage,"userId":$("#userIdd").val()},
 		dataType:"html",
 		success:data=>{
