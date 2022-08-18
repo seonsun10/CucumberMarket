@@ -3,8 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-   <button type="button" class="btn btn-primary"><i class="fa fa-search"></i></button>
-    <div id="all">
+   
+    <div id="all" style="height:720px">
       <div id="content">
         <div class="container">
           <div class="row">
@@ -21,7 +21,7 @@
 			  <div class="box">
 			    <h1>Login</h1>
 			    <p class="lead">::로그인::</p>
-			    <p class="text-muted">확인용</p>
+			    <p class="text-muted"></p>
 			    <hr>
 			    <form action="${path}/loginprocess" method="post">
 			      <div class="form-group">
@@ -32,7 +32,7 @@
 			        <label for="password">Password</label>
 			        <input id="password" type="password" name="password" class="form-control">
 			      </div>
-			      <div class="text-center">
+			      <div class="text-center" style="margin-bottom:6px;">
 			        <button type="submit" class="btn btn-primary"><i class="fa fa-sign-in"></i> Log in</button>
 			      </div>
 			    </form>

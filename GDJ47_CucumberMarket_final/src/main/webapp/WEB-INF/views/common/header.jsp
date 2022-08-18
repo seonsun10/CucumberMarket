@@ -71,7 +71,7 @@
           <div class="modal-dialog modal-sm">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Customer login</h5>
+                <h5 class="modal-title">로그인</h5>
                 <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
               </div>
               <div class="modal-body">
@@ -83,7 +83,7 @@
                     <input id="password-modal" type="password" name="password" placeholder="password" class="form-control">
                   </div>
                   <p class="text-center">
-                    <button class="btn btn-primary"><i class="fa fa-sign-in"></i> Log in</button>
+                    <button class="btn btn-primary"><i class="fa fa-sign-in"></i>Log in</button>
                   </p>
                 </form>
                 <p class="text-center text-muted">아직 가입하지 않으셨나요?</p>
@@ -97,7 +97,7 @@
         
       </div>
       <nav class="navbar navbar-expand-lg">
-        <div class="container"><a href="${path}/" class="navbar-brand home"><img src="${path}/resources/img/cucumber.png" style="width:85px;height:75px"alt="Obaju logo" class="d-none d-md-inline-block"><img src="/resources/img/cucumber.png" alt="Obaju logo" class="d-inline-block d-md-none"><span class="sr-only">오이마켓 - go to homepage</span></a>
+        <div class="container"><a href="${path}/" class="navbar-brand home"><img src="${path }/resources/img/cucumber.png" style="width:85px;height:75px"alt="Obaju logo" class="d-none d-md-inline-block"><img src="${path }/resources/img/cucumber.png" alt="Obaju logo" class="d-inline-block d-md-none"><span class="sr-only">::오이마켓::</span></a>
           <div class="navbar-buttons">
             <button type="button" data-toggle="collapse" data-target="#navigation" class="btn btn-outline-secondary navbar-toggler"><span class="sr-only">Toggle navigation</span><i class="fa fa-align-justify"></i></button>
             <button type="button" data-toggle="collapse" data-target="#search" class="btn btn-outline-secondary navbar-toggler"><span class="sr-only">Toggle search</span><i class="fa fa-search"></i></button><a href="basket.html" class="btn btn-outline-secondary navbar-toggler"><i class="fa fa-shopping-cart"></i></a>
