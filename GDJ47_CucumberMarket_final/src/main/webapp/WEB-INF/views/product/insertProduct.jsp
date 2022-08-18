@@ -79,7 +79,7 @@
 						
 						<label for="exampleInputEmail1">상품 가격 (최소금액 1,000원)</label>
 						<input type="number" name="price" class="form-control"
-						placeholder="상품 가격" required min="1000" max="999999999" oninvalid="this.setCustomValidity('상품 가격은 1000원 이상으로 설정되어야 합니다.')"><br>
+						placeholder="상품 가격" id="price" required min="1000" max="999999999"><br>
 						
 						<label for="exampleInputEmail1">상품 상태</label><br>
 						<label class="radio-inline">
@@ -194,6 +194,9 @@ fn_attachFile = {
 	}
 	if(content.length>400){
 		alert('등록할 상품 설명의 최대 글자수가 400을 벗어났습니다. 다시 작성해주세요.');
+	}
+	if(price<1000){
+		alert('상품 가격은 최소 1000원 이상으로 설정해야 합니다.');
 	}
 	return true;
 }

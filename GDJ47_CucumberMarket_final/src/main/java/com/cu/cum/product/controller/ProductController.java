@@ -410,7 +410,7 @@ public class ProductController {
 		Member m = Member.builder().userId(userId).build();
 		//먼저 product를 수정한 다음 
 		Product pp = Product.builder().proNo(no).title(proName).proContent(proContent).price(price).
-				region(region).categoryName(tag).proStatus(proStatus).member(m).enrollDate(new Date()).
+				region(region).categoryName(tag).proStatus(proStatus).solveStatus("y").member(m).enrollDate(new Date()).
 				build();
 				
 		Product product = service.insertProduct(pp);
