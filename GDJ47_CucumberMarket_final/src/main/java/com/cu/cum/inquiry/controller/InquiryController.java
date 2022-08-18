@@ -312,4 +312,10 @@ public class InquiryController {
 		return mv;
 	}
 	
+	
+	@RequestMapping(value="/contactPage", method=RequestMethod.GET)
+	public String contactPage() {
+		
+		return "common/contact";
+	}
 }

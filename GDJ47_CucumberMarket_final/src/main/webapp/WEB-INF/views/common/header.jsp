@@ -52,12 +52,13 @@
             <div class="col-lg-6 text-center text-lg-right">
               <ul class="menu list-inline mb-0">
               	<c:if test="${loginMember.userId eq null}">
-                 <li class="list-inline-item"><a href="#" data-toggle="modal" data-target="#login-modal">Login</a></li>
-                 </c:if>
-                 <li class="list-inline-item"><a href="/logout">Logout</a></li>
-                 
+                 <li class="list-inline-item"><a href="${path}/" data-toggle="modal" data-target="#login-modal">Login</a></li>
+                </c:if>
+                <c:if test="${loginMember.userId ne null}">
+                 <li class="list-inline-item"><a href="${path}/logout">Logout</a></li>
+                </c:if>
                 <li class="list-inline-item"><a href="${pageContext.request.contextPath}/joinForm">Register</a></li>
-                <li class="list-inline-item"><a href="contact.html">Contact</a></li>
+                <li class="list-inline-item"><a href="${pageContext.request.contextPath}/contactPage">Contact</a></li>
                 <li class="list-inline-item"><a href="#">Recently viewed</a></li>
               </ul>
             </div>
@@ -71,7 +72,7 @@
                 <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
               </div>
               <div class="modal-body">
-                <form action="/loginprocess" method="post">
+                <form action="${path}/loginprocess" method="post">
                   <div class="form-group">
                     <input id="email-modal" type="text" name="userId" placeholder="email" class="form-control">
                   </div>
@@ -83,7 +84,7 @@
                   </p>
                 </form>
                 <p class="text-center text-muted">아직 가입하지 않으셨나요?</p>
-                <p class="text-center text-muted"><a href="${path }/joinForm"><strong>Register now</strong></a>! It is easy and done in 1 minute and gives you access to special discounts and much more!</p>
+                <p class="text-center text-muted"><a href="${path}/joinForm"><strong>바로 가입</strong></a>! 1분 안에 간단한 회원가입!!</p>
               </div>
             </div>
           </div>

@@ -140,7 +140,6 @@ public class MemberController {
 	
 	@RequestMapping("/loginpage")
 	public String login() {
-		System.out.println("로그인 과정 거침?");
 		return "member/login";
 	}
 	

@@ -23,7 +23,7 @@
 			    <p class="lead">::로그인::</p>
 			    <p class="text-muted">확인용</p>
 			    <hr>
-			    <form action="/loginprocess" method="post">
+			    <form action="${path}/loginprocess" method="post">
 			      <div class="form-group">
 			        <label for="email">Email</label>
 			        <input id="email" type="text" name="userId" class="form-control">

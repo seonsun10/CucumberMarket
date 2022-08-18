@@ -380,7 +380,8 @@
      	$(e.target).parents("tr").after(tr);
      });
      function recommend(id){
-    		
+    	 	var hostIndex = location.href.indexOf(location.host) + location.host.length;
+    		console.log(location.href.substring(hostIndex,location.href.indexOf('/',hostIndex+1)));
     	 location.assign("${path}/board/boardRecommend.do/"+id);
      }
         </script>
