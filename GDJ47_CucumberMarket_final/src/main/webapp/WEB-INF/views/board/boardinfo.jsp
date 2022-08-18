@@ -113,13 +113,13 @@
                 <h1>${board.boardTitle }</h1>
                 <p class="author-date">By &nbsp
                 <c:if test="${board.userId ne loginMember.userId }">
-                    <a href="${path }/member/otherMember.do?writer=${b.userId }&customer=${loginMember.userId}">${board.userId }</a>&nbsp&nbsp
+                    <a href="${path }/member/otherMember.do?writer=${board.userId }&customer=${loginMember.userId}">${board.userId }</a>&nbsp&nbsp
                  </c:if>
                  <c:if test="${board.userId eq loginMember.userId }">
                     <a href="${path }/member/mypage.do?userId=${loginMember.userId}">${board.userId }</a>&nbsp&nbsp
                  </c:if>
                 
-                ${board.createDate } <a href ="#" id="btn-modal"> &nbsp&nbsp &nbsp&nbsp <i class="bi bi-hand-thumbs-up-fill"></i> :&nbsp ${board.recommendCount }&nbsp 개</a></p>
+                <fmt:formatDate value="${board.createDate }" pattern="yyyy년 MM월 dd일"/> <a href ="#" id="btn-modal"> &nbsp&nbsp &nbsp&nbsp <i class="bi bi-hand-thumbs-up-fill"></i> :&nbsp ${board.recommendCount }&nbsp 개</a></p>
                 <p class="lead"># ${board.boardCategory }</p>
                 <div id="post-content">
      					<p>${board.boardContent }</p>
@@ -191,7 +191,7 @@
 					<tr class="level1">
 				<td>
 					 <sub><p><img src="/resources/img/cucumber.png" alt="" class="img-fluid rounded-circle" width="50" height="50">&nbsp ${bc.boardCommentWriter}</p></sub>
-					<sub class="comment-date">${bc.boardCommentDate }</sub>
+					<sub class="comment-date"> <fmt:formatDate value="${bc.boardCommentDate }" pattern="yyyy년 MM월 dd일"/> </sub>
 					<br>
 					${bc.boardCommentContent }
 				
@@ -216,7 +216,7 @@
 				<td>
 					 
 					<sub><p><img src="/resources/img/cucumber.png" alt="" class="img-fluid rounded-circle" width="50" height="50">&nbsp ${bc.boardCommentWriter}</p></sub>
-					<sub>${bc.boardCommentDate}</sub>
+					<sub> <fmt:formatDate value="${bc.boardCommentDate}" pattern="yyyy년 MM월 dd일"/>  </sub>
 					<br>
 					${bc.boardCommentContent}
 				
