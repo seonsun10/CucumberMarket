@@ -82,7 +82,7 @@ public class ProductController {
 		//파일 업로드 처리하고 db에 insert문처리
 		List<MultipartFile> fileList = mtfRequest.getFiles("image"); //나머지 이미지 3개
 		MultipartFile thumbnail = mtfRequest.getFile("image1"); //썸네일 이미지 1개
-		System.out.println(fileList);
+		//System.out.println(fileList);
 		//System.out.println(upFile);
 		String path = mtfRequest.getServletContext().getRealPath("/resources/upload/product/");
 		File uploadDir = new File(path);
@@ -123,8 +123,8 @@ public class ProductController {
 					if(f!=null) {
 						String originalFilename2 = f.getOriginalFilename();
 						if(originalFilename2!=null) {
-							System.out.println(originalFilename2);
-							System.out.println("아래꺼 : "+originalFilename2.lastIndexOf("."));
+							//System.out.println(originalFilename2);
+							//System.out.println("아래꺼 : "+originalFilename2.lastIndexOf("."));
 							String extt = null;
 							try {
 								extt = originalFilename2.substring(originalFilename2.lastIndexOf("."));
@@ -202,12 +202,12 @@ public class ProductController {
 								@RequestParam String userId,
 								HttpServletRequest mtfRequest,
 								Model m) {
-		System.out.println(proNo);
-		System.out.println(userId);
+		//System.out.println(proNo);
+		//System.out.println(userId);
 		Product p = Product.builder().proNo(proNo).build();
 		List<Files> files = service.selectFiles(p);
 		List<String> filename = new ArrayList();
-		System.out.println("files : "+files);
+		//System.out.println("files : "+files);
 		String path = mtfRequest.getServletContext().getRealPath("/resources/upload/product/");
 		for(int i=0; i<files.size(); i++) {
 			filename.add(files.get(i).getRenameFilename());
@@ -234,7 +234,7 @@ public class ProductController {
 								@RequestParam(defaultValue="1") int cPage,
 								@RequestParam(defaultValue="200") int numPerpage,
 								Model m) throws Exception{
-		System.out.println(tag);
+		//System.out.println(tag);
 		List<Product> products = service.findAllByCategoryName(PageRequest.of((cPage-1)*numPerpage, numPerpage,Sort.by("enrollDate").descending()), tag);
 		List<Long> daylist = new ArrayList();
 		List<Files> tfn = new ArrayList();
@@ -253,7 +253,7 @@ public class ProductController {
 				renames.add(f.getRenameFilename());
 			}
 		}
-		System.out.println("상품 전체 페이지 : "+renames);
+		//System.out.println("상품 전체 페이지 : "+renames);
 		m.addAttribute("renames",renames);
 		m.addAttribute("productCount",service.selectCategoryCount(tag));
 		m.addAttribute("product",products);
@@ -276,7 +276,7 @@ public class ProductController {
 		String name = request.getParameter("name");
 		String proStatus = request.getParameter("proStatus");
 		String region = request.getParameter("region");
-		System.out.println(id+" "+no+" "+tag);
+		//System.out.println(id+" "+no+" "+tag);
 		Member m = Member.builder().userId(id).build();
 		Product p = Product.builder().proNo(no).build();
 		Cookie oldCookie = null;
@@ -307,7 +307,7 @@ public class ProductController {
 	    }
 		//상품상세페이지에 가져갈 상품 가져오기
 		Product result = service.productCheck(no);
-		System.out.println("상품정보 가져온거 : "+result);
+		//System.out.println("상품정보 가져온거 : "+result);
 		List<String> filename = new ArrayList();
 		List<String> filesname = new ArrayList();
 		for(int i=0; i<result.getFiles().size(); i++) {
@@ -323,8 +323,8 @@ public class ProductController {
 			}
 			
 		}
-		System.out.println("썸네일 이미지 : "+filename);
-		System.out.println("나머지 이미지 : "+filesname);
+		//System.out.println("썸네일 이미지 : "+filename);
+		//System.out.println("나머지 이미지 : "+filesname);
 		
 		//상품상세페이지에서 관심상품인지 아닌지 체크하기
 		int count = 0;
@@ -332,7 +332,7 @@ public class ProductController {
 		if(wl!=null) {
 			count = 1;
 		}
-		System.out.println("관심상품 등록되어있으면 1 없으면 0 출력 : "+count);
+		//System.out.println("관심상품 등록되어있으면 1 없으면 0 출력 : "+count);
 		
 		//관련상품 리스트 출력
 		Map param = new HashMap();
@@ -352,7 +352,7 @@ public class ProductController {
 		for(int i=0; i<relFiles.size(); i++) {
 			relFilename.add(relFiles.get(i).getRenameFilename());
 		}
-		System.out.println("관련상품 이미지 파일 : "+relFilename);
+		//System.out.println("관련상품 이미지 파일 : "+relFilename);
 		
 		
 		
@@ -375,11 +375,11 @@ public class ProductController {
 	@RequestMapping("/product/updateProductStart.do")
 	public String updateProductStart(@RequestParam("userId") String userId,
 			@RequestParam("proNo") int no,Model m) {
-		System.out.println(userId+" "+no);
+		//System.out.println(userId+" "+no);
 		
 		//먼저 no에 해당하는 상품를 찾아와야함
 		Product p = service.selectProduct(no);
-		System.out.println(p);
+		//System.out.println(p);
 
 		m.addAttribute("title", p.getTitle());
 		m.addAttribute("content",p.getProContent());
@@ -404,7 +404,7 @@ public class ProductController {
 		List<String> beforefilename = new ArrayList();
 		String path = mtfRequest.getServletContext().getRealPath("/resources/upload/product/");
 		
-		System.out.println("db에 있는 수정하기 전 파일에 해당하는 이미지네임 :"+beforefilename);
+		//System.out.println("db에 있는 수정하기 전 파일에 해당하는 이미지네임 :"+beforefilename);
 		
 		
 		Member m = Member.builder().userId(userId).build();
@@ -414,7 +414,7 @@ public class ProductController {
 				build();
 				
 		Product product = service.insertProduct(pp);
-		System.out.println("변경된 후 : "+product);
+		//System.out.println("변경된 후 : "+product);
 		//
 		
 		
@@ -548,7 +548,7 @@ public class ProductController {
 	@RequestMapping("/product/searchProduct.do")
 	public String searchProduct(@RequestParam String keyword,
 								Model m){
-		System.out.println(keyword);
+		//System.out.println(keyword);
 		List<Product> result = service.searchProduct(keyword);
 		List<String> renames = new ArrayList();
 		List<Files> files = new ArrayList();

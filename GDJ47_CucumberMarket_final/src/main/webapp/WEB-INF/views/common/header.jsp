@@ -54,9 +54,7 @@
               	<c:if test="${loginMember.userId eq null}">
                  <li class="list-inline-item"><a href="#" data-toggle="modal" data-target="#login-modal">Login</a></li>
                  </c:if>
-                 <li class="list-inline-item"><a href="/logout">Logout</a></li>
-                 
-                <li class="list-inline-item"><a href="${pageContext.request.contextPath}/joinForm">Register</a></li>
+                <li class="list-inline-item"><a href="${pageContext.request.contextPath}/joinForm">회원가입</a></li>
                 <li class="list-inline-item"><a href="contact.html">Contact</a></li>
                 <li class="list-inline-item"><a href="#">Recently viewed</a></li>
               </ul>

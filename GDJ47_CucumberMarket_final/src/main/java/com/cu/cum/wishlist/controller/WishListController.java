@@ -61,19 +61,19 @@ public class WishListController {
 	public String insertWishList(HttpServletRequest request,Model model) {
 		String id = request.getParameter("id");
 		int no = Integer.parseInt(request.getParameter("no"));
-		System.out.println(id);
-		System.out.println(no);
+		//System.out.println(id);
+		//System.out.println(no);
 		String tag = request.getParameter("tag");
 		String name = request.getParameter("name");
 		String proStatus = request.getParameter("proStatus");
 		String region = request.getParameter("region");
-		System.out.println(tag);
+		//System.out.println(tag);
 		Product p = Product.builder().proNo(no).build();
 		Member m = Member.builder().userId(id).build();
 		
 		//상품 부분
 		Product product = pservice.productCheck(no);
-		System.out.println("상품정보 가져온거 : "+product);
+		//System.out.println("상품정보 가져온거 : "+product);
 		List<String> filename = new ArrayList();
 		for(int i=0; i<product.getFiles().size(); i++) {
 			filename.add(product.getFiles().get(i).getRenameFilename());
@@ -96,12 +96,12 @@ public class WishListController {
 		for(int i=0; i<relFiles.size(); i++) {
 			relFilename.add(relFiles.get(i).getRenameFilename());
 		}
-		System.out.println("관련상품 이미지 파일 : "+relFilename);
+		//System.out.println("관련상품 이미지 파일 : "+relFilename);
 		
 		//위시리스트 부분
 		WishList wl = WishList.builder().member(m).product(p).build();
 		int checkresult = service.checkidWishlist(session,wl);
-		System.out.println(wl);
+		//System.out.println(wl);
 		int count;
 		
 		if(checkresult>0) {
@@ -132,13 +132,13 @@ public class WishListController {
 		String tag = request.getParameter("tag");
 		String proStatus = request.getParameter("proStatus");
 		String region = request.getParameter("region");
-		System.out.println(tag);
-		System.out.println(id);
-		System.out.println(no);
+		//System.out.println(tag);
+		//System.out.println(id);
+		//System.out.println(no);
 		String name = request.getParameter("name");
 		//상품가져오기
 		Product product = pservice.productCheck(no);
-		System.out.println("상품정보 가져온거 : "+product);
+		//System.out.println("상품정보 가져온거 : "+product);
 		List<String> filename = new ArrayList();
 		for(int i=0; i<product.getFiles().size(); i++) {
 			filename.add(product.getFiles().get(i).getRenameFilename());
@@ -163,7 +163,7 @@ public class WishListController {
 		for(int i=0; i<relFiles.size(); i++) {
 			relFilename.add(relFiles.get(i).getRenameFilename());
 		}
-		System.out.println("관련상품 이미지 파일 : "+relFilename);
+		//System.out.println("관련상품 이미지 파일 : "+relFilename);
 		
 		
 		//관심상품 삭제 부분
@@ -215,7 +215,7 @@ public class WishListController {
 		Product p = Product.builder().proNo(no).build();
 		Member m = Member.builder().userId(id).build();
 		int result = service.deleteWishlist(id, no);
-		System.out.println("어떻게 찍히나 : "+result);
+		//System.out.println("어떻게 찍히나 : "+result);
 		if(result>0) {
 			model.addAttribute("msg","관심 상품 해제가 완료되었습니다.");
 			model.addAttribute("loc", "member/mypage.do");
