@@ -134,7 +134,7 @@
                 
                   &nbsp <a href="${path }/board/boardlist.do/${b.boardCategory eq '동네 분실/실종센터'?'실종센터':b.boardCategory}">#${b.boardCategory }</a>&nbsp&nbsp  <a> <i class="bi bi-hand-thumbs-up-fill"></i> : ${b.recommendCount }&nbsp 개</a></p>
                 <hr>
-                <p class="date-comments"><a href="${path }/board/boardinfo.do/${b.boardId}"><i class="fa fa-calendar-o"></i> ${b.createDate }</a><a href="${path }/board/boardinfo.do/${b.boardId}"><i class="fa fa-comment-o"></i>  Comments &nbsp [ ${b.count } ]</a></p>
+                <p class="date-comments"><a href="${path }/board/boardinfo.do/${b.boardId}"><i class="fa fa-calendar-o"></i> <fmt:formatDate value="${b.createDate }" pattern="yyyy년 MM월 dd일"/>  </a><a href="${path }/board/boardinfo.do/${b.boardId}"><i class="fa fa-comment-o"></i>  Comments &nbsp [ ${b.count } ]</a></p>
                 
                 <p class="intro">${b.boardContent }</p>
                 <p class="read-more"><button class="btn btn-primary" onclick="recommend(${b.boardId});"><i class="bi bi-hand-thumbs-up-fill"></i>&nbsp추천하기</button></p>
