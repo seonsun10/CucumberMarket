@@ -31,7 +31,7 @@
                   <a href="${path }/member/wishList.do?userId=${loginMember.userId}" class="nav-link"><i class="fa fa-heart"></i>찜 목록</a>
                   <a href="${path }/member/myAccount.do" class="nav-link"><i class="fa fa-user"></i>내 정보 수정</a>
                   <a href="${path }/product/insertProductStart.do" class="nav-link active" style="margin-left:2px;"><i class="fa-solid fa-hand-holding-dollar" style="margin-right:5px;"></i>판매 하기</a>
-                  <a href="/logout" class="nav-link"><i class="fa fa-sign-out"></i>로그아웃</a>
+                  <a href="${path }/logout" class="nav-link"><i class="fa fa-sign-out"></i>로그아웃</a>
                   </ul>
                 </div>
 		
