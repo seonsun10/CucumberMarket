@@ -150,9 +150,10 @@ public class AlertControllerImpl implements AlertController{
 	public void saveNotify(@RequestParam Map<String,String> param) throws Exception {
 		Alert vo = new Alert();
 		vo.setN_target(param.get("target"));
-		vo.setN_content(param.get("content"));
+		vo.setN_content(param.get("title"));
 		vo.setN_type(param.get("type"));
 		vo.setN_url(param.get("url"));
+		
 		service.insertNotify(vo);
 	}
 	
