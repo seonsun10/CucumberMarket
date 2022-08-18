@@ -49,6 +49,8 @@
 ![chatting_view](https://user-images.githubusercontent.com/102929905/184778847-5d11dd45-4cf2-4f10-a75b-58a1faf5bbc7.png)
 
 ### 상품
+![카테고리별 상품](https://user-images.githubusercontent.com/107177104/185075463-34070b72-9ad1-4104-9274-11f2672c4028.png)
+
 
 ### 기타
 

@@ -269,7 +269,7 @@
         console.log(snsTitle);
         if( sns == 'facebook' ) {
             var url = "http://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(thisUrl);
-            window.open(url, "", "width=500, height=500");
+            window.open(url, "", "width=500, height=700");
         }
         else if( sns == 'twitter' ) {
             var url = "http://twitter.com/share?url="+encodeURIComponent(thisUrl)+"&text="+encodeURIComponent(snsTitle);
@@ -277,7 +277,7 @@
         }
         else if( sns == 'band' ) {
             var url = "http://www.band.us/plugin/share?body="+encodeURIComponent(snsTitle)+"&route="+encodeURIComponent(thisUrl);
-            window.open(url, "shareBand", "width=500, height=500, resizable=yes");
+            window.open(url, "shareBand", "width=500, height=800, resizable=yes");
         }
         else if( sns == 'kakao' ) {
             // 사용할 앱의 JavaScript 키 설정

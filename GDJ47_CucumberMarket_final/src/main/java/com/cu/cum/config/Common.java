@@ -10,30 +10,8 @@ import com.cu.cum.alert.model.service.CommonService;
 
 public class Common {
 	
-	// 로그인 체크 메서드, dest = 목적지 view
-	public static String checkLoginDestinationView(String dest, HttpServletRequest request) {
-		// 세션체크
-		String returnView = "alert/alert";	// 로그인 페이지
-		HttpSession session = request.getSession(false);
-		// 세션 멤버정보, 로그인상태 체크
-		if(session!=null) {
-			if(session.getAttribute("userid")!=null){
-				returnView = dest;				// 목적지 view로
-			}
-		}
-		return returnView;
-	}
-	// 로그인 체크 메서드, 로그인중이면 true 아니면 false 리턴
-	public static boolean checkLoginStatus(HttpServletRequest request) {
-		boolean result = false;
-		HttpSession session = request.getSession(false);
-		if(session!=null) {
-			if(session.getAttribute("userid")!=null){
-				result = true;
-			}
-		}
-		return result;
-	}
+	
+	
 	
 	// 천단위 컴마 찍기 
 	 public static String toNumFormat(String num) {
