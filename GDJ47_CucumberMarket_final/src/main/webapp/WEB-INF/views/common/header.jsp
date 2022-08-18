@@ -385,54 +385,42 @@
 
 	
    
-  
-    //채팅 메시지 눌럿을때
-     	
-			// 웹소켓 연결
-	
-		// 데이터를 전달 받았을때 
+
+
+	// 알림 카운트 받아오기
+	 
+	$.ajax({
+       type: "post",
+       async: "true",
+       dataType: "text",
+       data: {
+    	   userId: '${loginMember.userId}' //data로 넘겨주기
+       },
+       url: "${path }/member/selectNewNoticeCnt.do",
+       success: function (data, textStatus) {
+    	   if(data!='0'){
+       			$("#newNoticeCnt").text(data);
+    	   }
+       }
+});
+
+	// 채팅 카운트 받아오기
+	$.ajax({
+       type: "post",
+       async: "true",
+       dataType: "text",
+       data: {
+    	   userId: '${loginMember.userId}' //data로 넘겨주기
+       },
+       url: "${path }/member/selectNewChatCnt.do",
+       success: function (data, textStatus) {
+    	   if(data!='0'){
+       			$("#newChatCnt").text(data);
+    	   }
+       }
 		
-		//채팅 메시지 눌럿을때
-		
-		
-		
-       	//setinterval
-       	// 채팅 카운트 받아오기
-       	function chatCall(){
-	   		$.ajax({
-	               type: "post",
-	               async: "true",
-	               dataType: "text",
-	               data: {
-	            	   userId: '${loginMember.userId}' //data로 넘겨주기
-	               },
-	               url: "${path }/member/selectNewChatCnt.do",
-	               success: function (data, textStatus) {
-	            	   if(data!='0'){
-			       			$("#newChatCnt").text(data);
-	            	   }
-	               }
-	   			
-			});
-		}
-		
-   		// 알림 카운트 받아오기
-   		function alertCall(){
-   	   		$.ajax({
-   	               type: "post",
-   	               async: "true",
-   	               dataType: "text",
-   	               data: {
-   	            	   userId: '${loginMember.userId}' //data로 넘겨주기
-   	               },
-   	               url: "${path }/member/selectNewNoticeCnt.do",
-   	               success: function (data, textStatus) {
-   	            	   if(data!='0'){
-   			       			$("#newNoticeCnt").text(data);
-   	            	   }
-   	               }
-   			});
-   		}
+});
+
    	
    	// 실시간 알림 받았을 시 ing
 	function onMessage(evt){

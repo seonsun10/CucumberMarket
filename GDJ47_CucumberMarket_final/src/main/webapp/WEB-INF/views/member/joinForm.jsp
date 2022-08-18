@@ -24,17 +24,17 @@
                 <p>중고 거래를 통해 돈도 벌고, 차지하던 공간의 확보를 통해 쾌적할 삶을 즐기세요!</p>
                 <p class="text-muted">문의사항은 <a href="contact.html">contact us</a> 로 부탁드려요, 가능한 빠르게 답변드리도록 하겠습니다!</p>
                 <hr>
-                <form action="/join" method="post">
+                <form action="/join" method="post" onsubmit="return join()">
                   <div class="form-group">
                     <label for="email">이메일 - ID로 사용됩니다</label>
-                    <input id="userId" type="text" name="userId" class="form-control" placeholder="example@cu.com" required oninput = "checkId()">
+                    <input id="userId" type="text" name="userId" class="form-control" placeholder="example@cu.com" required oninput = "checkId()" onchange="validEmail(this)">
 					<d id="idAvailable" class="valid-feedback" style="display: none;"></d>
 					<d id="idNotAvailable" class="invalid-feedback" style="display: none;"></d>
                     <div class="input-group-addon">
 						<button type="button" class="btn btn-primary" id="mail-Check-Btn">본인인증</button>
 					</div>
 					<div class="mail-check-box">
-						<input class="form-control mail-check-input" placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" maxlength="6">
+						<input class="form-control mail-check-input" placeholder="인증번호 6자리를 입력해주세요!" required disabled="disabled" maxlength="6">
 					</div>
 					<span id="mail-check-warn"></span>
                   </div>
@@ -67,6 +67,22 @@
     </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 <script>
+	//이메일 정규식 입력 확인
+	function validEmail(obj){
+	    if(validEmailCheck(obj) == false){
+	        alert('올바른 이메일 주소를 입력해주세요.')
+	        obj.value='';
+	        obj.focus();
+	        return false;
+	    }
+	}
+	//이메일 정규식
+	function validEmailCheck(obj){
+	    var pattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	    return (obj.value.match(pattern) != null)
+	}
+
+
 	//이메일 중복확인
 	function checkId(){
 	    var userId = $('#userId').val(); //id값이 "userid"인 입력란의 값을 저장
@@ -85,6 +101,7 @@
 		    	// 성공 시 실패 메시지 hide, 성공 메시지 show
 		        $('#idNotAvailable').hide();
 		        $('#idAvailable').show().text(result).append($('<br />'));
+		        
 		    }, error: function(error) {
 		    	// 실패 시 실패 메시지 show, 성공 메시지 hide
 		        $('#idAvailable').hide();
@@ -92,6 +109,7 @@
 		    }
 		});
 	}
+	
 	
 	var code = "";
 	$('#mail-Check-Btn').click(function() {
@@ -121,6 +139,7 @@
 			$resultMsg.css('color','green');
 			$('#mail-Check-Btn').attr('disabled',true);
 			$('#userId').attr('readonly',true);
+
 		}else{
 			$resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요!.');
 			$resultMsg.css('color','red');
@@ -137,6 +156,13 @@
 	    );
 	}
 
-	
+	/* function join(){
+		const resultMsg = $('#mail-check-warn').val();
+		if(resultMsg=='인증번호가 일치합니다.'){
+			return true;
+		}
+		alert('이메일 인증을 완료해야 가입이됩니다.');
+		return false;
+	} */
 </script>
     

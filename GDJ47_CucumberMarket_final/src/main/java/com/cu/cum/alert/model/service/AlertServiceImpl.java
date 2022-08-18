@@ -30,8 +30,8 @@ public class AlertServiceImpl implements AlertService {
 		return dao.selectNewNotifyCnt(userid);
 	}
 	@Override
-	public int selectnewChatCnt(String userid) {
-		return dao.selectNewChatCnt(userid);
+	public int selectnewChatCnt(String userId) {
+		return dao.selectNewChatCnt(userId);
 	}
 
 	@Override
