@@ -37,4 +37,8 @@
 	<select id="mypageReportCount" resultType="_int">
 		SELECT COUNT(*) FROM REPORT WHERE USERID=#{userId}
 	</select>
+	
+	<select id="reportCount" resultType="_int">
+		SELECT COUNT(*) FROM REPORT WHERE target_Id=#{userId}
+	</select>
 </mapper>

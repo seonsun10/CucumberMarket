@@ -68,6 +68,7 @@ public class ReportController {
 		Report r = Report.builder().userId(loginMember).repType(repType).repTitle(repTitle).repContent(repContent).targetId(targetId).build();
 		System.out.println(r);
 		Report rpt = service.insertReport(r);
+		//int rptCount = service.reportCount();
 		if(!(rpt.equals(null))) {
 			mv.addObject("msg", "신고글 작성완료");
 			mv.addObject("loc","/member/mypage");
@@ -75,7 +76,7 @@ public class ReportController {
 		}else {
 			mv.addObject("msg", "신고글 작성실패");
 			mv.addObject("loc","report/insertReport.do");
-		}
+		} 
 		mv.setViewName("common/msgBasic");
 		return mv;
 	}
@@ -133,6 +134,8 @@ public class ReportController {
 		// System.out.println(report);
 		return model;
 	}
+	
+	
 	
 	
 

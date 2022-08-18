@@ -43,5 +43,7 @@ public interface ReportService {
 	// 마이페이지 신고글 개수 
 	int mypageReportCount(Report r);
 	
+	// 
+	int reportCount(String writer);
 	
 }
