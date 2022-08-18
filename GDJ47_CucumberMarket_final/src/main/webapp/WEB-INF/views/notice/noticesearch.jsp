@@ -41,7 +41,7 @@
 							</div>
 						</div>
               <!-- *** PAGES MENU END ***-->
-						<div class="banner"><a href="#"><img src="/resources/img/cucumber.png" alt="" class="img-fluid"></a></div>
+						<div class="banner"><a href="#"><img src="${pageContext.request.contextPath }/resources/img/cucumber.png" alt="" class="img-fluid"></a></div>
 					</div>
             
 					<div class="col-lg-9">
@@ -137,7 +137,7 @@
 			// 동적 form 생성
 			let frm = document.createElement('form');
 			frm.name = "frmQnA";				
-			frm.action = "${contextPath}/admin/"+dest+".do";
+			frm.action = "${path}/admin/"+dest+".do";
 			// form에 연결
 			let input = document.createElement('input');
 			input.setAttribute("type","hidden");

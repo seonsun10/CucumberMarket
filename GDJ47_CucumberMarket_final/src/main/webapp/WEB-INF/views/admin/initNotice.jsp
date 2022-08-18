@@ -37,7 +37,7 @@
 								</ul>
 							</div>
 						</div>
-					<div class="banner"><a href="#"><img src="/resources/img/cucumber.png" alt="" class="img-fluid"></a></div>
+					<div class="banner"><a href="#"><img src="${pageContext.request.contextPath }/resources/img/cucumber.png" alt="" class="img-fluid"></a></div>
 					</div>
 
 
@@ -92,7 +92,7 @@
 			
 			
 			let frmQnA = document.frmQnA;
-			frmQnA.action = "/admin/updateNotice.do";
+			frmQnA.action = "${path}/admin/updateNotice.do";
 			frmQnA.submit();
 		});
 	
@@ -102,7 +102,7 @@
 	$("#insertNotice").click(function(){
 			
 			let frmQnA = document.frmQnA;
-			frmQnA.action = "/admin/insertNotice.do";
+			frmQnA.action = "${path}/admin/insertNotice.do";
 			frmQnA.submit();
 			
 			  
@@ -115,7 +115,7 @@
 			  $.ajax({
 				  
 				  	type: 'post',
-			        url: '/member/saveNotify.do',
+			        url: '${path}/member/saveNotify.do',
 			        dataType: 'text',
 			        data: {
 			            target: target,
