@@ -362,36 +362,6 @@
 
  	});
      
-    
-
-    const openchat=()=>{
-    	console.log('${result.member.userId}');
-    	console.log('${loginMember.userId}');
-    	console.log('${result.proNo}');
-			$.ajax({
-				
-				data:JSON.stringify({userId:'${result.member.userId}',
-  	       			otherId:'${loginMember.userId}',
-  	       			proNo:${result.proNo}
-  	       			 }),
-				headers:{"Content-Type":"application/json"},
-      		 	url: '${path}/chatingRoom',
-      			type: "POST",
-      			
-      			
-      		
-      		 success:data=> {
-      			 console.log(data.roomId);
-      			 if(data.roomId!=null){
-      			open("${path}/testchat.do/"+data.roomId,"_blank","width=590,height=600");
-      			 }else{
-      				 alert("본인 상품에는 채팅을 하실 수 없습니다.")
-      			 }
-      			
-      			
-      		 }
-      	 }); 
-		};
     </script>
     <script src="${path }/resources/js/category.js"></script>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
