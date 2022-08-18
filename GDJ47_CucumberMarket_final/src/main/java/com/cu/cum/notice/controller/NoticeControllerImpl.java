@@ -33,7 +33,7 @@ public class NoticeControllerImpl implements NoticeController  {
 	// ADMIN 영역
 	// 공지사항 수정, 작성 폼 연결
 	@Override
-	@RequestMapping(value="/admin/initNotice.do", method= {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/GDJ47_CucumberMarket_final/admin/initNotice.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView initNoticeForm(HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String n_id = request.getParameter("n_id");
@@ -50,7 +50,7 @@ public class NoticeControllerImpl implements NoticeController  {
 
 	// 공지사항 작성
 	@Override
-	@RequestMapping(value="/admin/insertNotice.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/GDJ47_CucumberMarket_final/admin/insertNotice.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String insertNotice(@RequestParam Map<String, String> param, HttpServletRequest request) throws Exception {
 		Notice vo = new Notice(param.get("n_title"), param.get("n_content"));
 		service.insertNotice(vo);
@@ -59,7 +59,7 @@ public class NoticeControllerImpl implements NoticeController  {
 
 	// 공지사항 수정
 	@Override
-	@RequestMapping(value="/admin/updateNotice.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/GDJ47_CucumberMarket_final/admin/updateNotice.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String updateNotice(@RequestParam Map<String, String> param, HttpServletRequest request) throws Exception {
 		Notice vo = new Notice(param.get("n_id"), param.get("n_title"), param.get("n_content"));
 		service.updateNoticeById(vo);
@@ -68,7 +68,7 @@ public class NoticeControllerImpl implements NoticeController  {
 
 	// 공지사항 삭제
 	@Override
-	@RequestMapping(value="/admin/deleteNotice.do", method = {RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value="/GDJ47_CucumberMarket_final/admin/deleteNotice.do", method = {RequestMethod.POST, RequestMethod.GET})
 	public String deleteNotice(HttpServletRequest request) throws Exception {
 		String n_id = request.getParameter("n_id");
 		if(n_id != null) {
