@@ -32,7 +32,7 @@ if($("#pchat").click(e=>{
 			$("#gchat").click(e=>{
 				
 				$.ajax({
-					url:"/chatlist/"+'${loginMember.userId}',
+					url:"${path}/chatlist/"+'${loginMember.userId}',
 					dataType:"html",
 					success:data=>{
 						$("#databox2").html(data);
@@ -43,7 +43,7 @@ if($("#pchat").click(e=>{
 			$("#pchat").click(e=>{
 				
 				$.ajax({
-					url:"/chatlist2/"+'${loginMember.userId}',
+					url:"${path}/chatlist2/"+'${loginMember.userId}',
 					dataType:"html",
 					success:data=>{
 						$("#databox2").html(data);
