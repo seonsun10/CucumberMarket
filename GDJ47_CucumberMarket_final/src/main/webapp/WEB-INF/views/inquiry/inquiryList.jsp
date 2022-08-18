@@ -109,7 +109,7 @@
 		                          		<td><c:out value="${i.inquiryType}"/></td>
 		                          		<td colspan=1>
 		                          			<%-- <a href="${pageContext.request.contextPath }/inquiryView"> --%>
-		                          				<img src="/resources/img/replyLogo.png" style="width:50px; height:20px; margin : 0;" class="img-fluid">
+		                          				<img src="${path }/resources/img/replyLogo.png" style="width:50px; height:20px; margin : 0;" class="img-fluid">
 		                          			<a href="${pageContext.request.contextPath }/replyView/${i.inquiryNo}">
 												<c:out value="${i.reInquiry.replyinquiryTitle}"/>
 											</a>
