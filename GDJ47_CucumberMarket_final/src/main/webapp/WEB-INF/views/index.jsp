@@ -93,7 +93,7 @@ div#pro-date{
           <div class="row">
             <div class="col-md-12">
               <div id="main-slider" class="owl-carousel owl-theme">
-                <div class="item" ><img src="resources/img/cucumber-banner.jpg" alt="" class="img-fluid"></div>
+                <div class="item" ><img src="${path }/resources/img/cucumber-banner.jpg" alt="" class="img-fluid"></div>
                 <!-- <div class="item"><img src="resources/img/cucumber.png" alt="" class="img-fluid"></div>
                 <div class="item"><img src="resources/img/cucumber.png" alt="" class="img-fluid"></div>
                 <div class="item"><img src="resources/img/cucumber.png" alt="" class="img-fluid"></div> -->
