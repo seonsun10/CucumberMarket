@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+ <c:set var="path" value="${pageContext.request.contextPath}"/>
 <html>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -204,14 +205,14 @@ $(document).ready(function(){
 	
 	 
 
-    var sockJs = new SockJS("${path}/ws/chat");
+    var sockJs = new SockJS("/GDJ47_CucumberMarket_final/ws/chat");
     //1. SockJS를 내부에 들고있는 stomp를 내어줌
     var stomp = Stomp.over(sockJs);
 
     //2. connection이 맺어지면 실행
     stomp.connect({}, function (){
        console.log("STOMP Connection");
-       stomp.subscribe("${path}/sub/chat/room/"+roomid, function (chat) {
+       stomp.subscribe("/sub/chat/room/"+roomid, function (chat) {
            var content = JSON.parse(chat.body);
 		   var message = content.massage;
            var writer = content.userid;
@@ -241,7 +242,7 @@ $(document).ready(function(){
             if(msg.value.length!=0){
             	
             	 $('#chatLog').scrollTop($('#chatLog')[0].scrollHeight);
-            	 stomp.send('${path}/pub/chat/message', {}, JSON.stringify({roomId: '${room.roomId}', massage: msg.value, userid: '${loginMember.userId}'}));
+            	 stomp.send('/pub/chat/message', {}, JSON.stringify({roomId: '${room.roomId}', massage: msg.value, userid: '${loginMember.userId}'}));
             	 
             	 
             		
@@ -263,7 +264,7 @@ $(document).ready(function(){
             
             if(msg.value.length!=0){
             	
-            	 stomp.send('${path}/pub/chat/message', {}, JSON.stringify({roomId: '${room.roomId}', massage: msg.value, userid: '${loginMember.userId}'}));
+            	 stomp.send('/pub/chat/message', {}, JSON.stringify({roomId: '${room.roomId}', massage: msg.value, userid: '${loginMember.userId}'}));
             	 
                  msg.value = '';
             	
@@ -291,7 +292,7 @@ $(document).ready(function(){
                 massage: messageContent,
                 roodId: '${room.roomId}'
             };
-            stomp.send("${path}/pub/chat/message", {}, JSON.stringify(MessageContent));
+            stomp.send("/pub/chat/message", {}, JSON.stringify(MessageContent));
             
            
             msg = '';

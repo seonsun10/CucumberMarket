@@ -31,7 +31,7 @@
                   <a href="${path }/member/wishList.do?userId=${loginMember.userId}" class="nav-link"><i class="fa fa-heart"></i>찜 목록</a>
                   <a href="${path }/member/myAccount.do" class="nav-link"><i class="fa fa-user"></i>내 정보 수정</a>
                   <a href="${path }/product/insertProductStart.do" class="nav-link active" style="margin-left:2px;"><i class="fa-solid fa-hand-holding-dollar" style="margin-right:5px;"></i>판매 하기</a>
-                  <a href="/logout" class="nav-link"><i class="fa fa-sign-out"></i>로그아웃</a>
+                  <a href="${path }/logout" class="nav-link"><i class="fa fa-sign-out"></i>로그아웃</a>
                   </ul>
                 </div>
 		
@@ -79,7 +79,7 @@
 						
 						<label for="exampleInputEmail1">상품 가격 (최소금액 1,000원)</label>
 						<input type="number" name="price" class="form-control"
-						placeholder="상품 가격" required" min="1000" max="999999999" oninvalid="this.setCustomValidity('상품 가격은 1000원 이상으로 설정되어야 합니다.')"><br>
+						placeholder="상품 가격" id="price" required min="1000" max="999999999"><br>
 						
 						<label for="exampleInputEmail1">상품 상태</label><br>
 						<label class="radio-inline">
@@ -194,6 +194,9 @@ fn_attachFile = {
 	}
 	if(content.length>400){
 		alert('등록할 상품 설명의 최대 글자수가 400을 벗어났습니다. 다시 작성해주세요.');
+	}
+	if(price<1000){
+		alert('상품 가격은 최소 1000원 이상으로 설정해야 합니다.');
 	}
 	return true;
 }

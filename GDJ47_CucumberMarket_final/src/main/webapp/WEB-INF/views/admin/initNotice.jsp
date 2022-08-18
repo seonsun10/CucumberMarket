@@ -37,7 +37,7 @@
 								</ul>
 							</div>
 						</div>
-					<div class="banner"><a href="#"><img src="/resources/img/cucumber.png" alt="" class="img-fluid"></a></div>
+					<div class="banner"><a href="#"><img src="${pageContext.request.contextPath }/resources/img/cucumber.png" alt="" class="img-fluid"></a></div>
 					</div>
 
 
@@ -83,22 +83,53 @@
 	
 	$(document).ready(function(){
 		$("#n_content").val('${article.n_content}');
+
 	});
 	
-		// 수정
+	
+	// 수정
 		$("#updateNotice").click(function(){
 			
 			
 			let frmQnA = document.frmQnA;
-			frmQnA.action = "${contextPath}/admin/updateNotice.do";
+			frmQnA.action = "${path}/admin/updateNotice.do";
 			frmQnA.submit();
 		});
-		
-		// 작성
-		$("#insertNotice").click(function(){
+	
+	
+	// 작성
+	
+	$("#insertNotice").click(function(){
+			
 			let frmQnA = document.frmQnA;
-			frmQnA.action = "${contextPath}/admin/insertNotice.do";
+			frmQnA.action = "${path}/admin/insertNotice.do";
 			frmQnA.submit();
-		});
+			
+			  
+			  var type = '70';
+			  var target = 'js@js'; //모든유저들한테
+			  var content = ("#n_title").html();
+			  var url = '${path}/member/notify.do';
+			  
+			  
+			  $.ajax({
+				  
+				  	type: 'post',
+			        url: '${path}/member/saveNotify.do',
+			        dataType: 'text',
+			        data: {
+			            target: target,
+			            content: content,
+			            type: type,
+			            url: url
+			           
+			        }
+			      
+			        
+			        
+			  });
+		
+	});
+	
 		
 </script>
