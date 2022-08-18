@@ -54,7 +54,7 @@ public class NoticeControllerImpl implements NoticeController  {
 	public String insertNotice(@RequestParam Map<String, String> param, HttpServletRequest request) throws Exception {
 		Notice vo = new Notice(param.get("n_title"), param.get("n_content"));
 		service.insertNotice(vo);
-		return "redirect:/admin/searchNotice.do";
+		return "redirect:/GDJ47_CucumberMarket_final/admin/searchNotice.do";
 	}
 
 	// 공지사항 수정
@@ -63,7 +63,7 @@ public class NoticeControllerImpl implements NoticeController  {
 	public String updateNotice(@RequestParam Map<String, String> param, HttpServletRequest request) throws Exception {
 		Notice vo = new Notice(param.get("n_id"), param.get("n_title"), param.get("n_content"));
 		service.updateNoticeById(vo);
-		return "redirect:/admin/searchNotice.do";
+		return "redirect:/GDJ47_CucumberMarket_final/admin/searchNotice.do";
 	}
 
 	// 공지사항 삭제
@@ -74,7 +74,7 @@ public class NoticeControllerImpl implements NoticeController  {
 		if(n_id != null) {
 			service.deleteNoticeById(n_id);
 		}
-		return "redirect:/admin/searchNotice.do";
+		return "redirect:/GDJ47_CucumberMarket_final/admin/searchNotice.do";
 	}
 
 	// 어드민 - 공지사항 조회
