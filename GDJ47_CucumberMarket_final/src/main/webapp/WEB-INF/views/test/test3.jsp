@@ -204,14 +204,14 @@ $(document).ready(function(){
 	
 	 
 
-    var sockJs = new SockJS("${path}/ws/chat");
+    var sockJs = new SockJS("${path}/GDJ47_CucumberMarket_final/ws/chat");
     //1. SockJS를 내부에 들고있는 stomp를 내어줌
     var stomp = Stomp.over(sockJs);
 
     //2. connection이 맺어지면 실행
     stomp.connect({}, function (){
        console.log("STOMP Connection");
-       stomp.subscribe("${path}/sub/chat/room/"+roomid, function (chat) {
+       stomp.subscribe("${path}/GDJ47_CucumberMarket_final/sub/chat/room/"+roomid, function (chat) {
            var content = JSON.parse(chat.body);
 		   var message = content.massage;
            var writer = content.userid;
@@ -241,7 +241,7 @@ $(document).ready(function(){
             if(msg.value.length!=0){
             	
             	 $('#chatLog').scrollTop($('#chatLog')[0].scrollHeight);
-            	 stomp.send('${path}/pub/chat/message', {}, JSON.stringify({roomId: '${room.roomId}', massage: msg.value, userid: '${loginMember.userId}'}));
+            	 stomp.send('${path}/GDJ47_CucumberMarket_final/pub/chat/message', {}, JSON.stringify({roomId: '${room.roomId}', massage: msg.value, userid: '${loginMember.userId}'}));
             	 
             	 
             		
@@ -263,7 +263,7 @@ $(document).ready(function(){
             
             if(msg.value.length!=0){
             	
-            	 stomp.send('${path}/pub/chat/message', {}, JSON.stringify({roomId: '${room.roomId}', massage: msg.value, userid: '${loginMember.userId}'}));
+            	 stomp.send('${path}/GDJ47_CucumberMarket_final/pub/chat/message', {}, JSON.stringify({roomId: '${room.roomId}', massage: msg.value, userid: '${loginMember.userId}'}));
             	 
                  msg.value = '';
             	
@@ -291,7 +291,7 @@ $(document).ready(function(){
                 massage: messageContent,
                 roodId: '${room.roomId}'
             };
-            stomp.send("${path}/pub/chat/message", {}, JSON.stringify(MessageContent));
+            stomp.send("${path}/GDJ47_CucumberMarket_final/pub/chat/message", {}, JSON.stringify(MessageContent));
             
            
             msg = '';
