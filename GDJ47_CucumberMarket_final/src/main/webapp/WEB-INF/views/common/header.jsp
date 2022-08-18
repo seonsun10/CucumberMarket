@@ -52,13 +52,19 @@
             <div class="col-lg-6 text-center text-lg-right">
               <ul class="menu list-inline mb-0">
               	<c:if test="${loginMember.userId eq null}">
-                 <li class="list-inline-item"><a href="#" data-toggle="modal" data-target="#login-modal">Login</a></li>
-                 </c:if>
-                 <li class="list-inline-item"><a href="/logout">Logout</a></li>
-                 
+                 <li class="list-inline-item"><a href="${path}/" data-toggle="modal" data-target="#login-modal">Login</a></li>
+                </c:if>
+                <c:if test="${loginMember.userId ne null}">
+                 <li class="list-inline-item"><a href="${path}/logout">Logout</a></li>
+                </c:if>
                 <li class="list-inline-item"><a href="${pageContext.request.contextPath}/joinForm">Register</a></li>
+<<<<<<< HEAD
                 <li class="list-inline-item"><a href="${pageContext.request.contextPath}/contactPage">Contact</a></li>
                 <li class="list-inline-item"><a href="#">Recently viewed</a></li>
+=======
+                <!-- <li class="list-inline-item"><a href="contact.html">Contact</a></li> -->
+                <!-- <li class="list-inline-item"><a href="#">Recently viewed</a></li> -->
+>>>>>>> refs/remotes/origin/jooho
               </ul>
             </div>
           </div>
@@ -71,7 +77,7 @@
                 <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
               </div>
               <div class="modal-body">
-                <form action="/loginprocess" method="post">
+                <form action="${path}/loginprocess" method="post">
                   <div class="form-group">
                     <input id="email-modal" type="text" name="userId" placeholder="email" class="form-control">
                   </div>
@@ -83,7 +89,7 @@
                   </p>
                 </form>
                 <p class="text-center text-muted">아직 가입하지 않으셨나요?</p>
-                <p class="text-center text-muted"><a href="${path }/joinForm"><strong>Register now</strong></a>! It is easy and done in 1 minute and gives you access to special discounts and much more!</p>
+                <p class="text-center text-muted"><a href="${path}/joinForm"><strong>바로 가입</strong></a>! 1분 안에 간단한 회원가입!!</p>
               </div>
             </div>
           </div>
@@ -93,7 +99,7 @@
         
       </div>
       <nav class="navbar navbar-expand-lg">
-        <div class="container"><a href="${path}/" class="navbar-brand home"><img src="${path }/resources/img/cucumber.png" style="width:85px;height:75px"alt="Obaju logo" class="d-none d-md-inline-block"><img src="/resources/img/cucumber.png" alt="Obaju logo" class="d-inline-block d-md-none"><span class="sr-only">Obaju - go to homepage</span></a>
+        <div class="container"><a href="${path}/" class="navbar-brand home"><img src="${path}/resources/img/cucumber.png" style="width:85px;height:75px"alt="Obaju logo" class="d-none d-md-inline-block"><img src="/resources/img/cucumber.png" alt="Obaju logo" class="d-inline-block d-md-none"><span class="sr-only">오이마켓 - go to homepage</span></a>
           <div class="navbar-buttons">
             <button type="button" data-toggle="collapse" data-target="#navigation" class="btn btn-outline-secondary navbar-toggler"><span class="sr-only">Toggle navigation</span><i class="fa fa-align-justify"></i></button>
             <button type="button" data-toggle="collapse" data-target="#search" class="btn btn-outline-secondary navbar-toggler"><span class="sr-only">Toggle search</span><i class="fa fa-search"></i></button><a href="basket.html" class="btn btn-outline-secondary navbar-toggler"><i class="fa fa-shopping-cart"></i></a>
