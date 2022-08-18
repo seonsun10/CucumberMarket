@@ -343,7 +343,7 @@
   	       			proNo:${result.proNo}
   	       			 }),
 				headers:{"Content-Type":"application/json"},
-      		 	url: '/chatingRoom',
+      		 	url: '${path}/chatingRoom',
       			type: "POST",
       			
       			
@@ -375,7 +375,7 @@
   	       			proNo:${result.proNo}
   	       			 }),
 				headers:{"Content-Type":"application/json"},
-      		 	url: '/chatingRoom',
+      		 	url: '${path}/chatingRoom',
       			type: "POST",
       			
       			
