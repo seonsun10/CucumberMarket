@@ -58,8 +58,8 @@
                  <li class="list-inline-item"><a href="${path}/logout">Logout</a></li>
                 </c:if>
                 <li class="list-inline-item"><a href="${pageContext.request.contextPath}/joinForm">Register</a></li>
-                <!-- <li class="list-inline-item"><a href="contact.html">Contact</a></li> -->
-                <!-- <li class="list-inline-item"><a href="#">Recently viewed</a></li> -->
+                <li class="list-inline-item"><a href="${pageContext.request.contextPath}/contactPage">Contact</a></li>
+                <li class="list-inline-item"><a href="#">Recently viewed</a></li>
               </ul>
             </div>
           </div>
