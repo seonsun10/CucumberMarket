@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="product">
+	<resultMap type="product" id="productMap">
+		<id column="pro_no" property="proNo"/>
+		<result column="category_id" property="categoryName"/>
+		<result column="title" property="title"/>
+		<result column="pro_status" property="proStatus"/>
+		<result column="price" property="price"/>
+		<result column="pro_count" property="proCount"/>
+		<result column="pro_content" property="proContent"/>
+		<result column="enroll_date" property="enrollDate"/>
+		<result column="region" property="region"/>
+		<result column="solve_status" property="solveStatus"/>
+		<result column="user_id" property="member.userId"/>
+		<collection property="files" ofType="files" column="pro_no">
+			<id column="files_no" property="filesNo"/>
+			<result column="original_filename" property="originalFilename"/>
+			<result column="rename_filename" property="renameFilename"/>
+			<association property="product" javaType="product" column="proNo">
+			<id column="pro_no" property="proNo"/>
+			</association>
+		</collection>
+		
+	</resultMap>
+	<resultMap type="review" id="reviewMap">
+		<id column="review_no" property="reviewNo"/>
+		<result column="write_date" property="writeDate"/>
+		<result column="ment" property="ment"/>
+		<result column="host" property="host"/>
+		<result column="oi" property="oi"/>
+		<result column="writer" property="writer"/>
+		<association property="product" javaType="product" column="proNo">
+			<id column="pro_no" property="proNo"/>
+		</association>
+	</resultMap>
+	<resultMap type="files" id="filesMap">
+		<id column="files_no" property="filesNo"/>
+		<result column="original_filename" property="originalFilename"/>
+		<result column="rename_filename" property="renameFilename"/>
+		<result column="thumbnail_status" property="thumbnailStatus"/>
+		<association property="member" javaType="com.cu.cum.member.model.vo.Member" column="userId">	
+			<id column="user_id" property="userId"/>
+		</association>
+		<association property="product" javaType="product" column="proNo">
+			<id column="pro_no" property="proNo"/>
+		</association>
+	</resultMap>
+	
+	<select id="selectProductCount" resultType="_int">
+		SELECT COUNT(*) FROM PRODUCT WHERE USER_ID=#{userId} AND SOLVE_STATUS='y'
+	</select>
+	
+	<select id="selectProductList" resultMap="productMap">
+		SELECT * FROM PRODUCT P LEFT JOIN FILES  F ON F.PRO_NO=P.PRO_NO 
+			LEFT JOIN MEMBER M ON M.USERID=P.USER_ID WHERE P.USER_ID=#{userId} AND SOLVE_STATUS='y' ORDER BY ENROLLDATE DESC
+	</select>
+	
+	<insert id="insertReview" parameterType="review">
+		INSERT INTO REVIEW VALUES(#{proNo},#{oi},SYSDATE,#{writer})
+	</insert>
+	
+	<select id="selectReviewCount" resultType="_int">
+		SELECT COUNT(*) FROM REVIEW WHERE host=#{userId} 
+	</select>
+	
+	<select id="selectReviewList" resultMap="reviewMap">
+		SELECT * FROM REVIEW WHERE HOST=#{userId} order by write_date DESC
+	</select>
+ 	<select id="selectall" resultMap="productMap">
+ 	select * from product AND SOLVE_STATUS='y'
+	</select>
+	<select id="selectproduct" resultMap="productMap" parameterType="_int">
+	select * from product where pro_no=#{id} AND SOLVE_STATUS='y'
+	</select>
+
+	
+	<select id="selectUserProductList" resultMap="productMap">
+		SELECT * FROM PRODUCT P LEFT JOIN FILES  F ON F.PRO_NO=P.PRO_NO 
+			WHERE P.USER_ID=#{userId} AND SOLVE_STATUS='y'
+	</select>
+	
+	<select id="selectUserFiles" resultMap="filesMap">
+		select * from files where user_id=#{userId} and thumbnail_status='y'
+	</select>
+	<select id="selectWishList" parameterType="string" resultMap="productMap">
+	select * from product where pro_no in (select pro_no from wish_list where user_id = #{userId})
+	</select>
+	<select id="selectWishCount" parameterType="string" resultType="_int">
+	select count(*) from wish_list where user_id=#{id}
+	</select>
+	<select id="selectproductroomid" parameterType="string" resultMap="productMap">
+	select * from product where pro_no = (select prono from prochat3 where roomid=#{roomid})
+	</select>
+	<update id="updateproductsolve" parameterType="_int">
+	update product set solve_status ='n' where pro_no=#{no}
+	</update>
+	<select id="selectsolvecount" parameterType="string" resultType="_int">
+	select count(*) from product where user_id=#{userId} and solve_status='n'
+	</select>
+
+	
+	<select id="mainProductList" resultMap="productMap">
+		<!-- SELECT a.* FROM (SELECT * FROM product ORDER BY enroll_date DESC) a WHERE ROWNUM<=30 -->
+		<!-- SELECT a.* FROM (SELECT * FROM product p INNER JOIN FILES F ON p.pro_NO=F.PRO_NO ORDER BY DBMS_RANDOM.RANDOM) a WHERE ROWNUM&lt;=20 AND THUMBNAIL_STATUS='y' AND SOLVE_STATUS='y' -->
+		SELECT a.* FROM (SELECT * FROM product p INNER JOIN FILES F ON p.pro_NO=F.PRO_NO ORDER BY p.pro_count desc) a WHERE ROWNUM&lt;=20 AND THUMBNAIL_STATUS='y' AND SOLVE_STATUS='y' and TO_DATE(SUBSTR(enroll_Date,1,10),'yyyy-MM-dd')=TO_DATE(SYSDATE,'yyyy-MM-dd')
+	</select>
+<!-- 	<select id="mainFilesList" resultType="filesMap">
+	
+	</select> -->
+
+	<select id="selectCategoryCount" resultType="_int">
+		select count(*) from product where category_id=#{tag}
+	</select>
+	
+	
+<!-- 	<select id="relProduct" resultMap="productMap" parameterType="hashMap">
+		SELECT a.* FROM (SELECT * FROM product p INNER JOIN FILES F ON p.pro_NO=F.PRO_NO ORDER BY enroll_date DESC) a WHERE ROWNUM&lt;=8 AND category_id=#{tag} AND pro_Content!=#{proContent} and thumbnail_status='y'
+	</select> -->
+	
+	
+	<select id="relProduct" resultMap="productMap" parameterType="hashMap">
+	select a.* from(select * from product p INNER JOIN files f ON p.pro_no=f.PRO_NO 
+	order by DBMS_RANDOM.RANDOM) a where ROWNUM&lt;9 AND category_id=#{tag} AND pro_Content!=#{proContent} AND Thumbnail_status='y' AND SOLVE_STATUS='y'
+
+	</select>
+	
+	<select id="searchProduct" resultMap="productMap">
+		SELECT * FROM product p LEFT JOIN files f on(p.PRO_NO=f.PRO_NO) LEFT JOIN MEMBER m on(m.USERID=f.USER_ID) 
+		WHERE SOLVE_STATUS='y' AND name LIKE '%${keyword}%' or region LIKE '%${keyword}%' OR title LIKE '%${keyword}%' 
+	</select>
+
+	<update id="updateProViewCount">
+		update product set pro_count= pro_count+1 where pro_no=#{no}
+	</update>
+</mapper>

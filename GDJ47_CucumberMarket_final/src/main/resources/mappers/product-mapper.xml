@@ -127,7 +127,7 @@
 	
 	<select id="searchProduct" resultMap="productMap">
 		SELECT * FROM product p LEFT JOIN files f on(p.PRO_NO=f.PRO_NO) LEFT JOIN MEMBER m on(m.USERID=f.USER_ID) 
-		WHERE SOLVE_STATUS='y' AND name LIKE '%${keyword}%' or region LIKE '%${keyword}%' OR title LIKE '%${keyword}%' 
+		WHERE SOLVE_STATUS='y' AND m.name LIKE '%${keyword}%' or p.region LIKE '%${keyword}%' OR p.title LIKE '%${keyword}%' 
 	</select>
 
 	<update id="updateProViewCount">

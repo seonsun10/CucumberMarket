@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="board">
+	<resultMap type="board" id="boardMap">
+		<id column="boardid" property="boardId"/>
+		<result column="userid" property="userId"/>
+		<result column="boardcategory" property="boardCategory"/>
+		<result column="boardtitle" property="boardTitle"/>
+		<result column="boardcontent" property="boardContent"/>
+		<result column="picname" property="picName"/>
+		<result column="createdate" property="createDate"/>
+		<result column="recommendcount" property="recommendCount"/>
+	</resultMap>
+	<resultMap type="com.cu.cum.board.model.vo.RecommendList" id="recommendMap">
+		<result property="rec_UserId" column="rec_userid"/>
+		<result property="rec_BoardId" column="rec_boardid"/>
+	
+	</resultMap>
+	
+	<select id="selectboardlist" parameterType="string"  resultMap="boardMap">
+	
+	select * from board left join commentcount on boardid=boardref where board.boardregion=#{region} order by createdate desc
+	</select>
+	<insert id="insertboard" parameterType="board" >
+	insert into board values(seq_boardid.nextval,#{userId},#{boardCategory},#{boardTitle},#{boardContent},null,sysdate,0,#{boardregion})
+	</insert>
+	<select id="selectboard" parameterType="_int" resultMap="boardMap">
+	select * from board where boardid=#{boardId}
+	</select>
+	<select id="selectboardcount" parameterType="string" resultType="_int">
+	select count(*) from board where boardregion=#{region}
+	</select>
+	
+	<select id="selectboardlist2" resultMap="boardMap">
+	
+	select * from board left join commentcount on boardid=boardref where board.boardcategory=#{boardCategory} and board.boardregion=#{boardregion} order by createdate desc
+	</select>
+	<select id="selectboardcount2" parameterType="board" resultType="_int">
+	select count(*) from board where boardcategory=#{boardCategory} and boardregion=#{boardregion}
+	</select>
+	<select id="recommendcheck" parameterType="com.cu.cum.board.model.vo.RecommendList" resultType="_int">
+	select count(*) from recommendlist where rec_userid=#{rec_UserId} and rec_boardid=#{rec_BoardId}
+	</select>
+	<insert id="recommendboard" parameterType="recommend" >
+	insert into recommendlist values(#{rec_UserId},#{rec_BoardId})
+	</insert> 
+	<select id="recommendidcount" parameterType="_int" resultType="_int">
+	select count(*) from recommendlist where rec_boardid=#{BoardId}
+	</select>
+	<update id="updateboard" parameterType="board" >
+	update board set recommendcount =#{recommendCount} where boardid=#{boardId} 
+	</update>
+	
+	
+	<!-- 댓글  -->
+	<insert id="insertBoardReply" parameterType="java.util.HashMap">
+        <selectKey keyProperty="reply_id" resultType="int" order="BEFORE">
+          select reply_seq.nextval FROM DUAL
+        </selectKey>
+        insert into board_reply(
+            reply_id,
+            board_id,
+            parent_id,
+            depth,
+            reply_content,
+            reply_writer
+            
+        )values(
+            #{reply_id},
+            #{board_id},
+            #{parent_id},
+            #{depth},
+            #{reply_content},
+            #{reply_writer}
+            
+        )
+    </insert>
+    
+     <select id="selectBoardReplyList" resultType="com.cu.cum.board.model.vo.BoardReply" parameterType="_int">
+        select * from board_reply where board_id = #{id} order by reply_id desc
+    </select>
+     <delete id="deleteBoardReply" parameterType="java.util.HashMap">
+        delete
+        from
+            board_reply
+        where
+            reply_id = #{reply_id}
+            
+    </delete>
+    <delete id="deleteBoardReplyAll" parameterType="java.util.HashMap">
+        delete
+        from
+            board_reply
+        where
+            reply_id in (
+                select
+                    reply_id
+                from
+                    board_reply
+                where
+                    reply_id = #{reply_id}
+                    
+            ) or parent_id in (
+                select
+                    reply_id
+                from
+                    board_reply
+                where
+                    reply_id = #{reply_id}
+                    
+            )
+    </delete>
+    
+    <update id="updateReply" parameterType="java.util.HashMap">
+        update
+            board_reply
+        set
+            parent_id = #{parent_id},
+            depth = #{depth},
+            reply_content = #{reply_content},
+            reply_writer = #{reply_writer}
+        where
+            reply_id = #{reply_id}
+    </update>
+     <select id="selectReplyPassword" resultType="int" parameterType="java.util.HashMap">
+        select
+            count(*)
+        from
+            board_reply
+        where
+            reply_id = #{reply_id}
+            
+    </select>
+    <insert id="insertboardcomment" parameterType="com.cu.cum.board.model.vo.BoardComment">
+    	insert into board_comment values(reply_seq.nextval,#{boardCommentLevel},#{boardCommentWriter},#{boardRef},#{boardCommentRef},#{boardCommentContent},sysdate)
+    </insert>
+    <select id="selectboardcommentlist" parameterType="_int" resultType="com.cu.cum.board.model.vo.BoardComment">
+    	select * from board_comment where boardref=#{no} start with boardcommentlevel=1 connect by prior boardcommentno=boardcommentref
+    </select>
+    <select id="selectcommentcount" parameterType="_int" resultType="_int">
+    	select count from commentcount where boardref=#{boardId}
+    </select>
+    <delete id="deletecomment" parameterType="_int">
+    	delete from board_comment where boardcommentno=#{id} or boardcommentref=#{id}
+    </delete>
+    <delete id="deletecomment2" parameterType="_int">
+    	delete from board_comment where boardcommentno=#{id}
+    </delete>
+    <select id="selectboardcommentlist2" parameterType="_int" resultType="com.cu.cum.board.model.vo.BoardComment">
+    	select * from board_comment where boardref=#{boardId} start with boardcommentlevel=1 connect by prior boardcommentno=boardcommentref
+    </select>
+    <select id="selectpopularlist" parameterType="string" resultMap="boardMap">
+	   select boardid
+		from 
+		(select e.*,rownum as rank_
+		from(select s.* from (select boardid,recommendcount from board where boardregion=#{region}) s order by s.recommendcount desc)e)
+		where rank_ between 1 and 5
+    </select>
+    <select id="selectBaordRecommendCount" parameterType="_int" resultType="_int">
+    
+    select count(*) from recommendlist where rec_boardid=#{boardId}
+    </select>
+    <select id="selectRecommendList" parameterType="_int" resultType="com.cu.cum.board.model.vo.RecommendList">
+    select * from recommendlist where rec_boardid =#{boardId}
+    </select>
+	
+	
+	<select id="selectregion" parameterType="string" resultType="string">
+	
+	select region from member where userid=#{userid}
+	</select>
+	
+	<select id="searchboardlist" parameterType="com.cu.cum.board.model.vo.Search" resultType="com.cu.cum.board.model.vo.Board">
+	<if test='type.equals("boardTitle")'>
+	select * from board where boardregion=#{region} and boardTitle like '%'||#{keyword}||'%'
+	</if>
+	<if test='type.equals("userId")'>
+	select * from board where boardregion=#{region} and userid like '%'||#{keyword}||'%'
+	</if>
+	</select>
+	
+	<select id="searchboardcount" parameterType="com.cu.cum.board.model.vo.Search" resultType="_int">
+	<if test='type.equals("boardTitle")'>
+	select count(*) from board where boardregion=#{region} and boardTitle like '%'||#{keyword}||'%'
+	</if>
+	<if test='type.equals("userId")'>
+	select count(*) from board where boardregion=#{region} and userid like '%'||#{keyword}||'%'
+	</if>
+	</select>
+	
+	
+	
+	
+	
+	
+
+</mapper>
