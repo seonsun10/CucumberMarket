@@ -60,6 +60,7 @@ public class AlertControllerImpl implements AlertController{
 			mav.addObject("newList", newList);
 			mav.addObject("oldList", oldList);
 			mav.addObject("oldListCnt", service.selectOldNotifyCnt(userid));
+			mav.setViewName("alert/alert");
 		}
 		return mav;
 	}

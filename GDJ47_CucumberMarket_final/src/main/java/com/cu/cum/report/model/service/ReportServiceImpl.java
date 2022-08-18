@@ -87,6 +87,11 @@ public class ReportServiceImpl implements ReportService {
 		// TODO Auto-generated method stub
 		return rmdao.mypageReportCount(session, r);
 	}
+	@Override
+	public int reportCount(String writer) {
+		// TODO Auto-generated method stub
+		return rmdao.reportCount(session, writer);
+	}
 	
 	
 	
