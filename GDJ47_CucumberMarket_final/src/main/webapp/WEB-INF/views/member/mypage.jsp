@@ -37,7 +37,7 @@
                   <a href="${path }/product/insertProductStart.do" class="nav-link" style="margin-left:2px;"><i class="fa-solid fa-hand-holding-dollar" style="margin-right:5px;"></i>판매 하기</a>
 
 
-                  <a href="/logout" class="nav-link"><i class="fa fa-sign-out"></i>로그아웃</a>
+                  <a href="${path}/logout" class="nav-link"><i class="fa fa-sign-out"></i>로그아웃</a>
                   </ul>
                   <!-- <button class="btn btn-outline-success my-2 my-sm-0"
 				data-toggle="modal" data-target="#loginModal">상품 등록</button> -->

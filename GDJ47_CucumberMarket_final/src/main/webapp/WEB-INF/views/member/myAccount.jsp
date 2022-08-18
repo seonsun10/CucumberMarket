@@ -45,7 +45,7 @@
               <div class="box">
               <h1>회원정보</h1>
                 <p class="text-muted">현재 페이지에서 회원님의 정보를 수정할 수 있습니다.</p>
-                <form action="${path }/member/update.do" method="post" enctype="multipart/form-Data">
+                <form action="${path}/member/update.do" method="post" enctype="multipart/form-Data">
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
@@ -92,7 +92,7 @@
                 </form>
                 
                 <h3>비밀번호 변경</h3>
-                <form action="${path }/member/pwUpdate.do" method="post"  onsubmit="return pwcheck();">
+                <form action="${path}/member/pwUpdate.do" method="post"  onsubmit="return pwcheck();">
                   <input name="userId" type="hidden" value="${loginMember.userId }">
                   <div class="row">
                     <div class="col-md-6">
