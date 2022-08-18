@@ -71,7 +71,7 @@
           <div class="modal-dialog modal-sm">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Customer login</h5>
+                <h5 class="modal-title">로그인</h5>
                 <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
               </div>
               <div class="modal-body">
@@ -83,7 +83,7 @@
                     <input id="password-modal" type="password" name="password" placeholder="password" class="form-control">
                   </div>
                   <p class="text-center">
-                    <button class="btn btn-primary"><i class="fa fa-sign-in"></i> Log in</button>
+                    <button class="btn btn-primary"><i class="fa fa-sign-in"></i>Log in</button>
                   </p>
                 </form>
                 <p class="text-center text-muted">아직 가입하지 않으셨나요?</p>
