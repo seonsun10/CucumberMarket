@@ -154,6 +154,17 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return dao.searchBoardCount(session,page);
 	}
+	@Override
+	public int deleteboard(int id) {
+		// TODO Auto-generated method stub
+		return dao.deleteboard(session,id);
+	}
+	@Override
+	public int updateboard2(Board b) {
+		// TODO Auto-generated method stub
+		return dao.updateboard2(session,b);
+	}
+	
 	
 	
 	

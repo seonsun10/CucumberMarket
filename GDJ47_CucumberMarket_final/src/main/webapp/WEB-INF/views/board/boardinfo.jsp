@@ -107,10 +107,14 @@
       <div id="content">
         <div class="container">
           <div class="row">
-         
+         	
             <div id="blog-post" class="col-lg-9">
+            
               <div class="box">
-                <h1>${board.boardTitle }</h1>
+              <c:if test="${board.userId eq loginMember.userId }">
+              <div style="text-align: right"><button  onclick="fn_updateboard();" style="text-align: right"> 수정  </button><button onclick="fn_deleteboard();"  style="text-align: right"> 삭제  </button></div>
+              </c:if>
+                <h1>${board.boardTitle }</h1> 
                 <p class="author-date">By &nbsp
                 <c:if test="${board.userId ne loginMember.userId }">
                     <a href="${path }/member/otherMember.do?writer=${board.userId }&customer=${loginMember.userId}">${board.userId }</a>&nbsp&nbsp
@@ -332,6 +336,12 @@
     
     </script>
      <script type="text/javascript">
+     const fn_deleteboard=()=>{
+    	 location.assign('${path}/board/deleteboard/'+${board.boardId});
+     }
+     const fn_updateboard=()=>{
+    	 location.assign('${path}/board/updateboard/'+${board.boardId});
+     }
      
      const modal = document.getElementById("modal")
      const btnModal = document.getElementById("btn-modal")
