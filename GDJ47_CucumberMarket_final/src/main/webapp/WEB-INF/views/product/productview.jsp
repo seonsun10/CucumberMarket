@@ -300,7 +300,7 @@
                      webUrl: thisUrl
                    },
                  },
-                    buttons: [
+                 buttons: [
                          {
                            title: '웹으로 이동',
                            link: {
