@@ -74,6 +74,8 @@
 						 			</c:if>
 									<c:if test="${loginMember.userId == inq.writer.userId}">
 						 				<input type="button" value="수정" onclick="location.assign('${pageContext.request.contextPath }/updateInquiry/${inq.inquiryNo}')"/>
+						 			</c:if>
+									<c:if test="${loginMember.userId == inq.writer.userId or loginMember.userId eq 'admin'}">
 							 			<input type="button" value="삭제" onclick="location.assign('${pageContext.request.contextPath }/deleteInquiry/${inq.inquiryNo}')"/>
 						 			</c:if>
 						 		</td>
