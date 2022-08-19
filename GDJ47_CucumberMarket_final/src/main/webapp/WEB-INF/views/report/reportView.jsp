@@ -75,7 +75,7 @@
 								<td colspan="2" align="center">
 						 			<input type="button" value="목록" onclick="location.assign('${pageContext.request.contextPath }/reportList')"/>
 						 			<c:if test="${loginMember.userId eq 'admin'}">
-						 				<input type="button" value="삭제" onclick="location.assign('${pageContext.request.contextPath }/reportList')"/>
+						 				<input type="button" value="삭제" onclick="location.assign('${pageContext.request.contextPath }/deleteReport/${rep.repNo}')"/>
 						 			</c:if>
 						 		</td>
 						 	</tr>
