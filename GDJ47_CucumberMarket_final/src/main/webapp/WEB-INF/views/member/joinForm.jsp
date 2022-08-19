@@ -24,7 +24,7 @@
                 <p>중고 거래를 통해 돈도 벌고, 차지하던 공간의 확보를 통해 쾌적할 삶을 즐기세요!</p>
                 <p class="text-muted">문의사항은 <a href="${pageContext.request.contextPath}/contactPage">contact us</a> 로 부탁드려요, 가능한 빠르게 답변드리도록 하겠습니다!</p>
                 <hr>
-                <form action="${path}/join" method="post" onsubmit="return join()">
+                <form action="${path}/join" method="post" onsubmit="return fn_join()">
                   <div class="form-group">
                     <label for="email">이메일 - ID로 사용됩니다</label>
                     <input id="userId" type="text" name="userId" class="form-control" placeholder="example@cu.com" required oninput = "checkId()" onchange="validEmail(this)">
@@ -40,19 +40,19 @@
                   </div>
                   <div class="form-group">
                     <label for="password">비밀번호</label>
-                    <input id="password" type="password" name="password" class="form-control">
+                    <input id="password" type="password" required name="password" class="form-control">
                   </div>
                   <div class="form-group">
                     <label for="name">이름</label>
-                    <input id="name" type="text" name="name" class="form-control">
+                    <input id="name" type="text" name="name" required class="form-control">
                   </div>
                   <div class="form-group">
                     <label for="phone">핸드폰 번호</label>
-                    <input id="phone" type="text" name="phone" class="form-control">
+                    <input id="phone" type="text" name="phone" required class="form-control">
                   </div>
                   <div class="form-group">
                     <input type="button" onclick="fn_area();" class="btn btn-primary navbar-btn" value="지역설정"/>
-                    <input id="region" type="text" name="region" class="form-control" style="margin-top:5px;">
+                    <input id="region" type="text" name="region" class="form-control" readonly required style="margin-top:5px;">
                   </div>
                   <div class="text-center">
                     <button type="submit" class="btn btn-primary"><i class="fa fa-user-md"></i> Register</button>
@@ -87,7 +87,7 @@
 	function checkId(){
 	    var userId = $('#userId').val(); //id값이 "userid"인 입력란의 값을 저장
 		$.ajax({
-		    url: '/idCheck',
+		    url: '${path}/idCheck',
 		    type: 'GET',
 		    contentType: 'application/json',
 		    headers: {
@@ -125,6 +125,21 @@
 				checkInput.attr('disabled',false);
 				code = data;
 				alert('인증번호가 전송되었습니다.')
+				
+				if(data == "error"){
+	        		alert("이메일 주소가 올바르지 않습니다. 유효한 이메일 주소를 입력해주세요.");
+					$("#mail-Check-Btn").attr("autofocus",true);
+					$(".mail-check-warn").text("유효한 이메일 주소를 입력해주세요.");
+					$(".mail-check-warn").css("color","red");
+	        	}else{	        		
+					alert("인증번호 발송이 완료되었습니다.\n입력한 이메일에서 인증번호 확인을 해주십시오.");
+	        		$("#mail-check-input").attr("disabled",false);
+	        		$("#emailChk2").css("display","inline-block");
+	        		$(".mail-check-warn").text("인증번호를 입력한 뒤 이메일 인증을 눌러주십시오.");
+	        		$(".mail-check-warn").css("color","green");
+	        		code = data;
+	        	}
+				
 			}			
 		}); // ajax종료
 	}); //email 전송
@@ -155,14 +170,21 @@
 	      "width=800, height=600, top=100, left=600"
 	    );
 	}
-
-	/* function join(){
+	
+	function fn_join(){
 		const resultMsg = $('#mail-check-warn').val();
 		if(resultMsg=='인증번호가 일치합니다.'){
 			return true;
 		}
 		alert('이메일 인증을 완료해야 가입이됩니다.');
 		return false;
-	} */
+		
+		var region = $('#region').val();
+		if(region==''){
+			alert('지역설정을 해주세요.');
+			return false;
+		}
+		return true;
+	}
 </script>
     

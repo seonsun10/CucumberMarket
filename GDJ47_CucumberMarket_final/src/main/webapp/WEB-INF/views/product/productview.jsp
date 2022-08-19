@@ -258,7 +258,9 @@
         var region = '${region}';
         var proStatus = '${proStatus}';
         /* /product/productView.do?id='+id+'&no='+no+'&tag='+tag+'&name='+name+'&region='+region+'&proStatus='+proStatus */
-        var thisUrl = 'https://61.78.121.242:8844/GDJ47_CucumberMarket_final/product/productView.do?id='+id+'&no='+no+'&tag='+tag+'&name='+name+'&region='+region+'&proStatus='+proStatus; */
+
+        var thisUrl = 'https://61.78.121.242:8844/GDJ47_CucumberMarket_final/product/productView.do?id='+id+'&no='+no+'&tag='+tag+'&name='+name+'&region='+region+'&proStatus='+proStatus;
+
         /* var thisUrl = 'http://localhost:9090/product/productView.do?id='+id+'&no='+no+'&tag='+tag+'&name='+name+'&region='+region+'&proStatus='+proStatus; */
         /* /product/productView.do?id='+id+'&no='+no+'&tag='+tag+'&name='+name+'&region='+region+'&proStatus='+proStatus; */
         		console.log(thisUrl);
@@ -300,7 +302,7 @@
                      webUrl: thisUrl
                    },
                  },
-                    buttons: [
+                 buttons: [
                          {
                            title: '웹으로 이동',
                            link: {

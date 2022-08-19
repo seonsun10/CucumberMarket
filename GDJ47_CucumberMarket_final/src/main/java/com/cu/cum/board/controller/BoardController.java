@@ -190,7 +190,7 @@ public class BoardController {
 			service.updateBoard(b);
 			String url =request.getRequestURI();
 			System.out.println(url);
-			if(url.equals("/board/boardRecommend.do/"+boardId)) {
+			if(url.equals("/GDJ47_CucumberMarket_final/board/boardRecommend.do/"+boardId)) {
 				url="board/boardinfo.do/"+boardId;
 			}
 	
@@ -292,6 +292,37 @@ public class BoardController {
 		mv.setViewName("board/boardList");
     	return mv;
     	
+    	
+    }
+    @RequestMapping("/deleteboard/{id}")
+    public ModelAndView deleteBoard(@PathVariable int id,ModelAndView mv) {
+    	
+    	System.out.println(id);
+    	int result = service.deleteboard(id);
+    	String msg = result>0?"게시글삭제":"게시글삭제실패";
+    	mv.addObject("msg",msg);
+		mv.addObject("loc","board/boardlist.do");
+		mv.setViewName("common/msg");
+    	return mv;
+    	
+    }
+    @RequestMapping("/updateboard/{id}")
+    public ModelAndView updateBoard(@PathVariable int id,ModelAndView mv) {
+    	Board b =service.selectBoard(id);
+    	mv.addObject("board",b );
+    	mv.setViewName("board/boardWrite");
+    	return mv;
+    }
+    @PostMapping("/updateBoard2/{id}")
+    public ModelAndView updateBoard2(@PathVariable int id,ModelAndView mv,Board b) {
+    	b.setBoardId(id);
+    	System.out.println(b);
+    	int result = service.updateboard2(b);
+		String msg = result>0?"게시글수정":"게시글수정실패";
+    	mv.addObject("msg",msg);
+    	mv.addObject("loc","board/boardinfo.do/"+id);
+		mv.setViewName("common/msg");
+    	return mv;
     	
     }
     

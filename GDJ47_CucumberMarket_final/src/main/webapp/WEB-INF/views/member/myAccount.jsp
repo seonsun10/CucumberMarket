@@ -45,7 +45,7 @@
               <div class="box">
               <h1>회원정보</h1>
                 <p class="text-muted">현재 페이지에서 회원님의 정보를 수정할 수 있습니다.</p>
-                <form action="${path}/member/update.do" method="post" enctype="multipart/form-Data">
+                <form action="${path}/member/update.do" method="post" enctype="multipart/form-Data" onsubmit="return fn_join()">
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
@@ -56,7 +56,7 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="name">이름</label>
-                        <input id="name" type="text" class="form-control" value="<c:out value="${loginMember.name }"/>">
+                        <input id="name" type="text"  required class="form-control" value="<c:out value="${loginMember.name }"/>">
                       </div>
                     </div>
                   </div>
@@ -65,7 +65,7 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="company" style="margin-top:8px;">전화번호</label> 
-                        <input id="company" type="text" name="phone" class="form-control" value="<c:out value="${loginMember.phone }"/>" style="margin-top:3px;">
+                        <input id="company" type="text" name="phone" required class="form-control" value="<c:out value="${loginMember.phone }"/>" style="margin-top:3px;">
                       </div>
                     </div>
 
@@ -73,7 +73,7 @@
                       <div class="form-group">
                         <label for="company" style="margin-top:8px;">지역</label> 
                         <div >
-                    	<input id="region" type="text" name="region" class="form-control" value="${loginMember.region }" style="margin-top:5px; width:365px">
+                    	<input id="region" type="text" name="region" readonly class="form-control" value="${loginMember.region }" style="margin-top:5px; width:365px">
                     	<input type="button" onclick="fn_area();" class="btn btn-primary" value="지역설정" style="margin-top:5px;">
                         </div>
                       </div>
@@ -82,7 +82,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                         <label for="intro">자기소개 한마디!</label>
-                        <input id="intro" type="text" class="form-control" name="intro" value="<c:out value="${loginMember.intro}"/>">
+                        <input id="intro" type="text" class="form-control" required name="intro" value="<c:out value="${loginMember.intro}"/>">
                       </div>
                     </div>
                     <div class="col-md-12 text-center">
@@ -98,7 +98,7 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="oldPw">현재 비밀번호</label>
-                        <input name="oldPw" id="oldPw" type="password" class="form-control" required>
+                        <input name="oldPw" id="oldPw" type="password" required class="form-control" required>
                       </div>
                     </div>
                   </div>
@@ -106,13 +106,13 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="newPw">새로운 비밀번호</label>
-                        <input name="newPw" id="newPw" type="password" class="form-control" required>
+                        <input name="newPw" id="newPw" type="password" required class="form-control" required>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="password_2">비밀번호 확인</label>
-                        <input id="password_2" type="password" class="form-control" required>
+                        <input id="password_2" type="password" required class="form-control" required>
                         <span id="pwBox"></span>
                       </div>
                     </div>
@@ -135,6 +135,15 @@ function fn_area(){
      "현재 내 위치 설정",
      "width=800, height=600, top=100, left=600"
    );
+}
+
+function fn_join(){
+	var region = $('#region').val();
+	if(region==''){
+		alert('지역설정을 해주세요.');
+		return false;
+	}
+	return true;
 }
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
