@@ -53,7 +53,7 @@
 	
 	<select id="selectProductList" resultMap="productMap">
 		SELECT * FROM PRODUCT P LEFT JOIN FILES  F ON F.PRO_NO=P.PRO_NO 
-			LEFT JOIN MEMBER M ON M.USERID=P.USER_ID WHERE P.USER_ID=#{userId} AND SOLVE_STATUS='y' ORDER BY ENROLLDATE DESC
+			LEFT JOIN MEMBER M ON M.USERID=P.USER_ID WHERE P.USER_ID=#{userId} AND SOLVE_STATUS='y' ORDER BY p.ENROLL_DATE DESC
 	</select>
 	
 	<insert id="insertReview" parameterType="review">
