@@ -87,7 +87,7 @@
 	function checkId(){
 	    var userId = $('#userId').val(); //id값이 "userid"인 입력란의 값을 저장
 		$.ajax({
-		    url: '/idCheck',
+		    url: '${path}/idCheck',
 		    type: 'GET',
 		    contentType: 'application/json',
 		    headers: {

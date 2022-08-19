@@ -190,7 +190,7 @@ public class BoardController {
 			service.updateBoard(b);
 			String url =request.getRequestURI();
 			System.out.println(url);
-			if(url.equals("/board/boardRecommend.do/"+boardId)) {
+			if(url.equals("/GDJ47_CucumberMarket_final/board/boardRecommend.do/"+boardId)) {
 				url="board/boardinfo.do/"+boardId;
 			}
 	
