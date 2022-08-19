@@ -125,6 +125,21 @@
 				checkInput.attr('disabled',false);
 				code = data;
 				alert('인증번호가 전송되었습니다.')
+				
+				if(data == "error"){
+	        		alert("이메일 주소가 올바르지 않습니다. 유효한 이메일 주소를 입력해주세요.");
+					$("#mail-Check-Btn").attr("autofocus",true);
+					$(".mail-check-warn").text("유효한 이메일 주소를 입력해주세요.");
+					$(".mail-check-warn").css("color","red");
+	        	}else{	        		
+					alert("인증번호 발송이 완료되었습니다.\n입력한 이메일에서 인증번호 확인을 해주십시오.");
+	        		$("#mail-check-input").attr("disabled",false);
+	        		$("#emailChk2").css("display","inline-block");
+	        		$(".mail-check-warn").text("인증번호를 입력한 뒤 이메일 인증을 눌러주십시오.");
+	        		$(".mail-check-warn").css("color","green");
+	        		code = data;
+	        	}
+				
 			}			
 		}); // ajax종료
 	}); //email 전송
@@ -155,17 +170,15 @@
 	      "width=800, height=600, top=100, left=600"
 	    );
 	}
-
-	/* function join(){
+	
+	function fn_join(){
 		const resultMsg = $('#mail-check-warn').val();
 		if(resultMsg=='인증번호가 일치합니다.'){
 			return true;
 		}
 		alert('이메일 인증을 완료해야 가입이됩니다.');
 		return false;
-	} */
-	
-	function fn_join(){
+		
 		var region = $('#region').val();
 		if(region==''){
 			alert('지역설정을 해주세요.');
