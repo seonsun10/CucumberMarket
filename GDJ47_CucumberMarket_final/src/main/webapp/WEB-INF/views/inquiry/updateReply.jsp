@@ -36,7 +36,7 @@
                 </div>
               </div>
               <!-- *** PAGES MENU END ***-->
-              <div class="banner"><a href="#"><img src="img/banner.jpg" alt="sales 2014" class="img-fluid"></a></div>
+              <div class="banner"><a href="#"><img src="${path }/resources/img/cucumber.png" alt="sales 2014" class="img-fluid"></a></div>
             </div>
 			<div class="col-lg-9">
 				<form action="${pageContext.request.contextPath }/inquiry/updateReply.do" method="post">

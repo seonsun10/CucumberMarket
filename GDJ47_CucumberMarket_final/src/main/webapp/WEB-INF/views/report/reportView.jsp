@@ -36,7 +36,7 @@
 		                	</div>
 	              		</div>
 	              		<!-- *** PAGES MENU END ***-->
-	              		<div class="banner"><a href="#"><img src="/resources/img/cucumber.png" alt="" class="img-fluid"></a></div>
+	              		<div class="banner"><a href="#"><img src="${path }/resources/img/cucumber.png" alt="" class="img-fluid"></a></div>
             		</div>
             		<div class="col-lg-9">
 						<table aria-label="breadcrumb" class="box" border="1" summary="게시판 상세내용" width="650" height="350" border="1" cellpadding="5" align="center" >
@@ -75,7 +75,7 @@
 								<td colspan="2" align="center">
 						 			<input type="button" value="목록" onclick="location.assign('${pageContext.request.contextPath }/reportList')"/>
 						 			<c:if test="${loginMember.userId eq 'admin'}">
-						 				<input type="button" value="삭제" onclick="location.assign('${pageContext.request.contextPath }/reportList')"/>
+						 				<input type="button" value="삭제" onclick="location.assign('${pageContext.request.contextPath }/deleteReport/${rep.repNo}')"/>
 						 			</c:if>
 						 		</td>
 						 	</tr>

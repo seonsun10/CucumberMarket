@@ -37,7 +37,7 @@
 								</ul>
 							</div>
 						</div>
-					<div class="banner"><a href="#"><img src="/resources/img/cucumber.png" alt="" class="img-fluid"></a></div>
+					<div class="banner"><a href="#"><img src="${pageContext.request.contextPath }/resources/img/cucumber.png" alt="" class="img-fluid"></a></div>
 					</div>
 
 
