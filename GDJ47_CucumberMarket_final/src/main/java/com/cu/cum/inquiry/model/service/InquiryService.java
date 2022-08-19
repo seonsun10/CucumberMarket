@@ -43,7 +43,9 @@ public interface InquiryService {
 	List<Inquiry> searchListType(String keyword);
 	//List<Inquiry> searchListTest(String keyword, Pageable pageable);
 	
+	// 답변달린문의글 삭제 불가 구현
 	
+	List<Inquiry> joinInquiryN(int inquiryNo);
 	
 	
 	

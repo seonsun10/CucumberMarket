@@ -39,6 +39,10 @@
 		DELETE FROM INQUIRY WHERE INQUIRY_NO=#{inquiryNo}
 	</delete>
 	
+	<select id="joinInquiryN" resultMap="inquiryMap">
+		SELECT * FROM INQUIRY i INNER JOIN REPLY_INQUIRY r ON i.INQUIRY_NO =r.INQUIRY_NO WHERE i.INQUIRY_NO=#{inquiryNo}
+	</select>
+	
 	
 	
 	

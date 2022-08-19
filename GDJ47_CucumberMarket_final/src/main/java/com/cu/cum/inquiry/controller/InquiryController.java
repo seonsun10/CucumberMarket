@@ -204,14 +204,15 @@ public class InquiryController {
 		
 		inquiry.setWriter((Member)session.getAttribute("loginMember"));
 		//System.out.println(inquiry);
-		int inq = service.deleteInquiry(id);
-		if(inq>0) {
+		List<Inquiry> inqN = service.joinInquiryN(id);
+		if(inqN.isEmpty()) {
+			int inq = service.deleteInquiry(id);
 			mv.addObject("msg", "문의글 삭제완료");
 			mv.addObject("loc","/inquiryList");
 			
-		}else {
+		}else if(!(inqN.isEmpty())) {
 			mv.addObject("msg", "문의글 삭제실패");
-			mv.addObject("loc","inquiry/updateInquiry.do");
+			mv.addObject("loc","/inquiryList");
 		}
 		mv.setViewName("common/msgBasic");
 		return mv;

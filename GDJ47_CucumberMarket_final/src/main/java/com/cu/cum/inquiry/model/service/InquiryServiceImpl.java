@@ -98,6 +98,12 @@ public class InquiryServiceImpl implements InquiryService {
 		return dao.findByInquiryTypeContaining(keyword);
 	}
 
+	@Override
+	public List<Inquiry> joinInquiryN(int inquiryNo) {
+		// TODO Auto-generated method stub
+		return imdao.joinInquiryN(session, inquiryNo);
+	}
+
 	
 	
 	

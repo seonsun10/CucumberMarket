@@ -45,4 +45,7 @@ public class InquiryMapperDao {
 		return session.delete("inquiry.deleteReply",id);
 	}
 
+	public List<Inquiry> joinInquiryN(SqlSessionTemplate session, int id){
+		return session.selectList("joinInquiryN", id);
+	}
 }

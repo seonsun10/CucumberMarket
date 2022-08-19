@@ -15,6 +15,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import com.cu.cum.member.model.vo.Member;
 
 import lombok.AllArgsConstructor;
@@ -49,7 +52,7 @@ public class Inquiry {
 	@Column(columnDefinition = "varchar2(50) default 'n' not null ")
 	private String answer;  // 답변 여부
 	
-	
+	@Cascade(CascadeType.REMOVE)
 	@OneToOne(mappedBy = "inquiry")
 	private ReplyInquiry reInquiry;
 	
