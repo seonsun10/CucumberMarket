@@ -24,7 +24,7 @@
                 <p>중고 거래를 통해 돈도 벌고, 차지하던 공간의 확보를 통해 쾌적할 삶을 즐기세요!</p>
                 <p class="text-muted">문의사항은 <a href="${pageContext.request.contextPath}/contactPage">contact us</a> 로 부탁드려요, 가능한 빠르게 답변드리도록 하겠습니다!</p>
                 <hr>
-                <form action="${path}/join" method="post" onsubmit="return join()">
+                <form action="${path}/join" method="post" onsubmit="return fn_join()">
                   <div class="form-group">
                     <label for="email">이메일 - ID로 사용됩니다</label>
                     <input id="userId" type="text" name="userId" class="form-control" placeholder="example@cu.com" required oninput = "checkId()" onchange="validEmail(this)">
@@ -40,19 +40,19 @@
                   </div>
                   <div class="form-group">
                     <label for="password">비밀번호</label>
-                    <input id="password" type="password" name="password" class="form-control">
+                    <input id="password" type="password" required name="password" class="form-control">
                   </div>
                   <div class="form-group">
                     <label for="name">이름</label>
-                    <input id="name" type="text" name="name" class="form-control">
+                    <input id="name" type="text" name="name" required class="form-control">
                   </div>
                   <div class="form-group">
                     <label for="phone">핸드폰 번호</label>
-                    <input id="phone" type="text" name="phone" class="form-control">
+                    <input id="phone" type="text" name="phone" required class="form-control">
                   </div>
                   <div class="form-group">
                     <input type="button" onclick="fn_area();" class="btn btn-primary navbar-btn" value="지역설정"/>
-                    <input id="region" type="text" name="region" class="form-control" style="margin-top:5px;">
+                    <input id="region" type="text" name="region" class="form-control" readonly required style="margin-top:5px;">
                   </div>
                   <div class="text-center">
                     <button type="submit" class="btn btn-primary"><i class="fa fa-user-md"></i> Register</button>
@@ -164,5 +164,14 @@
 		alert('이메일 인증을 완료해야 가입이됩니다.');
 		return false;
 	} */
+	
+	function fn_join(){
+		var region = $('#region').val();
+		if(region==''){
+			alert('지역설정을 해주세요.');
+			return false;
+		}
+		return true;
+	}
 </script>
     

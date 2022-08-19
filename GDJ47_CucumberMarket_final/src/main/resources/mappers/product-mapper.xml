@@ -55,6 +55,7 @@
 		SELECT * FROM PRODUCT P LEFT JOIN FILES  F ON F.PRO_NO=P.PRO_NO 
 			LEFT JOIN MEMBER M ON M.USERID=P.USER_ID WHERE P.USER_ID=#{userId} AND THUMBNAIL_STATUS='y' AND SOLVE_STATUS='y' ORDER BY p.ENROLL_DATE DESC
 	</select>
+
 	
 	<insert id="insertReview" parameterType="review">
 		INSERT INTO REVIEW VALUES(#{proNo},#{oi},SYSDATE,#{writer})

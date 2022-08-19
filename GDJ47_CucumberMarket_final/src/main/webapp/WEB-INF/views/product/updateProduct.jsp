@@ -122,18 +122,17 @@
     	  }
     	}
      
-    function readURL1(input,idx) {
+      function readURL1(input,idx) {
     	  if (input.files && input.files[0]) {
     	    var reader = new FileReader();
     	    reader.onload = function(e) {
     	      document.getElementById('preview'+idx).src = e.target.result;
-     	      
     	    };
     	    reader.readAsDataURL(input.files[0]);
     	  } else {
-    	    document.getElementById('preview1').src = "";
+    	    document.getElementById('preview'+idx).src = "";
     	  }
-    }
+   	  }
     	
     	
     	attachFile = {

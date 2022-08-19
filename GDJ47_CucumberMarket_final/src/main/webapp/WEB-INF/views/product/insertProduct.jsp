@@ -46,7 +46,7 @@
 						<div class="row" id="row22">
 						<div class="col-md-6">
 						<!-- <div id="attachFileDiv"> -->
-							<input type="file" name="image1" value="" size="30" onchange="readURL(this);" required>
+							<input type="file" name="image1" size="30" onchange="readURL(this);" required>
 							<img id="preview" style="width:200px; height:200px;"/>
 						
 						<!-- </div> -->
@@ -121,11 +121,10 @@ function readURL1(input,idx) {
 	    var reader = new FileReader();
 	    reader.onload = function(e) {
 	      document.getElementById('preview'+idx).src = e.target.result;
- 	      
 	    };
 	    reader.readAsDataURL(input.files[0]);
 	  } else {
-	    document.getElementById('preview1').src = "";
+	    document.getElementById('preview'+idx).src = "";
 	  }
 }
 	
@@ -198,6 +197,7 @@ fn_attachFile = {
 	if(price<1000){
 		alert('상품 가격은 최소 1000원 이상으로 설정해야 합니다.');
 	}
+	/* console.log($("input[type=file]")); */
 	return true;
 }
 </script>	
