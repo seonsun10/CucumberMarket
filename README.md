@@ -12,7 +12,7 @@
 ### 
 * Java 11
 * Spring Boot 2.7.2, Maven
-  - Security, SMTP
+  - Security, SMTP, STOMP
 * JPA, Spring data JPA, Querydsl
 * MyBatis
 * JSP
