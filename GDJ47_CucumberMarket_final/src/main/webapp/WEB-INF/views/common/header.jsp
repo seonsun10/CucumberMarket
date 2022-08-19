@@ -363,11 +363,11 @@
       </nav>
       <div id="search" class="collapse">
         <div class="container">
-          <form role="search" class="ml-auto" action="${path }/product/searchProduct.do" method="post">
+          <form id="search2" role="search" class="ml-auto" action="${path }/product/searchProduct.do" method="post" >
             <div class="input-group">
-              <input type="text" placeholder="지역명, 상품명을 검색하세요!" class="form-control" name="keyword">
+              <input id="keyword" type="text" placeholder="지역명, 상품명을 검색하세요!" class="form-control" name="keyword" >
               <div class="input-group-append">
-                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                <button type="submit" class="btn btn-primary" ><i class="fa fa-search"></i></button>
               </div>
             </div>
           </form>
@@ -442,4 +442,9 @@
 		// 알림 카운트 추가
 		$("#newChatCnt").text($("#newChatCnt").text()*1+1);
 	};	
+
+	
+	
+	
+	
 </script>

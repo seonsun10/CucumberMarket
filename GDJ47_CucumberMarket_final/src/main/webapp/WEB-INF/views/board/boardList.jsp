@@ -185,7 +185,7 @@
 	
 	$("#bSearch").click(function(){
 		var btype = $("#bType").val();
-		var bkeyword = $("#bKeyword").val();
+		var bkeyword = $("#bKeyword").val(); 
 		if(bkeyword.length==0){
 			alert('검색할 내용을 입력하세요');
 		}else{

@@ -179,6 +179,16 @@ public class BoardDaoImpl implements BoardDao {
 		Search s  = (Search)page.get("search");
 		return session.selectOne("board.searchboardcount",s);
 	}
+	@Override
+	public int deleteboard(SqlSessionTemplate session, int id) {
+		// TODO Auto-generated method stub
+		return session.delete("board.deleteboard",id);
+	}
+	@Override
+	public int updateboard2(SqlSessionTemplate session, Board b) {
+		// TODO Auto-generated method stub
+		return session.update("board.updateboard2",b);
+	}
 	
 	
 	

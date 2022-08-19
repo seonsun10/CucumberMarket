@@ -17,6 +17,50 @@
 
 		<div class="container" role="main">	
 			<h2>오이마켓 글쓰기</h2>		
+				<c:if test="${board ne null }">
+				<form name="form" id="form2" role="form" method="post" action="${path}/board/updateBoard2/${board.boardId}" enctype="multipart/form-data">
+					<div class="mb-3">
+						
+						 <div>
+						 <label for="tag">TAG</label>
+						 
+							<select name='boardCategory'>
+								<option  value="동네맛집">동네맛집</option>
+								<option  value="동네소식">동네소식</option>
+								<option  value="동네질문">동네질문</option>
+								<option  value="동네 분실/실종센터">동네 분실/실종센터</option>
+							</select>
+						</div>	
+							<label for="title">제목</label>
+							<input type="text" class="form-control" name="boardTitle" id="title" placeholder="제목을 입력해 주세요" value="${board.boardTitle }">
+					</div>
+					<div class="mb-3">
+					<div class="mb-3">
+											
+					</div>			
+						<label for="reg_id">작성자</label>	
+						<input type="text" class="form-control" name="userId" id="reg_id" placeholder="이름을 입력해 주세요" readonly="readonly"  value="${loginMember.userId }">
+					</div>
+				<!-- <div >
+			      <input type="file" class="form-control-file border" name="picName">
+			    </div> -->
+					<div class="mb-3">
+						<label for="content">내용</label>	
+							<textarea class="form-control" rows="5" name="boardContent" id="content" placeholder="내용을 입력해 주세요" >${board.boardContent }</textarea>
+					</div>
+								
+				</form>			
+				<div>		
+						<button type="button" class="btn btn-sm btn-primary" id="btnSave" onclick="fn_boardUpdate();">수정</button>			
+						
+						
+						<div>
+						&nbsp&nbsp&nbsp&nbsp
+						</div>
+						
+				</div>	
+				</c:if>
+				<c:if test="${board eq null }">
 				<form name="form" id="form" role="form" method="post" action="${path}/board/saveBoard.do" enctype="multipart/form-data">
 					<div class="mb-3">
 						
@@ -58,6 +102,8 @@
 						</div>
 						
 				</div>	
+				</c:if>
+				
 		</div>	
 	
 	
@@ -69,6 +115,9 @@
 	}
 	const fn_boardWrite=()=>{
 		$("#form").submit();
+	}
+	const fn_boardUpdate=()=>{
+		$("#form2").submit();
 	}
 </script>
 

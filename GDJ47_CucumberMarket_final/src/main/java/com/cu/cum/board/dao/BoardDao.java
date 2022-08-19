@@ -52,5 +52,8 @@ public interface BoardDao {
     List<Board> searchBoardList(SqlSessionTemplate session,Map page);
     
     int searchBoardCount(SqlSessionTemplate session,Map page);
+    //수정삭제
+    int deleteboard(SqlSessionTemplate session,int id);
+    int updateboard2(SqlSessionTemplate session,Board b);
 	
 }

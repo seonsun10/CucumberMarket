@@ -188,6 +188,14 @@
 	</if>
 	</select>
 	
+	<delete id="deleteboard" parameterType="_int">
+	delete from board where boardid=#{id}
+	</delete>
+	<update id="updateboard2" parameterType="board">
+	update board set boardcategory=#{boardCategory} ,boardcontent=#{boardContent}, boardtitle=#{boardTitle} where boardid=#{boardId}
+	
+	</update>
+	
 	
 	
 	

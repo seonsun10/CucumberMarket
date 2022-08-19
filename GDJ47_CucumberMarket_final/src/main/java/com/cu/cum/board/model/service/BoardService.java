@@ -51,5 +51,9 @@ public interface BoardService {
      List<Board> searchBoardList(Map page);
      
      int searchBoardCount(Map page);
+     //수정,삭제
+     int deleteboard(int id);
+     int updateboard2(Board b);
+     
 	
 }
