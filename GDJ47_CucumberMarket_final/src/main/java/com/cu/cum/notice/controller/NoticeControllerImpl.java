@@ -54,7 +54,7 @@ public class NoticeControllerImpl implements NoticeController  {
 	public String insertNotice(@RequestParam Map<String, String> param, HttpServletRequest request) throws Exception {
 		Notice vo = new Notice(param.get("n_title"), param.get("n_content"));
 		service.insertNotice(vo);
-		return "redirect:/admin/searchNotice.do";
+		return "redirect:/GDJ47_CucumberMarket_final/admin/searchNotice.do";
 	}
 
 	// 공지사항 수정
@@ -63,7 +63,7 @@ public class NoticeControllerImpl implements NoticeController  {
 	public String updateNotice(@RequestParam Map<String, String> param, HttpServletRequest request) throws Exception {
 		Notice vo = new Notice(param.get("n_id"), param.get("n_title"), param.get("n_content"));
 		service.updateNoticeById(vo);
-		return "redirect:/admin/searchNotice.do";
+		return "redirect:/GDJ47_CucumberMarket_final/admin/searchNotice.do";
 	}
 
 	// 공지사항 삭제
@@ -74,7 +74,7 @@ public class NoticeControllerImpl implements NoticeController  {
 		if(n_id != null) {
 			service.deleteNoticeById(n_id);
 		}
-		return "redirect:/admin/searchNotice.do";
+		return "redirect:/GDJ47_CucumberMarket_final/admin/searchNotice.do";
 	}
 
 	// 어드민 - 공지사항 조회
@@ -87,13 +87,6 @@ public class NoticeControllerImpl implements NoticeController  {
 		return mav;
 	}
 	
-	// 메인(회원) - 공지사항 조회
-	@RequestMapping(value="/notice.do", method = {RequestMethod.POST, RequestMethod.GET})
-	public ModelAndView notice(@RequestParam(defaultValue = "1") int curPage, HttpServletRequest request) {
-		ModelAndView mav = setNoticeListObject(curPage);	// notice 리스트 생성
-		mav.setViewName("RootP003_d001_search_common");
-		return mav;
-	}
 	
 	// notice 리스트 생성 전달
 	private ModelAndView setNoticeListObject(int curPage) {
