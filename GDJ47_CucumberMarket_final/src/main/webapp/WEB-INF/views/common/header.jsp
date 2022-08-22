@@ -363,7 +363,7 @@
       </nav>
       <div id="search" class="collapse">
         <div class="container">
-          <form id="search2" role="search" class="ml-auto" action="${path }/product/searchProduct.do" method="post" >
+          <form id="search2" role="search" class="ml-auto" action="${path }/product/searchProduct.do" method="post" onsubmit="return fn_searchData(event);">
             <div class="input-group">
               <input id="keyword" type="text" placeholder="지역명, 상품명을 검색하세요!" class="form-control" name="keyword" >
               <div class="input-group-append">
@@ -442,7 +442,13 @@
 		// 알림 카운트 추가
 		$("#newChatCnt").text($("#newChatCnt").text()*1+1);
 	};	
-
+	
+	const fn_searchData=e=>{
+		if($(e.target).find("input").val().length==0){
+			alert("검색할 단어를 입력해주세요!");
+			return false;
+		}
+	}
 	
 	
 	
