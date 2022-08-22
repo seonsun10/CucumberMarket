@@ -117,8 +117,8 @@ div#pro-date{
          <div id="hot" style="justify-content:center;">
           
               <div class="row">
-                <div class="col-md-12">
-                  <h2 class="mb-0" >오늘의 인기 상품</h2>
+                <div class="col-md-12" style="margin-bottom:13px;">
+                  <h2 class="mb-0">오늘의 인기 상품</h2>
                 </div>
               </div>
         
