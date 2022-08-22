@@ -86,7 +86,7 @@
 			</c:if>
 			<c:forEach var="list" items="${newList}">
 				<div class="newElem card form-group col-sm-10 mx-auto p-0">
-					<div class="card-body pt-3" onclick="window.open('${list.n_url}')">
+					<div class="card-body pt-3" onclick="replace('${list.n_url}')">
 						<div class="row px-3 mb-2">
 					        <strong class="d-block text-gray-dark">${list.n_type}</strong>
 					        <span class="text-muted ml-auto">${list.n_time}</span>

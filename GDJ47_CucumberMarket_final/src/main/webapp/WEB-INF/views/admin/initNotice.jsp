@@ -54,7 +54,7 @@
 										<div class="mb-2 row">
 										    <label for="inputSubject" class="col-lg-2 col-sm-12 col-form-label">제목</label>
 										    <div class="col-lg-10 col-sm-12">
-										      <input type="text" class="form-control"  id="inputSubject" name="n_title" value="${article.n_title}" required>
+										      <input type="text" class="form-control"  id="n_title" name="n_title" value="${article.n_title}" required>
 								    		</div>
 								    	</div>
 								    	<!-- 에디터 -->
@@ -83,7 +83,6 @@
 	
 	$(document).ready(function(){
 		$("#n_content").val('${article.n_content}');
-
 	});
 	
 	
@@ -101,33 +100,34 @@
 	
 	$("#insertNotice").click(function(){
 			
+		  let type = '70';
+		  let target = 'js@js'; //모든유저들한테
+		  let content = $('#n_title').val();
+		  let url = '/GDJ47_CucumberMarket_final/admin/searchNotice.do';
+		  
+		  
+		  $.ajax({
+			  
+			  	type: 'post',
+		        url: '${path}/member/saveNotify.do',
+		        dataType: 'text',
+		        data: {
+		            target: target,
+		            content: content,
+		            type: type,
+		            url: url
+		           
+		        }
+		      
+		        
+		        
+		  })
 			let frmQnA = document.frmQnA;
 			frmQnA.action = "${path}/admin/insertNotice.do";
 			frmQnA.submit();
 			
 			  
-			  var type = '70';
-			  var target = 'js@js'; //모든유저들한테
-			  var content = ("#n_title").html();
-			  var url = '${path}/member/notify.do';
-			  
-			  
-			  $.ajax({
-				  
-				  	type: 'post',
-			        url: '${path}/member/saveNotify.do',
-			        dataType: 'text',
-			        data: {
-			            target: target,
-			            content: content,
-			            type: type,
-			            url: url
-			           
-			        }
-			      
-			        
-			        
-			  });
+			 
 		
 	});
 	

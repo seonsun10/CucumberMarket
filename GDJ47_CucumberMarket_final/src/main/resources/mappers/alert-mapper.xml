@@ -91,8 +91,8 @@
    		<!-- 알람 입력 -->   				
    		<insert id="insertNotify" parameterType="notify">
    		<![CDATA[
-   			INSERT INTO notify(n_id, n_target, n_title, n_time, n_checked, n_type, n_url)
-			VALUES(LPAD(NOTIFY_SEQ.NEXTVAL,6,'0'), #{n_target},#{n_title},TO_CHAR(sysdate, 'yyyy-mm-dd hh24:mi:ss'),'0',#{n_type},#{n_url})
+   			INSERT INTO notify(n_id, n_target, n_content, n_time, n_checked, n_type, n_url)
+			VALUES(LPAD(SEQ_N_ID.nextval,6,'0'), #{n_target},#{n_content},TO_CHAR(sysdate, 'yyyy-mm-dd hh24:mi:ss'),'0',#{n_type},#{n_url})
    		]]>
    		
    		

@@ -10,7 +10,6 @@
 			<th>제목</th>
 			<th>대화상대</th>
 			<th>입장</th>
-			<th>알림</th>
 		</tr>
 			<c:if test="${not empty newChatList}">
 				<c:forEach var="c" items="${newChatList }">
@@ -22,16 +21,7 @@
 						<td><button onclick="open('${path}/ptestchat.do/${c.roomId }','_blank','width=600,height=640');setTimeout(function(){location.reload()}, 1000);">채팅하기</button>
 							
 						</td>
-						<c:if test="${c.unReadCount ne 0 }">
-            			<td style='color:#ff0a00'> 
-            			<c:out value="${c.unReadCount }개의 새로운메시지가 있습니다"/> 
-            			</td>
-            			</c:if>
-            			<c:if test="${c.unReadCount eq 0 }">
-            			<td> 
-            			 
-            			</td>
-            			</c:if>
+						
 						
 					</tr>
 					
