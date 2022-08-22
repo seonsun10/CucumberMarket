@@ -12,7 +12,7 @@
 	<script>
 		const script='${script}';
 		alert('${msg}');
-		location.replace('${path}/${loc}');
+		location.replace('${path}/${loc}?userId=${id}');
 	</script>
 </body>
 </html>

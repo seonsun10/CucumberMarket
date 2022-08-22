@@ -117,8 +117,8 @@ div#pro-date{
          <div id="hot" style="justify-content:center;">
           
               <div class="row">
-                <div class="col-md-12">
-                  <h2 class="mb-0" >오늘의 인기 상품</h2>
+                <div class="col-md-12" style="margin-bottom:13px;">
+                  <h2 class="mb-0">오늘의 인기 상품</h2>
                 </div>
               </div>
         
@@ -142,7 +142,7 @@ div#pro-date{
 								<div id="pro-body2">
 									<div style="color:black;"><fmt:formatNumber value="${p.price}" pattern="#,###" />원</div>
 									
-									<div id="pro-date">${days[status.index]}일전</div>
+									<!-- <div id="pro-date"></div> -->
 									
 								</div>
 							</div>
