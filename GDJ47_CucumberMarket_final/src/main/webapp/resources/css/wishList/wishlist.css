@@ -63,11 +63,11 @@ input[type="checkbox"]+label {
     display: block;
     width: 28px;
     height: 28px;
-    background: url('/resources/img/checkbox-default.png') no-repeat 0 0px / contain;
+    background: url('/GDJ47_CucumberMarket_final/resources/img/checkbox-default.png') no-repeat 0 0px / contain;
 }
 
 input[type='checkbox']:checked+label {
-    background: url('/resources/img/checkbox-on.png') no-repeat 0 1px / contain;
+    background: url('/GDJ47_CucumberMarket_final/resources/img/checkbox-on.png') no-repeat 0 1px / contain;
 }
 
 input[type="checkbox"] {
