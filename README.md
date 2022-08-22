@@ -30,7 +30,7 @@
 + Google spreadsheets
 
 ## 구현
-[오이 마켓]
+[오이 마켓](https://61.78.121.242:8844/GDJ47_CucumberMarket_final/)
 
 
 ## 기능정의서 [자세히 보기](https://docs.google.com/spreadsheets/d/1jChONE-HqpAC-X8Dr4VCTSSx1rSuXCCXxlUnZ39Wnqk/edit#gid=0)
