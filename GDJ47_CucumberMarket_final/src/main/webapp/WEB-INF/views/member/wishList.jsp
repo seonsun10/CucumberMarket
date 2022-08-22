@@ -75,7 +75,12 @@
 			              					<c:out value="${products[status.index].price }"/> 
 			              				</div>
 			              				<div id="pro-enrollDate">
+			              				<c:if test="${dayList[status.index] eq 0}">
 			              					<c:out value="${dayList[status.index] }"/>일 전
+			              				</c:if>
+			              				<c:if test="${dayList[status.index] ne 0}">
+			              					오늘
+			              				</c:if>
 			              				</div>
 			              			</div>
 		              				<div id="pro-add">
