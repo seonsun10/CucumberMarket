@@ -142,7 +142,7 @@ div#pro-date{
 								<div id="pro-body2">
 									<div style="color:black;"><fmt:formatNumber value="${p.price}" pattern="#,###" />원</div>
 									
-									<div id="pro-date">${days[status.index]}일전</div>
+									<!-- <div id="pro-date"></div> -->
 									
 								</div>
 							</div>
