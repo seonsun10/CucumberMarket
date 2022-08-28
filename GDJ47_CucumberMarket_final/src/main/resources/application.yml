@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:oracle:thin:@61.78.121.242:8877:xe
+    url: jdbc:oracle:thin:@gd1class.iptime.org:8877:xe
     driver-class-name: oracle.jdbc.driver.OracleDriver
     username: cucumber
     password: cucumber123
