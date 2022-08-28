@@ -123,7 +123,7 @@
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=반팔" class="nav-link">반팔</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=긴팔" class="nav-link">긴팔</a></li>
 
-                          <li class="nav-item"><a href="${path }/product/productTotal.do?tag=티셔츠" class="nav-link">티셔츠</a></li>
+                         
 
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=셔츠" class="nav-link">셔츠</a></li>
                           <li class="nav-item"><a href="${path }/product/productTotal.do?tag=바지" class="nav-link">바지</a></li>

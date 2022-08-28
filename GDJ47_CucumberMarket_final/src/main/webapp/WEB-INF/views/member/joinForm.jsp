@@ -172,11 +172,12 @@
 	}
 	
 	function fn_join(){
-		const resultMsg = $('#mail-check-warn').val();
+		const resultMsg = $('#mail-check-warn').text();
 		if(resultMsg=='인증번호가 일치합니다.'){
 			return true;
 		}
 		alert('이메일 인증을 완료해야 가입이됩니다.');
+		
 		return false;
 		
 		var region = $('#region').val();

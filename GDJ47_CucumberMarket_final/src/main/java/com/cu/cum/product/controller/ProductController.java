@@ -109,6 +109,7 @@ public class ProductController {
 					.build());
 			model.addAttribute("msg","상품 등록이 완료되었습니다.");
 			model.addAttribute("loc", "member/mypage.do");
+			model.addAttribute("id",userId);
 		}catch(IOException e) {
 			//e.printStackTrace();
 			model.addAttribute("msg","상품 등록에 실패하였습니다.");
@@ -147,6 +148,7 @@ public class ProductController {
 									.renameFilename(rename1).build());
 								model.addAttribute("msg","상품 등록이 완료되었습니다.");
 								model.addAttribute("loc", "member/mypage.do");
+								model.addAttribute("id",userId);
 							}catch(IOException e) {
 								//e.printStackTrace();
 								model.addAttribute("msg","상품 등록에 실패하였습니다.");
@@ -447,7 +449,8 @@ public class ProductController {
 			//그다음 새걸로 다시 폴더로 넣어준다.
 			afterthumbnail.transferTo(new File(path+rename));
 			rs.setAttribute("msg", "상품수정이 완료되었습니다.");
-			rs.setAttribute("loc", "member/mypage");
+			rs.setAttribute("loc", "member/mypage.do");
+			rs.setAttribute("id", userId);
 		}catch(IOException e) {
 			//e.printStackTrace();
 			rs.setAttribute("msg", "상품수정이 실패하였습니다.");
@@ -488,7 +491,8 @@ public class ProductController {
 									.renameFilename(rename1).build());
 								f.transferTo(new File(path+rename1));
 								rs.setAttribute("msg", "상품수정이 완료되었습니다.");
-								rs.setAttribute("loc", "member/mypage");
+								rs.setAttribute("loc", "member/mypage.do");
+								rs.setAttribute("id", userId);
 							}catch(IOException e) {
 								//e.printStackTrace();
 								rs.setAttribute("msg", "상품수정이 실패하였습니다.");
